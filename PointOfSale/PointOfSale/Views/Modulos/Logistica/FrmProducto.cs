@@ -276,7 +276,7 @@ namespace DYM.Views
                 #region Si no hay criterio de busqueda, devuelte los primeros 100
                 if (text.Trim().Length == 0)
                 {
-                    LlenaGridProductos(ProductoController.List(100));
+                    LlenaGridProductos(ProductoController.SelectMany(100));
                     ModoCreate = false;
                     return;
                 }
@@ -284,11 +284,11 @@ namespace DYM.Views
 
                 #region Busca por coicidencias aproximadas
 
-                if (ProductoController.ReadOne(text).Count > 0)
+                if (ProductoController.SelectOneOverList(text).Count > 0)
                 {
                     //Entrotrado por clave
                     Text = "MODO VER / ACTUALIZAR PRODUCTO";
-                    LlenaGridProductos(ProductoController.ReadOne(text));
+                    LlenaGridProductos(ProductoController.SelectOneOverList(text));
                     ModoCreate = false;
                     return;
                 }
@@ -343,7 +343,7 @@ namespace DYM.Views
                 producto.ProductoId = TxtProductoId.Text.Trim();
             }
             else
-                producto = ProductoController.Read(TxtProductoId.Text);
+                producto = ProductoController.SelectOne(TxtProductoId.Text);
 
 
             producto.Descripcion = TxtDescripcion.Text.Length == 0 ? null : TxtDescripcion.Text;
@@ -463,7 +463,7 @@ namespace DYM.Views
             producto.RutaImg = TxtRutaImg.Text.Trim().Length == 0 ? null : TxtRutaImg.Text.Trim();
 
             if (ModoCreate)
-                ProductoController.Create(producto);
+                ProductoController.InsertOne(producto);
             else
                 ProductoController.Update(producto);
         }

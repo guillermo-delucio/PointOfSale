@@ -10,78 +10,6 @@ namespace PointOfSale.Controllers
 {
     public class ProductoController : IController<Producto>
     {
-        public bool Create(Producto o)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-                    db.Add(o);
-                    db.SaveChanges();
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
-            }
-
-            return false;
-        }
-
-        public List<Producto> ReadOne(string Id)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-                    return db.Producto.Where(x => x.ProductoId == Id.Trim()).ToList(); ;
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
-            }
-
-            return null;
-        }
-
-        public Producto Read(string Id)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                    return db.Producto.FirstOrDefault(x => x.ProductoId == Id.Trim());
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
-            }
-
-            return null;
-        }
-        public bool Update(Producto o)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    db.SaveChanges();
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
-            }
-
-            return false;
-        }
         public bool Delete(string Id)
         {
             try
@@ -105,7 +33,62 @@ namespace PointOfSale.Controllers
             return false;
         }
 
-        public List<Producto> List(int cantidad)
+        public bool InsertOne(Producto o)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    db.Add(o);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+            }
+
+            return false;
+        }
+
+        public bool InsertRange(List<Producto> lista)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    db.Producto.AddRange(lista);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+            }
+
+            return false;
+        }
+
+        public List<Producto> SelectAll()
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Producto.ToList(); ;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+            }
+
+            return null;
+        }
+
+        public List<Producto> SelectMany(int cantidad)
         {
             try
             {
@@ -121,6 +104,62 @@ namespace PointOfSale.Controllers
 
             return null;
         }
+
+        public Producto SelectOne(string Id)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+
+                    return db.Producto.FirstOrDefault(x => x.ProductoId == Id.Trim());
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+            }
+
+            return null;
+        }
+
+        public List<Producto> SelectOneOverList(string Id)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Producto.Where(x => x.ProductoId == Id.Trim()).ToList(); ;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+            }
+
+            return null;
+        }
+
+        public bool Update(Producto o)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+
+                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+            }
+
+            return false;
+        }
+
         public List<Producto> FiltrarVsDescrip(string SearchText)
         {
             try
@@ -137,6 +176,7 @@ namespace PointOfSale.Controllers
 
             return null;
         }
+
         public List<Producto> FiltrarVsSustancia(string SearchText)
         {
             try
@@ -157,30 +197,6 @@ namespace PointOfSale.Controllers
             }
 
             return null;
-        }
-
-        public bool Add(Producto o)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Addrange(List<Producto> lista)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-                    db.Producto.AddRange(lista);
-                    db.SaveChanges();
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
-            }
-
-            return false;
         }
     }
 }

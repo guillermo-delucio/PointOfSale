@@ -12,16 +12,36 @@ namespace PointOfSale.Controllers
      */
     public interface IController<T>
     {
-        bool Add(T o);
+        #region Operaciones de lectura
 
-        T Read(string Id);
+        T SelectOne(string Id);
+        List<T> SelectOneOverList(string Id);
+        List<T> SelectMany(int cantidad);
+        List<T> SelectAll();
+       
+
+        #endregion
+
+
+        #region Operaciones de escritura
+
+        bool InsertOne(T o);
+        bool InsertRange(List<T> lista);
+
+        #endregion
+
+
+        #region Operaciones de actualiación
 
         bool Update(T o);
 
+        #endregion
+
+        #region Operaciones de eliminación
+
         bool Delete(string Id);
 
-        List<T> List(int cantidad);
+        #endregion
 
-        bool Addrange(List<T> lista);
     }
 }

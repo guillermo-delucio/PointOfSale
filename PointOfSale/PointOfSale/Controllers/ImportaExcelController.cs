@@ -230,7 +230,7 @@ namespace PointOfSale.Controllers
                     }
 
                     ProductoController productoController = new ProductoController();
-                    if (productoController.Addrange(Productos))
+                    if (productoController.InsertRange(Productos))
                         Ambiente.Mensaje(end.Row + " Registros importados");
                     else
                         Ambiente.Mensaje("Algo salio mal :(");
