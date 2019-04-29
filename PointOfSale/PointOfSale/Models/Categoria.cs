@@ -7,5 +7,6 @@ namespace PointOfSale.Models
     {
         public string CategoriaId { get; set; }
         public string Nombre { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

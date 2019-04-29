@@ -1,4 +1,5 @@
 ﻿
+using PointOfSale.Views.Modulos.Catalogos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,10 +36,9 @@ namespace DYM.Views
 
         private void Button7_Click(object sender, EventArgs e)
         {
-            //var o = new FrmBusinessManager();
-            //o.MdiParent = this.MdiParent;
-            //o.StartPosition = FormStartPosition.CenterScreen;
-            //o.Show();
+            var o = new FrmBusinessManager();
+            o.MdiParent = this.MdiParent;
+            o.Show();
         }
 
         private void BtnConfiguracion_Click(object sender, EventArgs e)

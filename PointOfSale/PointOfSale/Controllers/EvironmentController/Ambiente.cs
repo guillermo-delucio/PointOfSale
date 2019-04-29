@@ -14,6 +14,17 @@ namespace PointOfSale.Controllers
     {
         public static Usuario LoggedUser { get; set; }
 
+        #region Enums
+        public enum TipoBusqueda
+        {
+            Clientes, Proveedores, Productos,
+            Categorias, Laboratorios, Impuestos,
+            Sustancias, Almacenes, Estaciones,
+            ClavesSat, Presentaciones, UnidadesMedida,
+            Usuarios
+
+        };
+        #endregion
 
         #region Cuadros de mensajes
 
@@ -76,7 +87,21 @@ namespace PointOfSale.Controllers
 
             }
         }
-        
+
         #endregion
+
+        #region Configuración Grids
+        public static void AdditionalSettingsDataGridView(DataGridView dataGridView)
+        {
+            if (dataGridView.ColumnCount > 0)
+                dataGridView.Columns[dataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+        #endregion
+
+        public static string FechaSQL(DateTime dateTime)
+        {
+            return dateTime.Date.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
     }
 }

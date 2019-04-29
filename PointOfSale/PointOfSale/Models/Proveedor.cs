@@ -21,5 +21,6 @@ namespace PointOfSale.Models
         public int? DiasCredito { get; set; }
         public decimal? LimiteCredito { get; set; }
         public decimal? Saldo { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

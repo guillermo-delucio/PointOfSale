@@ -65,6 +65,8 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
                 entity.Property(e => e.Nombre).HasMaxLength(50);
             });
 
@@ -78,6 +80,8 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
                 entity.Property(e => e.Nombre).HasMaxLength(50);
             });
 
@@ -86,6 +90,8 @@ namespace PointOfSale.Models
                 entity.Property(e => e.ClaveSatId)
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
             });
 
             modelBuilder.Entity<Cliente>(entity =>
@@ -93,6 +99,8 @@ namespace PointOfSale.Models
                 entity.Property(e => e.ClienteId)
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
                 entity.Property(e => e.Nombre).HasMaxLength(50);
             });
@@ -126,6 +134,8 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
                 entity.Property(e => e.Nombre).HasMaxLength(50);
             });
 
@@ -152,6 +162,8 @@ namespace PointOfSale.Models
                 entity.Property(e => e.ImpuestoId)
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
             });
 
             modelBuilder.Entity<Laboratorio>(entity =>
@@ -163,6 +175,8 @@ namespace PointOfSale.Models
                 entity.Property(e => e.LaboratorioId)
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
                 entity.Property(e => e.Nombre).HasMaxLength(50);
             });
@@ -222,6 +236,8 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
                 entity.Property(e => e.Nombre).HasMaxLength(50);
             });
 
@@ -236,21 +252,21 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.CategoriaId).HasMaxLength(50);
 
-                entity.Property(e => e.ClaveSatId).HasMaxLength(50);
+                entity.Property(e => e.ClaveCfdiId).HasMaxLength(50);
 
                 entity.Property(e => e.Contenido)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CratedAt).HasColumnType("datetime");
+                entity.Property(e => e.CratedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.CratedBy).HasMaxLength(50);
 
                 entity.Property(e => e.DeletedBy).HasMaxLength(50);
 
                 entity.Property(e => e.Descripcion).HasMaxLength(300);
-
-                entity.Property(e => e.Encatalogo).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.LaboratorioId).HasMaxLength(50);
 
@@ -270,9 +286,13 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.PresentacionId).HasMaxLength(50);
 
-                entity.Property(e => e.UnidadMedidaId).HasMaxLength(50);
+                entity.Property(e => e.RutaImg)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UnidadSat).HasMaxLength(50);
+                entity.Property(e => e.UnidadCfdi).HasMaxLength(50);
+
+                entity.Property(e => e.UnidadMedidaId).HasMaxLength(50);
 
                 entity.Property(e => e.Unidades).HasMaxLength(50);
 
@@ -373,6 +393,8 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Estado).HasMaxLength(100);
 
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
                 entity.Property(e => e.LimiteCredito).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.Localidad).HasMaxLength(100);
@@ -438,7 +460,7 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.ComodinString).HasMaxLength(50);
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
                 entity.Property(e => e.Nombre).HasMaxLength(50);
             });
@@ -448,6 +470,8 @@ namespace PointOfSale.Models
                 entity.Property(e => e.UnidadMedidaId)
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
                 entity.Property(e => e.Nombre).HasMaxLength(50);
 
@@ -461,6 +485,8 @@ namespace PointOfSale.Models
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.Area).HasMaxLength(50);
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
                 entity.Property(e => e.Nombre).HasMaxLength(50);
 

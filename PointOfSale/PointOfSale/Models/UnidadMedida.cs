@@ -8,5 +8,6 @@ namespace PointOfSale.Models
         public string UnidadMedidaId { get; set; }
         public string Nombre { get; set; }
         public string UnidadSat { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace PointOfSale.Models
 
         public string SustanciaId { get; set; }
         public string Nombre { get; set; }
-        public string ComodinString { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual ICollection<ProductoSustancia> ProductoSustancia { get; set; }
     }

@@ -39,6 +39,9 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.EntityFrameworkCore, Version=2.2.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.EntityFrameworkCore.2.2.4\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>
@@ -90,6 +93,7 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -125,6 +129,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -136,9 +141,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\Ambiente.cs" />
-    <Compile Include="Controllers\Inicializador.cs" />
+    <Compile Include="Controllers\AlmacenController.cs" />
+    <Compile Include="Controllers\BMController.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\ClaveSatController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\EstacionController.cs" />
+    <Compile Include="Controllers\EvironmentController\Ambiente.cs" />
+    <Compile Include="Controllers\EvironmentController\Inicializador.cs" />
+    <Compile Include="Controllers\ImportaExcelController.cs" />
+    <Compile Include="Controllers\EvironmentController\IController.cs" />
+    <Compile Include="Controllers\ImpuestoController.cs" />
+    <Compile Include="Controllers\LaboratorioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PresentacionController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\SustanciaController.cs" />
+    <Compile Include="Controllers\UnidadMedidaController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Models\Almacen.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\ClaveSat.cs" />
@@ -168,6 +189,12 @@
     <Compile Include="Models\UsuarioRole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Importaciones\FrmImportarProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Importaciones\FrmImportarProductos.Designer.cs">
+      <DependentUpon>FrmImportarProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login\FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,10 +225,22 @@
     <Compile Include="Views\Menus\FrmMenuLogistica.designer.cs">
       <DependentUpon>FrmMenuLogistica.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Modulos\Productos\FrmProducto.cs">
+    <Compile Include="Views\Modulos\Catalogos\FrmBusinessManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Modulos\Productos\FrmProducto.designer.cs">
+    <Compile Include="Views\Modulos\Catalogos\FrmBusinessManager.Designer.cs">
+      <DependentUpon>FrmBusinessManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmBusqueda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmBusqueda.designer.cs">
+      <DependentUpon>FrmBusqueda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmProducto.designer.cs">
       <DependentUpon>FrmProducto.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\RootShell.cs">
@@ -220,6 +259,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\Importaciones\FrmImportarProductos.resx">
+      <DependentUpon>FrmImportarProductos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Login\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -235,7 +277,13 @@
     <EmbeddedResource Include="Views\Menus\FrmMenuLogistica.resx">
       <DependentUpon>FrmMenuLogistica.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Modulos\Productos\FrmProducto.resx">
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmBusinessManager.resx">
+      <DependentUpon>FrmBusinessManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Logistica\FrmBusqueda.resx">
+      <DependentUpon>FrmBusqueda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Logistica\FrmProducto.resx">
       <DependentUpon>FrmProducto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RootShell.resx">
@@ -256,10 +304,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Modulos\BusinessManager\" />
-    <Folder Include="Views\Modulos\Clientes\" />
-    <Folder Include="Views\Modulos\EntradasCompra\" />
-    <Folder Include="Views\Modulos\Proveedores\" />
+    <None Include="Resources\excel.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo1.jpg" />
@@ -273,6 +318,7 @@
   <ItemGroup>
     <None Include="Resources\Aspirina1.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

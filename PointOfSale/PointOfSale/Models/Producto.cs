@@ -30,17 +30,18 @@ namespace PointOfSale.Models
         public decimal? Utilidad3 { get; set; }
         public decimal? Utilidad4 { get; set; }
         public bool? TieneLote { get; set; }
-        public bool? Encatalogo { get; set; }
+        public bool IsDeleted { get; set; }
         public string CratedBy { get; set; }
-        public DateTime? CratedAt { get; set; }
+        public DateTime CratedAt { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public string DeletedBy { get; set; }
         public string LoteId { get; set; }
         public string UnidadMedidaId { get; set; }
-        public string ClaveSatId { get; set; }
-        public string UnidadSat { get; set; }
+        public string ClaveCfdiId { get; set; }
+        public string UnidadCfdi { get; set; }
         public string Contenido { get; set; }
+        public string RutaImg { get; set; }
 
         public virtual ICollection<ProductoAlmacen> ProductoAlmacen { get; set; }
         public virtual ICollection<ProductoImpuesto> ProductoImpuesto { get; set; }

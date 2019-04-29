@@ -12,6 +12,7 @@ namespace PointOfSale.Models
 
         public string AlmacenId { get; set; }
         public string Nombre { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual ICollection<ProductoAlmacen> ProductoAlmacen { get; set; }
     }

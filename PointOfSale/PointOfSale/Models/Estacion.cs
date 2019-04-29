@@ -7,5 +7,6 @@ namespace PointOfSale.Models
     {
         public string EstacionId { get; set; }
         public string Nombre { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
