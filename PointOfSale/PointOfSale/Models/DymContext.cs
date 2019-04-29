@@ -270,7 +270,10 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.LaboratorioId).HasMaxLength(50);
 
-                entity.Property(e => e.LoteId).HasMaxLength(50);
+                entity.Property(e => e.LoteId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Precio1).HasColumnType("decimal(18, 3)");
 

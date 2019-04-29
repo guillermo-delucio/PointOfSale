@@ -12,6 +12,8 @@ namespace PointOfSale.Controllers
 {
     public static class Ambiente
     {
+        public static Dictionary<int, string> CatalgoErrores { get; set; }
+
         public static Usuario LoggedUser { get; set; }
 
         #region Enums
@@ -24,6 +26,7 @@ namespace PointOfSale.Controllers
             Usuarios
 
         };
+
         #endregion
 
         #region Cuadros de mensajes
@@ -98,10 +101,140 @@ namespace PointOfSale.Controllers
         }
         #endregion
 
+        #region Miselaneos
+
+
         public static string FechaSQL(DateTime dateTime)
         {
             return dateTime.Date.ToString("yyyy-MM-dd HH:mm:ss");
         }
+        public static string FDinero(string valor)
+        {
+            bool successv = decimal.TryParse(valor, out decimal nValor);
+            if (!successv)
+                return "1.000";
+            return string.Format("{0:0.000}", nValor);
+        }
 
+        #endregion
+
+        #region Precios y margenes
+
+        public static string GetPrecioString(string Costo, string Margen)
+        {
+            bool successc = decimal.TryParse(Costo, out decimal nCosto);
+            bool successm = decimal.TryParse(Margen, out decimal nMargen);
+
+            if (!successc || !successm)
+                return "1.000";
+
+            decimal nPrecio = nCosto / (1 - (nMargen / 100));
+
+            return string.Format("{0:0.000}", nPrecio);
+        }
+        public static decimal GetPrecioDecimal(string Costo, string Margen)
+        {
+            bool successc = decimal.TryParse(Costo, out decimal nCosto);
+            bool successm = decimal.TryParse(Margen, out decimal nMargen);
+
+            if (!successc || !successm)
+                return 0M;
+
+            decimal nPrecio = ((nCosto) / (1 - (nMargen / 100)));
+
+            return nPrecio;
+        }
+        public static string GetMargenString(string Costo, string Precio)
+        {
+
+            bool successc = decimal.TryParse(Costo, out decimal nCosto);
+            bool successp = decimal.TryParse(Precio, out decimal nPrecio);
+
+            if (!successc || !successp)
+                return "1.000";
+
+            decimal nMargen = (1 - (nCosto / nPrecio)) * 100;
+
+            return string.Format("{0:0.000}", nMargen);
+        }
+        public static decimal GetMargenDecimal(string Costo, string Precio)
+        {
+
+            bool successc = decimal.TryParse(Costo, out decimal nCosto);
+            bool successp = decimal.TryParse(Precio, out decimal nPrecio);
+
+            if (!successc || !successp)
+                return 0M;
+
+            decimal nMargen = (1 - (nCosto / nPrecio)) * 100;
+
+            return nMargen;
+        }
+
+        public static decimal GetPrecioSDecimal(decimal precio, ICollection<ProductoImpuesto> productoImpuestos)
+        {
+
+            try
+            {
+                //bool successp = decimal.TryParse(precio, out decimal nPrecio);
+                decimal acumulado = 0;
+
+                //if (!successp)
+                //    return 1M;
+
+                foreach (var prodImp in productoImpuestos)
+                {
+                    using (var db = new DymContext())
+                    {
+                        var impuesto = db.Impuesto.FirstOrDefault(x => x.ImpuestoId == prodImp.ImpuestoId);
+                        if (impuesto != null)
+                            acumulado = acumulado + precio * ((decimal)impuesto.Tasa / 100);
+                    }
+
+                }
+
+                return precio + acumulado;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Algo salio mal. \n Ambiente GetPrecioSDecimal\n " + ex.Message);
+            }
+
+            return -1m;
+        }
+
+
+        public static string GetPrecioSstring(string precio, ICollection<ProductoImpuesto> productoImpuestos)
+        {
+            try
+            {
+                bool successp = decimal.TryParse(precio, out decimal nPrecio);
+                decimal acumulado = 0;
+
+                if (!successp)
+                    return "1.000";
+
+                foreach (var prodImp in productoImpuestos)
+                {
+                    using (var db = new DymContext())
+                    {
+                        var impuesto = db.Impuesto.FirstOrDefault(x => x.ImpuestoId == prodImp.ImpuestoId);
+                        if (impuesto != null)
+                            acumulado = acumulado + nPrecio * ((decimal)impuesto.Tasa / 100);
+                    }
+
+                }
+
+                return FDinero(precio + acumulado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Algo salio mal. \n Ambiente GetPrecioSDecimal\n " + ex.Message);
+            }
+
+            return FDinero("1");
+        }
+
+        #endregion
     }
 }

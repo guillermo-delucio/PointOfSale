@@ -19,6 +19,7 @@ namespace PointOfSale.Views
         {
             InitializeComponent();
             Inicializador.IniciliazaConexion();
+            Inicializador.InicializaListas();
             GetLogin();
         }
 

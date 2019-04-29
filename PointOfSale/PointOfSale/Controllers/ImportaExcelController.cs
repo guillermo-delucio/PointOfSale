@@ -20,6 +20,14 @@ namespace PointOfSale.Controllers
         private FileInfo fi;
         private List<string> Errores;
         private List<Producto> Productos;
+        private List<ClaveSat> ClavesSat;
+        private List<Sustancia> Sustancias;
+        private List<Laboratorio> Laboratorios;
+        private List<UnidadMedida> UnidadMedidas;
+        private List<Presentacion> Presentaciones;
+
+
+
 
         public ImportaExcelController(int catalogo)
         {
@@ -29,6 +37,11 @@ namespace PointOfSale.Controllers
             Ruta = string.Empty;
             Errores = new List<string>();
             Productos = new List<Producto>();
+            Sustancias = new List<Sustancia>();
+            Laboratorios = new List<Laboratorio>();
+            UnidadMedidas = new List<UnidadMedida>();
+            Presentaciones = new List<Presentacion>();
+            ClavesSat = new List<ClaveSat>();
 
             GetRuta();
             Importa();
@@ -38,9 +51,9 @@ namespace PointOfSale.Controllers
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = "c:\\";
+                //openFileDialog.InitialDirectory = "c:\\";
                 openFileDialog.Filter = "Excel Files|*.XLSX";
-                openFileDialog.FilterIndex = 2;
+                //openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -115,52 +128,360 @@ namespace PointOfSale.Controllers
 
         private void ImportaUsuarios()
         {
-            throw new NotImplementedException();
+            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
         }
 
         private void ImportaUnidadMedida()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        Fila = row;
+                        var unidadMedida = new UnidadMedida();
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            // ... Cell by cell: 1Clave, 2Descripcion
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    unidadMedida.UnidadMedidaId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 2:
+                                    unidadMedida.Nombre = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 3:
+                                    unidadMedida.UnidadSat = workSheet.Cells[row, col].Text.Trim();
+                                    UnidadMedidas.Add(unidadMedida);
+                                    break;
+                                default:
+                                    Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    var unidadMedidaController = new UnidadMedidaController();
+
+                    if (unidadMedidaController.InsertRange(UnidadMedidas))
+                        Ambiente.Mensaje(end.Row + " Registros importados");
+                    else
+                        Ambiente.Mensaje("Algo salio mal :(");
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
+            }
         }
 
         private void ImportaPresentaciones()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        Fila = row;
+                        var presentacion = new Presentacion();
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            // ... Cell by cell: 1Clave, 2Descripcion
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    presentacion.PresentacionId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 2:
+                                    presentacion.Nombre = workSheet.Cells[row, col].Text.Trim();
+                                    Presentaciones.Add(presentacion);
+                                    break;
+                                default:
+                                    Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    var presentacionController = new PresentacionController();
+
+                    if (presentacionController.InsertRange(Presentaciones))
+                        Ambiente.Mensaje(end.Row + " Registros importados");
+                    else
+                        Ambiente.Mensaje("Algo salio mal :(");
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
+            }
         }
 
         private void ImportaClavesSat()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        Fila = row;
+                        var claveSat = new ClaveSat();
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            // ... Cell by cell: 1Clave, 2Descripcion
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    claveSat.ClaveSatId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 2:
+                                    claveSat.Nombre = workSheet.Cells[row, col].Text.Trim().ToUpper();
+                                    ClavesSat.Add(claveSat);
+                                    break;
+                                default:
+                                    Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    var claveSatController = new ClaveSatController();
+
+                    if (claveSatController.InsertRange(ClavesSat))
+                        Ambiente.Mensaje(end.Row + " Registros importados");
+                    else
+                        Ambiente.Mensaje("Algo salio mal :(");
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
+            }
         }
 
         private void ImportaEstaciones()
         {
-            throw new NotImplementedException();
+            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
         }
 
         private void ImportaAlmacenes()
         {
-            throw new NotImplementedException();
+            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
         }
 
         private void ImportaSustancias()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        Fila = row;
+                        var sustancia = new Sustancia();
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            // ... Cell by cell: 1Clave, 2Descripcion
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    sustancia.SustanciaId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 2:
+                                    sustancia.Nombre = workSheet.Cells[row, col].Text.Trim();
+                                    Sustancias.Add(sustancia);
+                                    break;
+                                default:
+                                    Errores.Add("SE OMITIÓ, " + sustancia.SustanciaId + ", A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    var sustanciaController = new SustanciaController();
+
+                    if (sustanciaController.InsertRange(Sustancias))
+                        Ambiente.Mensaje(end.Row + " Registros importados");
+                    else
+                        Ambiente.Mensaje("Algo salio mal :(");
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
+            }
         }
 
         private void ImportaImpuestos()
         {
-            throw new NotImplementedException();
+            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
         }
 
         private void ImportaLaboratorios()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        Fila = row;
+                        var laboratorio = new Laboratorio();
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            // ... Cell by cell: 1Clave, 2Descripcion
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    laboratorio.LaboratorioId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 2:
+                                    laboratorio.Nombre = workSheet.Cells[row, col].Text.Trim();
+                                    Laboratorios.Add(laboratorio);
+                                    break;
+                                default:
+                                    Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    var laboratorioController = new LaboratorioController();
+
+                    if (laboratorioController.InsertRange(Laboratorios))
+                        Ambiente.Mensaje(end.Row + " Registros importados");
+                    else
+                        Ambiente.Mensaje("Algo salio mal :(");
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
+            }
         }
 
         private void ImportaCategorias()
         {
-            throw new NotImplementedException();
+            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
         }
 
         private void ImportaProductos()
@@ -250,12 +571,12 @@ namespace PointOfSale.Controllers
 
         private void ImportaProveedores()
         {
-            throw new NotImplementedException();
+            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
         }
 
         private void ImportaClientes()
         {
-            throw new NotImplementedException();
+            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
         }
     }
 }

@@ -12,8 +12,8 @@ namespace DYM.Views
 
         #region Variables de clase
         ProductoController ProductoController;
-        HashSet<ProductoImpuesto> ProductoImpuesto;
-        HashSet<ProductoSustancia> ProductoSustancia;
+        ICollection<ProductoImpuesto> ProductoImpuesto;
+        ICollection<ProductoSustancia> ProductoSustancia;
         bool ModoCreate;
         #endregion
 
@@ -232,7 +232,7 @@ namespace DYM.Views
 
         }
 
-        private void LlenaGridImpuestos(HashSet<ProductoImpuesto> productoImpuestos)
+        private void LlenaGridImpuestos(ICollection<ProductoImpuesto> productoImpuestos)
         {
             GridImpuestos.Rows.Clear();
             foreach (var impuesto in productoImpuestos)
@@ -243,7 +243,7 @@ namespace DYM.Views
             }
         }
 
-        private void FillGridSustancias(HashSet<ProductoSustancia> productoSustancias)
+        private void LlenaGridSustancias(ICollection<ProductoSustancia> productoSustancias)
         {
 
             GridSustancias.Rows.Clear();
@@ -267,6 +267,7 @@ namespace DYM.Views
                 Text = "MODO VER / ACTUALIZAR PRODUCTO";
                 ModoCreate = false;
                 LlenaGridProductos(ProductoController.FiltrarVsSustancia(text));
+                GridProductos.Focus();
 
                 #endregion
 
@@ -278,6 +279,7 @@ namespace DYM.Views
                 {
                     LlenaGridProductos(ProductoController.SelectMany(100));
                     ModoCreate = false;
+                    GridProductos.Focus();
                     return;
                 }
                 #endregion
@@ -289,6 +291,7 @@ namespace DYM.Views
                     //Entrotrado por clave
                     Text = "MODO VER / ACTUALIZAR PRODUCTO";
                     LlenaGridProductos(ProductoController.SelectOneOverList(text));
+                    GridProductos.Focus();
                     ModoCreate = false;
                     return;
                 }
@@ -302,6 +305,7 @@ namespace DYM.Views
                         Text = "MODO VER / ACTUALIZAR PRODUCTO";
                         LlenaGridProductos(ProductoController.FiltrarVsDescrip(text));
                         ModoCreate = false;
+                        GridProductos.Focus();
                     }
                     else
                     {
@@ -463,12 +467,136 @@ namespace DYM.Views
             producto.RutaImg = TxtRutaImg.Text.Trim().Length == 0 ? null : TxtRutaImg.Text.Trim();
 
             if (ModoCreate)
-                ProductoController.InsertOne(producto);
+            {
+                if (ProductoController.InsertOne(producto))
+                    Ambiente.Mensaje("Cambios guardasos");
+                else
+                    Ambiente.Mensaje("Algo salió mal :( ");
+            }
             else
-                ProductoController.Update(producto);
+            {
+
+                if (ProductoController.Update(producto))
+                    Ambiente.Mensaje("Cambios guardasos");
+                else
+                    Ambiente.Mensaje("Algo salió mal :( ");
+            }
+
+
+
         }
 
 
         #endregion
+
+        #region Al cambiar la seleccion en el Grid de productos
+
+        private void GridProductos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (GridProductos.Rows[GridProductos.CurrentCell.RowIndex].Cells[0].Value != null)
+            {
+                var IdProducto = GridProductos.Rows[GridProductos.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim();
+                using (var db = new DymContext())
+                {
+                    var producto = db.Producto.Where(x => x.ProductoId == IdProducto).FirstOrDefault();
+                    if (producto != null)
+                    {
+                        LimpiaCampos();
+                        LlenaCampos(producto);
+                    }
+                }
+
+            }
+
+
+
+        }
+        private void GridProductos_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                TxtDescripcion.Focus();
+            }
+        }
+        private void LimpiaCampos()
+        {
+            TxtDescripcion.Text = string.Empty;
+            TxtContenido.Text = string.Empty;
+            TxtPresentacion.Text = string.Empty;
+            TxtUnidadMedida.Text = string.Empty;
+            TxtUnidades.Text = string.Empty;
+            TxtLaboratorio.Text = string.Empty;
+            TxtCategoria.Text = string.Empty;
+            TxtClaveCFDI.Text = string.Empty;
+            TxtUnidadCFDI.Text = string.Empty;
+            TxtPrecioCompra.Text = string.Empty;
+            TxtPrecioCaja.Text = string.Empty;
+            ChkEnCatalogo.Checked = false;
+            ChkLote.Checked = false;
+            TxtBuscarImpuestos.Text = string.Empty;
+            TxtBuscarSustancias.Text = string.Empty;
+            TxtBuscarExistencias.Text = string.Empty;
+            ProductoImpuesto = new HashSet<ProductoImpuesto>();
+            ProductoSustancia = new HashSet<ProductoSustancia>();
+            GridImpuestos.Rows.Clear();
+            GridSustancias.Rows.Clear();
+
+            TxtU1.Text = string.Empty;
+            TxtU2.Text = string.Empty;
+            TxtU3.Text = string.Empty;
+            TxtU4.Text = string.Empty;
+            TxtPrecio1.Text = string.Empty;
+            TxtPrecio2.Text = string.Empty;
+            TxtPrecio3.Text = string.Empty;
+            TxtPrecio4.Text = string.Empty;
+            TxtPrecioS1.Text = string.Empty;
+            TxtPrecioS2.Text = string.Empty;
+            TxtPrecioS3.Text = string.Empty;
+            TxtPrecioS4.Text = string.Empty;
+            TxtRutaImg.Text = string.Empty;
+        }
+        private void LlenaCampos(Producto producto)
+        {
+            TxtProductoId.Text = producto.ProductoId;
+            TxtDescripcion.Text = producto.Descripcion;
+            TxtContenido.Text = producto.Contenido;
+            TxtPresentacion.Text = producto.PresentacionId;
+            TxtUnidadMedida.Text = producto.UnidadMedidaId;
+            TxtUnidades.Text = producto.Unidades;
+            TxtLaboratorio.Text = producto.LaboratorioId;
+            TxtCategoria.Text = producto.CategoriaId;
+            TxtUnidadCFDI.Text = producto.UnidadCfdi;
+            TxtClaveCFDI.Text = producto.ClaveCfdiId;
+            TxtPrecioCompra.Text = Ambiente.FDinero(producto.PrecioCompra.ToString());
+            TxtPrecioCaja.Text = Ambiente.FDinero(producto.PrecioCaja.ToString());
+            ChkEnCatalogo.Checked = !producto.IsDeleted;
+            ChkLote.Checked = producto.TieneLote;
+            LlenaGridImpuestos(producto.ProductoImpuesto);
+            LlenaGridSustancias(producto.ProductoSustancia);
+
+
+
+            TxtPrecio1.Text = producto.Precio1.ToString();
+            TxtPrecio2.Text = producto.Precio2.ToString();
+            TxtPrecio3.Text = producto.Precio3.ToString();
+            TxtPrecio4.Text = producto.Precio4.ToString();
+            TxtU1.Text = producto.Utilidad1.ToString();
+            TxtU2.Text = producto.Utilidad2.ToString();
+            TxtU3.Text = producto.Utilidad3.ToString();
+            TxtU4.Text = producto.Utilidad4.ToString();
+            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(producto.Precio1.ToString(), producto.ProductoImpuesto);
+            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(producto.Precio2.ToString(), producto.ProductoImpuesto);
+            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(producto.Precio3.ToString(), producto.ProductoImpuesto);
+            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(producto.Precio4.ToString(), producto.ProductoImpuesto);
+            TxtRutaImg.Text = producto.RutaImg;
+            GridExistencias.DataSource = producto.ProductoAlmacen.Select(x => new { x.Almacen, x.Existencia }).ToList();
+
+        }
+
+
+        #endregion
+
+        
     }
 }

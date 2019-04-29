@@ -147,7 +147,7 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
 
-                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    db.Entry(o).State = EntityState.Modified;
                     db.SaveChanges();
                     return true;
                 }
@@ -185,7 +185,7 @@ namespace PointOfSale.Controllers
                 {
                     //var query= db.Categories.Where(c=>c.Category_ID==cat_id).SelectMany(c=>Articles);
 
-                    var query = from prod in db.Producto
+                    var query = from prod in db.Producto.AsNoTracking()
                                 where prod.ProductoSustancia.Any(c => c.SustanciaId.Contains(SearchText.Trim()))
                                 select prod;
                     return query.ToList();

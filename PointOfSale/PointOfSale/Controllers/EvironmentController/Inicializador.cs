@@ -24,5 +24,21 @@ namespace PointOfSale.Controllers
                 Ambiente.Mensaje(ex.ToString());
             }
         }
+
+        public static void InicializaListas()
+        {
+            Ambiente.CatalgoErrores = new Dictionary<int, string>();
+
+            Ambiente.CatalgoErrores.Add(100, "Proceso abortado");
+            Ambiente.CatalgoErrores.Add(101, "Proceso cancelado");
+            Ambiente.CatalgoErrores.Add(102, "Algo salio mal");
+            Ambiente.CatalgoErrores.Add(103, "Módulo no implementado");
+
+
+
+            Ambiente.CatalgoErrores.Add(200, "Proceso Concluido");
+            Ambiente.CatalgoErrores.Add(201, "Proceso Finalizado");
+
+        }
     }
 }

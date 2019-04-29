@@ -29,7 +29,7 @@ namespace PointOfSale.Models
         public decimal? Utilidad2 { get; set; }
         public decimal? Utilidad3 { get; set; }
         public decimal? Utilidad4 { get; set; }
-        public bool? TieneLote { get; set; }
+        public bool TieneLote { get; set; }
         public bool IsDeleted { get; set; }
         public string CratedBy { get; set; }
         public DateTime CratedAt { get; set; }
