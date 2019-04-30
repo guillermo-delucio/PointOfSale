@@ -207,7 +207,64 @@ namespace PointOfSale.Controllers
 
         private void ImportaProductoImpuesto()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        Fila = row;
+                        var productoImpuesto = new ProductoImpuesto();
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            // ... Cell by cell: 1Clave, 2Descripcion
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    productoImpuesto.ProductoId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 2:
+                                    productoImpuesto.ImpuestoId = workSheet.Cells[row, col].Text.Trim();
+                                    ProductoImpuestos.Add(productoImpuesto);
+                                    break;
+                                default:
+                                    Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    var productoImpuestoController = new ProductoImpuestoController();
+                    Ambiente.Mensaje(productoImpuestoController.InsertRange(ProductoImpuestos));
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
+            }
         }
 
         private void ImportaUsuarios()

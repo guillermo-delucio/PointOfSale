@@ -14,27 +14,46 @@ namespace PointOfSale.Controllers.TablasIntermedia
             List<ProductoSustancia> listaCorrectos = new List<ProductoSustancia>();
             List<string> errores = new List<string>();
             string correctos = string.Empty;
-            using (var db = new DymContext())
+
+            try
             {
-                foreach (var item in lista)
+                using (var db = new DymContext())
                 {
-                    var producto = db.Producto.FirstOrDefault(x => x.ProductoId == item.ProductoId);
-                    var sustancia = db.Sustancia.FirstOrDefault(x => x.SustanciaId == item.SustanciaId);
-                    if (producto != null || sustancia != null)
+                    foreach (var item in lista)
                     {
-                        listaCorrectos.Add(item);
+                        var producto = db.Producto.FirstOrDefault(x => x.ProductoId == item.ProductoId);
+                        var sustancia = db.Sustancia.FirstOrDefault(x => x.SustanciaId == item.SustanciaId);
+                        if (producto != null && sustancia != null)
+                        {
+
+                            var prodsus = new ProductoSustancia();
+                            prodsus.ProductoId = producto.ProductoId;
+                            prodsus.SustanciaId = sustancia.SustanciaId;
+                            prodsus.Contenido = item.Contenido;
+
+                            listaCorrectos.Add(prodsus);
+                         
+                        }
+                        else
+                        {
+                            errores.Add(item.SustanciaId + ", NO EXISTE EN LAS SUSTANCIAS o, "+item.ProductoId+ ", NO EXISTE EN LOS PRODUCTOS");
+                        }
                     }
-                    else
-                    {
-                        errores.Add(item.SustanciaId + ", NO EXISTE EN LOS SUSTANCIAS o PRODUCTOS\n");
-                    }
+                    db.ProductoSustancia.AddRange(listaCorrectos);
+                    db.SaveChanges();
+                    correctos += "SE GUARDARON " + listaCorrectos.Count + " REGISTOS\n\n";
+                    correctos += "SE OMITIERON " + errores.Count + " REGISTOS\n\n";
+                    correctos += "COPIE Y PEGUE LOS DETALLES\n\n ";
+                    var result = String.Join(" \n ", errores.ToArray());
+                    correctos += result;
                 }
-                db.AddRange(listaCorrectos);
-                correctos += "SE GUARDARON " + listaCorrectos.Count + " REGISTOS\n";
-                correctos += "SE OMITIERON " + errores.Count + " REGISTOS\n";
-                correctos += "COPIE Y PEGUE LOS DETALLES\n ";
-                correctos += errores.ToString();
             }
+            catch (Exception ex)
+            {
+
+                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n" + "  @ProductoSustanciaController\n" + ex.ToString());
+            }
+
             return correctos;
 
         }
