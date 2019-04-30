@@ -30,8 +30,9 @@ namespace PointOfSale.Controllers
             Ambiente.CatalgoErrores = new Dictionary<int, string>();
 
             Ambiente.CatalgoErrores.Add(100, "Proceso abortado");
-            Ambiente.CatalgoErrores.Add(101, "Proceso cancelado");
-            Ambiente.CatalgoErrores.Add(102, "Algo salio mal");
+            Ambiente.CatalgoErrores.Add(102, "Proceso cancelado");
+
+            Ambiente.CatalgoErrores.Add(101, "Algo salio mal");
             Ambiente.CatalgoErrores.Add(103, "Módulo no implementado");
 
 

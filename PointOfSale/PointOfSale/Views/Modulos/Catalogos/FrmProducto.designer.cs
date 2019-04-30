@@ -1,6 +1,6 @@
-﻿namespace DYM.Views
+﻿namespace PointOfSale.Views.Modulos.Catalogos
 {
-    partial class FrmProducto
+    partial class FrmProductos
     {
         /// <summary>
         /// Required designer variable.
@@ -299,7 +299,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Location = new System.Drawing.Point(12, 239);
             this.groupBox2.Name = "groupBox2";
@@ -309,7 +309,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Location = new System.Drawing.Point(11, 362);
             this.groupBox1.Name = "groupBox1";
@@ -527,7 +527,7 @@
             // 
             // label14
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.label14.Location = new System.Drawing.Point(4, 32);

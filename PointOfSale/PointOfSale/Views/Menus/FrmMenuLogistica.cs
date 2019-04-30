@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PointOfSale.Views.Modulos.Catalogos;
+using System;
 using System.Windows.Forms;
 
 namespace DYM.Views
@@ -12,7 +13,7 @@ namespace DYM.Views
 
         private void BtnProductosCapturaPrecios_Click(object sender, EventArgs e)
         {
-            var o = new FrmProducto
+            var o = new FrmProductos
             {
                 MdiParent = this.ParentForm
             };

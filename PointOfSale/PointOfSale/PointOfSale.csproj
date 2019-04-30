@@ -227,23 +227,125 @@
     <Compile Include="Views\Menus\FrmMenuLogistica.designer.cs">
       <DependentUpon>FrmMenuLogistica.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Menus\FrmMenuPuntoVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Menus\FrmMenuPuntoVenta.Designer.cs">
+      <DependentUpon>FrmMenuPuntoVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmAlmacenes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmAlmacenes.Designer.cs">
+      <DependentUpon>FrmAlmacenes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modulos\Catalogos\FrmBusinessManager.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Modulos\Catalogos\FrmBusinessManager.Designer.cs">
       <DependentUpon>FrmBusinessManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Modulos\Logistica\FrmBusqueda.cs">
+    <Compile Include="Views\Modulos\Catalogos\FrmCategorias.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Modulos\Logistica\FrmBusqueda.designer.cs">
+    <Compile Include="Views\Modulos\Catalogos\FrmCategorias.Designer.cs">
+      <DependentUpon>FrmCategorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Busquedas\FrmBusqueda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Busquedas\FrmBusqueda.designer.cs">
       <DependentUpon>FrmBusqueda.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Modulos\Logistica\FrmProducto.cs">
+    <Compile Include="Views\Modulos\Catalogos\FrmClavesSat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Modulos\Logistica\FrmProducto.designer.cs">
+    <Compile Include="Views\Modulos\Catalogos\FrmClavesSat.Designer.cs">
+      <DependentUpon>FrmClavesSat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmClientes.Designer.cs">
+      <DependentUpon>FrmClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmEstaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmEstaciones.Designer.cs">
+      <DependentUpon>FrmEstaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmImpuestos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmImpuestos.Designer.cs">
+      <DependentUpon>FrmImpuestos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmLaboratorios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmLaboratorios.Designer.cs">
+      <DependentUpon>FrmLaboratorios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmPresentaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmPresentaciones.Designer.cs">
+      <DependentUpon>FrmPresentaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmProducto.designer.cs">
       <DependentUpon>FrmProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmProveedores.Designer.cs">
+      <DependentUpon>FrmProveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmSustancias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmSustancias.Designer.cs">
+      <DependentUpon>FrmSustancias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmUnidadMedida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmUnidadMedida.Designer.cs">
+      <DependentUpon>FrmUnidadMedida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmUsuarios.Designer.cs">
+      <DependentUpon>FrmUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmEntradasPorCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmEntradasPorCompra.Designer.cs">
+      <DependentUpon>FrmEntradasPorCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmEntradasPorTraspaso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmEntradasPorTraspaso.Designer.cs">
+      <DependentUpon>FrmEntradasPorTraspaso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmSalidasPorTraspaso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmSalidasPorTraspaso.Designer.cs">
+      <DependentUpon>FrmSalidasPorTraspaso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmPointOfSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmPointOfSale.Designer.cs">
+      <DependentUpon>FrmPointOfSale.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\RootShell.cs">
       <SubType>Form</SubType>
@@ -279,14 +381,32 @@
     <EmbeddedResource Include="Views\Menus\FrmMenuLogistica.resx">
       <DependentUpon>FrmMenuLogistica.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Menus\FrmMenuPuntoVenta.resx">
+      <DependentUpon>FrmMenuPuntoVenta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Catalogos\FrmBusinessManager.resx">
       <DependentUpon>FrmBusinessManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Modulos\Logistica\FrmBusqueda.resx">
+    <EmbeddedResource Include="Views\Modulos\Busquedas\FrmBusqueda.resx">
       <DependentUpon>FrmBusqueda.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Modulos\Logistica\FrmProducto.resx">
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmCategorias.resx">
+      <DependentUpon>FrmCategorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmProducto.resx">
       <DependentUpon>FrmProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Logistica\FrmEntradasPorCompra.resx">
+      <DependentUpon>FrmEntradasPorCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Logistica\FrmEntradasPorTraspaso.resx">
+      <DependentUpon>FrmEntradasPorTraspaso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Logistica\FrmSalidasPorTraspaso.resx">
+      <DependentUpon>FrmSalidasPorTraspaso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmPointOfSale.resx">
+      <DependentUpon>FrmPointOfSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RootShell.resx">
       <DependentUpon>RootShell.cs</DependentUpon>

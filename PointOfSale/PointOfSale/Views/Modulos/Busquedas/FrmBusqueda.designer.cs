@@ -1,4 +1,4 @@
-﻿namespace DYM.Views
+﻿namespace PointOfSale.Views.Modulos.Busquedas
 {
     partial class FrmBusqueda
     {

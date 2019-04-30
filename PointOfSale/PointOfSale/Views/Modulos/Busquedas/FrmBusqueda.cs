@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace DYM.Views
+namespace PointOfSale.Views.Modulos.Busquedas
 {
     public partial class FrmBusqueda : Form
     {

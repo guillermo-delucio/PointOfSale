@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PointOfSale.Models;
+using PointOfSale.Views.Modulos.Catalogos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -831,7 +832,7 @@ namespace PointOfSale.Controllers
         #endregion
 
         #region Switch Importaciones
-  
+
         public void Importa(string NodoName, DataGridView Grid1)
         {
             switch (NodoName)
@@ -918,12 +919,12 @@ namespace PointOfSale.Controllers
                     break;
                 case "NodoProdSus":
                     ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.ProductoSustancia);
-                  
+
 
                     break;
                 case "NodoProdImp":
                     ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.ProductoImpuesto);
-                  
+
                     break;
 
                 default:
@@ -931,6 +932,196 @@ namespace PointOfSale.Controllers
             }
         }
 
+        #endregion
+
+        #region SelectionChaged Grid
+        public dynamic GetSelectedObject(string NodoName, DataGridView Grid1)
+        {
+
+            switch (NodoName)
+            {
+                case "NodoClientes":
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Cliente.FirstOrDefault(x => x.ClienteId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+                case "NodoProveedores":
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Proveedor.FirstOrDefault(x => x.ProveedorId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+
+                case "NodoProductos":
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Producto.FirstOrDefault(x => x.ProductoId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+
+                case "NodoCategorias":
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Categoria.FirstOrDefault(x => x.CategoriaId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+
+                case "NodoLaboratorios":
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Laboratorio.FirstOrDefault(x => x.LaboratorioId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+
+                case "NodoImpuestos":
+
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Impuesto.FirstOrDefault(x => x.ImpuestoId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+                case "NodoSustancias":
+
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Sustancia.FirstOrDefault(x => x.SustanciaId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+
+                case "NodoAlmacenes":
+
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Almacen.FirstOrDefault(x => x.AlmacenId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+                case "NodoEstaciones":
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Estacion.FirstOrDefault(x => x.EstacionId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+
+                case "NodoClavesSat":
+                    using (var db = new DymContext())
+                    {
+                        return db.ClaveSat.FirstOrDefault(x => x.ClaveSatId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+                case "NodoPresentaciones":
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Presentacion.FirstOrDefault(x => x.PresentacionId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+                case "NodoUnidadesMedida":
+                    using (var db = new DymContext())
+                    {
+                        return db.UnidadMedida.FirstOrDefault(x => x.UnidadMedidaId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+                case "NodoUsuarios":
+
+                    using (var db = new DymContext())
+                    {
+                        return db.Usuario.FirstOrDefault(x => x.UsuarioId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+                default:
+                    return null;
+            }
+        }
+        #endregion
+
+        #region SwitchUpdate
+        public void LanzaFormaUpdate(string NodoName, dynamic objeto)
+        {
+
+            switch (NodoName)
+            {
+                case "NodoClientes":
+
+                    new FrmClientes(objeto).Show();
+
+                    break;
+
+                case "NodoProveedores":
+                    new FrmProveedores(objeto).Show();
+                    break;
+
+                case "NodoProductos":
+                    new FrmProductos(objeto).Show();
+                    break;
+
+                case "NodoCategorias":
+                    new FrmCategorias(objeto).Show();
+                    break;
+
+                case "NodoLaboratorios":
+                    new FrmLaboratorios(objeto).Show();
+
+                    break;
+                case "NodoImpuestos":
+                    new FrmImpuestos(objeto).Show();
+
+                    break;
+
+                case "NodoSustancias":
+                    new FrmSustancias(objeto).Show();
+
+                    break;
+
+                case "NodoAlmacenes":
+                    new FrmAlmacenes(objeto).Show();
+
+                    break;
+                case "NodoEstaciones":
+                    new FrmEstaciones(objeto).Show();
+                    break;
+
+                case "NodoClavesSat":
+                    Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+
+                    break;
+
+                case "NodoPresentaciones":
+                    new FrmPresentaciones(objeto).Show();
+
+                    break;
+                case "NodoUnidadesMedida":
+                    new FrmUnidadMedida(objeto).Show();
+                    break;
+                case "NodoUsuarios":
+                    new FrmUsuarios(objeto).Show();
+                    break;
+                default:
+                    Ambiente.Mensaje("No se encontró Forma Update");
+                    return;
+            }
+        }
         #endregion
     }
 }

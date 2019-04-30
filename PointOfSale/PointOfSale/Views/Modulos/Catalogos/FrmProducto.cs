@@ -1,13 +1,14 @@
 ﻿using PointOfSale.Controllers;
 using PointOfSale.Models;
+using PointOfSale.Views.Modulos.Busquedas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace DYM.Views
+namespace PointOfSale.Views.Modulos.Catalogos
 {
-    public partial class FrmProducto : Form
+    public partial class FrmProductos : Form
     {
 
         #region Variables de clase
@@ -15,16 +16,22 @@ namespace DYM.Views
         ICollection<ProductoImpuesto> ProductoImpuesto;
         ICollection<ProductoSustancia> ProductoSustancia;
         bool ModoCreate;
+        private dynamic objeto;
         #endregion
 
         #region Contructores
-        public FrmProducto()
+        public FrmProductos()
         {
             InitializeComponent();
             ProductoController = new ProductoController();
             ProductoImpuesto = new HashSet<ProductoImpuesto>();
             ProductoSustancia = new HashSet<ProductoSustancia>();
             ModoCreate = false;
+        }
+
+        public FrmProductos(dynamic objeto)
+        {
+            this.objeto = objeto;
         }
 
         #endregion

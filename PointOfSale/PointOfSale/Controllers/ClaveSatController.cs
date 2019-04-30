@@ -26,7 +26,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("UnidadMedidaController:: " + ex.ToString());
+                Ambiente.Mensaje("ClaveSatController:: " + ex.ToString());
             }
 
             return false;
@@ -47,7 +47,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("UnidadMedidaController:: " + ex.ToString());
+                Ambiente.Mensaje("ClaveSatController:: " + ex.ToString());
             }
 
             return false;
@@ -68,7 +68,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("UnidadMedidaController:: " + ex.ToString());
+                Ambiente.Mensaje("ClaveSatController:: " + ex.ToString());
             }
 
             return false;
@@ -86,7 +86,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("UnidadMedidaController:: " + ex.ToString());
+                Ambiente.Mensaje("ClaveSatController:: " + ex.ToString());
             }
 
             return null;
@@ -104,7 +104,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("UnidadMedidaController:: " + ex.ToString());
+                Ambiente.Mensaje("ClaveSatController:: " + ex.ToString());
             }
 
             return null;
@@ -121,7 +121,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("UnidadMedidaController:: " + ex.ToString());
+                Ambiente.Mensaje("ClaveSatController:: " + ex.ToString());
             }
 
             return null;
@@ -138,7 +138,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("UnidadMedidaController:: " + ex.ToString());
+                Ambiente.Mensaje("ClaveSatController:: " + ex.ToString());
             }
 
             return null;
@@ -157,7 +157,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("UnidadMedidaController:: " + ex.ToString());
+                Ambiente.Mensaje("ClaveSatController:: " + ex.ToString());
             }
 
             return false;

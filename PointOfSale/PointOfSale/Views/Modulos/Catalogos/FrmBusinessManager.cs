@@ -15,12 +15,15 @@ namespace PointOfSale.Views.Modulos.Catalogos
     {
         BMController bMController;
         string NodoName;
+        dynamic SelectedObject;
         public FrmBusinessManager()
         {
             InitializeComponent();
             bMController = new BMController();
             NodoName = string.Empty;
         }
+
+
 
         private void BMtree_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -33,6 +36,29 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             if (NodoName.Length > 0)
                 bMController.Importa(NodoName, Grid1);
+        }
+
+
+        private void Grid1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value != null)
+                SelectedObject = bMController.GetSelectedObject(NodoName, Grid1);
+
+        }
+
+        private void BtnBMUpdate_Click(object sender, EventArgs e)
+        {
+            bMController.LanzaFormaUpdate(NodoName, SelectedObject);
+        }
+
+        private void BtnBMEliminar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnBMAgregar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
