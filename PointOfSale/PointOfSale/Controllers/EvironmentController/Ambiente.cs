@@ -23,7 +23,7 @@ namespace PointOfSale.Controllers
             Categorias, Laboratorios, Impuestos,
             Sustancias, Almacenes, Estaciones,
             ClavesSat, Presentaciones, UnidadesMedida,
-            Usuarios
+            Usuarios, ProductoImpuesto, ProductoSustancia
 
         };
 

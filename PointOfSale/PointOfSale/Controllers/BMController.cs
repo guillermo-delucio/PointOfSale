@@ -916,6 +916,15 @@ namespace PointOfSale.Controllers
                     LlenaNodoUsuarios(Grid1);
 
                     break;
+                case "NodoProdSus":
+                    ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.ProductoSustancia);
+                  
+
+                    break;
+                case "NodoProdImp":
+                    ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.ProductoImpuesto);
+                  
+                    break;
 
                 default:
                     break;

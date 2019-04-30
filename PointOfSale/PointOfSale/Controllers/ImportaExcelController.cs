@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using PointOfSale.Controllers.TablasIntermedia;
 using PointOfSale.Models;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace PointOfSale.Controllers
         private List<Laboratorio> Laboratorios;
         private List<UnidadMedida> UnidadMedidas;
         private List<Presentacion> Presentaciones;
+        private List<ProductoSustancia> ProductoSustancias;
+        private List<ProductoImpuesto> ProductoImpuestos;
 
 
 
@@ -36,12 +39,16 @@ namespace PointOfSale.Controllers
             Catalogo = catalogo;
             Ruta = string.Empty;
             Errores = new List<string>();
+            ClavesSat = new List<ClaveSat>();
             Productos = new List<Producto>();
             Sustancias = new List<Sustancia>();
             Laboratorios = new List<Laboratorio>();
             UnidadMedidas = new List<UnidadMedida>();
             Presentaciones = new List<Presentacion>();
-            ClavesSat = new List<ClaveSat>();
+            ProductoSustancias = new List<ProductoSustancia>();
+            ProductoImpuestos = new List<ProductoImpuesto>();
+
+
 
             GetRuta();
             Importa();
@@ -120,10 +127,87 @@ namespace PointOfSale.Controllers
                 case (int)Ambiente.TipoBusqueda.Usuarios:
                     ImportaUsuarios();
                     break;
+                case (int)Ambiente.TipoBusqueda.ProductoImpuesto:
+                    ImportaProductoImpuesto();
+                    break;
+                case (int)Ambiente.TipoBusqueda.ProductoSustancia:
+                    ImportaProductoSustancia();
+                    break;
                 default:
                     MessageBox.Show("Error, no hay importacion para catalogo");
                     break;
             }
+        }
+
+        private void ImportaProductoSustancia()
+        {
+            try
+            {
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        Fila = row;
+                        var productoSustancia = new ProductoSustancia();
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            // ... Cell by cell: 1Clave, 2Descripcion
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    productoSustancia.ProductoId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 2:
+                                    productoSustancia.SustanciaId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 3:
+                                    productoSustancia.Contenido = workSheet.Cells[row, col].Text.Trim();
+                                    ProductoSustancias.Add(productoSustancia);
+
+                                    break;
+                                default:
+                                    Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    var productoSustanciaController = new ProductoSustanciaController();
+                    Ambiente.Mensaje(productoSustanciaController.InsertRange(ProductoSustancias));
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
+            }
+        }
+
+        private void ImportaProductoImpuesto()
+        {
+            throw new NotImplementedException();
         }
 
         private void ImportaUsuarios()

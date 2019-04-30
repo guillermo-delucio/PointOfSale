@@ -158,6 +158,8 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\SustanciaController.cs" />
+    <Compile Include="Controllers\TablasIntermedia\ProductoImpuestoController.cs" />
+    <Compile Include="Controllers\TablasIntermedia\ProductoSustanciaController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Models\Almacen.cs" />

@@ -84,7 +84,7 @@
             this.importarDesdeExcelToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 26);
             // 
             // importarDesdeExcelToolStripMenuItem
             // 
@@ -201,7 +201,6 @@
             treeNode5.Name = "NodoLaboratorios";
             treeNode5.SelectedImageKey = "folderOpen.png";
             treeNode5.Text = "Laboratorios";
-            treeNode6.ContextMenuStrip = this.contextMenuStrip1;
             treeNode6.ImageKey = "folder.png";
             treeNode6.Name = "NodoImpuestos";
             treeNode6.SelectedImageKey = "folderOpen.png";
@@ -211,7 +210,6 @@
             treeNode7.Name = "NodoSustancias";
             treeNode7.SelectedImageKey = "folderOpen.png";
             treeNode7.Text = "Sustancias";
-            treeNode8.ContextMenuStrip = this.contextMenuStrip1;
             treeNode8.ImageKey = "folder.png";
             treeNode8.Name = "NodoAlmacenes";
             treeNode8.SelectedImageKey = "folderOpen.png";
