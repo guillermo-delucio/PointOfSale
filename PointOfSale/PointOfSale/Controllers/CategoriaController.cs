@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Controllers
 {
-    public class CategoriaController: IController<Categoria>
+    public class CategoriaController : IController<Categoria>
     {
         public bool Delete(string Id)
         {
@@ -20,7 +20,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @UsuarioController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @CategoriaController\n" + ex.ToString());
             }
             return false;
         }
@@ -31,12 +31,14 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
+                    db.Add(o);
+                    db.SaveChanges();
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @UsuarioController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @CategoriaController\n" + ex.ToString());
             }
             return false;
         }
@@ -52,7 +54,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @UsuarioController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @CategoriaController\n" + ex.ToString());
             }
             return false;
         }
@@ -68,7 +70,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @UsuarioController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @CategoriaController\n" + ex.ToString());
             }
             return null;
         }
@@ -84,7 +86,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @UsuarioController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @CategoriaController\n" + ex.ToString());
             }
             return null;
         }
@@ -100,7 +102,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @UsuarioController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @CategoriaController\n" + ex.ToString());
             }
             return null;
         }
@@ -116,7 +118,7 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @UsuarioController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @CategoriaController\n" + ex.ToString());
             }
             return null;
         }
@@ -127,12 +129,14 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
+                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    db.SaveChanges();
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @UsuarioController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @CategoriaController\n" + ex.ToString());
             }
             return false;
         }

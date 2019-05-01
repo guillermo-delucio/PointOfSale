@@ -190,570 +190,15 @@ namespace PointOfSale.Controllers
         }
         #endregion
 
-        #region Inserciones
-        private void InsertaCliente(Cliente cliente)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
 
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaProveedor(Proveedor proveedor)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaProducto(Producto producto)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaCategoria(Categoria categoria)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaLaboratorio(Laboratorio laboratorio)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaImpuesto(Impuesto impuesto)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaSustancia(Sustancia sustancia)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaAlmacen(Almacen almacen)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaEstacion(Estacion estacion)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaClaveSat()
-        {
-            Ambiente.Mensaje("No Implementado :( \n");
-        }
-
-        private void InsertaPresentacion(Presentacion presentacion)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaUnidadMedida(UnidadMedida unidadMedida)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void InsertaUsuario(Usuario usuariok)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-        #endregion
-
-        #region Actualizacione
-        private void ActualizaCliente(Cliente cliente)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void ActualizaProveedor(Proveedor proveedor)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void ActualizaProducto(Producto producto)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void ActualizaCategoria(Categoria categoria)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void ActualizaLaboratorio(Laboratorio laboratorio)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void ActualizaImpuesto(Impuesto impuesto)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void ActualizaSustancia(Sustancia sustancia)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void ActualizaAlmacen(Almacen almacen)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-        private void ActualizaEstacion(Estacion estacion)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void ActualizaClaveSat()
-        {
-            Ambiente.Mensaje("No Implementado :( \n");
-        }
-
-        private void ActualizaPresentacion(Presentacion presentacion)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void ActualizaUnidadMedida(UnidadMedida unidadMedida)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void ActualizaUsuario(Usuario usuariok)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-        #endregion
-
-        #region Borrados
-        private void BorraCliente(Cliente cliente)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraProveedor(Proveedor proveedor)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraProducto(Producto producto)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraCategoria(Categoria categoria)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraLaboratorio(Laboratorio laboratorio)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraImpuesto(Impuesto impuesto)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraSustancia(Sustancia sustancia)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraAlmacen(Almacen almacen)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraEstacion(Estacion estacion)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraClaveSat()
-        {
-            Ambiente.Mensaje("No Implementado :( \n");
-        }
-
-        private void BorraPresentacion(Presentacion presentacion)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraUnidadMedida(UnidadMedida unidadMedida)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-
-        private void BorraUsuario(Usuario usuario)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje("Algo salió mal :( \n" + ex.ToString());
-            }
-        }
-        #endregion
 
         #region Switch Nodos
 
         public void LlenaNodo(string NodoName, DataGridView Grid1)
         {
+            if (NodoName.Length == 0)
+                return;
+
             switch (NodoName)
             {
                 case "NodoClientes":
@@ -1057,66 +502,205 @@ namespace PointOfSale.Controllers
         #endregion
 
         #region SwitchUpdate
-        public void LanzaFormaUpdate(string NodoName, dynamic objeto)
+        public void LanzaFormaUpdate(string NodoName, dynamic objeto, dynamic Mdi)
         {
+            dynamic form;
 
             switch (NodoName)
             {
                 case "NodoClientes":
 
-                    new FrmClientes(objeto).Show();
-
+                    form = new FrmClientes(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
 
                 case "NodoProveedores":
-                    new FrmProveedores(objeto).Show();
+
+                    form = new FrmProveedores(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
 
                 case "NodoProductos":
-                    new FrmProductos(objeto).Show();
+
+                    form = new FrmProductos(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
 
                 case "NodoCategorias":
-                    new FrmCategorias(objeto).Show();
+
+                    form = new FrmCategorias(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
 
                 case "NodoLaboratorios":
-                    new FrmLaboratorios(objeto).Show();
 
+                    form = new FrmLaboratorios(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
-                case "NodoImpuestos":
-                    new FrmImpuestos(objeto).Show();
 
+                case "NodoImpuestos":
+
+                    form = new FrmImpuestos(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
 
                 case "NodoSustancias":
-                    new FrmSustancias(objeto).Show();
 
+                    form = new FrmSustancias(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
 
                 case "NodoAlmacenes":
-                    new FrmAlmacenes(objeto).Show();
 
+                    form = new FrmAlmacenes(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
+
                 case "NodoEstaciones":
-                    new FrmEstaciones(objeto).Show();
+
+                    form = new FrmEstaciones(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
 
                 case "NodoClavesSat":
-                    Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
 
+                    Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
                     break;
 
                 case "NodoPresentaciones":
-                    new FrmPresentaciones(objeto).Show();
 
+                    form = new FrmPresentaciones(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
+
                 case "NodoUnidadesMedida":
-                    new FrmUnidadMedida(objeto).Show();
+
+                    form = new FrmUnidadMedida(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
+
                 case "NodoUsuarios":
-                    new FrmUsuarios(objeto).Show();
+
+                    form = new FrmUsuarios(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
                     break;
+
+                default:
+                    Ambiente.Mensaje("No se encontró Forma Update");
+                    return;
+            }
+        }
+        #endregion
+
+        #region SwitchInsert
+        public void LanzaFormaInsert(string NodoName, dynamic Mdi)
+        {
+
+            dynamic form;
+
+            switch (NodoName)
+            {
+                case "NodoClientes":
+
+                    form = new FrmClientes();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoProveedores":
+
+                    form = new FrmProveedores();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoProductos":
+
+                    form = new FrmProductos();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoCategorias":
+
+                    form = new FrmCategorias();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoLaboratorios":
+
+                    form = new FrmLaboratorios();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoImpuestos":
+
+                    form = new FrmImpuestos();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoSustancias":
+
+                    form = new FrmSustancias();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoAlmacenes":
+
+                    form = new FrmAlmacenes();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoEstaciones":
+
+                    form = new FrmEstaciones();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoClavesSat":
+
+                    Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+                    break;
+
+                case "NodoPresentaciones":
+
+                    form = new FrmPresentaciones();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoUnidadesMedida":
+
+                    form = new FrmUnidadMedida();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoUsuarios":
+
+                    form = new FrmUsuarios();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
                 default:
                     Ambiente.Mensaje("No se encontró Forma Update");
                     return;

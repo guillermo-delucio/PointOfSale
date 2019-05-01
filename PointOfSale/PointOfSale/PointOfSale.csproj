@@ -384,6 +384,9 @@
     <EmbeddedResource Include="Views\Menus\FrmMenuPuntoVenta.resx">
       <DependentUpon>FrmMenuPuntoVenta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmAlmacenes.resx">
+      <DependentUpon>FrmAlmacenes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Catalogos\FrmBusinessManager.resx">
       <DependentUpon>FrmBusinessManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -393,8 +396,38 @@
     <EmbeddedResource Include="Views\Modulos\Catalogos\FrmCategorias.resx">
       <DependentUpon>FrmCategorias.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmClavesSat.resx">
+      <DependentUpon>FrmClavesSat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmClientes.resx">
+      <DependentUpon>FrmClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmEstaciones.resx">
+      <DependentUpon>FrmEstaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmImpuestos.resx">
+      <DependentUpon>FrmImpuestos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmLaboratorios.resx">
+      <DependentUpon>FrmLaboratorios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmPresentaciones.resx">
+      <DependentUpon>FrmPresentaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Catalogos\FrmProducto.resx">
       <DependentUpon>FrmProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmProveedores.resx">
+      <DependentUpon>FrmProveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmSustancias.resx">
+      <DependentUpon>FrmSustancias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmUnidadMedida.resx">
+      <DependentUpon>FrmUnidadMedida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmUsuarios.resx">
+      <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Logistica\FrmEntradasPorCompra.resx">
       <DependentUpon>FrmEntradasPorCompra.cs</DependentUpon>

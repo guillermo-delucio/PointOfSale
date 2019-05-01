@@ -39,6 +39,7 @@ namespace PointOfSale.Controllers
 
             Ambiente.CatalgoErrores.Add(200, "Proceso Concluido");
             Ambiente.CatalgoErrores.Add(201, "Proceso Finalizado");
+            Ambiente.CatalgoErrores.Add(202, "Cambios guardados");
 
         }
     }

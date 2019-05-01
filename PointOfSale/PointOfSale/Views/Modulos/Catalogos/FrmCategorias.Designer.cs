@@ -46,6 +46,7 @@
             this.BtnCancelar.TabIndex = 119;
             this.BtnCancelar.Text = "CANCELAR";
             this.BtnCancelar.UseVisualStyleBackColor = true;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // BtnAceptar
             // 
@@ -55,6 +56,7 @@
             this.BtnAceptar.TabIndex = 118;
             this.BtnAceptar.Text = "ACEPTAR";
             this.BtnAceptar.UseVisualStyleBackColor = true;
+            this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
             // 
             // TxtNombre
             // 
@@ -137,7 +139,9 @@
             this.Controls.Add(this.label14);
             this.MaximumSize = new System.Drawing.Size(336, 271);
             this.Name = "FrmCategorias";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmCategorias";
+            this.Load += new System.EventHandler(this.FrmCategorias_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

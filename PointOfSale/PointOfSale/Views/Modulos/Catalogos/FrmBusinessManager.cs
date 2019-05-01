@@ -28,8 +28,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void BMtree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             NodoName = BMtree.SelectedNode.Name;
-            if (NodoName.Length > 0)
-                bMController.LlenaNodo(NodoName, Grid1);
+            bMController.LlenaNodo(NodoName, Grid1);
         }
 
         private void ImportarDesdeExcelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,12 +42,12 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             if (Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value != null)
                 SelectedObject = bMController.GetSelectedObject(NodoName, Grid1);
-
         }
 
         private void BtnBMUpdate_Click(object sender, EventArgs e)
         {
-            bMController.LanzaFormaUpdate(NodoName, SelectedObject);
+            bMController.LanzaFormaUpdate(NodoName, SelectedObject, this);
+            bMController.LlenaNodo(NodoName, Grid1);
         }
 
         private void BtnBMEliminar_Click(object sender, EventArgs e)
@@ -58,7 +57,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
         private void BtnBMAgregar_Click(object sender, EventArgs e)
         {
-
+            bMController.LanzaFormaInsert(NodoName, this);
+            bMController.LlenaNodo(NodoName, Grid1);
         }
     }
 }
