@@ -715,22 +715,36 @@ namespace PointOfSale.Controllers
             switch (NodoName)
             {
                 case "NodoClientes":
-
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new ClienteController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
 
                     break;
 
                 case "NodoProveedores":
 
-                    form = new FrmProveedores(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new ProveedorController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
                 case "NodoProductos":
 
-                    form = new FrmProductos(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new ProductoController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
                 case "NodoCategorias":
@@ -742,41 +756,62 @@ namespace PointOfSale.Controllers
                     }
                     else
                         MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
+
                     break;
 
                 case "NodoLaboratorios":
 
-                    form = new FrmLaboratorios(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new LaboratorioController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
                 case "NodoImpuestos":
 
-                    form = new FrmImpuestos(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new ImpuestoController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
                 case "NodoSustancias":
 
-                    form = new FrmSustancias(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new SustanciaController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
                 case "NodoAlmacenes":
 
-                    form = new FrmAlmacenes(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new AlmacenController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
                 case "NodoEstaciones":
 
-                    form = new FrmEstaciones(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new EstacionController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
                 case "NodoClavesSat":
@@ -786,23 +821,29 @@ namespace PointOfSale.Controllers
 
                 case "NodoPresentaciones":
 
-                    form = new FrmPresentaciones(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new PresentacionController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
                 case "NodoUnidadesMedida":
 
-                    form = new FrmUnidadMedida(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
+                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
                     break;
 
                 case "NodoUsuarios":
 
-                    form = new FrmUsuarios(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new UsuarioController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
                 default:
