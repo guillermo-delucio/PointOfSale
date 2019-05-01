@@ -39,6 +39,7 @@ namespace PointOfSale.Controllers
 
         #region Operaciones de eliminación
 
+        bool Delete(T o);
         bool Delete(string Id);
 
         #endregion

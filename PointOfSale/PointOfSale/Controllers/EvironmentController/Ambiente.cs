@@ -12,7 +12,7 @@ namespace PointOfSale.Controllers
 {
     public static class Ambiente
     {
-        public static Dictionary<int, string> CatalgoErrores { get; set; }
+        public static Dictionary<int, string> CatalgoMensajes { get; set; }
 
         public static Usuario LoggedUser { get; set; }
 

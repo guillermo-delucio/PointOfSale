@@ -269,7 +269,7 @@ namespace PointOfSale.Controllers
 
         private void ImportaUsuarios()
         {
-            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
         }
 
         private void ImportaUnidadMedida()
@@ -475,12 +475,12 @@ namespace PointOfSale.Controllers
 
         private void ImportaEstaciones()
         {
-            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
         }
 
         private void ImportaAlmacenes()
         {
-            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
         }
 
         private void ImportaSustancias()
@@ -551,7 +551,7 @@ namespace PointOfSale.Controllers
 
         private void ImportaImpuestos()
         {
-            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
         }
 
         private void ImportaLaboratorios()
@@ -622,7 +622,7 @@ namespace PointOfSale.Controllers
 
         private void ImportaCategorias()
         {
-            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
         }
 
         private void ImportaProductos()
@@ -712,12 +712,12 @@ namespace PointOfSale.Controllers
 
         private void ImportaProveedores()
         {
-            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
         }
 
         private void ImportaClientes()
         {
-            Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
         }
     }
 }

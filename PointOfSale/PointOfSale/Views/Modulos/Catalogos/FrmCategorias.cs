@@ -78,18 +78,18 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.CategoriaId = TxtClave.Text.Trim();
                 objeto.Nombre = TxtNombre.Text.Trim();
                 if (categoriaController.InsertOne(objeto))
-                    Ambiente.Mensaje(Ambiente.CatalgoErrores[202]);
+                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
                 else
-                    Ambiente.Mensaje(Ambiente.CatalgoErrores[101]);
+                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1]);
                 Close();
             }
             else
             {
                 objeto.Nombre = TxtNombre.Text.Trim();
                 if (categoriaController.Update(objeto))
-                    Ambiente.Mensaje(Ambiente.CatalgoErrores[202]);
+                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
                 else
-                    Ambiente.Mensaje(Ambiente.CatalgoErrores[101]);
+                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1]);
 
                 Close();
             }

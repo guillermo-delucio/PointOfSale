@@ -49,7 +49,7 @@ namespace PointOfSale.Controllers.TablasIntermedia
             catch (Exception ex)
             {
 
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n" + "  @ProductoSustanciaController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
 
             return correctos;

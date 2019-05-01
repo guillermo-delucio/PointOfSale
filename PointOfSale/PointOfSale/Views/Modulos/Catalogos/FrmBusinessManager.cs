@@ -21,6 +21,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
             InitializeComponent();
             bMController = new BMController();
             NodoName = string.Empty;
+
         }
 
 
@@ -47,18 +48,17 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void BtnBMUpdate_Click(object sender, EventArgs e)
         {
             bMController.LanzaFormaUpdate(NodoName, SelectedObject, this);
-            bMController.LlenaNodo(NodoName, Grid1);
         }
 
         private void BtnBMEliminar_Click(object sender, EventArgs e)
         {
-
+            bMController.LanzaFormaDelete(NodoName, SelectedObject, this);
         }
 
         private void BtnBMAgregar_Click(object sender, EventArgs e)
         {
-            bMController.LanzaFormaInsert(NodoName, this);
-            bMController.LlenaNodo(NodoName, Grid1);
+
+
         }
     }
 }

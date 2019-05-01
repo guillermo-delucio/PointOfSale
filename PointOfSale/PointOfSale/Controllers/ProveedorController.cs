@@ -9,18 +9,43 @@ namespace PointOfSale.Controllers
 {
     public class ProveedorController: IController<Proveedor>
     {
+        public bool Delete(Proveedor o)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    o.IsDeleted = true;
+                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return false;
+        }
+
         public bool Delete(string Id)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return true;
+                    var temp = db.Proveedor.FirstOrDefault(x => x.ProveedorId == Id.Trim());
+                    if (temp != null)
+                    {
+                        temp.IsDeleted = true;
+                        db.SaveChanges();
+                        return true;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @ProveedorController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return false;
         }
@@ -31,12 +56,14 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
+                    db.Add(o);
+                    db.SaveChanges();
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @ProveedorController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return false;
         }
@@ -47,12 +74,14 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
+                    db.AddRange(lista);
+                    db.SaveChanges();
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @ProveedorController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return false;
         }
@@ -63,12 +92,12 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    return null;
+                    return db.Proveedor.ToList();
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @ProveedorController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return null;
         }
@@ -79,12 +108,12 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    return null;
+                    return db.Proveedor.Take(cantidad).ToList();
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @ProveedorController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return null;
         }
@@ -95,12 +124,12 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    return null;
+                    return db.Proveedor.FirstOrDefault(x => x.ProveedorId == Id.Trim());
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @ProveedorController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return null;
         }
@@ -111,12 +140,12 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    return null;
+                    return db.Proveedor.Where(x => x.ProveedorId == Id.Trim()).ToList();
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @ProveedorController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return null;
         }
@@ -127,12 +156,14 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
+                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    db.SaveChanges();
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoErrores[101] + "\n @ProveedorController\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return false;
         }

@@ -7,8 +7,27 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Controllers
 {
-    class SustanciaController : IController<Sustancia>
+    class SustanciaController :IController<Sustancia>
     {
+        public bool Delete(Sustancia o)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    o.IsDeleted = true;
+                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return false;
+        }
+
         public bool Delete(string Id)
         {
             try
@@ -18,7 +37,7 @@ namespace PointOfSale.Controllers
                     var temp = db.Sustancia.FirstOrDefault(x => x.SustanciaId == Id.Trim());
                     if (temp != null)
                     {
-                        db.Remove(temp);
+                        temp.IsDeleted = true;
                         db.SaveChanges();
                         return true;
                     }
@@ -26,9 +45,8 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("SustanciaController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return false;
         }
 
@@ -38,18 +56,15 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-
                     db.Add(o);
                     db.SaveChanges();
                     return true;
-
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("SustanciaController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return false;
         }
 
@@ -59,18 +74,15 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-
                     db.AddRange(lista);
                     db.SaveChanges();
                     return true;
-
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("SustanciaController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return false;
         }
 
@@ -81,14 +93,12 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Sustancia.ToList();
-
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("SustanciaController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return null;
         }
 
@@ -99,14 +109,12 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Sustancia.Take(cantidad).ToList();
-
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("SustanciaController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return null;
         }
 
@@ -121,9 +129,8 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("SustanciaController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return null;
         }
 
@@ -138,9 +145,8 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("SustanciaController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return null;
         }
 
@@ -157,9 +163,8 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("SustanciaController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return false;
         }
     }

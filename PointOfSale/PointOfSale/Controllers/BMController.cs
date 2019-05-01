@@ -505,7 +505,6 @@ namespace PointOfSale.Controllers
         public void LanzaFormaUpdate(string NodoName, dynamic objeto, dynamic Mdi)
         {
             dynamic form;
-
             switch (NodoName)
             {
                 case "NodoClientes":
@@ -532,6 +531,7 @@ namespace PointOfSale.Controllers
                 case "NodoCategorias":
 
                     form = new FrmCategorias(objeto);
+
                     form.MdiParent = Mdi.MdiParent;
                     form.Show();
                     break;
@@ -573,7 +573,7 @@ namespace PointOfSale.Controllers
 
                 case "NodoClavesSat":
 
-                    Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
                     break;
 
                 case "NodoPresentaciones":
@@ -677,7 +677,7 @@ namespace PointOfSale.Controllers
 
                 case "NodoClavesSat":
 
-                    Ambiente.Mensaje(Ambiente.CatalgoErrores[103]);
+                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
                     break;
 
                 case "NodoPresentaciones":
@@ -697,6 +697,110 @@ namespace PointOfSale.Controllers
                 case "NodoUsuarios":
 
                     form = new FrmUsuarios();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                default:
+                    Ambiente.Mensaje("No se encontró Forma Update");
+                    return;
+            }
+        }
+        #endregion
+
+        #region SwitchDelete
+        public void LanzaFormaDelete(string NodoName, dynamic objeto, dynamic Mdi)
+        {
+            dynamic form;
+            switch (NodoName)
+            {
+                case "NodoClientes":
+
+
+                    break;
+
+                case "NodoProveedores":
+
+                    form = new FrmProveedores(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoProductos":
+
+                    form = new FrmProductos(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoCategorias":
+
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new CategoriaController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
+                    break;
+
+                case "NodoLaboratorios":
+
+                    form = new FrmLaboratorios(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoImpuestos":
+
+                    form = new FrmImpuestos(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoSustancias":
+
+                    form = new FrmSustancias(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoAlmacenes":
+
+                    form = new FrmAlmacenes(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoEstaciones":
+
+                    form = new FrmEstaciones(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoClavesSat":
+
+                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
+                    break;
+
+                case "NodoPresentaciones":
+
+                    form = new FrmPresentaciones(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoUnidadesMedida":
+
+                    form = new FrmUnidadMedida(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                case "NodoUsuarios":
+
+                    form = new FrmUsuarios(objeto);
                     form.MdiParent = Mdi.MdiParent;
                     form.Show();
                     break;

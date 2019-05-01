@@ -27,19 +27,23 @@ namespace PointOfSale.Controllers
 
         public static void InicializaListas()
         {
-            Ambiente.CatalgoErrores = new Dictionary<int, string>();
 
-            Ambiente.CatalgoErrores.Add(100, "Proceso abortado");
-            Ambiente.CatalgoErrores.Add(102, "Proceso cancelado");
+            Ambiente.CatalgoMensajes = new Dictionary<int, string>
+            {
+                //[<0] MENSAJES NEGATIVOS
+                {-1, "ALGO SALIÓ MAL :( \n" },
+                {-2, "PROCESO ABORTADO :( \n" },
+                {-3, "PROCESO CANCELADO :( \n" },
+                {-4, "ERROR DESCONOCIDO :( \n" },
+                {-5, "MÓDULO NO IMPLEMENTADO :( \n" },
+                {-6, "EL REGISTRO YA NO EXISTE:( \n" },
 
-            Ambiente.CatalgoErrores.Add(101, "Algo salio mal");
-            Ambiente.CatalgoErrores.Add(103, "Módulo no implementado");
+                //[>0] MENSAJES POSITIVOS
+                {1, "COMPLETADO CON ÉXITO :) \n" },
+                {2, "PROCESO COMPLETADO :) \n" },
+                {3, "CAMBIOS GUARDADOS :) \n" },
 
-
-
-            Ambiente.CatalgoErrores.Add(200, "Proceso Concluido");
-            Ambiente.CatalgoErrores.Add(201, "Proceso Finalizado");
-            Ambiente.CatalgoErrores.Add(202, "Cambios guardados");
+            };
 
         }
     }

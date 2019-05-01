@@ -8,8 +8,27 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Controllers
 {
-    public class ProductoController : IController<Producto>
+    public class ProductoController :IController<Producto>
     {
+        public bool Delete(Producto o)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    o.IsDeleted = true;
+                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return false;
+        }
+
         public bool Delete(string Id)
         {
             try
@@ -19,7 +38,7 @@ namespace PointOfSale.Controllers
                     var temp = db.Producto.FirstOrDefault(x => x.ProductoId == Id.Trim());
                     if (temp != null)
                     {
-                        db.Remove(temp);
+                        temp.IsDeleted = true;
                         db.SaveChanges();
                         return true;
                     }
@@ -27,9 +46,8 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return false;
         }
 
@@ -46,9 +64,8 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return false;
         }
 
@@ -58,16 +75,15 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    db.Producto.AddRange(lista);
+                    db.AddRange(lista);
                     db.SaveChanges();
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return false;
         }
 
@@ -77,14 +93,13 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    return db.Producto.ToList(); ;
+                    return db.Producto.ToList();
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return null;
         }
 
@@ -94,14 +109,13 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    return db.Producto.AsNoTracking().Take(cantidad).ToList();
+                    return db.Producto.Take(cantidad).ToList();
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return null;
         }
 
@@ -111,15 +125,13 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-
                     return db.Producto.FirstOrDefault(x => x.ProductoId == Id.Trim());
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return null;
         }
 
@@ -129,14 +141,13 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    return db.Producto.Where(x => x.ProductoId == Id.Trim()).ToList(); ;
+                    return db.Producto.Where(x => x.ProductoId == Id.Trim()).ToList();
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return null;
         }
 
@@ -146,17 +157,15 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-
-                    db.Entry(o).State = EntityState.Modified;
+                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-
             return false;
         }
 
