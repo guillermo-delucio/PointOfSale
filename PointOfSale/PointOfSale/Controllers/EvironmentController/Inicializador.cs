@@ -37,6 +37,7 @@ namespace PointOfSale.Controllers
                 {-4, "ERROR DESCONOCIDO :( \n" },
                 {-5, "MÓDULO NO IMPLEMENTADO :( \n" },
                 {-6, "EL REGISTRO YA NO EXISTE:( \n" },
+                {-7, "LA CADENA NO TIENE EN FORMATO CORRECTO:( \n" },
 
                 //[>0] MENSAJES POSITIVOS
                 {1, "COMPLETADO CON ÉXITO :) \n" },

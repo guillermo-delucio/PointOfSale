@@ -58,7 +58,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void BtnBMAgregar_Click(object sender, EventArgs e)
         {
 
-
+            bMController.LanzaFormaInsert(NodoName, this);
         }
     }
 }

@@ -711,7 +711,9 @@ namespace PointOfSale.Controllers
         #region SwitchDelete
         public void LanzaFormaDelete(string NodoName, dynamic objeto, dynamic Mdi)
         {
-            dynamic form;
+            if (objeto == null)
+                return;
+
             switch (NodoName)
             {
                 case "NodoClientes":
@@ -772,7 +774,7 @@ namespace PointOfSale.Controllers
 
                 case "NodoImpuestos":
 
-                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.ImpuestoId))
                     {
                         if (new ImpuestoController().Delete(objeto))
                             MessageBox.Show(Ambiente.CatalgoMensajes[2]);
