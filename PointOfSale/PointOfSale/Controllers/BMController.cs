@@ -565,7 +565,7 @@ namespace PointOfSale.Controllers
                     break;
 
                 case "NodoEstaciones":
-
+                   
                     form = new FrmEstaciones(objeto);
                     form.MdiParent = Mdi.MdiParent;
                     form.Show();
@@ -669,7 +669,7 @@ namespace PointOfSale.Controllers
                     break;
 
                 case "NodoEstaciones":
-
+                    
                     form = new FrmEstaciones();
                     form.MdiParent = Mdi.MdiParent;
                     form.Show();
@@ -834,7 +834,13 @@ namespace PointOfSale.Controllers
 
                 case "NodoUnidadesMedida":
 
-                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    {
+                        if (new UnidadMedidaController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
                 case "NodoUsuarios":

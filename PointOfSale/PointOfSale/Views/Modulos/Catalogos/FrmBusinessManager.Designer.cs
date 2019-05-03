@@ -29,49 +29,49 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Clientes");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Proveedores");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Productos");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Categorías");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Laboratorios");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Impuestos");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Sustancias");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Almacenes");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Estaciones");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Claves Sat");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Presentaciones", 1, 2);
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Unidades Medida");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Usuarios", 1, 2);
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Catalogos", 5, 5, new System.Windows.Forms.TreeNode[] {
-            treeNode18,
-            treeNode19,
-            treeNode20,
-            treeNode21,
-            treeNode22,
-            treeNode23,
-            treeNode24,
-            treeNode25,
-            treeNode26,
-            treeNode27,
-            treeNode28,
-            treeNode29,
-            treeNode30});
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Producto-Sustancias", 1, 2);
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Producto-Impuesto");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Configuración", 3, 3, new System.Windows.Forms.TreeNode[] {
-            treeNode32,
-            treeNode33});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Clientes");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Proveedores");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Productos");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Categorías");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Laboratorios");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Impuestos");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Sustancias");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Almacenes");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Estaciones");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Claves Sat");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Presentaciones", 1, 2);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Unidades Medida");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Usuarios", 1, 2);
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Catalogos", 5, 5, new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12,
+            treeNode13});
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Producto-Sustancias", 1, 2);
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Producto-Impuesto");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Configuración", 3, 3, new System.Windows.Forms.TreeNode[] {
+            treeNode15,
+            treeNode16});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBusinessManager));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importarDesdeExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Grid1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.BtnBMUpdate = new System.Windows.Forms.Button();
             this.BtnBMEliminar = new System.Windows.Forms.Button();
             this.BtnBMAgregar = new System.Windows.Forms.Button();
             this.BMtree = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -108,7 +108,7 @@
             this.Grid1.MultiSelect = false;
             this.Grid1.Name = "Grid1";
             this.Grid1.ReadOnly = true;
-            this.Grid1.Size = new System.Drawing.Size(552, 350);
+            this.Grid1.Size = new System.Drawing.Size(633, 436);
             this.Grid1.TabIndex = 5;
             this.Grid1.SelectionChanged += new System.EventHandler(this.Grid1_SelectionChanged);
             // 
@@ -122,14 +122,25 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(238, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(552, 73);
+            this.panel1.Size = new System.Drawing.Size(633, 73);
             this.panel1.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox1.Image = global::PointOfSale.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(236, 73);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // BtnBMUpdate
             // 
             this.BtnBMUpdate.Dock = System.Windows.Forms.DockStyle.Right;
             this.BtnBMUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnBMUpdate.Location = new System.Drawing.Point(276, 0);
+            this.BtnBMUpdate.Location = new System.Drawing.Point(357, 0);
             this.BtnBMUpdate.Name = "BtnBMUpdate";
             this.BtnBMUpdate.Size = new System.Drawing.Size(92, 73);
             this.BtnBMUpdate.TabIndex = 1;
@@ -141,7 +152,7 @@
             // 
             this.BtnBMEliminar.Dock = System.Windows.Forms.DockStyle.Right;
             this.BtnBMEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnBMEliminar.Location = new System.Drawing.Point(368, 0);
+            this.BtnBMEliminar.Location = new System.Drawing.Point(449, 0);
             this.BtnBMEliminar.Name = "BtnBMEliminar";
             this.BtnBMEliminar.Size = new System.Drawing.Size(92, 73);
             this.BtnBMEliminar.TabIndex = 1;
@@ -153,7 +164,7 @@
             // 
             this.BtnBMAgregar.Dock = System.Windows.Forms.DockStyle.Right;
             this.BtnBMAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnBMAgregar.Location = new System.Drawing.Point(460, 0);
+            this.BtnBMAgregar.Location = new System.Drawing.Point(541, 0);
             this.BtnBMAgregar.Name = "BtnBMAgregar";
             this.BtnBMAgregar.Size = new System.Drawing.Size(92, 73);
             this.BtnBMAgregar.TabIndex = 1;
@@ -169,91 +180,91 @@
             this.BMtree.ImageList = this.imageList1;
             this.BMtree.Location = new System.Drawing.Point(0, 0);
             this.BMtree.Name = "BMtree";
-            treeNode18.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode18.ImageIndex = 1;
-            treeNode18.Name = "NodoClientes";
-            treeNode18.SelectedImageKey = "folderOpen.png";
-            treeNode18.Text = "Clientes";
-            treeNode19.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode19.ImageIndex = 1;
-            treeNode19.Name = "NodoProveedores";
-            treeNode19.SelectedImageKey = "folderOpen.png";
-            treeNode19.Text = "Proveedores";
-            treeNode20.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode20.ImageIndex = 1;
-            treeNode20.Name = "NodoProductos";
-            treeNode20.SelectedImageKey = "folderOpen.png";
-            treeNode20.Text = "Productos";
-            treeNode21.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode21.ImageKey = "folder.png";
-            treeNode21.Name = "NodoCategorias";
-            treeNode21.SelectedImageKey = "folderOpen.png";
-            treeNode21.Text = "Categorías";
-            treeNode22.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode22.ImageKey = "folder.png";
-            treeNode22.Name = "NodoLaboratorios";
-            treeNode22.SelectedImageKey = "folderOpen.png";
-            treeNode22.Text = "Laboratorios";
-            treeNode23.ImageKey = "folder.png";
-            treeNode23.Name = "NodoImpuestos";
-            treeNode23.SelectedImageKey = "folderOpen.png";
-            treeNode23.Text = "Impuestos";
-            treeNode24.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode24.ImageKey = "folder.png";
-            treeNode24.Name = "NodoSustancias";
-            treeNode24.SelectedImageKey = "folderOpen.png";
-            treeNode24.Text = "Sustancias";
-            treeNode25.ImageKey = "folder.png";
-            treeNode25.Name = "NodoAlmacenes";
-            treeNode25.SelectedImageKey = "folderOpen.png";
-            treeNode25.Text = "Almacenes";
-            treeNode26.ImageKey = "folder.png";
-            treeNode26.Name = "NodoEstaciones";
-            treeNode26.SelectedImageIndex = 2;
-            treeNode26.Text = "Estaciones";
-            treeNode27.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode27.ImageKey = "folder.png";
-            treeNode27.Name = "NodoClavesSat";
-            treeNode27.SelectedImageKey = "folderOpen.png";
-            treeNode27.Text = "Claves Sat";
-            treeNode28.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode28.ImageIndex = 1;
-            treeNode28.Name = "NodoPresentaciones";
-            treeNode28.SelectedImageIndex = 2;
-            treeNode28.Text = "Presentaciones";
-            treeNode29.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode29.ImageKey = "folder.png";
-            treeNode29.Name = "NodoUnidadesMedida";
-            treeNode29.SelectedImageKey = "folderOpen.png";
-            treeNode29.Text = "Unidades Medida";
-            treeNode30.ImageIndex = 1;
-            treeNode30.Name = "NodoUsuarios";
-            treeNode30.SelectedImageIndex = 2;
-            treeNode30.Text = "Usuarios";
-            treeNode31.ImageIndex = 5;
-            treeNode31.Name = "NodoRoot";
-            treeNode31.SelectedImageIndex = 5;
-            treeNode31.Text = "Catalogos";
-            treeNode32.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode32.ImageIndex = 1;
-            treeNode32.Name = "NodoProdSus";
-            treeNode32.SelectedImageIndex = 2;
-            treeNode32.Text = "Producto-Sustancias";
-            treeNode33.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode33.ImageIndex = 1;
-            treeNode33.Name = "NodoProdImp";
-            treeNode33.SelectedImageKey = "folderOpen.png";
-            treeNode33.Text = "Producto-Impuesto";
-            treeNode34.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode34.ImageIndex = 3;
-            treeNode34.Name = "NodoConfiguracion";
-            treeNode34.SelectedImageIndex = 3;
-            treeNode34.Text = "Configuración";
+            treeNode1.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode1.ImageIndex = 1;
+            treeNode1.Name = "NodoClientes";
+            treeNode1.SelectedImageKey = "folderOpen.png";
+            treeNode1.Text = "Clientes";
+            treeNode2.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode2.ImageIndex = 1;
+            treeNode2.Name = "NodoProveedores";
+            treeNode2.SelectedImageKey = "folderOpen.png";
+            treeNode2.Text = "Proveedores";
+            treeNode3.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode3.ImageIndex = 1;
+            treeNode3.Name = "NodoProductos";
+            treeNode3.SelectedImageKey = "folderOpen.png";
+            treeNode3.Text = "Productos";
+            treeNode4.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode4.ImageKey = "folder.png";
+            treeNode4.Name = "NodoCategorias";
+            treeNode4.SelectedImageKey = "folderOpen.png";
+            treeNode4.Text = "Categorías";
+            treeNode5.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode5.ImageKey = "folder.png";
+            treeNode5.Name = "NodoLaboratorios";
+            treeNode5.SelectedImageKey = "folderOpen.png";
+            treeNode5.Text = "Laboratorios";
+            treeNode6.ImageKey = "folder.png";
+            treeNode6.Name = "NodoImpuestos";
+            treeNode6.SelectedImageKey = "folderOpen.png";
+            treeNode6.Text = "Impuestos";
+            treeNode7.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode7.ImageKey = "folder.png";
+            treeNode7.Name = "NodoSustancias";
+            treeNode7.SelectedImageKey = "folderOpen.png";
+            treeNode7.Text = "Sustancias";
+            treeNode8.ImageKey = "folder.png";
+            treeNode8.Name = "NodoAlmacenes";
+            treeNode8.SelectedImageKey = "folderOpen.png";
+            treeNode8.Text = "Almacenes";
+            treeNode9.ImageKey = "folder.png";
+            treeNode9.Name = "NodoEstaciones";
+            treeNode9.SelectedImageIndex = 2;
+            treeNode9.Text = "Estaciones";
+            treeNode10.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode10.ImageKey = "folder.png";
+            treeNode10.Name = "NodoClavesSat";
+            treeNode10.SelectedImageKey = "folderOpen.png";
+            treeNode10.Text = "Claves Sat";
+            treeNode11.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode11.ImageIndex = 1;
+            treeNode11.Name = "NodoPresentaciones";
+            treeNode11.SelectedImageIndex = 2;
+            treeNode11.Text = "Presentaciones";
+            treeNode12.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode12.ImageKey = "folder.png";
+            treeNode12.Name = "NodoUnidadesMedida";
+            treeNode12.SelectedImageKey = "folderOpen.png";
+            treeNode12.Text = "Unidades Medida";
+            treeNode13.ImageIndex = 1;
+            treeNode13.Name = "NodoUsuarios";
+            treeNode13.SelectedImageIndex = 2;
+            treeNode13.Text = "Usuarios";
+            treeNode14.ImageIndex = 5;
+            treeNode14.Name = "NodoRoot";
+            treeNode14.SelectedImageIndex = 5;
+            treeNode14.Text = "Catalogos";
+            treeNode15.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode15.ImageIndex = 1;
+            treeNode15.Name = "NodoProdSus";
+            treeNode15.SelectedImageIndex = 2;
+            treeNode15.Text = "Producto-Sustancias";
+            treeNode16.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode16.ImageIndex = 1;
+            treeNode16.Name = "NodoProdImp";
+            treeNode16.SelectedImageKey = "folderOpen.png";
+            treeNode16.Text = "Producto-Impuesto";
+            treeNode17.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode17.ImageIndex = 3;
+            treeNode17.Name = "NodoConfiguracion";
+            treeNode17.SelectedImageIndex = 3;
+            treeNode17.Text = "Configuración";
             this.BMtree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode31,
-            treeNode34});
+            treeNode14,
+            treeNode17});
             this.BMtree.SelectedImageIndex = 0;
-            this.BMtree.Size = new System.Drawing.Size(238, 423);
+            this.BMtree.Size = new System.Drawing.Size(238, 509);
             this.BMtree.TabIndex = 4;
             this.BMtree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.BMtree_AfterSelect);
             // 
@@ -268,22 +279,11 @@
             this.imageList1.Images.SetKeyName(4, "SettingsC.ico");
             this.imageList1.Images.SetKeyName(5, "Catalogos.png");
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Image = global::PointOfSale.Properties.Resources.logo;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(236, 73);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
             // FrmBusinessManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 423);
+            this.ClientSize = new System.Drawing.Size(871, 509);
             this.Controls.Add(this.Grid1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.BMtree);

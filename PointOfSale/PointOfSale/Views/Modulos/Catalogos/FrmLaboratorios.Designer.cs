@@ -33,9 +33,9 @@
             this.TxtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtClave = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnCancelar
@@ -92,17 +92,6 @@
             this.TxtClave.TabIndex = 122;
             this.TxtClave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtClave_KeyDown);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label6.Location = new System.Drawing.Point(12, 57);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 18);
-            this.label6.TabIndex = 123;
-            this.label6.Text = "CLAVE";
-            // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
@@ -124,17 +113,28 @@
             this.label14.Size = new System.Drawing.Size(322, 9);
             this.label14.TabIndex = 120;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label6.Location = new System.Drawing.Point(8, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 18);
+            this.label6.TabIndex = 128;
+            this.label6.Text = "♥CLAVE";
+            // 
             // FrmLaboratorios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(320, 232);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnAceptar);
             this.Controls.Add(this.TxtNombre);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TxtClave);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.label14);
             this.MaximumSize = new System.Drawing.Size(336, 271);
@@ -153,8 +153,8 @@
         private System.Windows.Forms.TextBox TxtNombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TxtClave;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label6;
     }
 }

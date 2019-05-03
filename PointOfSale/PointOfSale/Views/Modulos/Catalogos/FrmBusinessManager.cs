@@ -21,7 +21,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
             InitializeComponent();
             bMController = new BMController();
             NodoName = string.Empty;
-
+            BMtree.Nodes[0].Expand();
         }
 
 

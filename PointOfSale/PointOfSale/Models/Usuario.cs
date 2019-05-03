@@ -14,7 +14,7 @@ namespace PointOfSale.Models
         public string Password { get; set; }
         public string Nombre { get; set; }
         public string Area { get; set; }
-        public bool? IsAdmin { get; set; }
+        public bool IsAdmin { get; set; }
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<UsuarioRole> UsuarioRole { get; set; }

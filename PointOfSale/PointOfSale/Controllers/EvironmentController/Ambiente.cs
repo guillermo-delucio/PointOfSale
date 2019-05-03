@@ -103,7 +103,43 @@ namespace PointOfSale.Controllers
 
         #region Miselaneos
 
+        /// Encripta una cadena
+        public static string Encrypt(this string _cadenaAencriptar)
+        {
+            try
+            {
+                string result = string.Empty;
+                byte[] encryted = System.Text.Encoding.Unicode.GetBytes(_cadenaAencriptar.Trim());
+                result = Convert.ToBase64String(encryted);
+                return result;
+            }
+            catch (Exception ex)
+            {
 
+                Mensaje(CatalgoMensajes[-1] + ex.ToString());
+            }
+            return null;
+        }
+
+        /// Esta función desencripta la cadena que le envíamos en el parámentro de entrada.
+        public static string Decrypt(this string _cadenaAdesencriptar)
+        {
+
+            try
+            {
+                string result = string.Empty;
+                byte[] decryted = Convert.FromBase64String(_cadenaAdesencriptar);
+                //result = System.Text.Encoding.Unicode.GetString(decryted, 0, decryted.ToArray().Length);
+                result = System.Text.Encoding.Unicode.GetString(decryted);
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                Mensaje(CatalgoMensajes[-1] + ex.ToString());
+            }
+            return null;
+        }
         public static string FechaSQL(DateTime dateTime)
         {
             return dateTime.Date.ToString("yyyy-MM-dd HH:mm:ss");

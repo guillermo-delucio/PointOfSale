@@ -99,9 +99,9 @@
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label6.Location = new System.Drawing.Point(12, 57);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 18);
+            this.label6.Size = new System.Drawing.Size(73, 18);
             this.label6.TabIndex = 123;
-            this.label6.Text = "CLAVE";
+            this.label6.Text = "♥CLAVE";
             // 
             // lblTitulo
             // 
@@ -139,6 +139,7 @@
             this.Controls.Add(this.label14);
             this.MaximumSize = new System.Drawing.Size(336, 271);
             this.Name = "FrmAlmacenes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmAlmacenes";
             this.ResumeLayout(false);
             this.PerformLayout();

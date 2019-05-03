@@ -134,9 +134,35 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.DefaultAlmacenId).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ImpresoraF)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'N/A')");
+
+                entity.Property(e => e.ImpresoraNc)
+                    .IsRequired()
+                    .HasColumnName("ImpresoraNC")
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'N/A')");
+
+                entity.Property(e => e.ImpresoraR)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'N/A')");
+
+                entity.Property(e => e.ImpresoraT)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'N/A')");
+
                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
-                entity.Property(e => e.Nombre).HasMaxLength(50);
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SIN NOMBRE')");
             });
 
             modelBuilder.Entity<Estado>(entity =>
