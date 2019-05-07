@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace PointOfSale.Views.Modulos.Catalogos
 {
-    public partial class FrmProductos : Form
+    public partial class FrmProducto : Form
     {
 
         #region Variables de clase
@@ -20,7 +20,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
         #endregion
 
         #region Contructores
-        public FrmProductos()
+        public FrmProducto()
         {
             InitializeComponent();
             ProductoController = new ProductoController();
@@ -29,7 +29,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
             ModoCreate = false;
         }
 
-        public FrmProductos(dynamic objeto)
+        public FrmProducto(dynamic objeto)
         {
             this.objeto = objeto;
         }

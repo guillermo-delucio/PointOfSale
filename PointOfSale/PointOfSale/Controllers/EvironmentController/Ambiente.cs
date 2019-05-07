@@ -15,6 +15,7 @@ namespace PointOfSale.Controllers
         public static Dictionary<int, string> CatalgoMensajes { get; set; }
 
         public static Usuario LoggedUser { get; set; }
+        public static string RutaImgs { get; set; }
 
         #region Enums
         public enum TipoBusqueda
@@ -146,12 +147,35 @@ namespace PointOfSale.Controllers
         }
         public static string FDinero(string valor)
         {
+            if (valor == null)
+                return string.Format("{0:0.000}", "1");
+
+
             bool successv = decimal.TryParse(valor, out decimal nValor);
             if (!successv)
                 return "1.000";
             return string.Format("{0:0.000}", nValor);
         }
 
+
+        public static Tuple<string, string> GetRuta()
+        {
+
+            var filePath = string.Empty;
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "JPG files (*.JPG)|*.JPG|PNG files (*.PNG)|*.PNG";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
+                    return new Tuple<string, string>(filePath, openFileDialog.SafeFileName);
+                }
+            }
+            return null;
+        }
         #endregion
 
         #region Precios y margenes

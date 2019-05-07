@@ -18,17 +18,17 @@ namespace PointOfSale.Models
         public string LaboratorioId { get; set; }
         public string Descripcion { get; set; }
         public string Unidades { get; set; }
-        public int? Stock { get; set; }
-        public decimal? PrecioCompra { get; set; }
-        public decimal? PrecioCaja { get; set; }
-        public decimal? Precio1 { get; set; }
-        public decimal? Precio2 { get; set; }
-        public decimal? Precio3 { get; set; }
-        public decimal? Precio4 { get; set; }
-        public decimal? Utilidad1 { get; set; }
-        public decimal? Utilidad2 { get; set; }
-        public decimal? Utilidad3 { get; set; }
-        public decimal? Utilidad4 { get; set; }
+        public int Stock { get; set; }
+        public decimal PrecioCompra { get; set; }
+        public decimal PrecioCaja { get; set; }
+        public decimal Precio1 { get; set; }
+        public decimal Precio2 { get; set; }
+        public decimal Precio3 { get; set; }
+        public decimal Precio4 { get; set; }
+        public decimal Utilidad1 { get; set; }
+        public decimal Utilidad2 { get; set; }
+        public decimal Utilidad3 { get; set; }
+        public decimal Utilidad4 { get; set; }
         public bool TieneLote { get; set; }
         public bool IsDeleted { get; set; }
         public string CratedBy { get; set; }

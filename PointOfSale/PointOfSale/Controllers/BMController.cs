@@ -19,7 +19,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.Cliente.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Cliente.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.ClienteId,
                     x.Nombre
@@ -33,7 +33,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.Proveedor.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Proveedor.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.ProveedorId,
                     x.RazonSocial
@@ -46,7 +46,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.Producto.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Producto.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.ProductoId,
                     x.Stock,
@@ -61,7 +61,7 @@ namespace PointOfSale.Controllers
             using (var db = new DymContext())
             {
 
-                Grid1.DataSource = db.Categoria.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Categoria.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.CategoriaId,
                     x.Nombre
@@ -74,7 +74,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.Laboratorio.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Laboratorio.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.LaboratorioId,
                     x.Nombre
@@ -87,7 +87,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.Impuesto.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Impuesto.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.ImpuestoId,
                     x.Tasa
@@ -100,7 +100,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.Sustancia.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Sustancia.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.SustanciaId,
                     x.Nombre
@@ -113,7 +113,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.Almacen.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Almacen.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.AlmacenId,
                     x.Nombre
@@ -126,7 +126,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.Estacion.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Estacion.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.EstacionId,
                     x.Nombre
@@ -139,7 +139,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.ClaveSat.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.ClaveSat.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.ClaveSatId,
                     x.Nombre
@@ -152,7 +152,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.Presentacion.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Presentacion.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.PresentacionId,
                     x.Nombre
@@ -165,7 +165,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.UnidadMedida.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.UnidadMedida.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.UnidadMedidaId,
                     x.UnidadSat,
@@ -179,7 +179,7 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.Usuario.AsNoTracking().Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.Usuario.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.UsuarioId,
                     x.Nombre,
@@ -740,7 +740,7 @@ namespace PointOfSale.Controllers
 
                 case "NodoProductos":
 
-                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Descripcion))
                     {
                         if (new ProductoController().Delete(objeto))
                             MessageBox.Show(Ambiente.CatalgoMensajes[2]);

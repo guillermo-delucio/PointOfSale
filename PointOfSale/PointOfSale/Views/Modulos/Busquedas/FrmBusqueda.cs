@@ -39,6 +39,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
             InitializeComponent();
             SearchText = searchText;
             Catalogo = tipoBuscqueda;
+            CargaGrid();
         }
 
         private void FrmBusqueda_Load(object sender, EventArgs e)
@@ -54,7 +55,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Cliente.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Cliente.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted==false).OrderBy(x => x.Nombre).
                             Select(x => new { x.ClienteId, x.Nombre }).ToList();
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -65,7 +66,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Proveedores:
                     using (var db = new DymContext())
                     {
-                        db.Proveedor.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText)).OrderBy(x => x.RazonSocial).
+                        Grid1.DataSource = db.Proveedor.Where(x => x.RazonSocial.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
                             Select(x => new { x.ProveedorId, x.RazonSocial }).ToList();
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -75,8 +76,8 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     using (var db = new DymContext())
                     {
-                        db.Producto.AsNoTracking().Where(
-                       x => x.Descripcion.Contains(SearchText)).Select(x => new
+                        Grid1.DataSource = db.Producto.Where(
+                       x => x.Descripcion.Contains(SearchText) && x.IsDeleted == false).Select(x => new
                        {
                            x.ProductoId,
                            x.Descripcion
@@ -88,7 +89,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Categorias:
                     using (var db = new DymContext())
                     {
-                        db.Categoria.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Categoria.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.CategoriaId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -98,7 +99,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Laboratorios:
                     using (var db = new DymContext())
                     {
-                        db.Laboratorio.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Laboratorio.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.LaboratorioId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -108,7 +109,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Impuestos:
                     using (var db = new DymContext())
                     {
-                        db.Impuesto.AsNoTracking().Where(x => x.ImpuestoId.Contains(SearchText)).OrderBy(x => x.ImpuestoId).
+                        Grid1.DataSource = db.Impuesto.Where(x => x.ImpuestoId.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.ImpuestoId).
                             Select(x => new { x.ImpuestoId, x.Tasa }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -119,7 +120,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Sustancias:
                     using (var db = new DymContext())
                     {
-                        db.Sustancia.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).
+                        Grid1.DataSource = db.Sustancia.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).
                             Select(x => new { x.SustanciaId, x.Nombre }).OrderBy(x => x.Nombre).ToList();
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -129,7 +130,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Almacenes:
                     using (var db = new DymContext())
                     {
-                        db.Almacen.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Almacen.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.AlmacenId, x.Nombre }).ToList();
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -138,7 +139,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Estaciones:
                     using (var db = new DymContext())
                     {
-                        db.Estacion.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Estacion.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.EstacionId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -148,7 +149,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.ClavesSat:
                     using (var db = new DymContext())
                     {
-                        db.ClaveSat.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.ClaveSat.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                         Select(x => new { x.ClaveSatId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -159,8 +160,8 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     using (var db = new DymContext())
                     {
-                        db.Presentacion.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).OrderBy(x => x.Nombre).
-                            Select(x => new { x.PresentacionId, x.Nombre }).ToList();
+                        Grid1.DataSource = db.Presentacion.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
+                             Select(x => new { x.PresentacionId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -169,7 +170,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.UnidadesMedida:
                     using (var db = new DymContext())
                     {
-                        db.UnidadMedida.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.UnidadMedida.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.UnidadMedidaId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -179,7 +180,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Usuarios:
                     using (var db = new DymContext())
                     {
-                        db.Usuario.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Usuario.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.UsuarioId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -234,7 +235,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                         using (var db = new DymContext())
                         {
-                            Cliente = db.Cliente.AsNoTracking().Where(x => x.ClienteId ==
+                            Cliente = db.Cliente.Where(x => x.ClienteId ==
                             Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
 
@@ -243,7 +244,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.Proveedores:
                         using (var db = new DymContext())
                         {
-                            Proveedor = db.Proveedor.AsNoTracking().Where(x => x.ProveedorId ==
+                            Proveedor = db.Proveedor.Where(x => x.ProveedorId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;
@@ -251,7 +252,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.Productos:
                         using (var db = new DymContext())
                         {
-                            Producto = db.Producto.AsNoTracking().Where(x => x.ProductoId ==
+                            Producto = db.Producto.Where(x => x.ProductoId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;
@@ -259,7 +260,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.Categorias:
                         using (var db = new DymContext())
                         {
-                            Categoria = db.Categoria.AsNoTracking().Where(x => x.CategoriaId ==
+                            Categoria = db.Categoria.Where(x => x.CategoriaId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;
@@ -267,7 +268,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.Laboratorios:
                         using (var db = new DymContext())
                         {
-                            Laboratorio = db.Laboratorio.AsNoTracking().Where(x => x.LaboratorioId ==
+                            Laboratorio = db.Laboratorio.Where(x => x.LaboratorioId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;
@@ -275,7 +276,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.Impuestos:
                         using (var db = new DymContext())
                         {
-                            Impuesto = db.Impuesto.AsNoTracking().Where(x => x.ImpuestoId ==
+                            Impuesto = db.Impuesto.Where(x => x.ImpuestoId ==
                          Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;
@@ -283,7 +284,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.Sustancias:
                         using (var db = new DymContext())
                         {
-                            Sustancia = db.Sustancia.AsNoTracking().Where(x => x.SustanciaId ==
+                            Sustancia = db.Sustancia.Where(x => x.SustanciaId ==
                           Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
 
@@ -292,7 +293,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.Almacenes:
                         using (var db = new DymContext())
                         {
-                            Almacen = db.Almacen.AsNoTracking().Where(x => x.AlmacenId ==
+                            Almacen = db.Almacen.Where(x => x.AlmacenId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;
@@ -300,7 +301,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.Estaciones:
                         using (var db = new DymContext())
                         {
-                            Estacion = db.Estacion.AsNoTracking().Where(x => x.EstacionId ==
+                            Estacion = db.Estacion.Where(x => x.EstacionId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;
@@ -308,7 +309,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.ClavesSat:
                         using (var db = new DymContext())
                         {
-                            ClaveSat = db.ClaveSat.AsNoTracking().Where(x => x.ClaveSatId ==
+                            ClaveSat = db.ClaveSat.Where(x => x.ClaveSatId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;
@@ -317,7 +318,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                         using (var db = new DymContext())
                         {
-                            Presentacion = db.Presentacion.AsNoTracking().Where(x => x.PresentacionId ==
+                            Presentacion = db.Presentacion.Where(x => x.PresentacionId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;
@@ -325,14 +326,14 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.UnidadesMedida:
                         using (var db = new DymContext())
                         {
-                            UnidadMedida = db.UnidadMedida.AsNoTracking().Where(x => x.UnidadMedidaId ==
+                            UnidadMedida = db.UnidadMedida.Where(x => x.UnidadMedidaId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;
                     case (int)Ambiente.TipoBusqueda.Usuarios:
                         using (var db = new DymContext())
                         {
-                            Usuario = db.Usuario.AsNoTracking().Where(x => x.UsuarioId ==
+                            Usuario = db.Usuario.Where(x => x.UsuarioId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;

@@ -47,5 +47,12 @@ namespace PointOfSale.Controllers
             };
 
         }
+
+
+        public static void InicializaProdiedades() {
+
+            Ambiente.RutaImgs = @"C:\Dympos\Img";
+
+        }
     }
 }

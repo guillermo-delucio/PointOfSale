@@ -15,7 +15,7 @@ namespace PointOfSale.Controllers
 
             using (var db = new DymContext())
             {
-                var user = db.Usuario.AsNoTracking().Where(x => x.UsuarioId == userString.Trim())
+                var user = db.Usuario.Where(x => x.UsuarioId == userString.Trim())
                .Include(x => x.UsuarioRole)
                .FirstOrDefault();
 

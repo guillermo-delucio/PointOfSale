@@ -46,7 +46,6 @@ namespace PointOfSale.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
             }
         }
@@ -301,17 +300,29 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Precio1).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Precio1)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Precio2).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Precio2)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Precio3).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Precio3)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Precio4).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Precio4)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.PrecioCaja).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.PrecioCaja)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.PrecioCompra).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.PrecioCompra)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.PresentacionId).HasMaxLength(50);
 
@@ -329,13 +340,21 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
 
-                entity.Property(e => e.Utilidad1).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Utilidad1)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Utilidad2).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Utilidad2)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Utilidad3).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Utilidad3)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Utilidad4).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Utilidad4)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
             });
 
             modelBuilder.Entity<ProductoAlmacen>(entity =>

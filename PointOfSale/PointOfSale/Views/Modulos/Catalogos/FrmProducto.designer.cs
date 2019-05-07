@@ -1,6 +1,6 @@
 ﻿namespace PointOfSale.Views.Modulos.Catalogos
 {
-    partial class FrmProductos
+    partial class FrmProducto
     {
         /// <summary>
         /// Required designer variable.
