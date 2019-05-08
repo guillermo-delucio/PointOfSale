@@ -46,6 +46,7 @@ namespace PointOfSale.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
             }
         }
@@ -213,6 +214,16 @@ namespace PointOfSale.Models
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.Caducidad).HasColumnType("date");
+
+                entity.Property(e => e.ProductoId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.Producto)
+                    .WithMany(p => p.Lote)
+                    .HasForeignKey(d => d.ProductoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Lote_Producto");
             });
 
             modelBuilder.Entity<Municipio>(entity =>
@@ -355,6 +366,31 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Utilidad4)
                     .HasColumnType("decimal(18, 3)")
                     .HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.Categoria)
+                    .WithMany(p => p.Producto)
+                    .HasForeignKey(d => d.CategoriaId)
+                    .HasConstraintName("FK_Producto_Categoria");
+
+                entity.HasOne(d => d.ClaveCfdi)
+                    .WithMany(p => p.Producto)
+                    .HasForeignKey(d => d.ClaveCfdiId)
+                    .HasConstraintName("FK_Producto_ClaveSat");
+
+                entity.HasOne(d => d.Laboratorio)
+                    .WithMany(p => p.Producto)
+                    .HasForeignKey(d => d.LaboratorioId)
+                    .HasConstraintName("FK_Producto_Laboratorio");
+
+                entity.HasOne(d => d.LaboratorioNavigation)
+                    .WithMany(p => p.Producto)
+                    .HasForeignKey(d => d.LaboratorioId)
+                    .HasConstraintName("FK_Producto_Presentacion");
+
+                entity.HasOne(d => d.UnidadMedida)
+                    .WithMany(p => p.Producto)
+                    .HasForeignKey(d => d.UnidadMedidaId)
+                    .HasConstraintName("FK_Producto_UnidadMedida");
             });
 
             modelBuilder.Entity<ProductoAlmacen>(entity =>

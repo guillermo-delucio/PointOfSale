@@ -7,6 +7,7 @@ namespace PointOfSale.Models
     {
         public Producto()
         {
+            Lote = new HashSet<Lote>();
             ProductoAlmacen = new HashSet<ProductoAlmacen>();
             ProductoImpuesto = new HashSet<ProductoImpuesto>();
             ProductoSustancia = new HashSet<ProductoSustancia>();
@@ -42,7 +43,14 @@ namespace PointOfSale.Models
         public string UnidadCfdi { get; set; }
         public string Contenido { get; set; }
         public string RutaImg { get; set; }
+        public bool ChkCaducidad { get; set; }
 
+        public virtual Categoria Categoria { get; set; }
+        public virtual ClaveSat ClaveCfdi { get; set; }
+        public virtual Laboratorio Laboratorio { get; set; }
+        public virtual Presentacion LaboratorioNavigation { get; set; }
+        public virtual UnidadMedida UnidadMedida { get; set; }
+        public virtual ICollection<Lote> Lote { get; set; }
         public virtual ICollection<ProductoAlmacen> ProductoAlmacen { get; set; }
         public virtual ICollection<ProductoImpuesto> ProductoImpuesto { get; set; }
         public virtual ICollection<ProductoSustancia> ProductoSustancia { get; set; }

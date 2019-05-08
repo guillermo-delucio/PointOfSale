@@ -21,6 +21,7 @@ namespace PointOfSale.Views
             Inicializador.IniciliazaConexion();
             Inicializador.InicializaListas();
             Inicializador.InicializaProdiedades();
+            Inicializador.InicializaDatabaseDefaultsValues();
             GetLogin();
         }
 

@@ -15,7 +15,7 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    db.Database.EnsureCreated();
+
                 }
             }
             catch (Exception ex)
@@ -49,10 +49,84 @@ namespace PointOfSale.Controllers
         }
 
 
-        public static void InicializaProdiedades() {
+        public static void InicializaProdiedades()
+        {
+            Ambiente.RutaImgs = @"C:\Dympos\IMGS";
+            Ambiente.PrefijoRutaImg = @"C:\Dympos\";
+        }
 
-            Ambiente.RutaImgs = @"C:\Dympos\Img";
+        public static void InicializaDatabaseDefaultsValues()
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    var sustancia = db.Sustancia.FirstOrDefault(x => x.SustanciaId == "SYS");
+                    if (sustancia == null)
+                    {
+                        sustancia = new Sustancia();
+                        sustancia.SustanciaId = "SYS";
+                        sustancia.Nombre = "DEFAUTL";
+                        db.Add(sustancia);
+                    }
+                    var categoria = db.Categoria.FirstOrDefault(x => x.CategoriaId == "SYS");
+                    if (categoria == null)
+                    {
+                        categoria = new Categoria();
+                        categoria.CategoriaId = "SYS";
+                        categoria.Nombre = "DEFAUTL";
+                        db.Add(categoria);
+                    }
 
+                    var almacen = db.Almacen.FirstOrDefault(x => x.AlmacenId == "SYS");
+                    if (almacen == null)
+                    {
+                        almacen = new Almacen();
+                        almacen.AlmacenId = "SYS";
+                        almacen.Nombre = "DEFAUTL";
+                        db.Add(almacen);
+                    }
+                    var presentacion = db.Presentacion.FirstOrDefault(x => x.PresentacionId == "SYS");
+                    if (presentacion == null)
+                    {
+                        presentacion = new Presentacion();
+                        presentacion.PresentacionId = "SYS";
+                        presentacion.Nombre = "DEFAUTL";
+                        db.Add(presentacion);
+                    }
+                    var laboratorio = db.Laboratorio.FirstOrDefault(x => x.LaboratorioId == "SYS");
+                    if (laboratorio == null)
+                    {
+                        laboratorio = new Laboratorio();
+                        laboratorio.LaboratorioId = "SYS";
+                        laboratorio.Nombre = "DEFAUTL";
+                        db.Add(laboratorio);
+                    }
+                    var impuesto = db.Impuesto.FirstOrDefault(x => x.ImpuestoId == "SYS");
+                    if (impuesto == null)
+                    {
+                        impuesto = new Impuesto();
+                        impuesto.ImpuestoId = "SYS";
+                        impuesto.Tasa = 0;
+                        db.Add(impuesto);
+                    }
+                    var unidadMedida = db.UnidadMedida.FirstOrDefault(x => x.UnidadMedidaId == "SYS");
+                    if (unidadMedida == null)
+                    {
+                        unidadMedida = new UnidadMedida();
+                        unidadMedida.UnidadMedidaId = "SYS";
+                        unidadMedida.Nombre = "DEFAUTL";
+                        unidadMedida.UnidadSat = "H87";
+                        db.Add(unidadMedida);
+                    }
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                System.Windows.Forms.MessageBox.Show("Error al inicializar db defautls: " + ex.ToString());
+            }
         }
     }
 }

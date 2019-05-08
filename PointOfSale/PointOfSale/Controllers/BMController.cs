@@ -371,6 +371,12 @@ namespace PointOfSale.Controllers
                     ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.ProductoImpuesto);
 
                     break;
+                case "NodoProductosCompleto":
+                    if (Ambiente.Pregunta("Esto puede tardar varios munitos\n Quiere continuar"))
+                        ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.ProductosCompleto);
+                    else
+                        return;
+                    break;
 
                 default:
                     break;
@@ -565,7 +571,7 @@ namespace PointOfSale.Controllers
                     break;
 
                 case "NodoEstaciones":
-                   
+
                     form = new FrmEstaciones(objeto);
                     form.MdiParent = Mdi.MdiParent;
                     form.Show();
@@ -669,7 +675,7 @@ namespace PointOfSale.Controllers
                     break;
 
                 case "NodoEstaciones":
-                    
+
                     form = new FrmEstaciones();
                     form.MdiParent = Mdi.MdiParent;
                     form.Show();

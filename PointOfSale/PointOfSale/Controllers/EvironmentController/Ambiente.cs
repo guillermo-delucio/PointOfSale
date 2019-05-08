@@ -16,6 +16,7 @@ namespace PointOfSale.Controllers
 
         public static Usuario LoggedUser { get; set; }
         public static string RutaImgs { get; set; }
+        public static string PrefijoRutaImg { get; set; }
 
         #region Enums
         public enum TipoBusqueda
@@ -24,7 +25,8 @@ namespace PointOfSale.Controllers
             Categorias, Laboratorios, Impuestos,
             Sustancias, Almacenes, Estaciones,
             ClavesSat, Presentaciones, UnidadesMedida,
-            Usuarios, ProductoImpuesto, ProductoSustancia
+            Usuarios, ProductoImpuesto, ProductoSustancia,
+            ProductosCompleto
 
         };
 

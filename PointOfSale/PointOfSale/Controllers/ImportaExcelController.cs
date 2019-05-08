@@ -26,6 +26,7 @@ namespace PointOfSale.Controllers
         private List<Laboratorio> Laboratorios;
         private List<UnidadMedida> UnidadMedidas;
         private List<Presentacion> Presentaciones;
+        private List<Categoria> Categorias;
         private List<ProductoSustancia> ProductoSustancias;
         private List<ProductoImpuesto> ProductoImpuestos;
 
@@ -45,6 +46,7 @@ namespace PointOfSale.Controllers
             Laboratorios = new List<Laboratorio>();
             UnidadMedidas = new List<UnidadMedida>();
             Presentaciones = new List<Presentacion>();
+            Categorias = new List<Categoria>();
             ProductoSustancias = new List<ProductoSustancia>();
             ProductoImpuestos = new List<ProductoImpuesto>();
 
@@ -132,6 +134,9 @@ namespace PointOfSale.Controllers
                     break;
                 case (int)Ambiente.TipoBusqueda.ProductoSustancia:
                     ImportaProductoSustancia();
+                    break;
+                case (int)Ambiente.TipoBusqueda.ProductosCompleto:
+                    ImportaProductosCompleto();
                     break;
                 default:
                     MessageBox.Show("Error, no hay importacion para catalogo");
@@ -709,7 +714,241 @@ namespace PointOfSale.Controllers
                 Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
             }
         }
+        private void ImportaProductosCompleto()
+        {
+            try
+            {
 
+                using (var db = new DymContext())
+                {
+                    ClavesSat = db.ClaveSat.ToList();
+                    Sustancias = db.Sustancia.ToList();
+                    Laboratorios = db.Laboratorio.ToList();
+                    UnidadMedidas = db.UnidadMedida.ToList();
+                    Presentaciones = db.Presentacion.ToList();
+                    Categorias = db.Categoria.ToList();
+                }
+
+                //Opening an existing Excel file
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    //Get a WorkSheet by index. Note that EPPlus indexes are base 1, not base 0!
+                    //Get a WorkSheet by name. If the worksheet doesn't exist, throw an exeption
+
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    bool succes = false;
+                    int nIntValue = 0;
+                    decimal nDecValue = 1m;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    { // Row by row...
+                        object cellValue = workSheet.Cells[row, 2].Text; // This got me the actual value I needed.
+                        Fila = row;
+                        var producto = new Producto();
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            // ... Cell by cell: 1Clave, 2Descripcion, 3Stock
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    //ProductoId
+                                    producto.ProductoId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 2:
+                                    //Descripcion
+                                    producto.Descripcion = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 3:
+                                    //Stock
+                                    succes = false;
+                                    succes = int.TryParse(workSheet.Cells[row, col].Text.Trim(), out nIntValue);
+                                    if (succes)
+                                        producto.Stock = nIntValue;
+                                    else
+                                        producto.Stock = 0;
+                                    break;
+                                case 4:
+                                    //Contenido
+                                    producto.Contenido = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "" : workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 5:
+                                    //CategoriaId
+                                    var Categoria = Categorias.FirstOrDefault(x => x.CategoriaId == workSheet.Cells[row, col].Text.Trim());
+                                    if (Categoria != null)
+                                        producto.CategoriaId = Categoria.CategoriaId;
+                                    else
+                                        producto.CategoriaId = "SYS";
+
+
+                                    break;
+                                case 6:
+                                    //PresentacionId
+                                    var Presentacion = Presentaciones.FirstOrDefault(x => x.PresentacionId == workSheet.Cells[row, col].Text.Trim());
+                                    if (Presentacion != null)
+                                        producto.PresentacionId = Presentacion.PresentacionId;
+                                    else
+                                        producto.PresentacionId = "SYS";
+
+                                    break;
+                                case 7:
+                                    //LaboratorioId
+                                    var Laboratorio = Laboratorios.FirstOrDefault(x => x.LaboratorioId == workSheet.Cells[row, col].Text.Trim());
+                                    if (Laboratorio != null)
+                                        producto.LaboratorioId = Laboratorio.LaboratorioId;
+                                    else
+                                        producto.LaboratorioId = "SYS";
+
+                                    break;
+                                case 8:
+                                    //Unidades
+                                    producto.Unidades = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "" : workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 9:
+                                    //PrecioCompra
+                                    succes = false;
+                                    succes = decimal.TryParse(workSheet.Cells[row, col].Text.Trim(), out nDecValue);
+                                    if (succes)
+                                        producto.PrecioCompra = nDecValue;
+                                    else
+                                        producto.PrecioCompra = 1M;
+
+                                    break;
+                                case 10:
+                                    //PrecioCaja
+                                    succes = false;
+                                    succes = decimal.TryParse(workSheet.Cells[row, col].Text.Trim(), out nDecValue);
+                                    if (succes)
+                                        producto.PrecioCaja = nDecValue;
+                                    else
+                                        producto.PrecioCaja = 1M;
+
+                                    break;
+                                case 11:
+                                    //Precio1
+                                    succes = false;
+                                    succes = decimal.TryParse(workSheet.Cells[row, col].Text.Trim(), out nDecValue);
+                                    if (succes)
+                                        producto.Precio1 = nDecValue;
+                                    else
+                                        producto.Precio1 = 1M;
+
+                                    break;
+                                case 12:
+                                    //Precio2
+                                    succes = false;
+                                    succes = decimal.TryParse(workSheet.Cells[row, col].Text.Trim(), out nDecValue);
+                                    if (succes)
+                                        producto.Precio2 = nDecValue;
+                                    else
+                                        producto.Precio2 = 1M;
+
+                                    break;
+                                case 13:
+                                    //Utilidad1
+                                    succes = false;
+                                    succes = decimal.TryParse(workSheet.Cells[row, col].Text.Trim(), out nDecValue);
+                                    if (succes)
+                                        producto.Utilidad1 = nDecValue;
+                                    else
+                                        producto.Utilidad1 = 1M;
+
+                                    break;
+                                case 14:
+                                    //Utilidad2
+                                    succes = false;
+                                    succes = decimal.TryParse(workSheet.Cells[row, col].Text.Trim(), out nDecValue);
+                                    if (succes)
+                                        producto.Utilidad2 = nDecValue;
+                                    else
+                                        producto.Utilidad2 = 1M;
+
+                                    break;
+                                case 15:
+                                    //TieneLote
+                                    if (workSheet.Cells[row, col].Text.Trim().Equals("VERDADERO"))
+                                        producto.TieneLote = true;
+                                    else
+                                        producto.TieneLote = false;
+
+                                    break;
+                                case 16:
+                                    //UnidadMedidaId
+                                    var UnidadMedida = UnidadMedidas.FirstOrDefault(x => x.UnidadMedidaId == workSheet.Cells[row, col].Text.Trim());
+                                    if (UnidadMedida != null)
+                                        producto.UnidadMedidaId = UnidadMedida.UnidadMedidaId;
+                                    else
+                                        producto.UnidadMedidaId = "SYS";
+
+                                    break;
+                                case 17:
+                                    //ClaveCfdiId
+
+                                    var ClaveProdServ = ClavesSat.FirstOrDefault(x => x.ClaveSatId == workSheet.Cells[row, col].Text.Trim());
+                                    if (ClaveProdServ != null)
+                                        producto.ClaveCfdiId = ClaveProdServ.ClaveSatId;
+                                    else
+                                        producto.ClaveCfdiId = "01010101";
+
+                                    break;
+                                case 18:
+                                    //UnidadCfdi
+                                    producto.UnidadCfdi = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "H87" : workSheet.Cells[row, col].Text.Trim();
+
+                                    break;
+                                case 19:
+                                    //RutaImg
+                                    producto.RutaImg = workSheet.Cells[row, col].Text.Trim().Length == 0 ? null : workSheet.Cells[row, col].Text.Trim();
+                                    producto.CratedAt = DateTime.Now;
+                                    producto.UpdatedAt = DateTime.Now;
+                                    producto.CratedBy = Ambiente.LoggedUser.UsuarioId;
+
+                                    if (producto.ProductoId == null || producto.ProductoId.Length == 0)
+                                        Errores.Add("SE OMITIÓ, " + producto.ProductoId + ", A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    else
+                                        Productos.Add(producto);
+
+                                    break;
+                                default:
+                                    MessageBox.Show("Columna no encontrada");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    ProductoController productoController = new ProductoController();
+                    if (productoController.InsertRange(Productos))
+                        Ambiente.Mensaje(end.Row + " Registros importados");
+                    else
+                        Ambiente.Mensaje("Algo salio mal :(");
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
+            }
+        }
         private void ImportaProveedores()
         {
             Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);

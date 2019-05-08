@@ -58,9 +58,11 @@
             treeNode13});
             System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Producto-Sustancias", 1, 2);
             System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Producto-Impuesto");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Configuración", 3, 3, new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Productos Completo", 1, 2);
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Configuración", 3, 3, new System.Windows.Forms.TreeNode[] {
             treeNode15,
-            treeNode16});
+            treeNode16,
+            treeNode17});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBusinessManager));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importarDesdeExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -256,13 +258,18 @@
             treeNode16.SelectedImageKey = "folderOpen.png";
             treeNode16.Text = "Producto-Impuesto";
             treeNode17.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode17.ImageIndex = 3;
-            treeNode17.Name = "NodoConfiguracion";
-            treeNode17.SelectedImageIndex = 3;
-            treeNode17.Text = "Configuración";
+            treeNode17.ImageIndex = 1;
+            treeNode17.Name = "NodoProductosCompleto";
+            treeNode17.SelectedImageIndex = 2;
+            treeNode17.Text = "Productos Completo";
+            treeNode18.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode18.ImageIndex = 3;
+            treeNode18.Name = "NodoConfiguracion";
+            treeNode18.SelectedImageIndex = 3;
+            treeNode18.Text = "Configuración";
             this.BMtree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode14,
-            treeNode17});
+            treeNode18});
             this.BMtree.SelectedImageIndex = 0;
             this.BMtree.Size = new System.Drawing.Size(238, 509);
             this.BMtree.TabIndex = 4;
