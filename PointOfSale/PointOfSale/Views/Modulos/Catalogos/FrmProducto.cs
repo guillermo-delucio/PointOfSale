@@ -602,8 +602,17 @@ namespace PointOfSale.Views.Modulos.Catalogos
         }
 
 
+
         #endregion
 
-        
+        private void TxtRutaImg_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnImagen_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

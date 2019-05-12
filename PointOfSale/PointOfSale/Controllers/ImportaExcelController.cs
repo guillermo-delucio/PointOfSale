@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml;
+﻿using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using PointOfSale.Controllers.TablasIntermedia;
 using PointOfSale.Models;
 using System;
@@ -673,12 +674,11 @@ namespace PointOfSale.Controllers
                                     break;
                                 case 3:
                                     bool succes = int.TryParse(workSheet.Cells[row, col].Text.Trim(), out int nStock);
-                                    producto.CratedAt = DateTime.Now;
-                                    producto.UpdatedAt = DateTime.Now;
-                                    producto.CratedBy = Ambiente.LoggedUser.UsuarioId;
-
                                     if (succes)
                                     {
+                                        producto.CratedAt = DateTime.Now;
+                                        producto.UpdatedAt = DateTime.Now;
+                                        producto.CratedBy = Ambiente.LoggedUser.UsuarioId;
                                         producto.Stock = nStock;
                                         Productos.Add(producto);
                                     }
@@ -721,12 +721,12 @@ namespace PointOfSale.Controllers
 
                 using (var db = new DymContext())
                 {
-                    ClavesSat = db.ClaveSat.ToList();
-                    Sustancias = db.Sustancia.ToList();
-                    Laboratorios = db.Laboratorio.ToList();
-                    UnidadMedidas = db.UnidadMedida.ToList();
-                    Presentaciones = db.Presentacion.ToList();
-                    Categorias = db.Categoria.ToList();
+                    ClavesSat = db.ClaveSat.AsNoTracking().ToList();
+                    Sustancias = db.Sustancia.AsNoTracking().ToList();
+                    Laboratorios = db.Laboratorio.AsNoTracking().ToList();
+                    UnidadMedidas = db.UnidadMedida.AsNoTracking().ToList();
+                    Presentaciones = db.Presentacion.AsNoTracking().ToList();
+                    Categorias = db.Categoria.AsNoTracking().ToList();
                 }
 
                 //Opening an existing Excel file

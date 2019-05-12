@@ -77,6 +77,7 @@ namespace PointOfSale.Controllers
                 {
                     db.AddRange(lista);
                     db.SaveChanges();
+
                     return true;
                 }
             }
@@ -187,7 +188,7 @@ namespace PointOfSale.Controllers
                     foreach (var sustancia in o.ProductoSustancia)
                         db.Add(sustancia);
 
-                        db.SaveChanges();
+                    db.SaveChanges();
 
                     return true;
                 }

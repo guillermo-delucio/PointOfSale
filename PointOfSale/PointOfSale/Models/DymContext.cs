@@ -286,9 +286,15 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.CategoriaId).HasMaxLength(50);
+                entity.Property(e => e.CategoriaId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
-                entity.Property(e => e.ClaveCfdiId).HasMaxLength(50);
+                entity.Property(e => e.ClaveCfdiId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("((1010101))");
 
                 entity.Property(e => e.Contenido)
                     .HasMaxLength(255)
@@ -304,10 +310,12 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Descripcion).HasMaxLength(300);
 
-                entity.Property(e => e.LaboratorioId).HasMaxLength(50);
+                entity.Property(e => e.LaboratorioId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
                 entity.Property(e => e.LoteId)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .HasDefaultValueSql("((1))");
 
@@ -335,15 +343,24 @@ namespace PointOfSale.Models
                     .HasColumnType("decimal(18, 3)")
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.PresentacionId).HasMaxLength(50);
+                entity.Property(e => e.PresentacionId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
                 entity.Property(e => e.RutaImg)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UnidadCfdi).HasMaxLength(50);
+                entity.Property(e => e.UnidadCfdi)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'H87')");
 
-                entity.Property(e => e.UnidadMedidaId).HasMaxLength(50);
+                entity.Property(e => e.UnidadMedidaId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
                 entity.Property(e => e.Unidades).HasMaxLength(50);
 
@@ -370,26 +387,31 @@ namespace PointOfSale.Models
                 entity.HasOne(d => d.Categoria)
                     .WithMany(p => p.Producto)
                     .HasForeignKey(d => d.CategoriaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Producto_Categoria");
 
                 entity.HasOne(d => d.ClaveCfdi)
                     .WithMany(p => p.Producto)
                     .HasForeignKey(d => d.ClaveCfdiId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Producto_ClaveSat");
 
                 entity.HasOne(d => d.Laboratorio)
                     .WithMany(p => p.Producto)
                     .HasForeignKey(d => d.LaboratorioId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Producto_Laboratorio");
 
-                entity.HasOne(d => d.LaboratorioNavigation)
+                entity.HasOne(d => d.Presentacion)
                     .WithMany(p => p.Producto)
-                    .HasForeignKey(d => d.LaboratorioId)
+                    .HasForeignKey(d => d.PresentacionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Producto_Presentacion");
 
                 entity.HasOne(d => d.UnidadMedida)
                     .WithMany(p => p.Producto)
                     .HasForeignKey(d => d.UnidadMedidaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Producto_UnidadMedida");
             });
 

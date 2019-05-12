@@ -153,6 +153,7 @@
     <Compile Include="Controllers\EvironmentController\IController.cs" />
     <Compile Include="Controllers\ImpuestoController.cs" />
     <Compile Include="Controllers\LaboratorioController.cs" />
+    <Compile Include="Controllers\LoggerController\TraceLogger.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PresentacionController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -323,6 +324,12 @@
     <Compile Include="Views\Modulos\Catalogos\FrmUsuarios.Designer.cs">
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\Importaciones\FrmImportaProds.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Importaciones\FrmImportaProds.Designer.cs">
+      <DependentUpon>FrmImportaProds.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modulos\Logistica\FrmEntradasPorCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -428,6 +435,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Catalogos\FrmUsuarios.resx">
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Importaciones\FrmImportaProds.resx">
+      <DependentUpon>FrmImportaProds.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Logistica\FrmEntradasPorCompra.resx">
       <DependentUpon>FrmEntradasPorCompra.cs</DependentUpon>

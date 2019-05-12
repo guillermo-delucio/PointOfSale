@@ -468,9 +468,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+                return null;
             }
-            return null;
         }
         private void TxtProductoId_KeyDown(object sender, KeyEventArgs e)
         {
@@ -669,7 +668,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             try
             {
-                if (imgdata==null)
+                if (imgdata == null)
                     return false;
 
                 var name = imgdata.Item2;

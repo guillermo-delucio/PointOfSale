@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PointOfSale.Models;
 using PointOfSale.Views.Modulos.Catalogos;
+using PointOfSale.Views.Modulos.Importaciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -373,7 +374,11 @@ namespace PointOfSale.Controllers
                     break;
                 case "NodoProductosCompleto":
                     if (Ambiente.Pregunta("Esto puede tardar varios munitos\n Quiere continuar"))
-                        ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.ProductosCompleto);
+                    {
+                        //ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.ProductosCompleto);
+                        var form = new FrmImportaProds();
+                        form.Show();
+                    }
                     else
                         return;
                     break;

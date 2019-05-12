@@ -48,7 +48,7 @@ namespace PointOfSale.Models
         public virtual Categoria Categoria { get; set; }
         public virtual ClaveSat ClaveCfdi { get; set; }
         public virtual Laboratorio Laboratorio { get; set; }
-        public virtual Presentacion LaboratorioNavigation { get; set; }
+        public virtual Presentacion Presentacion { get; set; }
         public virtual UnidadMedida UnidadMedida { get; set; }
         public virtual ICollection<Lote> Lote { get; set; }
         public virtual ICollection<ProductoAlmacen> ProductoAlmacen { get; set; }
