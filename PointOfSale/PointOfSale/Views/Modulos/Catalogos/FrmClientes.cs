@@ -67,7 +67,9 @@ namespace PointOfSale.Views.Modulos.Catalogos
             TxtDiasCredito.Text = objeto.DiasCredito.ToString();
             TxtCelular.Text = objeto.Celular;
             TxtTelefono.Text = objeto.Telefono;
-
+            TxtFormaPago.Text = objeto.FormaPago;
+            TxtMetodoPago.Text = objeto.MetodoPago;
+            CboPrecioDefault.Text = objeto.PrecioDefault;
 
         }
 
@@ -113,6 +115,9 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
                 objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
                 objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
+                objeto.MetodoPago = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
+                objeto.FormaPago = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
+                objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? "PRECIO 1" : CboPrecioDefault.Text.Trim();
 
                 success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                 success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
@@ -149,6 +154,9 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
                 objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
                 objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
+                objeto.MetodoPago = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
+                objeto.FormaPago = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
+                objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? "PRECIO 1" : CboPrecioDefault.Text.Trim();
 
                 success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                 success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
@@ -207,6 +215,43 @@ namespace PointOfSale.Views.Modulos.Catalogos
             TraeCP(TxtCp.Text);
         }
 
-        
+        private void TxtClienteId_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                using (var form = new FrmBusqueda(TxtClienteId.Text.Trim(), (int)Ambiente.TipoBusqueda.Clientes))
+                {
+                    form.ShowDialog();
+                    if (form.DialogResult == DialogResult.OK)
+                        TxtClienteId.Text = form.Cliente.ClienteId;
+                }
+            }
+        }
+
+        private void TxtMetodoPago_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                using (var form = new FrmBusqueda(TxtMetodoPago.Text.Trim(), (int)Ambiente.TipoBusqueda.MetodoPago))
+                {
+                    form.ShowDialog();
+                    if (form.DialogResult == DialogResult.OK)
+                        TxtMetodoPago.Text = form.MetodoPago.MetodoPagoId;
+                }
+            }
+        }
+
+        private void TxtFormaPago_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                using (var form = new FrmBusqueda(TxtFormaPago.Text.Trim(), (int)Ambiente.TipoBusqueda.FormaPago))
+                {
+                    form.ShowDialog();
+                    if (form.DialogResult == DialogResult.OK)
+                        TxtFormaPago.Text = form.FormaPago.FormaPagoId;
+                }
+            }
+        }
     }
 }

@@ -27,6 +27,8 @@ namespace PointOfSale.Views.Modulos.Busquedas
         public Presentacion Presentacion;
         public UnidadMedida UnidadMedida;
         public Usuario Usuario;
+        public FormaPago FormaPago;
+        public MetodoPago MetodoPago;
 
 
         public FrmBusqueda()
@@ -186,6 +188,24 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
                     break;
+                case (int)Ambiente.TipoBusqueda.FormaPago:
+                    using (var db = new DymContext())
+                    {
+                        Grid1.DataSource = db.FormaPago.Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
+                            Select(x => new { x.FormaPagoId, x.Descripcion }).ToList();
+
+                        Ambiente.AdditionalSettingsDataGridView(Grid1);
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.MetodoPago:
+                    using (var db = new DymContext())
+                    {
+                        Grid1.DataSource = db.MetodoPago.Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
+                            Select(x => new { x.MetodoPagoId, x.Descripcion }).ToList();
+
+                        Ambiente.AdditionalSettingsDataGridView(Grid1);
+                    }
+                    break;
                 default:
                     MessageBox.Show("Error, no hay enumerador para catalogo");
                     break;
@@ -334,6 +354,20 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         using (var db = new DymContext())
                         {
                             Usuario = db.Usuario.Where(x => x.UsuarioId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                        }
+                        break;
+                    case (int)Ambiente.TipoBusqueda.MetodoPago:
+                        using (var db = new DymContext())
+                        {
+                            MetodoPago = db.MetodoPago.Where(x => x.MetodoPagoId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                        }
+                        break;
+                    case (int)Ambiente.TipoBusqueda.FormaPago:
+                        using (var db = new DymContext())
+                        {
+                            FormaPago = db.FormaPago.Where(x => x.FormaPagoId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;

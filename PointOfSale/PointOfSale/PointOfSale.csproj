@@ -167,14 +167,17 @@
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\ClaveSat.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\CmetodoPago.cs" />
     <Compile Include="Models\Consecutivo.cs" />
     <Compile Include="Models\Cp.cs" />
     <Compile Include="Models\DymContext.cs" />
     <Compile Include="Models\Estacion.cs" />
     <Compile Include="Models\Estado.cs" />
+    <Compile Include="Models\FormaPago.cs" />
     <Compile Include="Models\Impuesto.cs" />
     <Compile Include="Models\Laboratorio.cs" />
     <Compile Include="Models\Lote.cs" />
+    <Compile Include="Models\MetodoPago.cs" />
     <Compile Include="Models\Municipio.cs" />
     <Compile Include="Models\Pais.cs" />
     <Compile Include="Models\Permiso.cs" />

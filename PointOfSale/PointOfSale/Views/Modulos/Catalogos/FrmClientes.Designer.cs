@@ -67,11 +67,11 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TxtMetodoPago = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.TxtFormaPago = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
+            this.CboPrecioDefault = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label18
@@ -94,7 +94,7 @@
             this.TxtCelular.Location = new System.Drawing.Point(343, 225);
             this.TxtCelular.Name = "TxtCelular";
             this.TxtCelular.Size = new System.Drawing.Size(298, 24);
-            this.TxtCelular.TabIndex = 220;
+            this.TxtCelular.TabIndex = 6;
             // 
             // TxtTelefono
             // 
@@ -105,7 +105,7 @@
             this.TxtTelefono.Location = new System.Drawing.Point(18, 225);
             this.TxtTelefono.Name = "TxtTelefono";
             this.TxtTelefono.Size = new System.Drawing.Size(298, 24);
-            this.TxtTelefono.TabIndex = 219;
+            this.TxtTelefono.TabIndex = 5;
             // 
             // label19
             // 
@@ -138,14 +138,14 @@
             this.TxtCorreo.Location = new System.Drawing.Point(343, 172);
             this.TxtCorreo.Name = "TxtCorreo";
             this.TxtCorreo.Size = new System.Drawing.Size(298, 24);
-            this.TxtCorreo.TabIndex = 218;
+            this.TxtCorreo.TabIndex = 4;
             // 
             // BtnCancelar
             // 
             this.BtnCancelar.Location = new System.Drawing.Point(445, 597);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(95, 40);
-            this.BtnCancelar.TabIndex = 232;
+            this.BtnCancelar.TabIndex = 21;
             this.BtnCancelar.Text = "SALIR";
             this.BtnCancelar.UseVisualStyleBackColor = true;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
@@ -156,7 +156,7 @@
             this.BtnAceptar.Location = new System.Drawing.Point(546, 597);
             this.BtnAceptar.Name = "BtnAceptar";
             this.BtnAceptar.Size = new System.Drawing.Size(95, 40);
-            this.BtnAceptar.TabIndex = 231;
+            this.BtnAceptar.TabIndex = 20;
             this.BtnAceptar.Text = "&ACEPTAR";
             this.BtnAceptar.UseVisualStyleBackColor = true;
             this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
@@ -181,7 +181,7 @@
             this.TxtDiasCredito.Location = new System.Drawing.Point(343, 499);
             this.TxtDiasCredito.Name = "TxtDiasCredito";
             this.TxtDiasCredito.Size = new System.Drawing.Size(298, 24);
-            this.TxtDiasCredito.TabIndex = 230;
+            this.TxtDiasCredito.TabIndex = 16;
             this.TxtDiasCredito.Text = "0";
             // 
             // TxtLimiteCredito
@@ -193,7 +193,7 @@
             this.TxtLimiteCredito.Location = new System.Drawing.Point(18, 499);
             this.TxtLimiteCredito.Name = "TxtLimiteCredito";
             this.TxtLimiteCredito.Size = new System.Drawing.Size(298, 24);
-            this.TxtLimiteCredito.TabIndex = 229;
+            this.TxtLimiteCredito.TabIndex = 15;
             this.TxtLimiteCredito.Text = "0.000";
             // 
             // label16
@@ -227,7 +227,7 @@
             this.TxtPais.Location = new System.Drawing.Point(343, 446);
             this.TxtPais.Name = "TxtPais";
             this.TxtPais.Size = new System.Drawing.Size(298, 24);
-            this.TxtPais.TabIndex = 228;
+            this.TxtPais.TabIndex = 14;
             // 
             // TxtEstado
             // 
@@ -238,7 +238,7 @@
             this.TxtEstado.Location = new System.Drawing.Point(18, 446);
             this.TxtEstado.Name = "TxtEstado";
             this.TxtEstado.Size = new System.Drawing.Size(298, 24);
-            this.TxtEstado.TabIndex = 227;
+            this.TxtEstado.TabIndex = 13;
             // 
             // label12
             // 
@@ -271,7 +271,7 @@
             this.TxtLocalidad.Location = new System.Drawing.Point(343, 394);
             this.TxtLocalidad.Name = "TxtLocalidad";
             this.TxtLocalidad.Size = new System.Drawing.Size(298, 24);
-            this.TxtLocalidad.TabIndex = 226;
+            this.TxtLocalidad.TabIndex = 12;
             // 
             // TxtMunicipio
             // 
@@ -282,7 +282,7 @@
             this.TxtMunicipio.Location = new System.Drawing.Point(18, 394);
             this.TxtMunicipio.Name = "TxtMunicipio";
             this.TxtMunicipio.Size = new System.Drawing.Size(298, 24);
-            this.TxtMunicipio.TabIndex = 225;
+            this.TxtMunicipio.TabIndex = 11;
             // 
             // label10
             // 
@@ -315,7 +315,7 @@
             this.TxtColonia.Location = new System.Drawing.Point(343, 337);
             this.TxtColonia.Name = "TxtColonia";
             this.TxtColonia.Size = new System.Drawing.Size(298, 24);
-            this.TxtColonia.TabIndex = 224;
+            this.TxtColonia.TabIndex = 10;
             // 
             // TxtCp
             // 
@@ -326,7 +326,7 @@
             this.TxtCp.Location = new System.Drawing.Point(18, 337);
             this.TxtCp.Name = "TxtCp";
             this.TxtCp.Size = new System.Drawing.Size(298, 24);
-            this.TxtCp.TabIndex = 223;
+            this.TxtCp.TabIndex = 9;
             this.TxtCp.Leave += new System.EventHandler(this.TxtCp_Leave);
             // 
             // label8
@@ -360,7 +360,7 @@
             this.TxtDireccion.Location = new System.Drawing.Point(343, 282);
             this.TxtDireccion.Name = "TxtDireccion";
             this.TxtDireccion.Size = new System.Drawing.Size(298, 24);
-            this.TxtDireccion.TabIndex = 222;
+            this.TxtDireccion.TabIndex = 8;
             // 
             // TxtContacto
             // 
@@ -371,7 +371,7 @@
             this.TxtContacto.Location = new System.Drawing.Point(18, 282);
             this.TxtContacto.Name = "TxtContacto";
             this.TxtContacto.Size = new System.Drawing.Size(298, 24);
-            this.TxtContacto.TabIndex = 221;
+            this.TxtContacto.TabIndex = 7;
             // 
             // label4
             // 
@@ -393,7 +393,7 @@
             this.TxtRazonSocial.Location = new System.Drawing.Point(18, 172);
             this.TxtRazonSocial.Name = "TxtRazonSocial";
             this.TxtRazonSocial.Size = new System.Drawing.Size(298, 24);
-            this.TxtRazonSocial.TabIndex = 217;
+            this.TxtRazonSocial.TabIndex = 3;
             // 
             // label7
             // 
@@ -426,7 +426,7 @@
             this.TxtNegocio.Location = new System.Drawing.Point(343, 121);
             this.TxtNegocio.Name = "TxtNegocio";
             this.TxtNegocio.Size = new System.Drawing.Size(298, 24);
-            this.TxtNegocio.TabIndex = 216;
+            this.TxtNegocio.TabIndex = 2;
             // 
             // TxtRFC
             // 
@@ -437,7 +437,7 @@
             this.TxtRFC.Location = new System.Drawing.Point(18, 121);
             this.TxtRFC.Name = "TxtRFC";
             this.TxtRFC.Size = new System.Drawing.Size(298, 24);
-            this.TxtRFC.TabIndex = 215;
+            this.TxtRFC.TabIndex = 1;
             // 
             // label2
             // 
@@ -459,7 +459,8 @@
             this.TxtClienteId.Location = new System.Drawing.Point(18, 71);
             this.TxtClienteId.Name = "TxtClienteId";
             this.TxtClienteId.Size = new System.Drawing.Size(623, 24);
-            this.TxtClienteId.TabIndex = 214;
+            this.TxtClienteId.TabIndex = 0;
+            this.TxtClienteId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtClienteId_KeyDown_1);
             this.TxtClienteId.Leave += new System.EventHandler(this.TxtClienteId_Leave);
             // 
             // label1
@@ -499,77 +500,82 @@
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label20.Location = new System.Drawing.Point(340, 531);
+            this.label20.Location = new System.Drawing.Point(15, 535);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(165, 18);
             this.label20.TabIndex = 255;
             this.label20.Text = "♥METODO DE PAGO";
             // 
-            // textBox1
+            // TxtMetodoPago
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.Black;
-            this.textBox1.Location = new System.Drawing.Point(343, 552);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(298, 24);
-            this.textBox1.TabIndex = 253;
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.ForeColor = System.Drawing.Color.Black;
-            this.textBox2.Location = new System.Drawing.Point(18, 552);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(298, 24);
-            this.textBox2.TabIndex = 252;
+            this.TxtMetodoPago.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtMetodoPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtMetodoPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtMetodoPago.ForeColor = System.Drawing.Color.Black;
+            this.TxtMetodoPago.Location = new System.Drawing.Point(18, 556);
+            this.TxtMetodoPago.Name = "TxtMetodoPago";
+            this.TxtMetodoPago.Size = new System.Drawing.Size(298, 24);
+            this.TxtMetodoPago.TabIndex = 17;
+            this.TxtMetodoPago.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtMetodoPago_KeyDown);
             // 
             // label21
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label21.Location = new System.Drawing.Point(15, 531);
+            this.label21.Location = new System.Drawing.Point(16, 592);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(154, 18);
             this.label21.TabIndex = 254;
             this.label21.Text = "♥PRECIO DEFAULT";
             // 
-            // textBox3
+            // TxtFormaPago
             // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.ForeColor = System.Drawing.Color.Black;
-            this.textBox3.Location = new System.Drawing.Point(18, 604);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(298, 24);
-            this.textBox3.TabIndex = 256;
+            this.TxtFormaPago.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtFormaPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtFormaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtFormaPago.ForeColor = System.Drawing.Color.Black;
+            this.TxtFormaPago.Location = new System.Drawing.Point(343, 556);
+            this.TxtFormaPago.Name = "TxtFormaPago";
+            this.TxtFormaPago.Size = new System.Drawing.Size(298, 24);
+            this.TxtFormaPago.TabIndex = 18;
+            this.TxtFormaPago.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtFormaPago_KeyDown);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label22.Location = new System.Drawing.Point(15, 583);
+            this.label22.Location = new System.Drawing.Point(340, 535);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(152, 18);
             this.label22.TabIndex = 257;
             this.label22.Text = "♥FORMA DE PAGO";
+            // 
+            // CboPrecioDefault
+            // 
+            this.CboPrecioDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.CboPrecioDefault.FormattingEnabled = true;
+            this.CboPrecioDefault.Items.AddRange(new object[] {
+            "PRECIO 1",
+            "PRECIO 2",
+            "PRECIO 3",
+            "PRECIO 4"});
+            this.CboPrecioDefault.Location = new System.Drawing.Point(18, 611);
+            this.CboPrecioDefault.Name = "CboPrecioDefault";
+            this.CboPrecioDefault.Size = new System.Drawing.Size(297, 26);
+            this.CboPrecioDefault.TabIndex = 19;
             // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 640);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.CboPrecioDefault);
+            this.Controls.Add(this.TxtFormaPago);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label20);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.TxtMetodoPago);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.TxtCelular);
@@ -658,10 +664,10 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox TxtMetodoPago;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox TxtFormaPago;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox CboPrecioDefault;
     }
 }

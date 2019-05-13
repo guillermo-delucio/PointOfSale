@@ -26,5 +26,6 @@ namespace PointOfSale.Models
         public string Correo { get; set; }
         public string MetodoPago { get; set; }
         public string FormaPago { get; set; }
+        public string PrecioDefault { get; set; }
     }
 }

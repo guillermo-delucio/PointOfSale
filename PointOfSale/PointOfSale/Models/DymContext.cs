@@ -23,9 +23,11 @@ namespace PointOfSale.Models
         public virtual DbSet<Cp> Cp { get; set; }
         public virtual DbSet<Estacion> Estacion { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
+        public virtual DbSet<FormaPago> FormaPago { get; set; }
         public virtual DbSet<Impuesto> Impuesto { get; set; }
         public virtual DbSet<Laboratorio> Laboratorio { get; set; }
         public virtual DbSet<Lote> Lote { get; set; }
+        public virtual DbSet<MetodoPago> MetodoPago { get; set; }
         public virtual DbSet<Municipio> Municipio { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
         public virtual DbSet<Permiso> Permiso { get; set; }
@@ -138,6 +140,11 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Pais).HasMaxLength(50);
 
+                entity.Property(e => e.PrecioDefault)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'PRECIO 1')");
+
                 entity.Property(e => e.RazonSocial).HasMaxLength(50);
 
                 entity.Property(e => e.Rfc)
@@ -223,6 +230,15 @@ namespace PointOfSale.Models
                     .HasConstraintName("FK_Estado_Pais");
             });
 
+            modelBuilder.Entity<FormaPago>(entity =>
+            {
+                entity.Property(e => e.FormaPagoId)
+                    .HasMaxLength(2)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Descripcion).HasMaxLength(50);
+            });
+
             modelBuilder.Entity<Impuesto>(entity =>
             {
                 entity.HasIndex(e => e.ImpuestoId)
@@ -268,6 +284,15 @@ namespace PointOfSale.Models
                     .HasForeignKey(d => d.ProductoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Lote_Producto");
+            });
+
+            modelBuilder.Entity<MetodoPago>(entity =>
+            {
+                entity.Property(e => e.MetodoPagoId)
+                    .HasMaxLength(4)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Descripcion).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Municipio>(entity =>
