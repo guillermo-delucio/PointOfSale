@@ -3,14 +3,8 @@ using PointOfSale.Models;
 using PointOfSale.Views.Modulos.Busquedas;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PointOfSale.Views.Modulos.Catalogos
@@ -63,15 +57,15 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
                 objeto = new Producto();
                 objeto.ProductoId = TxtProductoId.Text.Trim();
-                objeto.Descripcion = TxtDescripcion.Text.Length == 0 ? null : TxtDescripcion.Text;
+                objeto.Descripcion = TxtDescripcion.Text.Length == 0 ? "SYS" : TxtDescripcion.Text;
                 objeto.Contenido = TxtContenido.Text.Length == 0 ? null : TxtContenido.Text;
-                objeto.PresentacionId = TxtPresentacion.Text.Trim().Length == 0 ? null : TxtPresentacion.Text.Trim();
-                objeto.UnidadMedidaId = TxtUnidadMedida.Text.Trim().Length == 0 ? null : TxtUnidadMedida.Text.Trim();
+                objeto.PresentacionId = TxtPresentacion.Text.Trim().Length == 0 ? "SYS" : TxtPresentacion.Text.Trim();
+                objeto.UnidadMedidaId = TxtUnidadMedida.Text.Trim().Length == 0 ? "SYS" : TxtUnidadMedida.Text.Trim();
                 objeto.Unidades = TxtUnidades.Text.Trim().Length == 0 ? null : TxtUnidades.Text.Trim();
-                objeto.LaboratorioId = TxtLaboratorio.Text.Trim().Length == 0 ? null : TxtLaboratorio.Text.Trim();
-                objeto.CategoriaId = TxtCategoria.Text.Trim().Length == 0 ? null : TxtCategoria.Text.Trim();
-                objeto.UnidadCfdi = TxtUnidadCFDI.Text.Trim().Length == 0 ? null : TxtUnidadCFDI.Text.Trim();
-                objeto.ClaveCfdiId = TxtClaveCFDI.Text.Trim().Length == 0 ? null : TxtClaveCFDI.Text.Trim();
+                objeto.LaboratorioId = TxtLaboratorio.Text.Trim().Length == 0 ? "SYS" : TxtLaboratorio.Text.Trim();
+                objeto.CategoriaId = TxtCategoria.Text.Trim().Length == 0 ? "SYS" : TxtCategoria.Text.Trim();
+                objeto.UnidadCfdi = TxtUnidadCFDI.Text.Trim().Length == 0 ? "H87" : TxtUnidadCFDI.Text.Trim();
+                objeto.ClaveCfdiId = TxtClaveCFDI.Text.Trim().Length == 0 ? "01010101" : TxtClaveCFDI.Text.Trim();
 
 
                 bool success = true;
@@ -188,16 +182,15 @@ namespace PointOfSale.Views.Modulos.Catalogos
             }
             else
             {
-                objeto.Descripcion = TxtDescripcion.Text.Length == 0 ? null : TxtDescripcion.Text;
+                objeto.Descripcion = TxtDescripcion.Text.Length == 0 ? "SYS" : TxtDescripcion.Text;
                 objeto.Contenido = TxtContenido.Text.Length == 0 ? null : TxtContenido.Text;
-                objeto.PresentacionId = TxtPresentacion.Text.Trim().Length == 0 ? null : TxtPresentacion.Text.Trim();
-                objeto.UnidadMedidaId = TxtUnidadMedida.Text.Trim().Length == 0 ? null : TxtUnidadMedida.Text.Trim();
+                objeto.PresentacionId = TxtPresentacion.Text.Trim().Length == 0 ? "SYS" : TxtPresentacion.Text.Trim();
+                objeto.UnidadMedidaId = TxtUnidadMedida.Text.Trim().Length == 0 ? "SYS" : TxtUnidadMedida.Text.Trim();
                 objeto.Unidades = TxtUnidades.Text.Trim().Length == 0 ? null : TxtUnidades.Text.Trim();
-                objeto.LaboratorioId = TxtLaboratorio.Text.Trim().Length == 0 ? null : TxtLaboratorio.Text.Trim();
-                objeto.CategoriaId = TxtCategoria.Text.Trim().Length == 0 ? null : TxtCategoria.Text.Trim();
-                objeto.UnidadCfdi = TxtUnidadCFDI.Text.Trim().Length == 0 ? null : TxtUnidadCFDI.Text.Trim();
-                objeto.ClaveCfdiId = TxtClaveCFDI.Text.Trim().Length == 0 ? null : TxtClaveCFDI.Text.Trim();
-
+                objeto.LaboratorioId = TxtLaboratorio.Text.Trim().Length == 0 ? "SYS" : TxtLaboratorio.Text.Trim();
+                objeto.CategoriaId = TxtCategoria.Text.Trim().Length == 0 ? "SYS" : TxtCategoria.Text.Trim();
+                objeto.UnidadCfdi = TxtUnidadCFDI.Text.Trim().Length == 0 ? "H87" : TxtUnidadCFDI.Text.Trim();
+                objeto.ClaveCfdiId = TxtClaveCFDI.Text.Trim().Length == 0 ? "01010101" : TxtClaveCFDI.Text.Trim();
 
                 bool success = true;
 
@@ -405,8 +398,13 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 GridProductos.Rows[GridProductos.Rows.Count - 1].Cells[9].Value = producto.UpdatedBy;
                 GridProductos.Rows[GridProductos.Rows.Count - 1].Cells[10].Value = producto.UpdatedAt;
             }
+            if (GridProductos.RowCount > 0)
+            {
+                GridProductos.Rows[0].Selected = true;
+                GridProductos.Focus();
+            }
+            LblCoincidencias.Text = productos.Count + " Coincidencias";
 
-            GridProductos.Focus();
         }
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
@@ -451,7 +449,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 TxtPrecioS3.Text = Ambiente.GetPrecioSstring(objeto.Precio3.ToString(), objeto.ProductoImpuesto);
                 TxtPrecioS4.Text = Ambiente.GetPrecioSstring(objeto.Precio4.ToString(), objeto.ProductoImpuesto);
                 TxtRutaImg.Text = objeto.RutaImg;
-                //GridExistencias.DataSource = objeto.ProductoAlmacen.Select(x => new { x.Almacen, x.Existencia }).ToList();
+                //GridExistencias.DataSource = objeto.ProductoAlmacen.Select(x => new { x.AlmacenId, x.ExistenciaId }).ToList();
                 PbxImagen.Image = GetImg(objeto.RutaImg);
             }
         }
@@ -475,55 +473,106 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             if (e.KeyCode == Keys.Enter)
             {
+                var SearchText = TxtProductoId.Text.Trim();
 
                 #region Operaciones desde el modulo de logistica 
-
-                var SearchText = TxtProductoId.Text.Trim();
-                if (productoController.SelectOne(SearchText) != null)
+                if (ChkFiltroSustancia.Checked)
                 {
                     //Encontrado por clave
                     GridProductos.Rows.Clear();
-                    LlenaGridProductos(productoController.SelectOneOverList(SearchText));
+                    LlenaGridProductos(productoController.FiltrarVsSustancia(SearchText));
                     Text = "MODO VER / ACTUALIZAR";
                 }
                 else
                 {
-                    if (SearchText.Length == 0)
+                    if (productoController.SelectOne(SearchText) != null)
                     {
-                        Text = "MODO VER / ACTUALIZAR";
+                        //Encontrado por clave
                         GridProductos.Rows.Clear();
-                        LlenaGridProductos(productoController.SelectMany(100));
+                        LlenaGridProductos(productoController.SelectOneOverList(SearchText));
+                        Text = "MODO VER / ACTUALIZAR";
                     }
                     else
                     {
-                        if (productoController.FiltrarVsDescrip(SearchText).Count > 0)
+                        if (SearchText.Length == 0)
                         {
-                            //Filtro por descripcion
                             Text = "MODO VER / ACTUALIZAR";
                             GridProductos.Rows.Clear();
-                            LlenaGridProductos(productoController.FiltrarVsDescrip(SearchText));
+                            LlenaGridProductos(productoController.SelectMany(100));
                         }
                         else
                         {
-                            Text = "MODO CREAR PRODUCTO";
-                            GridProductos.Rows.Clear();
-                            TxtDescripcion.Focus();
+                            if (productoController.FiltrarVsDescrip(SearchText).Count > 0)
+                            {
+                                //Filtro por descripcion
+                                Text = "MODO VER / ACTUALIZAR";
+                                GridProductos.Rows.Clear();
+                                LlenaGridProductos(productoController.FiltrarVsDescrip(SearchText));
+                            }
+                            else
+                            {
+                                Text = "MODO CREAR PRODUCTO";
+                                LblCoincidencias.Text = "0 Coincidencias";
+                                GridProductos.Rows.Clear();
+                                LimpiaCampos();
+
+                                TxtDescripcion.Focus();
+                                TxtProductoId.Text = SearchText;
+
+                            }
 
                         }
 
+
                     }
-
-
                 }
 
 
 
                 #endregion
 
-                GridProductos.Focus();
             }
         }
+        private void LimpiaCampos()
+        {
+            TxtDescripcion.Text = string.Empty;
+            TxtPresentacion.Text = string.Empty;
+            TxtUnidadMedida.Text = string.Empty;
+            TxtUnidades.Text = string.Empty;
+            TxtLaboratorio.Text = string.Empty;
+            TxtCategoria.Text = string.Empty;
+            TxtClaveCFDI.Text = string.Empty;
+            TxtUnidadCFDI.Text = string.Empty;
+            TxtPrecioCompra.Text = string.Empty;
+            ChkEnCatalogo.Checked = false;
+            ChkLote.Checked = false;
+            TxtBuscarImpuestos.Text = string.Empty;
+            GridImpuestos.Rows.Clear();
+            GridSustancias.Rows.Clear();
 
+
+            TxtU1.Text = string.Empty;
+            TxtU2.Text = string.Empty;
+            TxtU3.Text = string.Empty;
+            TxtU4.Text = string.Empty;
+            TxtPrecio1.Text = string.Empty;
+            TxtPrecio2.Text = string.Empty;
+            TxtPrecio3.Text = string.Empty;
+            TxtPrecio4.Text = string.Empty;
+            TxtPrecioS1.Text = string.Empty;
+            TxtPrecioS2.Text = string.Empty;
+            TxtPrecioS3.Text = string.Empty;
+            TxtPrecioS4.Text = string.Empty;
+            TxtBuscarSustancias.Text = string.Empty;
+            TxtPrecioCaja.Text = string.Empty;
+            TxtContenido.Text = string.Empty;
+            TxtRutaImg.Text = string.Empty;
+            PbxImagen.Image = null;
+
+
+
+
+        }
         private void GridProductos_SelectionChanged(object sender, EventArgs e)
         {
             if (GridProductos.Rows[GridProductos.CurrentCell.RowIndex].Cells[0].Value != null)
@@ -688,6 +737,74 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 Ambiente.Mensaje(ex.ToString());
                 return false;
             }
+        }
+
+        private void TxtProductoId_TextChanged(object sender, EventArgs e)
+        {
+            // MessageBox.Show(e.ToString());
+        }
+
+        private void ChkLote_Leave(object sender, EventArgs e)
+        {
+            TxtBuscarImpuestos.Focus();
+        }
+
+        private void BtnImagen_Leave(object sender, EventArgs e)
+        {
+            BtnAceptar.Focus();
+        }
+
+        private void TxtU1_Leave(object sender, EventArgs e)
+        {
+            TxtU1.Text = Ambiente.FDinero(TxtU1.Text);
+            TxtPrecio1.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU1.Text);
+
+        }
+
+        private void TxtU2_Leave(object sender, EventArgs e)
+        {
+            TxtU2.Text = Ambiente.FDinero(TxtU2.Text);
+            TxtPrecio2.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU2.Text);
+        }
+
+        private void TxtU3_Leave(object sender, EventArgs e)
+        {
+            TxtU3.Text = Ambiente.FDinero(TxtU3.Text);
+            TxtPrecio3.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU3.Text);
+        }
+
+        private void TxtU4_Leave(object sender, EventArgs e)
+        {
+            TxtU4.Text = Ambiente.FDinero(TxtU4.Text);
+            TxtPrecio4.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU4.Text);
+        }
+
+        private void TxtPrecio1_Leave(object sender, EventArgs e)
+        {
+            TxtPrecio1.Text = Ambiente.FDinero(TxtPrecio1.Text);
+            TxtU1.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio1.Text);
+            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(TxtPrecio1.Text, GridImpuestos);
+        }
+
+        private void TxtPrecio2_Leave(object sender, EventArgs e)
+        {
+            TxtPrecio2.Text = Ambiente.FDinero(TxtPrecio2.Text);
+            TxtU2.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio2.Text);
+            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(TxtPrecio2.Text, GridImpuestos);
+        }
+
+        private void TxtPrecio3_Leave(object sender, EventArgs e)
+        {
+            TxtPrecio3.Text = Ambiente.FDinero(TxtPrecio3.Text);
+            TxtU3.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio3.Text);
+            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(TxtPrecio3.Text, GridImpuestos);
+        }
+
+        private void TxtPrecio4_Leave(object sender, EventArgs e)
+        {
+            TxtPrecio4.Text = Ambiente.FDinero(TxtPrecio4.Text);
+            TxtU4.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio4.Text);
+            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(TxtPrecio4.Text, GridImpuestos);
         }
     }
 }

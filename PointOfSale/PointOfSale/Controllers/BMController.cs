@@ -23,7 +23,7 @@ namespace PointOfSale.Controllers
                 Grid1.DataSource = db.Cliente.Where(x => x.IsDeleted == false).Select(x => new
                 {
                     x.ClienteId,
-                    x.Nombre
+                    x.RazonSocial
                 }).ToList();
             }
 
@@ -740,7 +740,7 @@ namespace PointOfSale.Controllers
 
                 case "NodoProveedores":
 
-                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.RazonSocial))
                     {
                         if (new ProveedorController().Delete(objeto))
                             MessageBox.Show(Ambiente.CatalgoMensajes[2]);

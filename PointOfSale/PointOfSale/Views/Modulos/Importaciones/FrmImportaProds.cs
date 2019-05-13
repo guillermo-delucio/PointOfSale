@@ -289,15 +289,10 @@ namespace PointOfSale.Views.Modulos.Importaciones
         private void Bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (exito)
-            {
                 Ambiente.Mensaje(Ambiente.CatalgoMensajes[1]);
-                Close();
-            }
             else
-            {
                 Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1]);
-                Close();
-            }
+            Close();
         }
 
         private void BtnAceptar_Click(object sender, EventArgs e)

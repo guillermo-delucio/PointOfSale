@@ -55,8 +55,8 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Cliente.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted==false).OrderBy(x => x.Nombre).
-                            Select(x => new { x.ClienteId, x.Nombre }).ToList();
+                        Grid1.DataSource = db.Cliente.Where(x => x.RazonSocial.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
+                            Select(x => new { x.ClienteId, x.RazonSocial }).ToList();
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
 

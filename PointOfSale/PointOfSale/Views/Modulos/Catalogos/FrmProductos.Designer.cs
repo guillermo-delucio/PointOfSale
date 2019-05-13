@@ -103,7 +103,6 @@
             this.ChkEnCatalogo = new System.Windows.Forms.CheckBox();
             this.TxtUnidadCFDI = new System.Windows.Forms.TextBox();
             this.TxtPrecioCaja = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.TxtClaveCFDI = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.TxtCategoria = new System.Windows.Forms.TextBox();
@@ -128,6 +127,7 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnAceptar = new System.Windows.Forms.Button();
+            this.LblCoincidencias = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GridSustancias)).BeginInit();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridExistencias)).BeginInit();
@@ -148,7 +148,8 @@
             this.TxtPrecio2.Location = new System.Drawing.Point(103, 102);
             this.TxtPrecio2.Name = "TxtPrecio2";
             this.TxtPrecio2.Size = new System.Drawing.Size(91, 24);
-            this.TxtPrecio2.TabIndex = 18;
+            this.TxtPrecio2.TabIndex = 20;
+            this.TxtPrecio2.Leave += new System.EventHandler(this.TxtPrecio2_Leave);
             // 
             // label11
             // 
@@ -193,7 +194,8 @@
             this.TxtU2.Location = new System.Drawing.Point(6, 102);
             this.TxtU2.Name = "TxtU2";
             this.TxtU2.Size = new System.Drawing.Size(91, 24);
-            this.TxtU2.TabIndex = 17;
+            this.TxtU2.TabIndex = 19;
+            this.TxtU2.Leave += new System.EventHandler(this.TxtU2_Leave);
             // 
             // TxtPrecio1
             // 
@@ -203,7 +205,8 @@
             this.TxtPrecio1.Location = new System.Drawing.Point(103, 45);
             this.TxtPrecio1.Name = "TxtPrecio1";
             this.TxtPrecio1.Size = new System.Drawing.Size(91, 24);
-            this.TxtPrecio1.TabIndex = 16;
+            this.TxtPrecio1.TabIndex = 18;
+            this.TxtPrecio1.Leave += new System.EventHandler(this.TxtPrecio1_Leave);
             // 
             // Column4
             // 
@@ -239,7 +242,7 @@
             this.TxtBuscarSustancias.Location = new System.Drawing.Point(91, 10);
             this.TxtBuscarSustancias.Name = "TxtBuscarSustancias";
             this.TxtBuscarSustancias.Size = new System.Drawing.Size(108, 24);
-            this.TxtBuscarSustancias.TabIndex = 23;
+            this.TxtBuscarSustancias.TabIndex = 25;
             this.TxtBuscarSustancias.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtBuscarSustancias_KeyDown);
             // 
             // TxtPrecioCompra
@@ -251,7 +254,7 @@
             this.TxtPrecioCompra.Location = new System.Drawing.Point(348, 330);
             this.TxtPrecioCompra.Name = "TxtPrecioCompra";
             this.TxtPrecioCompra.Size = new System.Drawing.Size(135, 24);
-            this.TxtPrecioCompra.TabIndex = 205;
+            this.TxtPrecioCompra.TabIndex = 12;
             // 
             // label21
             // 
@@ -323,7 +326,7 @@
             this.TxtUnidadMedida.Location = new System.Drawing.Point(634, 276);
             this.TxtUnidadMedida.Name = "TxtUnidadMedida";
             this.TxtUnidadMedida.Size = new System.Drawing.Size(143, 24);
-            this.TxtUnidadMedida.TabIndex = 200;
+            this.TxtUnidadMedida.TabIndex = 6;
             this.TxtUnidadMedida.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtUnidadMedida_KeyDown);
             // 
             // label26
@@ -455,10 +458,11 @@
             this.BtnImagen.Location = new System.Drawing.Point(163, 15);
             this.BtnImagen.Name = "BtnImagen";
             this.BtnImagen.Size = new System.Drawing.Size(42, 26);
-            this.BtnImagen.TabIndex = 24;
+            this.BtnImagen.TabIndex = 26;
             this.BtnImagen.Text = "- - -";
             this.BtnImagen.UseVisualStyleBackColor = true;
             this.BtnImagen.Click += new System.EventHandler(this.BtnImagen_Click);
+            this.BtnImagen.Leave += new System.EventHandler(this.BtnImagen_Leave);
             // 
             // TxtRutaImg
             // 
@@ -468,6 +472,7 @@
             this.TxtRutaImg.ForeColor = System.Drawing.Color.Black;
             this.TxtRutaImg.Location = new System.Drawing.Point(6, 17);
             this.TxtRutaImg.Name = "TxtRutaImg";
+            this.TxtRutaImg.ReadOnly = true;
             this.TxtRutaImg.Size = new System.Drawing.Size(153, 24);
             this.TxtRutaImg.TabIndex = 42;
             this.TxtRutaImg.TabStop = false;
@@ -505,7 +510,7 @@
             this.TxtContenido.Location = new System.Drawing.Point(365, 276);
             this.TxtContenido.Name = "TxtContenido";
             this.TxtContenido.Size = new System.Drawing.Size(117, 24);
-            this.TxtContenido.TabIndex = 198;
+            this.TxtContenido.TabIndex = 4;
             // 
             // label28
             // 
@@ -590,10 +595,10 @@
             this.Column12,
             this.Column13,
             this.Column14});
-            this.GridProductos.Location = new System.Drawing.Point(11, 83);
+            this.GridProductos.Location = new System.Drawing.Point(10, 80);
             this.GridProductos.Name = "GridProductos";
-            this.GridProductos.Size = new System.Drawing.Size(1050, 150);
-            this.GridProductos.TabIndex = 196;
+            this.GridProductos.Size = new System.Drawing.Size(1050, 169);
+            this.GridProductos.TabIndex = 2;
             this.GridProductos.SelectionChanged += new System.EventHandler(this.GridProductos_SelectionChanged);
             this.GridProductos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridProductos_KeyDown);
             // 
@@ -667,7 +672,8 @@
             this.TxtPrecio4.Location = new System.Drawing.Point(103, 215);
             this.TxtPrecio4.Name = "TxtPrecio4";
             this.TxtPrecio4.Size = new System.Drawing.Size(91, 24);
-            this.TxtPrecio4.TabIndex = 22;
+            this.TxtPrecio4.TabIndex = 24;
+            this.TxtPrecio4.Leave += new System.EventHandler(this.TxtPrecio4_Leave);
             // 
             // label19
             // 
@@ -712,7 +718,8 @@
             this.TxtU4.Location = new System.Drawing.Point(6, 215);
             this.TxtU4.Name = "TxtU4";
             this.TxtU4.Size = new System.Drawing.Size(91, 24);
-            this.TxtU4.TabIndex = 21;
+            this.TxtU4.TabIndex = 23;
+            this.TxtU4.Leave += new System.EventHandler(this.TxtU4_Leave);
             // 
             // label15
             // 
@@ -733,7 +740,8 @@
             this.TxtPrecio3.Location = new System.Drawing.Point(103, 157);
             this.TxtPrecio3.Name = "TxtPrecio3";
             this.TxtPrecio3.Size = new System.Drawing.Size(91, 24);
-            this.TxtPrecio3.TabIndex = 20;
+            this.TxtPrecio3.TabIndex = 22;
+            this.TxtPrecio3.Leave += new System.EventHandler(this.TxtPrecio3_Leave);
             // 
             // label16
             // 
@@ -778,7 +786,8 @@
             this.TxtU3.Location = new System.Drawing.Point(6, 157);
             this.TxtU3.Name = "TxtU3";
             this.TxtU3.Size = new System.Drawing.Size(91, 24);
-            this.TxtU3.TabIndex = 19;
+            this.TxtU3.TabIndex = 21;
+            this.TxtU3.Leave += new System.EventHandler(this.TxtU3_Leave);
             // 
             // label10
             // 
@@ -812,7 +821,8 @@
             this.TxtU1.Location = new System.Drawing.Point(6, 45);
             this.TxtU1.Name = "TxtU1";
             this.TxtU1.Size = new System.Drawing.Size(91, 24);
-            this.TxtU1.TabIndex = 15;
+            this.TxtU1.TabIndex = 17;
+            this.TxtU1.Leave += new System.EventHandler(this.TxtU1_Leave);
             // 
             // ChkFiltroSustancia
             // 
@@ -822,7 +832,7 @@
             this.ChkFiltroSustancia.Location = new System.Drawing.Point(505, 50);
             this.ChkFiltroSustancia.Name = "ChkFiltroSustancia";
             this.ChkFiltroSustancia.Size = new System.Drawing.Size(230, 24);
-            this.ChkFiltroSustancia.TabIndex = 232;
+            this.ChkFiltroSustancia.TabIndex = 1;
             this.ChkFiltroSustancia.Text = "FILTRAR POR SUSTANCIA";
             this.ChkFiltroSustancia.UseVisualStyleBackColor = true;
             // 
@@ -855,9 +865,10 @@
             this.ChkLote.Location = new System.Drawing.Point(611, 332);
             this.ChkLote.Name = "ChkLote";
             this.ChkLote.Size = new System.Drawing.Size(76, 22);
-            this.ChkLote.TabIndex = 208;
+            this.ChkLote.TabIndex = 15;
             this.ChkLote.Text = "LOTES";
             this.ChkLote.UseVisualStyleBackColor = true;
+            this.ChkLote.Leave += new System.EventHandler(this.ChkLote_Leave);
             // 
             // ChkEnCatalogo
             // 
@@ -867,7 +878,7 @@
             this.ChkEnCatalogo.Location = new System.Drawing.Point(611, 308);
             this.ChkEnCatalogo.Name = "ChkEnCatalogo";
             this.ChkEnCatalogo.Size = new System.Drawing.Size(134, 22);
-            this.ChkEnCatalogo.TabIndex = 207;
+            this.ChkEnCatalogo.TabIndex = 14;
             this.ChkEnCatalogo.Text = "EN CATÁLOGO";
             this.ChkEnCatalogo.UseVisualStyleBackColor = true;
             // 
@@ -881,7 +892,7 @@
             this.TxtUnidadCFDI.Location = new System.Drawing.Point(129, 330);
             this.TxtUnidadCFDI.Name = "TxtUnidadCFDI";
             this.TxtUnidadCFDI.Size = new System.Drawing.Size(99, 24);
-            this.TxtUnidadCFDI.TabIndex = 211;
+            this.TxtUnidadCFDI.TabIndex = 10;
             this.TxtUnidadCFDI.TabStop = false;
             // 
             // TxtPrecioCaja
@@ -893,17 +904,7 @@
             this.TxtPrecioCaja.Location = new System.Drawing.Point(489, 330);
             this.TxtPrecioCaja.Name = "TxtPrecioCaja";
             this.TxtPrecioCaja.Size = new System.Drawing.Size(106, 24);
-            this.TxtPrecioCaja.TabIndex = 206;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Location = new System.Drawing.Point(11, 239);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1049, 10);
-            this.groupBox2.TabIndex = 226;
-            this.groupBox2.TabStop = false;
+            this.TxtPrecioCaja.TabIndex = 13;
             // 
             // TxtClaveCFDI
             // 
@@ -914,7 +915,7 @@
             this.TxtClaveCFDI.Location = new System.Drawing.Point(234, 330);
             this.TxtClaveCFDI.Name = "TxtClaveCFDI";
             this.TxtClaveCFDI.Size = new System.Drawing.Size(108, 24);
-            this.TxtClaveCFDI.TabIndex = 204;
+            this.TxtClaveCFDI.TabIndex = 11;
             this.TxtClaveCFDI.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtClaveCFDI_KeyDown);
             // 
             // label7
@@ -934,10 +935,10 @@
             this.TxtCategoria.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtCategoria.ForeColor = System.Drawing.Color.Black;
-            this.TxtCategoria.Location = new System.Drawing.Point(11, 332);
+            this.TxtCategoria.Location = new System.Drawing.Point(11, 330);
             this.TxtCategoria.Name = "TxtCategoria";
             this.TxtCategoria.Size = new System.Drawing.Size(112, 24);
-            this.TxtCategoria.TabIndex = 203;
+            this.TxtCategoria.TabIndex = 9;
             this.TxtCategoria.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtCategoria_KeyDown);
             // 
             // label6
@@ -945,7 +946,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label6.Location = new System.Drawing.Point(11, 311);
+            this.label6.Location = new System.Drawing.Point(11, 309);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(112, 18);
             this.label6.TabIndex = 222;
@@ -960,7 +961,7 @@
             this.TxtLaboratorio.Location = new System.Drawing.Point(892, 276);
             this.TxtLaboratorio.Name = "TxtLaboratorio";
             this.TxtLaboratorio.Size = new System.Drawing.Size(132, 24);
-            this.TxtLaboratorio.TabIndex = 202;
+            this.TxtLaboratorio.TabIndex = 8;
             this.TxtLaboratorio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtLaboratorio_KeyDown);
             // 
             // label5
@@ -983,7 +984,7 @@
             this.TxtUnidades.Location = new System.Drawing.Point(783, 276);
             this.TxtUnidades.Name = "TxtUnidades";
             this.TxtUnidades.Size = new System.Drawing.Size(103, 24);
-            this.TxtUnidades.TabIndex = 201;
+            this.TxtUnidades.TabIndex = 7;
             // 
             // label4
             // 
@@ -1005,7 +1006,7 @@
             this.TxtPresentacion.Location = new System.Drawing.Point(488, 276);
             this.TxtPresentacion.Name = "TxtPresentacion";
             this.TxtPresentacion.Size = new System.Drawing.Size(135, 24);
-            this.TxtPresentacion.TabIndex = 199;
+            this.TxtPresentacion.TabIndex = 5;
             this.TxtPresentacion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPresentacion_KeyDown);
             // 
             // label3
@@ -1029,7 +1030,7 @@
             this.TxtDescripcion.Multiline = true;
             this.TxtDescripcion.Name = "TxtDescripcion";
             this.TxtDescripcion.Size = new System.Drawing.Size(348, 45);
-            this.TxtDescripcion.TabIndex = 197;
+            this.TxtDescripcion.TabIndex = 3;
             // 
             // TxtProductoId
             // 
@@ -1040,7 +1041,8 @@
             this.TxtProductoId.Location = new System.Drawing.Point(126, 50);
             this.TxtProductoId.Name = "TxtProductoId";
             this.TxtProductoId.Size = new System.Drawing.Size(361, 24);
-            this.TxtProductoId.TabIndex = 195;
+            this.TxtProductoId.TabIndex = 0;
+            this.TxtProductoId.TextChanged += new System.EventHandler(this.TxtProductoId_TextChanged);
             this.TxtProductoId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtProductoId_KeyDown);
             // 
             // label1
@@ -1106,7 +1108,7 @@
             this.TxtBuscarImpuestos.Location = new System.Drawing.Point(91, 10);
             this.TxtBuscarImpuestos.Name = "TxtBuscarImpuestos";
             this.TxtBuscarImpuestos.Size = new System.Drawing.Size(108, 24);
-            this.TxtBuscarImpuestos.TabIndex = 14;
+            this.TxtBuscarImpuestos.TabIndex = 16;
             this.TxtBuscarImpuestos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtBuscarImpuestos_KeyDown);
             // 
             // groupBox5
@@ -1180,8 +1182,8 @@
             this.BtnCancelar.Location = new System.Drawing.Point(975, 575);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(95, 40);
-            this.BtnCancelar.TabIndex = 234;
-            this.BtnCancelar.Text = "CANCELAR";
+            this.BtnCancelar.TabIndex = 28;
+            this.BtnCancelar.Text = "SALIR";
             this.BtnCancelar.UseVisualStyleBackColor = true;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
@@ -1191,16 +1193,28 @@
             this.BtnAceptar.Location = new System.Drawing.Point(976, 426);
             this.BtnAceptar.Name = "BtnAceptar";
             this.BtnAceptar.Size = new System.Drawing.Size(95, 40);
-            this.BtnAceptar.TabIndex = 233;
+            this.BtnAceptar.TabIndex = 27;
             this.BtnAceptar.Text = "&ACEPTAR";
             this.BtnAceptar.UseVisualStyleBackColor = true;
             this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
+            // 
+            // LblCoincidencias
+            // 
+            this.LblCoincidencias.AutoSize = true;
+            this.LblCoincidencias.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblCoincidencias.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.LblCoincidencias.Location = new System.Drawing.Point(741, 53);
+            this.LblCoincidencias.Name = "LblCoincidencias";
+            this.LblCoincidencias.Size = new System.Drawing.Size(94, 15);
+            this.LblCoincidencias.TabIndex = 235;
+            this.LblCoincidencias.Text = "0 Coincidencias";
             // 
             // FrmProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1074, 635);
+            this.Controls.Add(this.LblCoincidencias);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnAceptar);
             this.Controls.Add(this.TxtPrecioCompra);
@@ -1221,7 +1235,6 @@
             this.Controls.Add(this.ChkEnCatalogo);
             this.Controls.Add(this.TxtUnidadCFDI);
             this.Controls.Add(this.TxtPrecioCaja);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.TxtClaveCFDI);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.TxtCategoria);
@@ -1331,7 +1344,6 @@
         private System.Windows.Forms.CheckBox ChkEnCatalogo;
         private System.Windows.Forms.TextBox TxtUnidadCFDI;
         private System.Windows.Forms.TextBox TxtPrecioCaja;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox TxtClaveCFDI;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox TxtCategoria;
@@ -1356,5 +1368,6 @@
         private System.Windows.Forms.DataGridView GridImpuestos;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.Label LblCoincidencias;
     }
 }

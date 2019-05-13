@@ -49,7 +49,7 @@
             this.BtnSalir.Name = "BtnSalir";
             this.BtnSalir.Size = new System.Drawing.Size(85, 47);
             this.BtnSalir.TabIndex = 188;
-            this.BtnSalir.Text = "SALIDA";
+            this.BtnSalir.Text = "SALIR";
             this.BtnSalir.UseVisualStyleBackColor = true;
             this.BtnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
@@ -60,7 +60,7 @@
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(87, 45);
             this.BtnGuardar.TabIndex = 187;
-            this.BtnGuardar.Text = "GUARDAR CAMBIOS";
+            this.BtnGuardar.Text = "ACEPTAR";
             this.BtnGuardar.UseVisualStyleBackColor = true;
             this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 

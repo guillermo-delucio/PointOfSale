@@ -44,6 +44,8 @@ namespace PointOfSale.Models
         public string Contenido { get; set; }
         public string RutaImg { get; set; }
         public bool ChkCaducidad { get; set; }
+        public decimal LimiteCredito { get; set; }
+        public int DiasCredito { get; set; }
 
         public virtual Categoria Categoria { get; set; }
         public virtual ClaveSat ClaveCfdi { get; set; }

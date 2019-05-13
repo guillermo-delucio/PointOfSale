@@ -266,28 +266,64 @@ namespace PointOfSale.Controllers
         }
 
 
-        public static string GetPrecioSstring(string precio, ICollection<ProductoImpuesto> productoImpuestos)
+        public static string GetPrecioSstring(string precio, DataGridView gridView)
         {
+            decimal nPrecio = 0;
             try
             {
-                bool successp = decimal.TryParse(precio, out decimal nPrecio);
+                bool successp = decimal.TryParse(precio, out nPrecio);
                 decimal acumulado = 0;
 
                 if (!successp)
                     return "1.000";
 
-                foreach (var prodImp in productoImpuestos)
+
+                using (var db = new DymContext())
                 {
-                    using (var db = new DymContext())
+                    for (int i = 0; i < gridView.RowCount; i++)
                     {
-                        var impuesto = db.Impuesto.FirstOrDefault(x => x.ImpuestoId == prodImp.ImpuestoId);
+                        var impuesto = db.Impuesto.FirstOrDefault(x => x.ImpuestoId == gridView.Rows[i].Cells[1].Value.ToString().Trim());
                         if (impuesto != null)
                             acumulado = acumulado + nPrecio * ((decimal)impuesto.Tasa / 100);
                     }
 
                 }
 
-                return FDinero(precio + acumulado);
+
+
+                return FDinero(nPrecio + acumulado + "");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Algo salio mal. \n Ambiente GetPrecioSDecimal\n " + ex.Message);
+            }
+
+            return FDinero("1");
+        }
+        public static string GetPrecioSstring(string precio, ICollection<ProductoImpuesto> productoImpuestos)
+        {
+            decimal nPrecio = 0;
+            try
+            {
+                bool successp = decimal.TryParse(precio, out nPrecio);
+                decimal acumulado = 0;
+
+                if (!successp)
+                    return "1.000";
+
+
+                using (var db = new DymContext())
+                {
+                    foreach (var item in productoImpuestos)
+                    {
+                        var impuesto = db.Impuesto.FirstOrDefault(x => x.ImpuestoId == item.ImpuestoId);
+                        if (impuesto != null)
+                            acumulado = acumulado + nPrecio * ((decimal)impuesto.Tasa / 100);
+                    }
+
+
+                }
+                return FDinero(nPrecio + acumulado + "");
             }
             catch (Exception ex)
             {

@@ -22,5 +22,7 @@ namespace PointOfSale.Models
         public decimal? LimiteCredito { get; set; }
         public decimal? Saldo { get; set; }
         public bool IsDeleted { get; set; }
+        public string Colonia { get; set; }
+        public string Correo { get; set; }
     }
 }

@@ -100,9 +100,53 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.Celular).HasMaxLength(50);
+
+                entity.Property(e => e.Colonia).HasMaxLength(50);
+
+                entity.Property(e => e.Contancto).HasMaxLength(50);
+
+                entity.Property(e => e.Correo).HasMaxLength(50);
+
+                entity.Property(e => e.Cp)
+                    .HasColumnName("CP")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Direccion).HasMaxLength(50);
+
+                entity.Property(e => e.Estado).HasMaxLength(50);
+
+                entity.Property(e => e.FormaPago)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'PUE')");
+
                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
-                entity.Property(e => e.Nombre).HasMaxLength(50);
+                entity.Property(e => e.LimiteCredito).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.Localidad).HasMaxLength(50);
+
+                entity.Property(e => e.MetodoPago)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'01')");
+
+                entity.Property(e => e.Municipio).HasMaxLength(50);
+
+                entity.Property(e => e.Negocio).HasMaxLength(50);
+
+                entity.Property(e => e.Pais).HasMaxLength(50);
+
+                entity.Property(e => e.RazonSocial).HasMaxLength(50);
+
+                entity.Property(e => e.Rfc)
+                    .HasColumnName("RFC")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Saldo).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.Telefono).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Consecutivo>(entity =>
@@ -294,7 +338,7 @@ namespace PointOfSale.Models
                 entity.Property(e => e.ClaveCfdiId)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .HasDefaultValueSql("((1010101))");
+                    .HasDefaultValueSql("(N'01010101')");
 
                 entity.Property(e => e.Contenido)
                     .HasMaxLength(255)
@@ -314,6 +358,8 @@ namespace PointOfSale.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'SYS')");
+
+                entity.Property(e => e.LimiteCredito).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.LoteId)
                     .HasMaxLength(50)
@@ -489,7 +535,11 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Celular).HasMaxLength(100);
 
+                entity.Property(e => e.Colonia).HasMaxLength(100);
+
                 entity.Property(e => e.Contancto).HasMaxLength(100);
+
+                entity.Property(e => e.Correo).HasMaxLength(100);
 
                 entity.Property(e => e.Cp)
                     .HasColumnName("CP")
@@ -514,6 +564,7 @@ namespace PointOfSale.Models
                 entity.Property(e => e.RazonSocial).HasMaxLength(100);
 
                 entity.Property(e => e.Rfc)
+                    .IsRequired()
                     .HasColumnName("RFC")
                     .HasMaxLength(13);
 
