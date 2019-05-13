@@ -62,7 +62,7 @@
             this.TxtNegocio = new System.Windows.Forms.TextBox();
             this.TxtRFC = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.TxtProveedorId = new System.Windows.Forms.TextBox();
+            this.TxtClienteId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -148,6 +148,7 @@
             this.BtnCancelar.TabIndex = 232;
             this.BtnCancelar.Text = "SALIR";
             this.BtnCancelar.UseVisualStyleBackColor = true;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // BtnAceptar
             // 
@@ -158,6 +159,7 @@
             this.BtnAceptar.TabIndex = 231;
             this.BtnAceptar.Text = "&ACEPTAR";
             this.BtnAceptar.UseVisualStyleBackColor = true;
+            this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
             // 
             // label15
             // 
@@ -325,6 +327,7 @@
             this.TxtCp.Name = "TxtCp";
             this.TxtCp.Size = new System.Drawing.Size(298, 24);
             this.TxtCp.TabIndex = 223;
+            this.TxtCp.Leave += new System.EventHandler(this.TxtCp_Leave);
             // 
             // label8
             // 
@@ -447,16 +450,17 @@
             this.label2.TabIndex = 236;
             this.label2.Text = "R.F.C.";
             // 
-            // TxtProveedorId
+            // TxtClienteId
             // 
-            this.TxtProveedorId.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtProveedorId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtProveedorId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtProveedorId.ForeColor = System.Drawing.Color.Black;
-            this.TxtProveedorId.Location = new System.Drawing.Point(18, 71);
-            this.TxtProveedorId.Name = "TxtProveedorId";
-            this.TxtProveedorId.Size = new System.Drawing.Size(623, 24);
-            this.TxtProveedorId.TabIndex = 214;
+            this.TxtClienteId.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtClienteId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtClienteId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtClienteId.ForeColor = System.Drawing.Color.Black;
+            this.TxtClienteId.Location = new System.Drawing.Point(18, 71);
+            this.TxtClienteId.Name = "TxtClienteId";
+            this.TxtClienteId.Size = new System.Drawing.Size(623, 24);
+            this.TxtClienteId.TabIndex = 214;
+            this.TxtClienteId.Leave += new System.EventHandler(this.TxtClienteId_Leave);
             // 
             // label1
             // 
@@ -601,7 +605,7 @@
             this.Controls.Add(this.TxtNegocio);
             this.Controls.Add(this.TxtRFC);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.TxtProveedorId);
+            this.Controls.Add(this.TxtClienteId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label14);
@@ -649,7 +653,7 @@
         private System.Windows.Forms.TextBox TxtNegocio;
         private System.Windows.Forms.TextBox TxtRFC;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TxtProveedorId;
+        private System.Windows.Forms.TextBox TxtClienteId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
