@@ -140,6 +140,9 @@ namespace PointOfSale.Views.Modulos.Catalogos
             else
             {
 
+                if (objeto == null)
+                    return;
+
                 objeto.Rfc = TxtRFC.Text.Trim().Length == 0 ? "XAXX010101000" : TxtRFC.Text.Trim();
                 objeto.Negocio = TxtNegocio.Text.Trim().Length == 0 ? "" : TxtNegocio.Text.Trim();
                 objeto.RazonSocial = TxtRazonSocial.Text.Trim().Length == 0 ? "" : TxtRazonSocial.Text.Trim();

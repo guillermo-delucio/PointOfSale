@@ -554,6 +554,7 @@
             // 
             // CboPrecioDefault
             // 
+            this.CboPrecioDefault.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboPrecioDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.CboPrecioDefault.FormattingEnabled = true;
             this.CboPrecioDefault.Items.AddRange(new object[] {
