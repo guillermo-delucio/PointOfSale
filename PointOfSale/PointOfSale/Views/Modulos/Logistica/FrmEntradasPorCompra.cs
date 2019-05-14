@@ -16,5 +16,20 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             InitializeComponent();
         }
+
+        private void TxtDescuento_Leave(object sender, EventArgs e)
+        {
+            TxtU1.Focus();
+        }
+
+        private void TxtPrecio4_Leave(object sender, EventArgs e)
+        {
+            BtnAgregar.Focus();
+        }
+
+        private void BtnAgregar_Click(object sender, EventArgs e)
+        {
+            TxtProductoId.Focus();
+        }
     }
 }
