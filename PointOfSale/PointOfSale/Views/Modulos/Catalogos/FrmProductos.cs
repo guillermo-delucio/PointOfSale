@@ -182,6 +182,19 @@ namespace PointOfSale.Views.Modulos.Catalogos
             }
             else
             {
+                if (objeto == null)
+                    objeto = productoController.SelectOne(TxtProductoId.Text);
+
+                if (objeto == null)
+                {
+                    if (TxtProductoId.Text.Trim().Length == 0)
+                        return;
+
+                    objeto = new Producto();
+                    objeto.ProductoId = TxtProductoId.Text.Trim();
+                }
+
+
                 objeto.Descripcion = TxtDescripcion.Text.Length == 0 ? "SYS" : TxtDescripcion.Text;
                 objeto.Contenido = TxtContenido.Text.Length == 0 ? null : TxtContenido.Text;
                 objeto.PresentacionId = TxtPresentacion.Text.Trim().Length == 0 ? "SYS" : TxtPresentacion.Text.Trim();
@@ -464,7 +477,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 Image img = Image.FromFile(ruta);
                 return img;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -805,6 +818,27 @@ namespace PointOfSale.Views.Modulos.Catalogos
             TxtPrecio4.Text = Ambiente.FDinero(TxtPrecio4.Text);
             TxtU4.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio4.Text);
             TxtPrecioS4.Text = Ambiente.GetPrecioSstring(TxtPrecio4.Text, GridImpuestos);
+        }
+
+        private void GridImpuestos_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                BorraFilaDgv(GridImpuestos.CurrentCell.RowIndex, GridImpuestos);
+        }
+
+        private void BorraFilaDgv(int fila, DataGridView gridView)
+        {
+            if (gridView.RowCount >= 0 && fila >= 0 && gridView.RowCount > 0)
+            {
+                gridView.Rows.RemoveAt(fila);
+
+            }
+        }
+
+        private void GridSustancias_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                BorraFilaDgv(GridSustancias.CurrentCell.RowIndex, GridSustancias);
         }
     }
 }

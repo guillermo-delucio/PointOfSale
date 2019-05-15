@@ -164,15 +164,20 @@
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Models\Almacen.cs" />
+    <Compile Include="Models\CambiosPrecio.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\ClaveSat.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\CmetodoPago.cs" />
+    <Compile Include="Models\Compra.cs" />
     <Compile Include="Models\Consecutivo.cs" />
     <Compile Include="Models\Cp.cs" />
+    <Compile Include="Models\Cxp.cs" />
+    <Compile Include="Models\Documento.cs" />
     <Compile Include="Models\DymContext.cs" />
     <Compile Include="Models\Estacion.cs" />
     <Compile Include="Models\Estado.cs" />
+    <Compile Include="Models\EstadoDoc.cs" />
     <Compile Include="Models\FormaPago.cs" />
     <Compile Include="Models\Impuesto.cs" />
     <Compile Include="Models\Laboratorio.cs" />
@@ -180,6 +185,7 @@
     <Compile Include="Models\MetodoPago.cs" />
     <Compile Include="Models\Municipio.cs" />
     <Compile Include="Models\Pais.cs" />
+    <Compile Include="Models\Pcxp.cs" />
     <Compile Include="Models\Permiso.cs" />
     <Compile Include="Models\Presentacion.cs" />
     <Compile Include="Models\Producto.cs" />
@@ -190,6 +196,7 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\RolePermiso.cs" />
     <Compile Include="Models\Sustancia.cs" />
+    <Compile Include="Models\TipoDoc.cs" />
     <Compile Include="Models\UnidadMedida.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuarioRole.cs" />

@@ -7,6 +7,7 @@ namespace PointOfSale.Models
     {
         public Usuario()
         {
+            CambiosPrecio = new HashSet<CambiosPrecio>();
             UsuarioRole = new HashSet<UsuarioRole>();
         }
 
@@ -17,6 +18,7 @@ namespace PointOfSale.Models
         public bool IsAdmin { get; set; }
         public bool IsDeleted { get; set; }
 
+        public virtual ICollection<CambiosPrecio> CambiosPrecio { get; set; }
         public virtual ICollection<UsuarioRole> UsuarioRole { get; set; }
     }
 }

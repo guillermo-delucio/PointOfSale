@@ -5,6 +5,12 @@ namespace PointOfSale.Models
 {
     public partial class Proveedor
     {
+        public Proveedor()
+        {
+            Cxp = new HashSet<Cxp>();
+            Pcxp = new HashSet<Pcxp>();
+        }
+
         public string ProveedorId { get; set; }
         public string Rfc { get; set; }
         public string Negocio { get; set; }
@@ -24,5 +30,8 @@ namespace PointOfSale.Models
         public bool IsDeleted { get; set; }
         public string Colonia { get; set; }
         public string Correo { get; set; }
+
+        public virtual ICollection<Cxp> Cxp { get; set; }
+        public virtual ICollection<Pcxp> Pcxp { get; set; }
     }
 }

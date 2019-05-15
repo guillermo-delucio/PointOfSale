@@ -5,6 +5,11 @@ namespace PointOfSale.Models
 {
     public partial class Estacion
     {
+        public Estacion()
+        {
+            Compra = new HashSet<Compra>();
+        }
+
         public string EstacionId { get; set; }
         public string Nombre { get; set; }
         public bool IsDeleted { get; set; }
@@ -13,5 +18,7 @@ namespace PointOfSale.Models
         public string ImpresoraF { get; set; }
         public string ImpresoraNc { get; set; }
         public int DefaultAlmacenId { get; set; }
+
+        public virtual ICollection<Compra> Compra { get; set; }
     }
 }

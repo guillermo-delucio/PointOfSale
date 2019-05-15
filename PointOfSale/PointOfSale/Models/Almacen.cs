@@ -7,6 +7,7 @@ namespace PointOfSale.Models
     {
         public Almacen()
         {
+            Compra = new HashSet<Compra>();
             ProductoAlmacen = new HashSet<ProductoAlmacen>();
         }
 
@@ -14,6 +15,7 @@ namespace PointOfSale.Models
         public string Nombre { get; set; }
         public bool IsDeleted { get; set; }
 
+        public virtual ICollection<Compra> Compra { get; set; }
         public virtual ICollection<ProductoAlmacen> ProductoAlmacen { get; set; }
     }
 }

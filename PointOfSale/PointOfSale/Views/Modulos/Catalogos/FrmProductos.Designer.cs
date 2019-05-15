@@ -305,6 +305,7 @@
             this.GridSustancias.Size = new System.Drawing.Size(193, 202);
             this.GridSustancias.TabIndex = 93;
             this.GridSustancias.TabStop = false;
+            this.GridSustancias.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridSustancias_KeyDown);
             // 
             // label27
             // 
@@ -1162,6 +1163,7 @@
             this.GridImpuestos.Size = new System.Drawing.Size(193, 84);
             this.GridImpuestos.TabIndex = 93;
             this.GridImpuestos.TabStop = false;
+            this.GridImpuestos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridImpuestos_KeyDown);
             // 
             // dataGridViewTextBoxColumn1
             // 
