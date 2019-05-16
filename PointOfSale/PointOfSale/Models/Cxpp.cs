@@ -5,8 +5,8 @@ namespace PointOfSale.Models
 {
     public partial class Cxpp
     {
-        public int Pcxpid { get; set; }
-        public int Cxpid { get; set; }
+        public int CxppId { get; set; }
+        public int CxpId { get; set; }
         public int CompraId { get; set; }
         public string ProveedorId { get; set; }
         public string CargoAbono { get; set; }

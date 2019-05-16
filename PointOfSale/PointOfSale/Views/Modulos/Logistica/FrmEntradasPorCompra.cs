@@ -16,22 +16,30 @@ namespace PointOfSale.Views.Modulos.Logistica
     public partial class FrmEntradasPorCompra : Form
     {
         ProductoController productoController;
+        CompraController compraController;
+        CxpController cxpController;
+
         Producto Producto;
         Compra Compra;
-        List<Comprap> PartidasCompra;
+        Comprap PartidaCompra;
         Cxp Cxp;
-        List<Cxpp> PartidasCXP;
+        Cxpp PartidasCXP;
         CambiosPrecio CambioPrecio;
+        bool Success;
 
         public FrmEntradasPorCompra()
         {
             InitializeComponent();
             productoController = new ProductoController();
+            compraController = new CompraController();
+            cxpController = new CxpController();
+
+            Success = false;
             Producto = null;
             Compra = null;
-            PartidasCompra = new List<Comprap>();
+            PartidaCompra = new Comprap();
             Cxp = null;
-            PartidasCXP = new List<Cxpp>();
+            PartidasCXP = new Cxpp();
             CambioPrecio = null;
         }
 
@@ -44,14 +52,16 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
-            InsertaPartida();
+            InsertaData();
             TxtProductoId.Focus();
         }
 
-        private void InsertaPartida()
+        private void InsertaData()
         {
+
             if (Compra == null)
             {
+                //Insertar la compra
                 Compra = new Compra();
                 Compra.AlmacenId = TxtAlmacenId.Text.Trim().Length == 0 ? "SYS" : TxtAlmacenId.Text.Trim();
                 Compra.ProveedorId = TxtProvedorId.Text.Trim().Length == 0 ? "SYS" : TxtProvedorId.Text.Trim();
@@ -59,16 +69,30 @@ namespace PointOfSale.Views.Modulos.Logistica
                 Compra.FechaDocumento = DpFechaDoc.Value;
                 Compra.FechaVencimiento = DpFechaVencimiento.Value;
                 Compra.EsCxp = ChkCXP.Checked;
-                if (Compra.EsCxp)
-                {
-
-                }
-
+                Compra.Datos = TxtDatosProveedor.Text.Trim().Length == 0 ? "SYS" : TxtDatosProveedor.Text.Trim();
+                Compra.TipoDocId = "COM";
+                Compra.EstadoDocId = "PEN";
+                Compra.Importe = 0;
+                Compra.Impuesto = 0;
+                Compra.EstacionId = "SYS";
+                Compra.CreatedAt = DateTime.Now;
+                Compra.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                Success = compraController.InsertOne(Compra);
             }
             else
             {
+                //Inserar las partidas
+                if (Success)
+                {
+                    if (Compra == null)
+                        return;
+
+                    PartidaCompra = new Comprap();
+                    PartidaCompra.CompraId = Compra.CompraId;
+                    PartidaCompra.ProductoId = TxtProductoId.Text.Trim().Length == 0 ? "SYS" : TxtProductoId.Text.Trim();
 
 
+                }
             }
         }
 
@@ -106,6 +130,13 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             if (e.KeyCode == Keys.Enter)
             {
+                Producto = productoController.SelectOne(TxtProductoId.Text);
+                if (Producto != null)
+                {
+                    LlenaDatosProducto();
+                    NCantidad.Focus();
+                    return;
+                }
                 using (var form = new FrmBusqueda(TxtProductoId.Text, (int)Ambiente.TipoBusqueda.Productos))
                 {
                     if (form.ShowDialog() == DialogResult.OK)
@@ -222,18 +253,18 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         private void NCantidad_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Oemplus)
-                NCantidad.Value++;
-            if (e.KeyCode == Keys.OemMinus)
-                NCantidad.Value--;
+            //if (e.KeyCode == Keys.Oemplus)
+            //    NCantidad.Value++;
+            //if (e.KeyCode == Keys.OemMinus)
+            //    NCantidad.Value--;
         }
 
         private void NDescuento_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Oemplus)
-                NCantidad.Value++;
-            if (e.KeyCode == Keys.OemMinus)
-                NCantidad.Value--;
+            //if (e.KeyCode == Keys.Oemplus)
+            //    NCantidad.Value++;
+            //if (e.KeyCode == Keys.OemMinus)
+            //    NCantidad.Value--;
         }
 
         private void NDescuento_Leave(object sender, EventArgs e)

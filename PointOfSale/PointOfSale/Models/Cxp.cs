@@ -14,13 +14,13 @@ namespace PointOfSale.Models
         public int CxpId { get; set; }
         public int? CompraId { get; set; }
         public string TipoDocId { get; set; }
-        public int? NoReferencia { get; set; }
+        public int NoReferencia { get; set; }
         public string ProveedorId { get; set; }
-        public DateTime? FechaDocumento { get; set; }
-        public DateTime? FechaVencimiento { get; set; }
+        public DateTime FechaDocumento { get; set; }
+        public DateTime FechaVencimiento { get; set; }
         public string FacturaProveedor { get; set; }
-        public decimal? Importe { get; set; }
-        public decimal? Saldo { get; set; }
+        public decimal Importe { get; set; }
+        public decimal Saldo { get; set; }
         public string EstadoDocId { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
