@@ -21,9 +21,11 @@ namespace PointOfSale.Models
         public virtual DbSet<ClaveSat> ClaveSat { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Compra> Compra { get; set; }
+        public virtual DbSet<Comprap> Comprap { get; set; }
         public virtual DbSet<Consecutivo> Consecutivo { get; set; }
         public virtual DbSet<Cp> Cp { get; set; }
         public virtual DbSet<Cxp> Cxp { get; set; }
+        public virtual DbSet<Cxpp> Cxpp { get; set; }
         public virtual DbSet<Estacion> Estacion { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<EstadoDoc> EstadoDoc { get; set; }
@@ -34,7 +36,6 @@ namespace PointOfSale.Models
         public virtual DbSet<MetodoPago> MetodoPago { get; set; }
         public virtual DbSet<Municipio> Municipio { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
-        public virtual DbSet<Pcxp> Pcxp { get; set; }
         public virtual DbSet<Permiso> Permiso { get; set; }
         public virtual DbSet<Presentacion> Presentacion { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
@@ -54,6 +55,7 @@ namespace PointOfSale.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
             }
         }
@@ -224,7 +226,8 @@ namespace PointOfSale.Models
             {
                 entity.Property(e => e.AlmacenId)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
@@ -232,7 +235,8 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
                 entity.Property(e => e.Cxpid).HasColumnName("CXPID");
 
@@ -240,17 +244,25 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.EstacionId)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
                 entity.Property(e => e.EstadoDocId)
                     .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'PEN')");
+
+                entity.Property(e => e.FacturaProveedor)
+                    .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.FacturaProveedor).HasMaxLength(50);
+                entity.Property(e => e.FechaDocumento)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.FechaDocumento).HasColumnType("datetime");
-
-                entity.Property(e => e.FechaVencimiento).HasColumnType("datetime");
+                entity.Property(e => e.FechaVencimiento)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Importe).HasColumnType("decimal(18, 3)");
 
@@ -262,7 +274,8 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.TipoDocId)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'COM')");
 
                 entity.HasOne(d => d.Almacen)
                     .WithMany(p => p.Compra)
@@ -281,6 +294,19 @@ namespace PointOfSale.Models
                     .HasForeignKey(d => d.EstacionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Compra_Estacion");
+            });
+
+            modelBuilder.Entity<Comprap>(entity =>
+            {
+                entity.Property(e => e.CompraPid).HasColumnName("CompraPID");
+
+                entity.Property(e => e.Importe).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.Impuestos).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.Precio).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.ProductoId).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Consecutivo>(entity =>
@@ -309,8 +335,6 @@ namespace PointOfSale.Models
             modelBuilder.Entity<Cxp>(entity =>
             {
                 entity.ToTable("CXP");
-
-                entity.Property(e => e.Cxpid).HasColumnName("CXPId");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
@@ -348,6 +372,46 @@ namespace PointOfSale.Models
                     .WithMany(p => p.Cxp)
                     .HasForeignKey(d => d.TipoDocId)
                     .HasConstraintName("FK_CXP_TipoDoc");
+            });
+
+            modelBuilder.Entity<Cxpp>(entity =>
+            {
+                entity.HasKey(e => e.Pcxpid)
+                    .HasName("PK_PCXP");
+
+                entity.ToTable("CXPP");
+
+                entity.Property(e => e.Pcxpid).HasColumnName("PCXPId");
+
+                entity.Property(e => e.CargoAbono)
+                    .IsRequired()
+                    .HasMaxLength(1);
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Cxpid).HasColumnName("CXPId");
+
+                entity.Property(e => e.Importe).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.ProveedorId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.Cxp)
+                    .WithMany(p => p.Cxpp)
+                    .HasForeignKey(d => d.Cxpid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PCXP_CXP");
+
+                entity.HasOne(d => d.Proveedor)
+                    .WithMany(p => p.Cxpp)
+                    .HasForeignKey(d => d.ProveedorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PCXP_Proveedor");
             });
 
             modelBuilder.Entity<Estacion>(entity =>
@@ -403,10 +467,7 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<EstadoDoc>(entity =>
             {
-                entity.HasKey(e => e.EstadoIdocId);
-
-                entity.Property(e => e.EstadoIdocId)
-                    .HasColumnName("EstadoIDocId")
+                entity.Property(e => e.EstadoDocId)
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
 
@@ -497,43 +558,6 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Codigo).HasMaxLength(50);
 
                 entity.Property(e => e.Nombre).HasMaxLength(120);
-            });
-
-            modelBuilder.Entity<Pcxp>(entity =>
-            {
-                entity.ToTable("PCXP");
-
-                entity.Property(e => e.Pcxpid).HasColumnName("PCXPId");
-
-                entity.Property(e => e.CargoAbono)
-                    .IsRequired()
-                    .HasMaxLength(1);
-
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.CreatedBy)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Cxpid).HasColumnName("CXPId");
-
-                entity.Property(e => e.Importe).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.ProveedorId)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.Cxp)
-                    .WithMany(p => p.Pcxp)
-                    .HasForeignKey(d => d.Cxpid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PCXP_CXP");
-
-                entity.HasOne(d => d.Proveedor)
-                    .WithMany(p => p.Pcxp)
-                    .HasForeignKey(d => d.ProveedorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PCXP_Proveedor");
             });
 
             modelBuilder.Entity<Permiso>(entity =>

@@ -10,7 +10,7 @@ namespace PointOfSale.Models
             Cxp = new HashSet<Cxp>();
         }
 
-        public string EstadoIdocId { get; set; }
+        public string EstadoDocId { get; set; }
         public string Descripcion { get; set; }
 
         public virtual ICollection<Cxp> Cxp { get; set; }

@@ -266,7 +266,7 @@ namespace PointOfSale.Controllers
         }
 
 
-        public static string GetPrecioSstring(string precio, DataGridView gridView)
+        public static string GetPrecioSstring(string precio, DataGridView gridView, int IntexColImpuesto)
         {
             decimal nPrecio = 0;
             try
@@ -282,7 +282,7 @@ namespace PointOfSale.Controllers
                 {
                     for (int i = 0; i < gridView.RowCount; i++)
                     {
-                        var impuesto = db.Impuesto.FirstOrDefault(x => x.ImpuestoId == gridView.Rows[i].Cells[1].Value.ToString().Trim());
+                        var impuesto = db.Impuesto.FirstOrDefault(x => x.ImpuestoId == gridView.Rows[i].Cells[IntexColImpuesto].Value.ToString().Trim());
                         if (impuesto != null)
                             acumulado = acumulado + nPrecio * ((decimal)impuesto.Tasa / 100);
                     }
@@ -300,6 +300,7 @@ namespace PointOfSale.Controllers
 
             return FDinero("1");
         }
+
         public static string GetPrecioSstring(string precio, ICollection<ProductoImpuesto> productoImpuestos)
         {
             decimal nPrecio = 0;

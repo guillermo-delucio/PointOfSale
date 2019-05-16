@@ -143,9 +143,12 @@
   <ItemGroup>
     <Compile Include="Controllers\AlmacenController.cs" />
     <Compile Include="Controllers\BMController.cs" />
+    <Compile Include="Controllers\CambioPrecioController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ClaveSatController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\CompraController.cs" />
+    <Compile Include="Controllers\CxpController.cs" />
     <Compile Include="Controllers\EstacionController.cs" />
     <Compile Include="Controllers\EvironmentController\Ambiente.cs" />
     <Compile Include="Controllers\EvironmentController\Inicializador.cs" />
@@ -170,9 +173,11 @@
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\CmetodoPago.cs" />
     <Compile Include="Models\Compra.cs" />
+    <Compile Include="Models\CompraP.cs" />
     <Compile Include="Models\Consecutivo.cs" />
     <Compile Include="Models\Cp.cs" />
     <Compile Include="Models\Cxp.cs" />
+    <Compile Include="Models\Cxpp.cs" />
     <Compile Include="Models\Documento.cs" />
     <Compile Include="Models\DymContext.cs" />
     <Compile Include="Models\Estacion.cs" />

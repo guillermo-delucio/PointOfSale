@@ -8,10 +8,10 @@ namespace PointOfSale.Models
         public Cxp()
         {
             Compra = new HashSet<Compra>();
-            Pcxp = new HashSet<Pcxp>();
+            Cxpp = new HashSet<Cxpp>();
         }
 
-        public int Cxpid { get; set; }
+        public int CxpId { get; set; }
         public int? CompraId { get; set; }
         public string TipoDocId { get; set; }
         public int? NoReferencia { get; set; }
@@ -24,11 +24,12 @@ namespace PointOfSale.Models
         public string EstadoDocId { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual EstadoDoc EstadoDoc { get; set; }
         public virtual Proveedor Proveedor { get; set; }
         public virtual TipoDoc TipoDoc { get; set; }
         public virtual ICollection<Compra> Compra { get; set; }
-        public virtual ICollection<Pcxp> Pcxp { get; set; }
+        public virtual ICollection<Cxpp> Cxpp { get; set; }
     }
 }

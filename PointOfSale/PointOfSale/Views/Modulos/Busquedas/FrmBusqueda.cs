@@ -57,7 +57,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Cliente.Where(x => x.RazonSocial.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
+                        Grid1.DataSource = db.Cliente.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
                             Select(x => new { x.ClienteId, x.RazonSocial }).ToList();
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -68,7 +68,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Proveedores:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Proveedor.Where(x => x.RazonSocial.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
+                        Grid1.DataSource = db.Proveedor.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
                             Select(x => new { x.ProveedorId, x.RazonSocial }).ToList();
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -78,7 +78,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Producto.Where(
+                        Grid1.DataSource = db.Producto.AsNoTracking().Where(
                        x => x.Descripcion.Contains(SearchText) && x.IsDeleted == false).Select(x => new
                        {
                            x.ProductoId,
@@ -91,7 +91,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Categorias:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Categoria.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Categoria.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.CategoriaId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -101,7 +101,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Laboratorios:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Laboratorio.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Laboratorio.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.LaboratorioId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -111,7 +111,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Impuestos:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Impuesto.Where(x => x.ImpuestoId.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.ImpuestoId).
+                        Grid1.DataSource = db.Impuesto.AsNoTracking().Where(x => x.ImpuestoId.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.ImpuestoId).
                             Select(x => new { x.ImpuestoId, x.Tasa }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -122,7 +122,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Sustancias:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Sustancia.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).
+                        Grid1.DataSource = db.Sustancia.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).
                             Select(x => new { x.SustanciaId, x.Nombre }).OrderBy(x => x.Nombre).ToList();
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -132,7 +132,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Almacenes:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Almacen.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Almacen.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.AlmacenId, x.Nombre }).ToList();
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -141,7 +141,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Estaciones:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Estacion.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Estacion.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.EstacionId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -151,7 +151,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.ClavesSat:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.ClaveSat.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.ClaveSat.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                         Select(x => new { x.ClaveSatId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -162,7 +162,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Presentacion.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Presentacion.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                              Select(x => new { x.PresentacionId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -172,7 +172,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.UnidadesMedida:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.UnidadMedida.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.UnidadMedida.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.UnidadMedidaId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -182,7 +182,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.Usuarios:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Usuario.Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
+                        Grid1.DataSource = db.Usuario.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.UsuarioId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -191,7 +191,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.FormaPago:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.FormaPago.Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
+                        Grid1.DataSource = db.FormaPago.AsNoTracking().Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
                             Select(x => new { x.FormaPagoId, x.Descripcion }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -200,7 +200,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.MetodoPago:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.MetodoPago.Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
+                        Grid1.DataSource = db.MetodoPago.AsNoTracking().Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
                             Select(x => new { x.MetodoPagoId, x.Descripcion }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);

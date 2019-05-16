@@ -8,7 +8,7 @@ namespace PointOfSale.Models
         public Proveedor()
         {
             Cxp = new HashSet<Cxp>();
-            Pcxp = new HashSet<Pcxp>();
+            Cxpp = new HashSet<Cxpp>();
         }
 
         public string ProveedorId { get; set; }
@@ -32,6 +32,6 @@ namespace PointOfSale.Models
         public string Correo { get; set; }
 
         public virtual ICollection<Cxp> Cxp { get; set; }
-        public virtual ICollection<Pcxp> Pcxp { get; set; }
+        public virtual ICollection<Cxpp> Cxpp { get; set; }
     }
 }
