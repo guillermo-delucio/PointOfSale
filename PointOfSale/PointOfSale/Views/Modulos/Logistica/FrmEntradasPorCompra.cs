@@ -18,6 +18,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         ProductoController productoController;
         CompraController compraController;
         CxpController cxpController;
+        CambioPrecioController cambioPrecioController;
 
         Producto producto;
         Compra compra;
@@ -47,6 +48,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             productoController = new ProductoController();
             compraController = new CompraController();
             cxpController = new CxpController();
+            cambioPrecioController = new CambioPrecioController();
             success = false;
             Reset();
         }
@@ -76,8 +78,142 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             InsertaGrid();
             InsertaData();
+            InsertaCambioPrecio();
+            ActualizaPrecios();
             LimpiaData();
             TxtProductoId.Focus();
+        }
+
+        private void ActualizaPrecios()
+        {
+
+            if (producto == null)
+                return;
+
+            success = true;
+
+            if (TxtPrecioCompra.Text.Trim().Length == 0)
+                TxtPrecioCompra.Text = "1.000";
+
+            if (TxtPrecioCaja.Text.Trim().Length == 0)
+                TxtPrecioCaja.Text = "1.000";
+
+            success = decimal.TryParse(TxtPrecioCompra.Text, out decimal nCosto);
+            success = decimal.TryParse(TxtPrecioCaja.Text, out decimal nPrecioCaja);
+
+            if (!success)
+            {
+                Ambiente.Mensaje("Precio de compra caja no válido. \n Proceso abortado.");
+                return;
+            }
+
+            producto.PrecioCompra = nCosto;
+            producto.PrecioCaja = nPrecioCaja;
+
+            if (TxtPrecio1.Text.Trim().Length == 0)
+                TxtPrecio1.Text = "1.000";
+
+            if (TxtPrecio2.Text.Trim().Length == 0)
+                TxtPrecio2.Text = "1.000";
+
+            if (TxtPrecio3.Text.Trim().Length == 0)
+                TxtPrecio3.Text = "1.000";
+
+            if (TxtPrecio4.Text.Trim().Length == 0)
+                TxtPrecio4.Text = "1.000";
+
+            if (TxtU1.Text.Trim().Length == 0)
+                TxtU1.Text = "1.000";
+
+            if (TxtU2.Text.Trim().Length == 0)
+                TxtU2.Text = "1.000";
+
+            if (TxtU3.Text.Trim().Length == 0)
+                TxtU3.Text = "1.000";
+
+            if (TxtU4.Text.Trim().Length == 0)
+                TxtU4.Text = "1.000";
+
+            success = true;
+            success = decimal.TryParse(TxtPrecio1.Text, out decimal nprecio1);
+            success = decimal.TryParse(TxtPrecio2.Text, out decimal nprecio2);
+            success = decimal.TryParse(TxtPrecio3.Text, out decimal nprecio3);
+            success = decimal.TryParse(TxtPrecio4.Text, out decimal nprecio4);
+
+            success = true;
+            success = decimal.TryParse(TxtU1.Text, out decimal nMargen1);
+            success = decimal.TryParse(TxtU2.Text, out decimal nMargen2);
+            success = decimal.TryParse(TxtU3.Text, out decimal nMargen3);
+            success = decimal.TryParse(TxtU4.Text, out decimal nMargen4);
+
+            if (!success)
+            {
+                Ambiente.Mensaje("Precios o margenes no válidos. \n Proceso abortado.");
+                return;
+            }
+
+            producto.Precio1 = nprecio1;
+            producto.Precio2 = nprecio2;
+            producto.Precio3 = nprecio3;
+            producto.Precio4 = nprecio4;
+
+            producto.Utilidad1 = nMargen1;
+            producto.Utilidad2 = nMargen2;
+            producto.Utilidad3 = nMargen3;
+            producto.Utilidad4 = nMargen4;
+            productoController.Update(producto);
+        }
+
+        private void InsertaCambioPrecio()
+        {
+            if (producto.PrecioCompra != precioCompra)
+            {
+                cambioPrecio = new CambiosPrecio
+                {
+                    ProductoId = productoId,
+                    PrecioCompraViejo = producto.PrecioCompra,
+                    Precio1Viejo = producto.Precio1,
+                    Precio2Viejo = producto.Precio2,
+                    Precio3Viejo = producto.Precio3,
+                    Precio4Viejo = producto.Precio4,
+                    Utilidad1Viejo = producto.Utilidad1,
+                    Utilidad2Viejo = producto.Utilidad2,
+                    Utilidad3Viejo = producto.Utilidad3,
+                    Utilidad4Viejo = producto.Utilidad4,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = Ambiente.LoggedUser.UsuarioId
+                };
+
+                success = true;
+                success = decimal.TryParse(TxtPrecio1.Text, out decimal nprecio1);
+                success = decimal.TryParse(TxtPrecio2.Text, out decimal nprecio2);
+                success = decimal.TryParse(TxtPrecio3.Text, out decimal nprecio3);
+                success = decimal.TryParse(TxtPrecio4.Text, out decimal nprecio4);
+
+                success = true;
+                success = decimal.TryParse(TxtU1.Text, out decimal nMargen1);
+                success = decimal.TryParse(TxtU2.Text, out decimal nMargen2);
+                success = decimal.TryParse(TxtU3.Text, out decimal nMargen3);
+                success = decimal.TryParse(TxtU4.Text, out decimal nMargen4);
+
+                if (!success)
+                {
+                    Ambiente.Mensaje("Precios o margenes no válidos. \n Proceso abortado.");
+                    return;
+                }
+
+                cambioPrecio.Precio1Nuevo = nprecio1;
+                cambioPrecio.Precio2Nuevo = nprecio2;
+                cambioPrecio.Precio3Nuevo = nprecio3;
+                cambioPrecio.Precio4Nuevo = nprecio4;
+
+                cambioPrecio.Utilidad1Nuevo = nMargen1;
+                cambioPrecio.Utilidad1Nuevo = nMargen2;
+                cambioPrecio.Utilidad1Nuevo = nMargen3;
+                cambioPrecio.Utilidad1Nuevo = nMargen4;
+
+                cambioPrecioController.InsertOne(cambioPrecio);
+            }
         }
 
         private void LimpiaData()
@@ -345,7 +481,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             TxtPrecioS3.Text = Ambiente.GetPrecioSstring(producto.Precio3.ToString(), producto.ProductoImpuesto);
             TxtPrecioS4.Text = Ambiente.GetPrecioSstring(producto.Precio4.ToString(), producto.ProductoImpuesto);
             TxtRutaImg.Text = producto.RutaImg;
-            //GridExistencias.DataSource = objeto.ProductoAlmacen.Select(x => new { x.AlmacenId, x.ExistenciaId }).ToList();
+            //GridExistencias.DataSource = producto.ProductoAlmacen.Select(x => new { x.AlmacenId, x.ExistenciaId }).ToList();
             PbxImagen.Image = GetImg(producto.RutaImg);
         }
 

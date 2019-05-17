@@ -366,7 +366,7 @@ namespace PointOfSale.Controllers
                     {
                         var impuesto = db.Impuesto.FirstOrDefault(x => x.ImpuestoId == gridView.Rows[i].Cells[IntexColImpuesto].Value.ToString().Trim());
                         if (impuesto != null)
-                            acumulado = acumulado + nPrecio * ((decimal)impuesto.Tasa / 100);
+                            acumulado += acumulado + nPrecio * impuesto.Tasa;
                     }
 
                 }

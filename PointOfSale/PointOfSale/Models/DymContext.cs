@@ -89,21 +89,21 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Estado).HasMaxLength(50);
 
-                entity.Property(e => e.Precio1Nuevo).HasMaxLength(10);
+                entity.Property(e => e.Precio1Nuevo).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.Precio1Viejo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Precio2Nuevo).HasMaxLength(10);
+                entity.Property(e => e.Precio2Nuevo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Precio2Viejo).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.Precio2Viejo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Precio3Nuevo).HasMaxLength(10);
+                entity.Property(e => e.Precio3Nuevo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Precio3Viejo).HasMaxLength(10);
+                entity.Property(e => e.Precio3Viejo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Precio4Nuevo).HasMaxLength(10);
+                entity.Property(e => e.Precio4Nuevo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Precio4Viejo).HasMaxLength(10);
+                entity.Property(e => e.Precio4Viejo).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.PrecioCompraNuevo).HasColumnType("decimal(18, 3)");
 
@@ -113,21 +113,21 @@ namespace PointOfSale.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Utilidad1Nuevo).HasMaxLength(10);
+                entity.Property(e => e.Utilidad1Nuevo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Utilidad1Viejo).HasMaxLength(10);
+                entity.Property(e => e.Utilidad1Viejo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Utilidad2Nuevo).HasMaxLength(10);
+                entity.Property(e => e.Utilidad2Nuevo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Utilidad2Viejo).HasMaxLength(10);
+                entity.Property(e => e.Utilidad2Viejo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Utilidad3Nuevo).HasMaxLength(10);
+                entity.Property(e => e.Utilidad3Nuevo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Utilidad3Viejo).HasMaxLength(10);
+                entity.Property(e => e.Utilidad3Viejo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Utilidad4Nuevo).HasMaxLength(10);
+                entity.Property(e => e.Utilidad4Nuevo).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Utilidad4Viejo).HasMaxLength(10);
+                entity.Property(e => e.Utilidad4Viejo).HasColumnType("decimal(18, 3)");
 
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.CambiosPrecio)
