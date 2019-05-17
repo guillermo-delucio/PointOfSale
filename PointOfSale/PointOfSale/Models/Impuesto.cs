@@ -11,7 +11,7 @@ namespace PointOfSale.Models
         }
 
         public string ImpuestoId { get; set; }
-        public int? Tasa { get; set; }
+        public decimal Tasa { get; set; }
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<ProductoImpuesto> ProductoImpuesto { get; set; }

@@ -297,15 +297,25 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Comprap>(entity =>
             {
-                entity.Property(e => e.CompraPid).HasColumnName("CompraPID");
+                entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.Descripcion).IsRequired();
 
+                entity.Property(e => e.Descuento).HasColumnType("decimal(18, 3)");
+
                 entity.Property(e => e.Importe).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.Impuesto1)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((0.16))");
+
+                entity.Property(e => e.Impuesto2).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.Impuesto3).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.Impuestos).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Precio).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.PrecioCompra).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.ProductoId)
                     .IsRequired()
@@ -505,6 +515,8 @@ namespace PointOfSale.Models
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
+                entity.Property(e => e.Tasa).HasColumnType("decimal(18, 2)");
             });
 
             modelBuilder.Entity<Laboratorio>(entity =>

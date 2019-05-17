@@ -19,13 +19,27 @@ namespace PointOfSale.Views.Modulos.Logistica
         CompraController compraController;
         CxpController cxpController;
 
-        Producto Producto;
-        Compra Compra;
-        Comprap PartidaCompra;
-        Cxp Cxp;
-        Cxpp PartidasCXP;
-        CambiosPrecio CambioPrecio;
-        bool Success;
+        Producto producto;
+        Compra compra;
+        Comprap comprap;
+        Cxp cxp;
+        Cxpp cxpp;
+        CambiosPrecio cambioPrecio;
+
+        bool success;
+        string productoId;
+        string descripcion;
+        decimal cantidad;
+        decimal precioCompra;
+        decimal descuento;
+        decimal impuesto1;
+        decimal impuesto2;
+        decimal impuesto3;
+        decimal importeParcial;
+        decimal impuestoParcial;
+        int cantImpuestos;
+
+
 
         public FrmEntradasPorCompra()
         {
@@ -33,16 +47,24 @@ namespace PointOfSale.Views.Modulos.Logistica
             productoController = new ProductoController();
             compraController = new CompraController();
             cxpController = new CxpController();
-
-            Success = false;
-            Producto = null;
-            Compra = null;
-            PartidaCompra = new Comprap();
-            Cxp = null;
-            PartidasCXP = new Cxpp();
-            CambioPrecio = null;
+            success = false;
+            Reset();
         }
 
+        private void Reset()
+        {
+            productoId = string.Empty;
+            descripcion = string.Empty;
+            cantidad = 0;
+            precioCompra = 0;
+            descuento = 0;
+            impuesto1 = 0;
+            impuesto2 = 0;
+            impuesto3 = 0;
+            importeParcial = 0;
+            impuestoParcial = 0;
+            cantImpuestos = 0;
+        }
         private void TxtDescuento_Leave(object sender, EventArgs e)
         {
             TxtU1.Focus();
@@ -52,47 +74,203 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
+            InsertaGrid();
             InsertaData();
+            LimpiaData();
             TxtProductoId.Focus();
         }
+
+        private void LimpiaData()
+        {
+            TxtProductoId.Text = string.Empty;
+            TxtPrecioCompra.Text = string.Empty;
+            TxtPrecioCaja.Text = string.Empty;
+            TxtDescripcion.Text = string.Empty;
+            TxtU1.Text = string.Empty;
+            TxtU2.Text = string.Empty;
+            TxtU3.Text = string.Empty;
+            TxtU4.Text = string.Empty;
+            TxtPrecio1.Text = string.Empty;
+            TxtPrecio2.Text = string.Empty;
+            TxtPrecio3.Text = string.Empty;
+            TxtPrecio4.Text = string.Empty;
+            GridImpuestos.Rows.Clear();
+            GridImpuestos.Refresh();
+            TxtPrecioS1.Text = string.Empty;
+            TxtPrecioS2.Text = string.Empty;
+            TxtPrecioS3.Text = string.Empty;
+            TxtPrecioS4.Text = string.Empty;
+            TxtRutaImg.Text = producto.RutaImg;
+            PbxImagen.Image = null;
+            NDesc.Value = 0;
+            NCantidad.Value = 1;
+        }
+
+        private void InsertaGrid()
+        {
+            try
+            {
+                if (TxtProductoId.Text.Trim().Length == 0)
+                    return;
+                Reset();
+                productoId = TxtProductoId.Text.Trim();
+                descripcion = TxtDescripcion.Text.Trim();
+                cantidad = NCantidad.Value;
+                precioCompra = Ambiente.ToDecimal(TxtPrecioCompra.Text);
+
+                if (precioCompra < producto.PrecioCompra)
+                    if (!Ambiente.Pregunta("EL PRECIO DE COMMPRA ES INFERIOR QUE EL DE LA COMPRA ANTERIOR\n QUIERE CONTINUAR"))
+                        return;
+
+                descuento = NDesc.Value;
+                cantImpuestos = GridImpuestos.RowCount;
+
+                importeParcial = cantidad * precioCompra;
+
+                if (NDesc.Value > 0)
+                    importeParcial -= importeParcial * (descuento / 100);
+
+                if (GridImpuestos.RowCount == 1)
+                {
+                    impuesto1 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[0].Cells[0].Value.ToString());
+                    impuestoParcial += importeParcial * impuesto1;
+                }
+                else if (GridImpuestos.RowCount == 2)
+                {
+                    impuesto1 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[0].Cells[0].Value.ToString());
+                    impuesto2 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[1].Cells[0].Value.ToString());
+                    impuestoParcial += importeParcial * impuesto1;
+                    impuestoParcial += importeParcial * impuesto2;
+                }
+                else if (GridImpuestos.RowCount == 3)
+                {
+                    impuesto1 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[0].Cells[0].Value.ToString());
+                    impuesto2 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[1].Cells[0].Value.ToString());
+                    impuesto3 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[2].Cells[0].Value.ToString());
+                    impuestoParcial += importeParcial * impuesto1;
+                    impuestoParcial += importeParcial * impuesto2;
+                    impuestoParcial += importeParcial * impuesto3;
+                }
+
+                GridPartidas.Rows.Add();
+
+                //productoId
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[0].Value = productoId;
+                //Descripcion
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[1].Value = descripcion;
+                //Cantidad
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[2].Value = cantidad;
+                //PrecioCompra
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[3].Value = precioCompra;
+                //Descuento
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[4].Value = descuento;
+                //Impuesto 1
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[5].Value = impuesto1;
+                //Impuesto 2
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[6].Value = impuesto2;
+                //Impuesto 3
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[7].Value = impuesto3;
+                //Importe
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[8].Value = importeParcial;
+                //Impuestos
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[9].Value = impuestoParcial;
+                //CantImp
+                GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[10].Value = cantImpuestos;
+
+                TxtSubtotal.Text = importeParcial.ToString();
+                TxtImpuestos.Text = impuestoParcial.ToString();
+                TxtTotal.Text = (importeParcial + impuestoParcial).ToString();
+
+            }
+            catch (Exception ex)
+            {
+
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+        }
+
 
         private void InsertaData()
         {
 
-            if (Compra == null)
+            if (compra == null)
             {
                 //Insertar la compra
-                Compra = new Compra();
-                Compra.AlmacenId = TxtAlmacenId.Text.Trim().Length == 0 ? "SYS" : TxtAlmacenId.Text.Trim();
-                Compra.ProveedorId = TxtProvedorId.Text.Trim().Length == 0 ? "SYS" : TxtProvedorId.Text.Trim();
-                Compra.FacturaProveedor = TxtFacturaProveedor.Text.Trim().Length == 0 ? "SYS" : TxtFacturaProveedor.Text.Trim();
-                Compra.FechaDocumento = DpFechaDoc.Value;
-                Compra.FechaVencimiento = DpFechaVencimiento.Value;
-                Compra.EsCxp = ChkCXP.Checked;
-                Compra.Datos = TxtDatosProveedor.Text.Trim().Length == 0 ? "SYS" : TxtDatosProveedor.Text.Trim();
-                Compra.TipoDocId = "COM";
-                Compra.EstadoDocId = "PEN";
-                Compra.Importe = 0;
-                Compra.Impuesto = 0;
-                Compra.EstacionId = "SYS";
-                Compra.CreatedAt = DateTime.Now;
-                Compra.CreatedBy = Ambiente.LoggedUser.UsuarioId;
-                Success = compraController.InsertOne(Compra);
+                compra = new Compra();
+                compra.AlmacenId = TxtAlmacenId.Text.Trim().Length == 0 ? "SYS" : TxtAlmacenId.Text.Trim();
+                compra.ProveedorId = TxtProvedorId.Text.Trim().Length == 0 ? "SYS" : TxtProvedorId.Text.Trim();
+                compra.FacturaProveedor = TxtFacturaProveedor.Text.Trim().Length == 0 ? "SYS" : TxtFacturaProveedor.Text.Trim();
+                compra.FechaDocumento = DpFechaDoc.Value;
+                compra.FechaVencimiento = DpFechaVencimiento.Value;
+                compra.EsCxp = ChkCXP.Checked;
+                compra.Datos = TxtDatosProveedor.Text.Trim().Length == 0 ? "SYS" : TxtDatosProveedor.Text.Trim();
+                compra.TipoDocId = "COM";
+                compra.EstadoDocId = "PEN";
+                compra.Importe = 0;
+                compra.Impuesto = 0;
+                compra.EstacionId = "SYS";
+                compra.CreatedAt = DateTime.Now;
+                compra.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                success = compraController.InsertOne(compra);
+
+                //Insertat la primera partida
+                if (success)
+                {
+                    if (compra == null)
+                        return;
+
+                    comprap = new Comprap
+                    {
+                        CompraId = compra.CompraId,
+                        ProductoId = productoId,
+                        Descripcion = descripcion,
+                        Cantidad = cantidad,
+                        Descuento = descuento,
+                        CantImpuestos = cantImpuestos,
+                        PrecioCompra = precioCompra,
+                        Importe = importeParcial,
+                        Impuesto1 = impuesto1,
+                        Impuesto2 = impuesto2,
+                        Impuesto3 = impuesto3,
+                        Impuestos = impuestoParcial,
+
+                    };
+
+                    success = compraController.InsertaPartida(comprap);
+                }
+                else
+                    Ambiente.Mensaje("La compra no se guardó, No continue.");
+
             }
             else
             {
-                //Inserar las partidas
-                if (Success)
+                //Insertat la primera partida
+                if (success)
                 {
-                    if (Compra == null)
+                    if (compra == null)
                         return;
 
-                    PartidaCompra = new Comprap();
-                    PartidaCompra.CompraId = Compra.CompraId;
-                    PartidaCompra.ProductoId = TxtProductoId.Text.Trim().Length == 0 ? "SYS" : TxtProductoId.Text.Trim();
+                    comprap = new Comprap
+                    {
+                        CompraId = compra.CompraId,
+                        ProductoId = productoId,
+                        Descripcion = descripcion,
+                        Cantidad = cantidad,
+                        Descuento = descuento,
+                        CantImpuestos = cantImpuestos,
+                        PrecioCompra = precioCompra,
+                        Importe = importeParcial,
+                        Impuesto1 = impuesto1,
+                        Impuesto2 = impuesto2,
+                        Impuesto3 = impuesto3,
+                        Impuestos = impuestoParcial,
 
+                    };
 
+                    success = compraController.InsertaPartida(comprap);
                 }
+                else
+                    Ambiente.Mensaje("La compra no se guardó, No continue.");
             }
         }
 
@@ -130,8 +308,8 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Producto = productoController.SelectOne(TxtProductoId.Text);
-                if (Producto != null)
+                producto = productoController.SelectOne(TxtProductoId.Text);
+                if (producto != null)
                 {
                     LlenaDatosProducto();
                     NCantidad.Focus();
@@ -149,26 +327,28 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         private void LlenaDatosProducto()
         {
-            TxtProductoId.Text = Producto.ProductoId;
-            TxtPrecioCompra.Text = Producto.PrecioCompra.ToString();
-            TxtPrecioCaja.Text = Producto.PrecioCaja.ToString();
-            TxtU1.Text = Producto.Utilidad1.ToString();
-            TxtU2.Text = Producto.Utilidad2.ToString();
-            TxtU3.Text = Producto.Utilidad3.ToString();
-            TxtU4.Text = Producto.Utilidad4.ToString();
-            TxtPrecio1.Text = Producto.Precio1.ToString();
-            TxtPrecio2.Text = Producto.Precio2.ToString();
-            TxtPrecio3.Text = Producto.Precio3.ToString();
-            TxtPrecio4.Text = Producto.Precio4.ToString();
-            LlenaGridImpuestos(Producto.ProductoImpuesto);
-            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(Producto.Precio1.ToString(), Producto.ProductoImpuesto);
-            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(Producto.Precio2.ToString(), Producto.ProductoImpuesto);
-            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(Producto.Precio3.ToString(), Producto.ProductoImpuesto);
-            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(Producto.Precio4.ToString(), Producto.ProductoImpuesto);
-            TxtRutaImg.Text = Producto.RutaImg;
+            TxtProductoId.Text = producto.ProductoId;
+            TxtPrecioCompra.Text = producto.PrecioCompra.ToString();
+            TxtPrecioCaja.Text = producto.PrecioCaja.ToString();
+            TxtDescripcion.Text = producto.Descripcion;
+            TxtU1.Text = producto.Utilidad1.ToString();
+            TxtU2.Text = producto.Utilidad2.ToString();
+            TxtU3.Text = producto.Utilidad3.ToString();
+            TxtU4.Text = producto.Utilidad4.ToString();
+            TxtPrecio1.Text = producto.Precio1.ToString();
+            TxtPrecio2.Text = producto.Precio2.ToString();
+            TxtPrecio3.Text = producto.Precio3.ToString();
+            TxtPrecio4.Text = producto.Precio4.ToString();
+            LlenaGridImpuestos(producto.ProductoImpuesto);
+            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(producto.Precio1.ToString(), producto.ProductoImpuesto);
+            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(producto.Precio2.ToString(), producto.ProductoImpuesto);
+            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(producto.Precio3.ToString(), producto.ProductoImpuesto);
+            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(producto.Precio4.ToString(), producto.ProductoImpuesto);
+            TxtRutaImg.Text = producto.RutaImg;
             //GridExistencias.DataSource = objeto.ProductoAlmacen.Select(x => new { x.AlmacenId, x.ExistenciaId }).ToList();
-            PbxImagen.Image = GetImg(Producto.RutaImg);
+            PbxImagen.Image = GetImg(producto.RutaImg);
         }
+
         private Image GetImg(string ruta)
         {
             try
@@ -184,11 +364,11 @@ namespace PointOfSale.Views.Modulos.Logistica
                 return null;
             }
         }
-        private void LlenaGridImpuestos(ICollection<ProductoImpuesto> impuestos)
+        private void LlenaGridImpuestos(ICollection<ProductoImpuesto> impuestoParcial)
         {
             GridImpuestos.Rows.Clear();
             GridImpuestos.Refresh();
-            foreach (var productoImpuesto in impuestos)
+            foreach (var productoImpuesto in impuestoParcial)
             {
                 GridImpuestos.Rows.Add();
                 GridImpuestos.Rows[GridImpuestos.RowCount - 1].Cells[0].Value = productoImpuesto.ImpuestoId;
@@ -267,23 +447,41 @@ namespace PointOfSale.Views.Modulos.Logistica
             //    NCantidad.Value--;
         }
 
-        private void NDescuento_Leave(object sender, EventArgs e)
-        {
-            TxtU1.Focus();
-        }
+
 
         private void TxtProductoId_Leave(object sender, EventArgs e)
         {
             if (TxtProductoId.Text.Trim().Length > 0)
             {
-                Producto = productoController.SelectOne(TxtProductoId.Text);
-                if (Producto != null)
+                producto = productoController.SelectOne(TxtProductoId.Text);
+                if (producto != null)
                 {
                     LlenaDatosProducto();
                 }
             }
         }
 
+        private void BtnAceptar_Click(object sender, EventArgs e)
+        {
+            //if (Success)
+            //{
+            //    if (ChkCXP.Checked)
+            //    {
+            //        if (Cxp == null)
+            //        {
+            //            Cxp = new Cxp();
+            //        }
+            //        else
+            //        {
 
+            //        }
+            //    }
+            //}
+        }
+
+        private void NDesc_Leave(object sender, EventArgs e)
+        {
+            TxtU1.Focus();
+        }
     }
 }

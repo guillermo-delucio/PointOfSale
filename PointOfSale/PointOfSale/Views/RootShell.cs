@@ -36,11 +36,18 @@ namespace PointOfSale.Views
 
         private void ToolStripSplitButton1_ButtonClick(object sender, EventArgs e)
         {
-            var form = new FrmMain()
+            if (Ambiente.LoggedUser == null)
             {
-                MdiParent = this
-            };
-            form.Show();
+                GetLogin();
+            }
+            else
+            {
+                var form = new FrmMain()
+                {
+                    MdiParent = this
+                };
+                form.Show();
+            }
         }
     }
 }

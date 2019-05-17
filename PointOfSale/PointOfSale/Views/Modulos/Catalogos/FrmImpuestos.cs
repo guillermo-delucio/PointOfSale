@@ -39,14 +39,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
         }
 
-        private void TxtClave_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                LlenaCampos();
-            }
-        }
-
+    
         private void LlenaCampos()
         {
             if (objeto == null)
@@ -55,7 +48,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
             {
                 ModoCreate = false;
                 TxtClave.Text = objeto.ImpuestoId;
-                TxtNombre.Text = objeto.Tasa.ToString();
+                TxtNombre.Text = (objeto.Tasa * 100).ToString();
 
             }
 
@@ -76,8 +69,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
                 objeto = new Impuesto();
                 objeto.ImpuestoId = TxtClave.Text.Trim();
-                if (int.TryParse(TxtNombre.Text.Trim(), out int intTasa))
-                    objeto.Tasa = intTasa;
+                if (decimal.TryParse(TxtNombre.Text.Trim(), out decimal DecTasa))
+                    objeto.Tasa = DecTasa / 100;
                 else
                 {
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[-7]);
@@ -96,8 +89,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
             }
             else
             {
-                if (int.TryParse(TxtNombre.Text.Trim(), out int intTasa))
-                    objeto.Tasa = intTasa;
+                if (decimal.TryParse(TxtNombre.Text.Trim(), out decimal DecTasa))
+                    objeto.Tasa = DecTasa / 100;
                 else
                 {
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[-7]);
@@ -116,6 +109,11 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void TxtClave_Leave(object sender, EventArgs e)
+        {
+            LlenaCampos();
         }
     }
 }

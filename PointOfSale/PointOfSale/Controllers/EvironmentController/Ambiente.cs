@@ -265,6 +265,88 @@ namespace PointOfSale.Controllers
             return -1m;
         }
 
+        public static decimal ToDecimal(string precio)
+        {
+
+            try
+            {
+                bool successp = decimal.TryParse(precio.Trim(), out decimal nPrecio);
+
+
+                if (!successp)
+                    return 0;
+
+                return nPrecio;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Algo salio mal. \n Ambiente ToDecimal\n " + ex.Message);
+            }
+
+            return 1m;
+        }
+        public static int ToInt(string precio)
+        {
+
+            try
+            {
+                bool successp = int.TryParse(precio.Trim(), out int nPrecio);
+
+
+                if (!successp)
+                    return 0;
+
+                return nPrecio;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Algo salio mal. \n Ambiente ToDecimal\n " + ex.Message);
+            }
+
+            return 0;
+        }
+        public static string ToString(decimal precio)
+        {
+
+            try
+            {
+                return precio.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Algo salio mal. \n Ambiente ToDecimal\n " + ex.Message);
+            }
+
+            return "1.000";
+        }
+
+        public static decimal GetTasaImpuesto(string impuestoId)
+        {
+            if (impuestoId == null)
+            {
+                return 0;
+            }
+
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    var impuesto = db.Impuesto.FirstOrDefault(x => x.ImpuestoId == impuestoId.Trim());
+                    if (impuesto != null)
+                        return impuesto.Tasa;
+                    else
+                        return 0;
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@ GetTasaImpuesto \n" + ex.ToString());
+            }
+            return 0;
+
+        }
 
         public static string GetPrecioSstring(string precio, DataGridView gridView, int IntexColImpuesto)
         {

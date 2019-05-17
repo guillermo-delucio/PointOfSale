@@ -146,6 +146,8 @@ namespace PointOfSale.Controllers
             return null;
         }
 
+       
+
         public List<Producto> SelectOneOverList(string Id)
         {
             try

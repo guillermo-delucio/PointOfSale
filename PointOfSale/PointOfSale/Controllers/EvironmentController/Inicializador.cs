@@ -61,6 +61,14 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
+                    var estacion = db.Estacion.FirstOrDefault(x => x.EstacionId == "SYS");
+                    if (estacion == null)
+                    {
+                        estacion = new Estacion();
+                        estacion.EstacionId = "SYS";
+                        estacion.Nombre = "DEFAUTL";
+                        db.Add(estacion);
+                    }
                     var sustancia = db.Sustancia.FirstOrDefault(x => x.SustanciaId == "SYS");
                     if (sustancia == null)
                     {
