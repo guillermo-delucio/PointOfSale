@@ -675,6 +675,8 @@ namespace PointOfSale.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Stock).HasColumnType("decimal(18, 1)");
+
                 entity.Property(e => e.UnidadCfdi)
                     .IsRequired()
                     .HasMaxLength(50)

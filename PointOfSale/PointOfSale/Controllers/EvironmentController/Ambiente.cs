@@ -149,6 +149,7 @@ namespace PointOfSale.Controllers
         }
         public static string FDinero(string valor)
         {
+            valor = valor.Trim();
             if (valor == null)
                 return string.Format("{0:0.000}", "1");
 

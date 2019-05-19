@@ -156,6 +156,7 @@
     <Compile Include="Controllers\ImportaExcelController.cs" />
     <Compile Include="Controllers\EvironmentController\IController.cs" />
     <Compile Include="Controllers\ImpuestoController.cs" />
+    <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\LaboratorioController.cs" />
     <Compile Include="Controllers\LoggerController\TraceLogger.cs" />
     <Compile Include="Controllers\LoginController.cs" />

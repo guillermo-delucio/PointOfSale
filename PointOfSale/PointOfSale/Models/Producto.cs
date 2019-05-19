@@ -20,7 +20,7 @@ namespace PointOfSale.Models
         public string LaboratorioId { get; set; }
         public string Descripcion { get; set; }
         public string Unidades { get; set; }
-        public int Stock { get; set; }
+        public decimal Stock { get; set; }
         public decimal PrecioCompra { get; set; }
         public decimal PrecioCaja { get; set; }
         public decimal Precio1 { get; set; }

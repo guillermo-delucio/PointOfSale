@@ -281,7 +281,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                 {
                     impuesto1 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[0].Cells[0].Value.ToString());
                     impuestoParcial += importeParcial * impuesto1;
-
+                    impuestoTotal += impuestoParcial;
                 }
                 else if (GridImpuestos.RowCount == 2)
                 {
@@ -297,9 +297,9 @@ namespace PointOfSale.Views.Modulos.Logistica
                     impuesto1 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[0].Cells[0].Value.ToString());
                     impuesto2 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[1].Cells[0].Value.ToString());
                     impuesto3 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[2].Cells[0].Value.ToString());
-                    impuestoParcial+ = importeParcial * impuesto1;
-                    impuestoParcial+ = importeParcial * impuesto2;
-                    impuestoParcial+ = importeParcial * impuesto3;
+                    impuestoParcial += importeParcial * impuesto1;
+                    impuestoParcial += importeParcial * impuesto2;
+                    impuestoParcial += importeParcial * impuesto3;
                     impuestoTotal += impuestoParcial;
                 }
 
@@ -329,8 +329,8 @@ namespace PointOfSale.Views.Modulos.Logistica
                 GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[10].Value = cantImpuestos;
 
                 TxtSubtotal.Text = importeParcial.ToString();
-                TxtImpuestos.Text = impuestoParcial.ToString();
-                TxtTotal.Text = (importeParcial + impuestoParcial).ToString();
+                TxtImpuestos.Text = impuestoTotal.ToString();
+                TxtTotal.Text = (importeTotal + impuestoTotal).ToString();
 
             }
             catch (Exception ex)
@@ -617,6 +617,61 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             InsertaCxp();
             ActualizaEstadoCompra();
+            ActualizaStock();
+            LimpiaTodo();
+        }
+
+        private void LimpiaTodo()
+        {
+            Reset();
+            LimpiaData();
+            TxtAlmacenId.Text = string.Empty;
+            TxtProvedorId.Text = string.Empty;
+            TxtFacturaProveedor.Text = string.Empty;
+            DpFechaDoc.Value = DateTime.Now;
+            ChkCXP.Checked = false;
+            DpFechaVencimiento.Value = DateTime.Now;
+            TxtDatosProveedor.Text = string.Empty;
+
+            productoController = new ProductoController();
+            compraController = new CompraController();
+            cxpController = new CxpController();
+            cxppController = new CxppController();
+            cambioPrecioController = new CambioPrecioController();
+            success = false;
+            producto = null;
+            proveedor = null;
+            compra = null;
+            comprap = null;
+            cxp = null;
+            cxpp = null;
+            cambioPrecio = null;
+
+            success = false;
+            productoId = string.Empty;
+            descripcion = string.Empty;
+            cantidad = 0;
+            precioCompra = 0;
+            descuento = 0;
+            impuesto1 = 0;
+            impuesto2 = 0;
+            impuesto3 = 0;
+            importeParcial = 0;
+            impuestoParcial = 0;
+            importeTotal = 0;
+            impuestoTotal = 0;
+            cantImpuestos = 0;
+            GridPartidas.Rows.Clear();
+
+        }
+
+        private void ActualizaStock()
+        {
+
+            var partidas = cxppController.TraePartidas(compra.CompraId);
+            InventarioController inventarioController = new InventarioController();
+            foreach (var p in partidas)
+                inventarioController.AfectaInventario(p.ProductoId, p.Cantidad);
         }
 
         private void ActualizaEstadoCompra()
@@ -624,6 +679,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             if (success)
             {
 
+                compra.CxpId = cxp.CxpId;
                 compra.Importe = importeTotal;
                 compra.Impuesto = impuestoTotal;
                 compra.EstadoDocId = "CON";
@@ -664,6 +720,7 @@ namespace PointOfSale.Views.Modulos.Logistica
 
                 if (success)
                 {
+                    Ambiente.UpdateSiguiente("NO_REFEREN_CXP");
                     cxpp = new Cxpp();
                     cxpp.CxpId = cxp.CxpId;
                     cxpp.CompraId = compra.CompraId;
@@ -696,6 +753,21 @@ namespace PointOfSale.Views.Modulos.Logistica
         private void NDesc_Leave(object sender, EventArgs e)
         {
             TxtU1.Focus();
+        }
+
+        private void TxtPrecioCompra_Leave(object sender, EventArgs e)
+        {
+            TxtPrecioCompra.Text = Ambiente.FDinero(TxtPrecioCompra.Text);
+        }
+
+        private void TxtPrecioCaja_Leave(object sender, EventArgs e)
+        {
+            TxtPrecioCaja.Text = Ambiente.FDinero(TxtPrecioCaja.Text);
+        }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

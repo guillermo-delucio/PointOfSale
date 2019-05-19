@@ -796,28 +796,28 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             TxtPrecio1.Text = Ambiente.FDinero(TxtPrecio1.Text);
             TxtU1.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio1.Text);
-            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(TxtPrecio1.Text, GridImpuestos,1);
+            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(TxtPrecio1.Text, GridImpuestos, 1);
         }
 
         private void TxtPrecio2_Leave(object sender, EventArgs e)
         {
             TxtPrecio2.Text = Ambiente.FDinero(TxtPrecio2.Text);
             TxtU2.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio2.Text);
-            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(TxtPrecio2.Text, GridImpuestos,1);
+            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(TxtPrecio2.Text, GridImpuestos, 1);
         }
 
         private void TxtPrecio3_Leave(object sender, EventArgs e)
         {
             TxtPrecio3.Text = Ambiente.FDinero(TxtPrecio3.Text);
             TxtU3.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio3.Text);
-            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(TxtPrecio3.Text, GridImpuestos,1);
+            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(TxtPrecio3.Text, GridImpuestos, 1);
         }
 
         private void TxtPrecio4_Leave(object sender, EventArgs e)
         {
             TxtPrecio4.Text = Ambiente.FDinero(TxtPrecio4.Text);
             TxtU4.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio4.Text);
-            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(TxtPrecio4.Text, GridImpuestos,1);
+            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(TxtPrecio4.Text, GridImpuestos, 1);
         }
 
         private void GridImpuestos_KeyDown(object sender, KeyEventArgs e)
@@ -839,6 +839,16 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             if (e.KeyCode == Keys.Delete)
                 BorraFilaDgv(GridSustancias.CurrentCell.RowIndex, GridSustancias);
+        }
+
+        private void TxtPrecioCompra_Leave(object sender, EventArgs e)
+        {
+            TxtPrecioCompra.Text = Ambiente.FDinero(TxtPrecioCompra.Text);
+        }
+
+        private void TxtPrecioCaja_Leave(object sender, EventArgs e)
+        {
+            TxtPrecioCaja.Text = Ambiente.FDinero(TxtPrecioCaja.Text);
         }
     }
 }

@@ -20,7 +20,6 @@ namespace PointOfSale.Models
         public string EstacionId { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
-        public bool IsDeleted { get; set; }
         public string Datos { get; set; }
 
         public virtual Almacen Almacen { get; set; }

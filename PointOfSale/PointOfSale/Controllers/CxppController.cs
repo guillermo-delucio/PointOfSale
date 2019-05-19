@@ -120,5 +120,21 @@ namespace PointOfSale.Controllers
             }
             return false;
         }
+
+        public ICollection<Comprap> TraePartidas(int Id)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Comprap.Where(x => x.CompraId == Id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
     }
 }
