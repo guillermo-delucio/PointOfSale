@@ -158,8 +158,6 @@ namespace PointOfSale.Controllers
                 return "1.000";
             return string.Format("{0:0.000}", nValor);
         }
-
-
         public static Tuple<string, string> GetRuta()
         {
 
@@ -177,6 +175,67 @@ namespace PointOfSale.Controllers
                 }
             }
             return null;
+        }
+
+        public static int TraeSiguiente(string consecutivoId)
+        {
+
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    var consecutivo = db.Consecutivo.FirstOrDefault(x => x.ConsecutivoId == consecutivoId.Trim());
+                    if (consecutivo != null)
+                    {
+                        return consecutivo.Folio;
+                    }
+                    else
+                    {
+                        consecutivo = new Consecutivo();
+                        consecutivo.ConsecutivoId = consecutivoId;
+                        consecutivo.Folio++;
+                        db.Add(consecutivo);
+                        db.SaveChanges();
+                        return consecutivo.Folio;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@ TraeSiguiente \n" + ex.ToString());
+            }
+            return -1;
+
+        }
+
+        public static int UpdateSiguiente(string consecutivoId)
+        {
+
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    var consecutivo = db.Consecutivo.FirstOrDefault(x => x.ConsecutivoId == consecutivoId.Trim());
+                    if (consecutivo != null)
+                    {
+                        consecutivo.Folio++;
+                        db.Update(consecutivo);
+                        db.SaveChanges();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@ UpdateSiguiente \n" + ex.ToString());
+            }
+            return -1;
+
+        }
+
+        public static string Z(int valor)
+        {
+            return string.Format("{0:00000}", valor);
         }
         #endregion
 
@@ -417,5 +476,7 @@ namespace PointOfSale.Controllers
         }
 
         #endregion
+
+
     }
 }

@@ -24,9 +24,9 @@ namespace PointOfSale.Models
         public string Pais { get; set; }
         public string Telefono { get; set; }
         public string Celular { get; set; }
-        public int? DiasCredito { get; set; }
-        public decimal? LimiteCredito { get; set; }
-        public decimal? Saldo { get; set; }
+        public int DiasCredito { get; set; }
+        public decimal LimiteCredito { get; set; }
+        public decimal Saldo { get; set; }
         public bool IsDeleted { get; set; }
         public string Colonia { get; set; }
         public string Correo { get; set; }

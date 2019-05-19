@@ -28,6 +28,7 @@ namespace PointOfSale.Models
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public string Estado { get; set; }
+        public int CompraId { get; set; }
 
         public virtual Usuario CreatedByNavigation { get; set; }
         public virtual Producto Producto { get; set; }

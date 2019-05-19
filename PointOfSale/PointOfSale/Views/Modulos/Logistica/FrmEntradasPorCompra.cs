@@ -18,9 +18,12 @@ namespace PointOfSale.Views.Modulos.Logistica
         ProductoController productoController;
         CompraController compraController;
         CxpController cxpController;
+        CxppController cxppController;
         CambioPrecioController cambioPrecioController;
 
+
         Producto producto;
+        Proveedor proveedor;
         Compra compra;
         Comprap comprap;
         Cxp cxp;
@@ -38,6 +41,8 @@ namespace PointOfSale.Views.Modulos.Logistica
         decimal impuesto3;
         decimal importeParcial;
         decimal impuestoParcial;
+        decimal importeTotal;
+        decimal impuestoTotal;
         int cantImpuestos;
 
 
@@ -48,6 +53,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             productoController = new ProductoController();
             compraController = new CompraController();
             cxpController = new CxpController();
+            cxppController = new CxppController();
             cambioPrecioController = new CambioPrecioController();
             success = false;
             Reset();
@@ -65,6 +71,8 @@ namespace PointOfSale.Views.Modulos.Logistica
             impuesto3 = 0;
             importeParcial = 0;
             impuestoParcial = 0;
+            importeTotal = 0;
+            impuestoTotal = 0;
             cantImpuestos = 0;
         }
         private void TxtDescuento_Leave(object sender, EventArgs e)
@@ -172,6 +180,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                 {
                     ProductoId = productoId,
                     PrecioCompraViejo = producto.PrecioCompra,
+                    PrecioCompraNuevo = precioCompra,
                     Precio1Viejo = producto.Precio1,
                     Precio2Viejo = producto.Precio2,
                     Precio3Viejo = producto.Precio3,
@@ -180,6 +189,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                     Utilidad2Viejo = producto.Utilidad2,
                     Utilidad3Viejo = producto.Utilidad3,
                     Utilidad4Viejo = producto.Utilidad4,
+                    CompraId = compra.CompraId,
                     CreatedAt = DateTime.Now,
                     CreatedBy = Ambiente.LoggedUser.UsuarioId
                 };
@@ -211,6 +221,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                 cambioPrecio.Utilidad1Nuevo = nMargen2;
                 cambioPrecio.Utilidad1Nuevo = nMargen3;
                 cambioPrecio.Utilidad1Nuevo = nMargen4;
+
 
                 cambioPrecioController.InsertOne(cambioPrecio);
             }
@@ -432,9 +443,10 @@ namespace PointOfSale.Views.Modulos.Logistica
                 {
                     if (form.ShowDialog() == DialogResult.OK)
                     {
-                        TxtProvedorId.Text = form.Proveedor.ProveedorId;
-                        TxtDatosProveedor.Text = form.Proveedor.Negocio + " " + form.Proveedor.Direccion + " " + form.Proveedor.Colonia
-                            + " " + form.Proveedor.Municipio + " " + form.Proveedor.Localidad + " " + form.Proveedor.Estado + " TEL." + form.Proveedor.Telefono;
+                        proveedor = form.Proveedor;
+                        TxtProvedorId.Text = proveedor.ProveedorId;
+                        TxtDatosProveedor.Text = proveedor.Negocio + " " + proveedor.Direccion + " " + proveedor.Colonia
+                            + " " + proveedor.Municipio + " " + proveedor.Localidad + " " + proveedor.Estado + " TEL." + proveedor.Telefono;
                     }
                 }
             }
@@ -599,20 +611,82 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
-            //if (Success)
-            //{
-            //    if (ChkCXP.Checked)
-            //    {
-            //        if (Cxp == null)
-            //        {
-            //            Cxp = new Cxp();
-            //        }
-            //        else
-            //        {
+            InsertaCxp();
+            ActualizaEstadoCompra();
+        }
 
-            //        }
-            //    }
-            //}
+        private void ActualizaEstadoCompra()
+        {
+            if (success)
+            {
+
+                compra.Importe = importeTotal;
+                compra.Impuesto = impuestoTotal;
+                compra.EstadoDocId = "CON";
+
+                success = false;
+                success = compraController.Update(compra);
+
+                if (true)
+                {
+                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[1]);
+                }
+            }
+            else
+
+                Ambiente.Mensaje("Algo salío mal con la insercion de cxp o al cerrar la compra");
+        }
+
+        private void InsertaCxp()
+        {
+            if (ChkCXP.Checked)
+            {
+                cxp = new Cxp();
+                cxp.CompraId = compra.CompraId;
+                cxp.TipoDocId = "CXP";
+                cxp.NoReferencia = Ambiente.TraeSiguiente("NO_REFEREN_CXP");
+                cxp.ProveedorId = TxtProvedorId.Text.Trim().Length == 0 ? "SYS" : TxtProvedorId.Text.Trim();
+                cxp.FechaDocumento = DateTime.Now;
+                cxp.FechaVencimiento = DateTime.Now.AddDays(proveedor.DiasCredito);
+                cxp.FacturaProveedor = TxtFacturaProveedor.Text.Trim().Length == 0 ? "SYS" : TxtFacturaProveedor.Text.Trim();
+                cxp.Importe = importeTotal + impuestoTotal;
+                cxp.Saldo = importeTotal + impuestoTotal;
+                cxp.EstadoDocId = "PEN";
+                cxp.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                cxp.CreatedAt = DateTime.Now;
+
+                success = false;
+                success = cxpController.InsertOne(cxp);
+
+                if (success)
+                {
+                    cxpp = new Cxpp();
+                    cxpp.CxpId = cxp.CxpId;
+                    cxpp.CompraId = compra.CompraId;
+                    cxpp.ProveedorId = proveedor.ProveedorId;
+                    cxpp.CargoAbono = "C";
+                    cxpp.Importe = importeTotal + impuestoTotal;
+                    cxpp.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                    cxpp.CreatedAt = DateTime.Now;
+
+                    success = false;
+                    success = cxppController.InsertOne(cxpp);
+
+                    if (success)
+                    {
+                        cxp.EstadoDocId = "CON";
+                        cxp.Importe = importeTotal + impuestoTotal;
+                        cxp.Saldo = importeTotal + impuestoTotal;
+
+                        success = false;
+                        success = cxpController.Update(cxp);
+                    }
+                }
+
+
+
+
+            }
         }
 
         private void NDesc_Leave(object sender, EventArgs e)

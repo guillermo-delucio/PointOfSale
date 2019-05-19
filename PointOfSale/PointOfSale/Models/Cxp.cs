@@ -24,7 +24,6 @@ namespace PointOfSale.Models
         public string EstadoDocId { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
-        public bool IsDeleted { get; set; }
 
         public virtual EstadoDoc EstadoDoc { get; set; }
         public virtual Proveedor Proveedor { get; set; }

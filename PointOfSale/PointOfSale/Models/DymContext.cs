@@ -79,8 +79,6 @@ namespace PointOfSale.Models
             {
                 entity.HasKey(e => e.CambioPrecioId);
 
-                entity.Property(e => e.CambioPrecioId).ValueGeneratedNever();
-
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
                 entity.Property(e => e.CreatedBy)
@@ -327,8 +325,6 @@ namespace PointOfSale.Models
                 entity.Property(e => e.ConsecutivoId)
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
-
-                entity.Property(e => e.Consecutivo1).HasColumnName("Consecutivo");
             });
 
             modelBuilder.Entity<Cp>(entity =>

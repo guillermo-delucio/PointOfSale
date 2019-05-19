@@ -149,6 +149,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\CxpController.cs" />
+    <Compile Include="Controllers\CxppController.cs" />
     <Compile Include="Controllers\EstacionController.cs" />
     <Compile Include="Controllers\EvironmentController\Ambiente.cs" />
     <Compile Include="Controllers\EvironmentController\Inicializador.cs" />

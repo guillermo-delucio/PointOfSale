@@ -216,6 +216,15 @@ namespace PointOfSale.Controllers
                         db.Add(tipoDocNc);
                     }
 
+                    var tipoDocCxp = db.TipoDoc.FirstOrDefault(x => x.TipoDocId == "CXP");
+                    if (tipoDocCxp == null)
+                    {
+                        tipoDocCxp = new TipoDoc();
+                        tipoDocCxp.TipoDocId = "CXP";
+                        tipoDocCxp.Descripcion = "CUENTA POR PAGAR";
+                        db.Add(tipoDocCxp);
+                    }
+
 
                     db.SaveChanges();
                 }
