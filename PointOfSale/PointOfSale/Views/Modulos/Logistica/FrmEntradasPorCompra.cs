@@ -71,8 +71,6 @@ namespace PointOfSale.Views.Modulos.Logistica
             impuesto3 = 0;
             importeParcial = 0;
             impuestoParcial = 0;
-            importeTotal = 0;
-            impuestoTotal = 0;
             cantImpuestos = 0;
         }
         private void TxtDescuento_Leave(object sender, EventArgs e)
@@ -273,6 +271,8 @@ namespace PointOfSale.Views.Modulos.Logistica
                 cantImpuestos = GridImpuestos.RowCount;
 
                 importeParcial = cantidad * precioCompra;
+                importeTotal += importeParcial;
+
 
                 if (NDesc.Value > 0)
                     importeParcial -= importeParcial * (descuento / 100);
@@ -281,22 +281,26 @@ namespace PointOfSale.Views.Modulos.Logistica
                 {
                     impuesto1 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[0].Cells[0].Value.ToString());
                     impuestoParcial += importeParcial * impuesto1;
+
                 }
                 else if (GridImpuestos.RowCount == 2)
                 {
                     impuesto1 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[0].Cells[0].Value.ToString());
                     impuesto2 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[1].Cells[0].Value.ToString());
+
                     impuestoParcial += importeParcial * impuesto1;
                     impuestoParcial += importeParcial * impuesto2;
+                    impuestoTotal += impuestoParcial;
                 }
                 else if (GridImpuestos.RowCount == 3)
                 {
                     impuesto1 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[0].Cells[0].Value.ToString());
                     impuesto2 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[1].Cells[0].Value.ToString());
                     impuesto3 = Ambiente.GetTasaImpuesto(GridImpuestos.Rows[2].Cells[0].Value.ToString());
-                    impuestoParcial += importeParcial * impuesto1;
-                    impuestoParcial += importeParcial * impuesto2;
-                    impuestoParcial += importeParcial * impuesto3;
+                    impuestoParcial+ = importeParcial * impuesto1;
+                    impuestoParcial+ = importeParcial * impuesto2;
+                    impuestoParcial+ = importeParcial * impuesto3;
+                    impuestoTotal += impuestoParcial;
                 }
 
                 GridPartidas.Rows.Add();
