@@ -184,7 +184,7 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.FormaPago)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(2)
                     .HasDefaultValueSql("(N'PUE')");
 
                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
@@ -195,7 +195,7 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.MetodoPago)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(4)
                     .HasDefaultValueSql("(N'01')");
 
                 entity.Property(e => e.Municipio).HasMaxLength(50);
@@ -218,6 +218,18 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Saldo).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.Telefono).HasMaxLength(50);
+
+                entity.HasOne(d => d.FormaPagoNavigation)
+                    .WithMany(p => p.Cliente)
+                    .HasForeignKey(d => d.FormaPago)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cliente_FormaPago");
+
+                entity.HasOne(d => d.MetodoPagoNavigation)
+                    .WithMany(p => p.Cliente)
+                    .HasForeignKey(d => d.MetodoPago)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cliente_MetodoPago");
             });
 
             modelBuilder.Entity<Compra>(entity =>
@@ -291,6 +303,18 @@ namespace PointOfSale.Models
                     .HasForeignKey(d => d.EstacionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Compra_Estacion");
+
+                entity.HasOne(d => d.EstadoDoc)
+                    .WithMany(p => p.Compra)
+                    .HasForeignKey(d => d.EstadoDocId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Compra_EstadoDoc");
+
+                entity.HasOne(d => d.TipoDoc)
+                    .WithMany(p => p.Compra)
+                    .HasForeignKey(d => d.TipoDocId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Compra_TipoDoc");
             });
 
             modelBuilder.Entity<Comprap>(entity =>
@@ -318,6 +342,12 @@ namespace PointOfSale.Models
                 entity.Property(e => e.ProductoId)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.HasOne(d => d.Compra)
+                    .WithMany(p => p.Comprap)
+                    .HasForeignKey(d => d.CompraId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Comprap_Compra");
             });
 
             modelBuilder.Entity<Consecutivo>(entity =>
@@ -424,7 +454,7 @@ namespace PointOfSale.Models
                     .WithMany(p => p.Cxpp)
                     .HasForeignKey(d => d.CxpId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PCXP_CXP");
+                    .HasConstraintName("FK_Cxpp_Cxp");
 
                 entity.HasOne(d => d.Proveedor)
                     .WithMany(p => p.Cxpp)
@@ -501,7 +531,9 @@ namespace PointOfSale.Models
                     .HasMaxLength(2)
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Descripcion).HasMaxLength(50);
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Impuesto>(entity =>
@@ -551,7 +583,9 @@ namespace PointOfSale.Models
                     .HasMaxLength(4)
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Descripcion).HasMaxLength(50);
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Municipio>(entity =>

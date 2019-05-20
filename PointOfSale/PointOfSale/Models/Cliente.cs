@@ -27,5 +27,8 @@ namespace PointOfSale.Models
         public string MetodoPago { get; set; }
         public string FormaPago { get; set; }
         public string PrecioDefault { get; set; }
+
+        public virtual FormaPago FormaPagoNavigation { get; set; }
+        public virtual MetodoPago MetodoPagoNavigation { get; set; }
     }
 }

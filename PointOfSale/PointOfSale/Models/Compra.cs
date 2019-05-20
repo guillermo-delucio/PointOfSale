@@ -5,6 +5,11 @@ namespace PointOfSale.Models
 {
     public partial class Compra
     {
+        public Compra()
+        {
+            Comprap = new HashSet<Comprap>();
+        }
+
         public int CompraId { get; set; }
         public DateTime FechaDocumento { get; set; }
         public DateTime FechaVencimiento { get; set; }
@@ -25,5 +30,8 @@ namespace PointOfSale.Models
         public virtual Almacen Almacen { get; set; }
         public virtual Cxp Cxp { get; set; }
         public virtual Estacion Estacion { get; set; }
+        public virtual EstadoDoc EstadoDoc { get; set; }
+        public virtual TipoDoc TipoDoc { get; set; }
+        public virtual ICollection<Comprap> Comprap { get; set; }
     }
 }

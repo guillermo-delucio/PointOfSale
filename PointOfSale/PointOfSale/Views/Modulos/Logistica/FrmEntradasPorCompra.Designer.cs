@@ -109,7 +109,6 @@
             this.BtnAceptar = new System.Windows.Forms.Button();
             this.GridImpuestos = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BtnImagen = new System.Windows.Forms.Button();
             this.TxtRutaImg = new System.Windows.Forms.TextBox();
             this.PbxImagen = new System.Windows.Forms.PictureBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -598,12 +597,15 @@
             // 
             this.TxtAlmacenId.BackColor = System.Drawing.SystemColors.Window;
             this.TxtAlmacenId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtAlmacenId.Enabled = false;
             this.TxtAlmacenId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtAlmacenId.ForeColor = System.Drawing.Color.Black;
             this.TxtAlmacenId.Location = new System.Drawing.Point(6, 45);
             this.TxtAlmacenId.Name = "TxtAlmacenId";
             this.TxtAlmacenId.Size = new System.Drawing.Size(94, 24);
             this.TxtAlmacenId.TabIndex = 0;
+            this.TxtAlmacenId.TabStop = false;
+            this.TxtAlmacenId.Text = "1";
             this.toolTip1.SetToolTip(this.TxtAlmacenId, "Almacen donde de agregarán las existencias");
             this.TxtAlmacenId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtAlmacenId_KeyDown);
             // 
@@ -637,9 +639,10 @@
             this.TxtSubtotal.BackColor = System.Drawing.SystemColors.Window;
             this.TxtSubtotal.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtSubtotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtSubtotal.ForeColor = System.Drawing.Color.Black;
+            this.TxtSubtotal.ForeColor = System.Drawing.Color.DimGray;
             this.TxtSubtotal.Location = new System.Drawing.Point(184, 9);
             this.TxtSubtotal.Name = "TxtSubtotal";
+            this.TxtSubtotal.ReadOnly = true;
             this.TxtSubtotal.Size = new System.Drawing.Size(118, 24);
             this.TxtSubtotal.TabIndex = 227;
             this.toolTip1.SetToolTip(this.TxtSubtotal, "Almacen donde de agregarán las existencias");
@@ -649,9 +652,10 @@
             this.TxtImpuestos.BackColor = System.Drawing.SystemColors.Window;
             this.TxtImpuestos.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtImpuestos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtImpuestos.ForeColor = System.Drawing.Color.Black;
+            this.TxtImpuestos.ForeColor = System.Drawing.Color.DimGray;
             this.TxtImpuestos.Location = new System.Drawing.Point(426, 9);
             this.TxtImpuestos.Name = "TxtImpuestos";
+            this.TxtImpuestos.ReadOnly = true;
             this.TxtImpuestos.Size = new System.Drawing.Size(118, 24);
             this.TxtImpuestos.TabIndex = 229;
             this.toolTip1.SetToolTip(this.TxtImpuestos, "Almacen donde de agregarán las existencias");
@@ -661,9 +665,10 @@
             this.TxtTotal.BackColor = System.Drawing.SystemColors.Window;
             this.TxtTotal.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtTotal.ForeColor = System.Drawing.Color.Black;
+            this.TxtTotal.ForeColor = System.Drawing.Color.DimGray;
             this.TxtTotal.Location = new System.Drawing.Point(639, 10);
             this.TxtTotal.Name = "TxtTotal";
+            this.TxtTotal.ReadOnly = true;
             this.TxtTotal.Size = new System.Drawing.Size(118, 24);
             this.TxtTotal.TabIndex = 231;
             this.toolTip1.SetToolTip(this.TxtTotal, "Almacen donde de agregarán las existencias");
@@ -1015,15 +1020,6 @@
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
-            // BtnImagen
-            // 
-            this.BtnImagen.Location = new System.Drawing.Point(984, 301);
-            this.BtnImagen.Name = "BtnImagen";
-            this.BtnImagen.Size = new System.Drawing.Size(32, 26);
-            this.BtnImagen.TabIndex = 248;
-            this.BtnImagen.Text = "- - -";
-            this.BtnImagen.UseVisualStyleBackColor = true;
-            // 
             // TxtRutaImg
             // 
             this.TxtRutaImg.BackColor = System.Drawing.SystemColors.Control;
@@ -1127,7 +1123,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1023, 566);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.BtnImagen);
             this.Controls.Add(this.TxtRutaImg);
             this.Controls.Add(this.PbxImagen);
             this.Controls.Add(this.GridImpuestos);
@@ -1218,7 +1213,6 @@
         private System.Windows.Forms.Button BtnAceptar;
         private System.Windows.Forms.DataGridView GridImpuestos;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.Button BtnImagen;
         private System.Windows.Forms.TextBox TxtRutaImg;
         private System.Windows.Forms.PictureBox PbxImagen;
         private System.Windows.Forms.Label label7;

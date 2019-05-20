@@ -18,5 +18,7 @@ namespace PointOfSale.Models
         public decimal Impuestos { get; set; }
         public decimal Importe { get; set; }
         public int CantImpuestos { get; set; }
+
+        public virtual Compra Compra { get; set; }
     }
 }

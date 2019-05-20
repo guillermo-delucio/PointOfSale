@@ -82,6 +82,9 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
+            if (producto == null || proveedor == null)
+                return;
+
             InsertaGrid();
             InsertaData();
             InsertaCambioPrecio();
@@ -172,6 +175,9 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         private void InsertaCambioPrecio()
         {
+            if (producto == null)
+                return;
+
             if (producto.PrecioCompra != precioCompra)
             {
                 cambioPrecio = new CambiosPrecio
@@ -245,7 +251,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             TxtPrecioS2.Text = string.Empty;
             TxtPrecioS3.Text = string.Empty;
             TxtPrecioS4.Text = string.Empty;
-            TxtRutaImg.Text = producto.RutaImg;
+            TxtRutaImg.Text = string.Empty;
             PbxImagen.Image = null;
             NDesc.Value = 0;
             NCantidad.Value = 1;
@@ -352,7 +358,12 @@ namespace PointOfSale.Views.Modulos.Logistica
                 compra.ProveedorId = TxtProvedorId.Text.Trim().Length == 0 ? "SYS" : TxtProvedorId.Text.Trim();
                 compra.FacturaProveedor = TxtFacturaProveedor.Text.Trim().Length == 0 ? "SYS" : TxtFacturaProveedor.Text.Trim();
                 compra.FechaDocumento = DpFechaDoc.Value;
-                compra.FechaVencimiento = DpFechaVencimiento.Value;
+
+                if (DpFechaVencimiento.Value.Date == DateTime.Now.Date)
+                    compra.FechaVencimiento = DpFechaVencimiento.Value.AddDays(proveedor.DiasCredito);
+                else
+                    compra.FechaVencimiento = DpFechaVencimiento.Value;
+
                 compra.EsCxp = ChkCXP.Checked;
                 compra.Datos = TxtDatosProveedor.Text.Trim().Length == 0 ? "SYS" : TxtDatosProveedor.Text.Trim();
                 compra.TipoDocId = "COM";
@@ -492,10 +503,10 @@ namespace PointOfSale.Views.Modulos.Logistica
             TxtPrecio3.Text = producto.Precio3.ToString();
             TxtPrecio4.Text = producto.Precio4.ToString();
             LlenaGridImpuestos(producto.ProductoImpuesto);
-            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(producto.Precio1.ToString(), producto.ProductoImpuesto);
-            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(producto.Precio2.ToString(), producto.ProductoImpuesto);
-            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(producto.Precio3.ToString(), producto.ProductoImpuesto);
-            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(producto.Precio4.ToString(), producto.ProductoImpuesto);
+            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(TxtPrecio1.Text, GridImpuestos, 0);
+            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(TxtPrecio2.Text, GridImpuestos, 0);
+            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(TxtPrecio3.Text, GridImpuestos, 0);
+            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(TxtPrecio4.Text, GridImpuestos, 0);
             TxtRutaImg.Text = producto.RutaImg;
             //GridExistencias.DataSource = producto.ProductoAlmacen.Select(x => new { x.AlmacenId, x.ExistenciaId }).ToList();
             PbxImagen.Image = GetImg(producto.RutaImg);
@@ -615,6 +626,9 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
+            if (compra == null)
+                return;
+
             InsertaCxp();
             ActualizaEstadoCompra();
             ActualizaStock();
@@ -628,6 +642,9 @@ namespace PointOfSale.Views.Modulos.Logistica
             TxtAlmacenId.Text = string.Empty;
             TxtProvedorId.Text = string.Empty;
             TxtFacturaProveedor.Text = string.Empty;
+            TxtSubtotal.Text = string.Empty;
+            TxtTotal.Text = string.Empty;
+            TxtImpuestos.Text = string.Empty;
             DpFechaDoc.Value = DateTime.Now;
             ChkCXP.Checked = false;
             DpFechaVencimiento.Value = DateTime.Now;
@@ -678,8 +695,11 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             if (success)
             {
+                if (cxp != null)
+                    compra.CxpId = cxp.CxpId;
+                else
+                    compra.CxpId = null;
 
-                compra.CxpId = cxp.CxpId;
                 compra.Importe = importeTotal;
                 compra.Impuesto = impuestoTotal;
                 compra.EstadoDocId = "CON";
@@ -707,7 +727,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                 cxp.NoReferencia = Ambiente.TraeSiguiente("NO_REFEREN_CXP");
                 cxp.ProveedorId = TxtProvedorId.Text.Trim().Length == 0 ? "SYS" : TxtProvedorId.Text.Trim();
                 cxp.FechaDocumento = DateTime.Now;
-                cxp.FechaVencimiento = DateTime.Now.AddDays(proveedor.DiasCredito);
+                cxp.FechaVencimiento = compra.FechaVencimiento;
                 cxp.FacturaProveedor = TxtFacturaProveedor.Text.Trim().Length == 0 ? "SYS" : TxtFacturaProveedor.Text.Trim();
                 cxp.Importe = importeTotal + impuestoTotal;
                 cxp.Saldo = importeTotal + impuestoTotal;
