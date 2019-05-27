@@ -19,9 +19,12 @@ namespace PointOfSale.Controllers
         private int Catalogo;
         private int Fila;
         private int Columna;
+        private string tipo_per;
         private FileInfo fi;
         private List<string> Errores;
         private List<Producto> Productos;
+        private List<Cliente> Clientes;
+        private List<Proveedor> Proveedores;
         private List<ClaveSat> ClavesSat;
         private List<Sustancia> Sustancias;
         private List<Laboratorio> Laboratorios;
@@ -34,12 +37,14 @@ namespace PointOfSale.Controllers
 
 
 
+
         public ImportaExcelController(int catalogo)
         {
             Fila = 0;
             Columna = 0;
             Catalogo = catalogo;
             Ruta = string.Empty;
+            tipo_per = string.Empty;
             Errores = new List<string>();
             ClavesSat = new List<ClaveSat>();
             Productos = new List<Producto>();
@@ -48,6 +53,8 @@ namespace PointOfSale.Controllers
             UnidadMedidas = new List<UnidadMedida>();
             Presentaciones = new List<Presentacion>();
             Categorias = new List<Categoria>();
+            Clientes = new List<Cliente>();
+            Proveedores = new List<Proveedor>();
             ProductoSustancias = new List<ProductoSustancia>();
             ProductoImpuestos = new List<ProductoImpuesto>();
 
@@ -951,12 +958,279 @@ namespace PointOfSale.Controllers
         }
         private void ImportaProveedores()
         {
-            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
+            try
+            {
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        Fila = row;
+                        var proveedor = new Proveedor();
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    //tp_per
+                                    tipo_per = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 2:
+                                    //ClienteId
+                                    proveedor.ProveedorId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 3:
+                                    //RFC
+                                    proveedor.Rfc = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 4:
+                                    //Licencia
+                                    //if (workSheet.Cells[row, col].Text.Trim().Equals("VERDADERO"))
+                                    //    proveedor.TieneLicencia = true;
+                                    //else
+                                    //    proveedor.TieneLicencia = false;
+
+                                    break;
+                                case 5:
+                                    //Negocio
+                                    proveedor.Negocio = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 6:
+                                    //RazonSocial
+                                    proveedor.RazonSocial = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 7:
+                                    //Contancto
+                                    proveedor.Contancto = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 8:
+                                    //Direccion
+                                    proveedor.Direccion = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 9:
+                                    //CP
+                                    proveedor.Cp = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 10:
+                                    //Municipio
+                                    proveedor.Municipio = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 11:
+                                    //Localidad
+                                    proveedor.Localidad = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 12:
+                                    //Estado
+                                    proveedor.Estado = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 13:
+                                    //Pais
+                                    proveedor.Pais = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 14:
+                                    //Telefono
+                                    proveedor.Telefono = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 15:
+                                    //Celular
+                                    proveedor.Celular = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 16:
+                                    //Colonia
+                                    proveedor.Colonia = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 17:
+                                    //Correo
+                                    proveedor.Correo = workSheet.Cells[row, col].Text.Trim();
+                                    proveedor.LimiteCredito = 0;
+                                    proveedor.DiasCredito = 0;
+                                    proveedor.IsDeleted = false;
+                                    proveedor.Saldo = 0;
+
+                                    if (tipo_per.Equals("P"))
+                                        Proveedores.Add(proveedor);
+                                    break;
+                                default:
+                                    Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    var proveedorController = new ProveedorController();
+
+                    if (proveedorController.InsertRange(Proveedores))
+                        Ambiente.Mensaje(Proveedores.Count + " Registros importados");
+                    else
+                        Ambiente.Mensaje("Algo salio mal :(");
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
+            }
         }
 
         private void ImportaClientes()
         {
-            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-5]);
+            try
+            {
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        Fila = row;
+                        var cliente = new Cliente();
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    //tp_per
+                                    tipo_per = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 2:
+                                    //ClienteId
+                                    cliente.ClienteId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 3:
+                                    //RFC
+                                    cliente.Rfc = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 4:
+                                    //Licencia
+                                    if (workSheet.Cells[row, col].Text.Trim().Equals("VERDADERO"))
+                                        cliente.TieneLicencia = true;
+                                    else
+                                        cliente.TieneLicencia = false;
+
+                                    break;
+                                case 5:
+                                    //Negocio
+                                    cliente.Negocio = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 6:
+                                    //RazonSocial
+                                    cliente.RazonSocial = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 7:
+                                    //Contancto
+                                    cliente.Contancto = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 8:
+                                    //Direccion
+                                    cliente.Direccion = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 9:
+                                    //CP
+                                    cliente.Cp = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 10:
+                                    //Municipio
+                                    cliente.Municipio = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 11:
+                                    //Localidad
+                                    cliente.Localidad = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 12:
+                                    //Estado
+                                    cliente.Estado = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 13:
+                                    //Pais
+                                    cliente.Pais = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 14:
+                                    //Telefono
+                                    cliente.Telefono = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 15:
+                                    //Celular
+                                    cliente.Celular = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 16:
+                                    //Colonia
+                                    cliente.Colonia = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 17:
+                                    //Correo
+                                    cliente.Correo = workSheet.Cells[row, col].Text.Trim();
+                                    cliente.LimiteCredito = 0;
+                                    cliente.DiasCredito = 0;
+                                    cliente.IsDeleted = false;
+                                    cliente.MetodoPago = "PUE";
+                                    cliente.PrecioDefault = "PRECIO 1";
+                                    cliente.FormaPago = "01";
+                                    cliente.Saldo = 0;
+
+                                    if (tipo_per.Equals("C"))
+                                        Clientes.Add(cliente);
+                                    break;
+                                default:
+                                    Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    var clienteController = new ClienteController();
+
+                    if (clienteController.InsertRange(Clientes))
+                        Ambiente.Mensaje(Clientes.Count + " Registros importados");
+                    else
+                        Ambiente.Mensaje("Algo salio mal :(");
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
+            }
         }
     }
 }

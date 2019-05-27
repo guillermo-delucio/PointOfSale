@@ -36,6 +36,8 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnCancelar
@@ -66,7 +68,7 @@
             this.TxtNombre.ForeColor = System.Drawing.Color.Black;
             this.TxtNombre.Location = new System.Drawing.Point(11, 131);
             this.TxtNombre.Name = "TxtNombre";
-            this.TxtNombre.Size = new System.Drawing.Size(297, 24);
+            this.TxtNombre.Size = new System.Drawing.Size(148, 24);
             this.TxtNombre.TabIndex = 124;
             // 
             // label1
@@ -76,9 +78,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label1.Location = new System.Drawing.Point(12, 110);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 18);
+            this.label1.Size = new System.Drawing.Size(81, 18);
             this.label1.TabIndex = 125;
-            this.label1.Text = "TASA";
+            this.label1.Text = "TASA / 100";
             // 
             // TxtClave
             // 
@@ -90,7 +92,6 @@
             this.TxtClave.Name = "TxtClave";
             this.TxtClave.Size = new System.Drawing.Size(297, 24);
             this.TxtClave.TabIndex = 122;
-            
             this.TxtClave.Leave += new System.EventHandler(this.TxtClave_Leave);
             // 
             // lblTitulo
@@ -125,11 +126,35 @@
             this.label6.TabIndex = 128;
             this.label6.Text = "♥CLAVE";
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.Black;
+            this.textBox1.Location = new System.Drawing.Point(164, 131);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(148, 24);
+            this.textBox1.TabIndex = 129;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label2.Location = new System.Drawing.Point(165, 110);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 18);
+            this.label2.TabIndex = 130;
+            this.label2.Text = "CLAVE SAT";
+            // 
             // FrmImpuestos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(320, 232);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnAceptar);
@@ -157,5 +182,7 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

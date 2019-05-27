@@ -36,6 +36,7 @@ namespace PointOfSale.Controllers
                     catch (Exception ex)
                     {
                         //hacemos rollback si hay excepción
+                        ex.ToString();
                         transaction.Rollback();
 
                     }

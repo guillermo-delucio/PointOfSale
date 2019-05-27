@@ -70,10 +70,12 @@ namespace PointOfSale.Controllers
 
         public bool InsertRange(List<Cliente> lista)
         {
+         
             try
             {
                 using (var db = new DymContext())
                 {
+
                     db.AddRange(lista);
                     db.SaveChanges();
                     return true;

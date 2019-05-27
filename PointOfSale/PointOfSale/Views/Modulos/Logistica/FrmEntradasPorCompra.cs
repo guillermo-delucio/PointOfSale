@@ -789,5 +789,30 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             Close();
         }
+
+        private void TxtBuscarImpuesto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                using (var form = new FrmBusqueda(TxtBuscarImpuesto.Text, (int)Ambiente.TipoBusqueda.Impuestos))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        //InsertaImpuesto(impuesto);
+                    }
+                }
+            }
+        }
+
+        private void InsertaImpuesto(Impuesto impuesto)
+        {
+            for (int i = 0; i < GridImpuestos.RowCount; i++)
+            {
+                if (true)
+                {
+
+                }
+            }
+        }
     }
 }

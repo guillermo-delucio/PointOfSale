@@ -16,6 +16,22 @@ namespace PointOfSale.Models
         }
 
         public virtual DbSet<Almacen> Almacen { get; set; }
+        public virtual DbSet<CAduana> CAduana { get; set; }
+        public virtual DbSet<CCaducidadfolios> CCaducidadfolios { get; set; }
+        public virtual DbSet<CClaveprodserv> CClaveprodserv { get; set; }
+        public virtual DbSet<CClaveunidad> CClaveunidad { get; set; }
+        public virtual DbSet<CFormapago> CFormapago { get; set; }
+        public virtual DbSet<CImpuesto> CImpuesto { get; set; }
+        public virtual DbSet<CMetodopago> CMetodopago { get; set; }
+        public virtual DbSet<CMoneda> CMoneda { get; set; }
+        public virtual DbSet<CNumpedimentoaduana> CNumpedimentoaduana { get; set; }
+        public virtual DbSet<CPatenteaduanal> CPatenteaduanal { get; set; }
+        public virtual DbSet<CRegimenfiscal> CRegimenfiscal { get; set; }
+        public virtual DbSet<CTasaocuota> CTasaocuota { get; set; }
+        public virtual DbSet<CTipodecomprobante> CTipodecomprobante { get; set; }
+        public virtual DbSet<CTipofactor> CTipofactor { get; set; }
+        public virtual DbSet<CTiporelacion> CTiporelacion { get; set; }
+        public virtual DbSet<CUsocfdi> CUsocfdi { get; set; }
         public virtual DbSet<CambiosPrecio> CambiosPrecio { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<ClaveSat> ClaveSat { get; set; }
@@ -24,8 +40,11 @@ namespace PointOfSale.Models
         public virtual DbSet<Comprap> Comprap { get; set; }
         public virtual DbSet<Consecutivo> Consecutivo { get; set; }
         public virtual DbSet<Cp> Cp { get; set; }
+        public virtual DbSet<Cxc> Cxc { get; set; }
+        public virtual DbSet<Cxcp> Cxcp { get; set; }
         public virtual DbSet<Cxp> Cxp { get; set; }
         public virtual DbSet<Cxpp> Cxpp { get; set; }
+        public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<Estacion> Estacion { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<EstadoDoc> EstadoDoc { get; set; }
@@ -45,11 +64,14 @@ namespace PointOfSale.Models
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<RolePermiso> RolePermiso { get; set; }
+        public virtual DbSet<Serie> Serie { get; set; }
         public virtual DbSet<Sustancia> Sustancia { get; set; }
         public virtual DbSet<TipoDoc> TipoDoc { get; set; }
         public virtual DbSet<UnidadMedida> UnidadMedida { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<UsuarioRole> UsuarioRole { get; set; }
+        public virtual DbSet<Venta> Venta { get; set; }
+        public virtual DbSet<Ventap> Ventap { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -73,6 +95,402 @@ namespace PointOfSale.Models
                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
                 entity.Property(e => e.Nombre).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<CAduana>(entity =>
+            {
+                entity.ToTable("C_Aduana");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CAduana1)
+                    .HasColumnName("c_Aduana")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Descripción).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CCaducidadfolios>(entity =>
+            {
+                entity.ToTable("C_Caducidadfolios");
+
+                entity.Property(e => e.DiasCaducidad).HasColumnName("diasCaducidad");
+
+                entity.Property(e => e.PorcentajeCaducidad).HasColumnName("porcentajeCaducidad");
+            });
+
+            modelBuilder.Entity<CClaveprodserv>(entity =>
+            {
+                entity.ToTable("C_Claveprodserv");
+
+                entity.HasIndex(e => e.Descripción)
+                    .HasName("IX_C_Claveprodserv_1");
+
+                entity.HasIndex(e => e.PalabrasSimilares)
+                    .HasName("IX_C_Claveprodserv");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CClaveProdServ1)
+                    .HasColumnName("c_ClaveProdServ")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ComplementoQueDebeIncluir)
+                    .HasColumnName("Complemento que debe incluir")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripción)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaFinVigencia)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaInicioVigencia)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IncluirIepsTrasladado)
+                    .HasColumnName("Incluir IEPS trasladado")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IncluirIvaTrasladado)
+                    .HasColumnName("Incluir IVA trasladado")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PalabrasSimilares)
+                    .HasColumnName("Palabras similares")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<CClaveunidad>(entity =>
+            {
+                entity.ToTable("C_Claveunidad");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CClaveUnidad1)
+                    .HasColumnName("c_ClaveUnidad")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripción)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Fechadefindevigencia)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Fechadeiniciodevigencia)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nota)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Símbolo)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<CFormapago>(entity =>
+            {
+                entity.ToTable("C_Formapago");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Bancarizado).HasMaxLength(255);
+
+                entity.Property(e => e.CFormaPago1)
+                    .HasColumnName("c_FormaPago")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.CuentaDeBenenficiario)
+                    .HasColumnName("Cuenta de Benenficiario")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.CuentaOrdenante)
+                    .HasColumnName("Cuenta Ordenante")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Descripción).HasMaxLength(255);
+
+                entity.Property(e => e.NombreDelBancoEmisorDeLaCuentaOrdenanteEnCasoDeExtran)
+                    .HasColumnName("Nombre del Banco emisor de la cuenta ordenante en caso de extran")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.NúmeroDeOperación)
+                    .HasColumnName("Número de operación")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.PatrónParaCuentaBeneficiaria)
+                    .HasColumnName("Patrón para cuenta Beneficiaria")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.PatrónParaCuentaOrdenante)
+                    .HasColumnName("Patrón para cuenta ordenante")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.RfcDelEmisorCuentaDeBeneficiario)
+                    .HasColumnName("RFC del Emisor Cuenta de Beneficiario")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.RfcDelEmisorDeLaCuentaOrdenante)
+                    .HasColumnName("RFC del Emisor de la cuenta ordenante")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.TipoCadenaPago)
+                    .HasColumnName("Tipo Cadena Pago")
+                    .HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CImpuesto>(entity =>
+            {
+                entity.ToTable("C_Impuesto");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CImpuesto1)
+                    .HasColumnName("c_Impuesto")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Descripción).HasMaxLength(255);
+
+                entity.Property(e => e.EntidadEnLaQueAplica)
+                    .HasColumnName("Entidad en la que aplica")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.LocalOFederal)
+                    .HasColumnName("Local o federal")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Retención).HasMaxLength(255);
+
+                entity.Property(e => e.Traslado).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CMetodopago>(entity =>
+            {
+                entity.ToTable("C_Metodopago");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CMetodoPago1)
+                    .HasColumnName("c_MetodoPago")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Descripción).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CMoneda>(entity =>
+            {
+                entity.ToTable("C_Moneda");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CMoneda1)
+                    .HasColumnName("c_Moneda")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Decimales).HasMaxLength(255);
+
+                entity.Property(e => e.Descripción).HasMaxLength(255);
+
+                entity.Property(e => e.PorcentajeVariación)
+                    .HasColumnName("Porcentaje variación")
+                    .HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CNumpedimentoaduana>(entity =>
+            {
+                entity.ToTable("C_Numpedimentoaduana");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CAduana)
+                    .HasColumnName("c_Aduana")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Cantidad).HasMaxLength(255);
+
+                entity.Property(e => e.Ejercicio).HasMaxLength(255);
+
+                entity.Property(e => e.FechaFinDeVigencia)
+                    .HasColumnName("Fecha fin de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.FechaInicioDeVigencia)
+                    .HasColumnName("Fecha inicio de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Patente).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CPatenteaduanal>(entity =>
+            {
+                entity.ToTable("C_Patenteaduanal");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CPatenteAduanal1)
+                    .HasColumnName("C_PatenteAduanal")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.FinDeVigencia)
+                    .HasColumnName("Fin de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.InicioDeVigencia)
+                    .HasColumnName("Inicio de vigencia")
+                    .HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CRegimenfiscal>(entity =>
+            {
+                entity.ToTable("C_Regimenfiscal");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CRegimenFiscal1)
+                    .HasColumnName("c_RegimenFiscal")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Descripción).HasMaxLength(255);
+
+                entity.Property(e => e.FechaDeFinDeVigencia)
+                    .HasColumnName("Fecha de fin de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.FechaDeInicioDeVigencia)
+                    .HasColumnName("Fecha de inicio de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Física).HasMaxLength(255);
+
+                entity.Property(e => e.Moral).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CTasaocuota>(entity =>
+            {
+                entity.ToTable("C_Tasaocuota");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Factor).HasMaxLength(255);
+
+                entity.Property(e => e.FechaFinDeVigencia)
+                    .HasColumnName("Fecha fin de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.FechaInicioDeVigencia)
+                    .HasColumnName("Fecha inicio de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Impuesto).HasMaxLength(255);
+
+                entity.Property(e => e.RangoOfijo)
+                    .HasColumnName("RangoOFijo")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Retención).HasMaxLength(255);
+
+                entity.Property(e => e.Traslado).HasMaxLength(255);
+
+                entity.Property(e => e.ValorMáximo)
+                    .HasColumnName("Valor máximo")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.ValorMínimo)
+                    .HasColumnName("Valor mínimo")
+                    .HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CTipodecomprobante>(entity =>
+            {
+                entity.ToTable("C_Tipodecomprobante");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CTipoDeComprobante1)
+                    .HasColumnName("c_TipoDeComprobante")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.D).HasMaxLength(255);
+
+                entity.Property(e => e.Descripción).HasMaxLength(255);
+
+                entity.Property(e => e.FechaFinDeVigencia)
+                    .HasColumnName("Fecha fin de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.FechaInicioDeVigencia)
+                    .HasColumnName("Fecha inicio de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.ValorMáximo)
+                    .HasColumnName("Valor máximo")
+                    .HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CTipofactor>(entity =>
+            {
+                entity.ToTable("C_Tipofactor");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CTipoFactor1)
+                    .HasColumnName("c_TipoFactor")
+                    .HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CTiporelacion>(entity =>
+            {
+                entity.ToTable("C_Tiporelacion");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CTipoRelacion1)
+                    .HasColumnName("c_TipoRelacion")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Descripción).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<CUsocfdi>(entity =>
+            {
+                entity.ToTable("C_Usocfdi");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CUsoCfdi1)
+                    .HasColumnName("c_UsoCFDI")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Descripción).HasMaxLength(255);
+
+                entity.Property(e => e.FechaFinDeVigencia)
+                    .HasColumnName("Fecha fin de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.FechaInicioDeVigencia)
+                    .HasColumnName("Fecha inicio de vigencia")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Fisica).HasMaxLength(255);
+
+                entity.Property(e => e.Moral).HasMaxLength(255);
             });
 
             modelBuilder.Entity<CambiosPrecio>(entity =>
@@ -168,17 +586,9 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Celular).HasMaxLength(50);
 
-                entity.Property(e => e.Colonia).HasMaxLength(50);
-
-                entity.Property(e => e.Contancto).HasMaxLength(50);
-
-                entity.Property(e => e.Correo).HasMaxLength(50);
-
                 entity.Property(e => e.Cp)
                     .HasColumnName("CP")
                     .HasMaxLength(50);
-
-                entity.Property(e => e.Direccion).HasMaxLength(50);
 
                 entity.Property(e => e.Estado).HasMaxLength(50);
 
@@ -200,16 +610,12 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Municipio).HasMaxLength(50);
 
-                entity.Property(e => e.Negocio).HasMaxLength(50);
-
                 entity.Property(e => e.Pais).HasMaxLength(50);
 
                 entity.Property(e => e.PrecioDefault)
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'PRECIO 1')");
-
-                entity.Property(e => e.RazonSocial).HasMaxLength(50);
 
                 entity.Property(e => e.Rfc)
                     .HasColumnName("RFC")
@@ -371,6 +777,52 @@ namespace PointOfSale.Models
                     .HasConstraintName("FK_CP_Municipio");
             });
 
+            modelBuilder.Entity<Cxc>(entity =>
+            {
+                entity.Property(e => e.EstadoDocId)
+                    .HasMaxLength(3)
+                    .HasDefaultValueSql("(N'PEN')");
+
+                entity.Property(e => e.FechaDocumento)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.FechaVencimiento).HasColumnType("datetime");
+
+                entity.Property(e => e.Importe)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.MonedaId)
+                    .HasMaxLength(5)
+                    .HasDefaultValueSql("(N'MXN')");
+
+                entity.Property(e => e.Saldo)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.SerieDocId).HasMaxLength(3);
+
+                entity.Property(e => e.TipoDocId).HasMaxLength(3);
+            });
+
+            modelBuilder.Entity<Cxcp>(entity =>
+            {
+                entity.Property(e => e.CargoAbono).HasMaxLength(1);
+
+                entity.Property(e => e.ConceptoPago).HasMaxLength(50);
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(50);
+
+                entity.Property(e => e.DeletedBy).HasMaxLength(50);
+
+                entity.Property(e => e.Importe).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(50);
+            });
+
             modelBuilder.Entity<Cxp>(entity =>
             {
                 entity.Property(e => e.CreatedAt)
@@ -463,6 +915,67 @@ namespace PointOfSale.Models
                     .HasConstraintName("FK_PCXP_Proveedor");
             });
 
+            modelBuilder.Entity<Empresa>(entity =>
+            {
+                entity.Property(e => e.CRegimenFiscal)
+                    .IsRequired()
+                    .HasColumnName("C_RegimenFiscal")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.ClavePrivada)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Cp)
+                    .IsRequired()
+                    .HasColumnName("CP")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Direccion).IsRequired();
+
+                entity.Property(e => e.Estado)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Localidad)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Municipio)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Negocio).IsRequired();
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Pais)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.RazonSocial).IsRequired();
+
+                entity.Property(e => e.Rfc)
+                    .IsRequired()
+                    .HasMaxLength(13);
+
+                entity.Property(e => e.RutaCer)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.RutaComprobantes)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.RutaKey)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.Telefono).HasMaxLength(50);
+            });
+
             modelBuilder.Entity<Estacion>(entity =>
             {
                 entity.Property(e => e.EstacionId)
@@ -541,6 +1054,11 @@ namespace PointOfSale.Models
                 entity.Property(e => e.ImpuestoId)
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.CImpuesto)
+                    .IsRequired()
+                    .HasColumnName("C_Impuesto")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
@@ -848,17 +1366,9 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Celular).HasMaxLength(100);
 
-                entity.Property(e => e.Colonia).HasMaxLength(100);
-
-                entity.Property(e => e.Contancto).HasMaxLength(100);
-
-                entity.Property(e => e.Correo).HasMaxLength(100);
-
                 entity.Property(e => e.Cp)
                     .HasColumnName("CP")
                     .HasMaxLength(10);
-
-                entity.Property(e => e.Direccion).HasMaxLength(100);
 
                 entity.Property(e => e.Estado).HasMaxLength(100);
 
@@ -870,11 +1380,7 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Municipio).HasMaxLength(100);
 
-                entity.Property(e => e.Negocio).HasMaxLength(100);
-
                 entity.Property(e => e.Pais).HasMaxLength(100);
-
-                entity.Property(e => e.RazonSocial).HasMaxLength(100);
 
                 entity.Property(e => e.Rfc)
                     .IsRequired()
@@ -918,6 +1424,15 @@ namespace PointOfSale.Models
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_RolePermiso_Role");
+            });
+
+            modelBuilder.Entity<Serie>(entity =>
+            {
+                entity.Property(e => e.Descripcion).HasMaxLength(50);
+
+                entity.Property(e => e.SerieName)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Sustancia>(entity =>
@@ -993,6 +1508,124 @@ namespace PointOfSale.Models
                     .HasForeignKey(d => d.UsuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UsuarioRole_Usuario");
+            });
+
+            modelBuilder.Entity<Venta>(entity =>
+            {
+                entity.Property(e => e.AlmacenId).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ClienteId)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
+
+                entity.Property(e => e.ConceptoPago1)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.ConceptoPago2).HasMaxLength(50);
+
+                entity.Property(e => e.ConceptoPago3).HasMaxLength(50);
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.DatosCliente)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Descuento)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.EstacionId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.EstadoDocId)
+                    .HasMaxLength(10)
+                    .HasDefaultValueSql("(N'PEN')");
+
+                entity.Property(e => e.FechaDoc)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.FechaVencimiento)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Importe)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.ImporteLetra).IsRequired();
+
+                entity.Property(e => e.Impuesto)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.MonedaId)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'MXN')");
+
+                entity.Property(e => e.NoPrecio).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Pago1).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.Pago2).HasMaxLength(50);
+
+                entity.Property(e => e.Pago3).HasMaxLength(50);
+
+                entity.Property(e => e.RutaXml).HasMaxLength(250);
+
+                entity.Property(e => e.SerieDoc)
+                    .IsRequired()
+                    .HasMaxLength(3)
+                    .HasDefaultValueSql("(N'TCK')");
+
+                entity.Property(e => e.TipoDocId)
+                    .IsRequired()
+                    .HasMaxLength(3)
+                    .HasDefaultValueSql("(N'T')");
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(50);
+
+                entity.Property(e => e.UuId).HasMaxLength(40);
+            });
+
+            modelBuilder.Entity<Ventap>(entity =>
+            {
+                entity.HasKey(e => e.Ventap1);
+
+                entity.Property(e => e.Ventap1).HasColumnName("Ventap");
+
+                entity.Property(e => e.CantImpuestos).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Cantidad)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Descripcion).HasMaxLength(250);
+
+                entity.Property(e => e.Descuento)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Impuesto1).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Impuesto2).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Impuesto3).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.LoteId).HasMaxLength(50);
+
+                entity.Property(e => e.SubTotal).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.Total).HasColumnType("decimal(18, 3)");
             });
         }
     }

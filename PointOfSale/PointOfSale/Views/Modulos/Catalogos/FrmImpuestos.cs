@@ -69,8 +69,9 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
                 objeto = new Impuesto();
                 objeto.ImpuestoId = TxtClave.Text.Trim();
+               // objeto.
                 if (decimal.TryParse(TxtNombre.Text.Trim(), out decimal DecTasa))
-                    objeto.Tasa = DecTasa / 100;
+                    objeto.Tasa = DecTasa;
                 else
                 {
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[-7]);
