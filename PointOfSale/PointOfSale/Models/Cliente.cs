@@ -5,6 +5,11 @@ namespace PointOfSale.Models
 {
     public partial class Cliente
     {
+        public Cliente()
+        {
+            Venta = new HashSet<Venta>();
+        }
+
         public string ClienteId { get; set; }
         public string Rfc { get; set; }
         public bool IsDeleted { get; set; }
@@ -24,12 +29,17 @@ namespace PointOfSale.Models
         public decimal Saldo { get; set; }
         public string Colonia { get; set; }
         public string Correo { get; set; }
-        public string MetodoPago { get; set; }
-        public string FormaPago { get; set; }
+        public string MetodoPagoId { get; set; }
+        public string FormaPagoId { get; set; }
         public string PrecioDefault { get; set; }
         public bool TieneLicencia { get; set; }
+        public string UsoCfdiid { get; set; }
 
+        public virtual CFormapago FormaPago { get; set; }
         public virtual FormaPago FormaPagoNavigation { get; set; }
+        public virtual CMetodopago MetodoPago { get; set; }
         public virtual MetodoPago MetodoPagoNavigation { get; set; }
+        public virtual CUsocfdi UsoCfdi { get; set; }
+        public virtual ICollection<Venta> Venta { get; set; }
     }
 }

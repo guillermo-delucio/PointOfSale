@@ -23,7 +23,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
         public Sustancia Sustancia;
         public Almacen Almacen;
         public Estacion Estacion;
-        public ClaveSat ClaveSat;
+        public CClaveProdServ CClaveProdServ;
         public Presentacion Presentacion;
         public UnidadMedida UnidadMedida;
         public Usuario Usuario;
@@ -129,14 +129,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     break;
 
-                case (int)Ambiente.TipoBusqueda.Almacenes:
-                    using (var db = new DymContext())
-                    {
-                        Grid1.DataSource = db.Almacen.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
-                            Select(x => new { x.AlmacenId, x.Nombre }).ToList();
-                        Ambiente.AdditionalSettingsDataGridView(Grid1);
-                    }
-                    break;
+             
 
                 case (int)Ambiente.TipoBusqueda.Estaciones:
                     using (var db = new DymContext())
@@ -151,8 +144,8 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.ClavesSat:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.ClaveSat.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
-                        Select(x => new { x.ClaveSatId, x.Nombre }).ToList();
+                        Grid1.DataSource = db.CClaveProdServ.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
+                        Select(x => new { x.ClaveProdServId, x.Nombre }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -310,13 +303,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                         break;
 
-                    case (int)Ambiente.TipoBusqueda.Almacenes:
-                        using (var db = new DymContext())
-                        {
-                            Almacen = db.Almacen.Where(x => x.AlmacenId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
+                  
 
                     case (int)Ambiente.TipoBusqueda.Estaciones:
                         using (var db = new DymContext())
@@ -329,7 +316,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     case (int)Ambiente.TipoBusqueda.ClavesSat:
                         using (var db = new DymContext())
                         {
-                            ClaveSat = db.ClaveSat.Where(x => x.ClaveSatId ==
+                            CClaveProdServ = db.CClaveProdServ.Where(x => x.ClaveProdServId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                         }
                         break;

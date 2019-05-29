@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Controllers
 {
-    public class AlmacenController : IController<Almacen>
+    class LoteController : IController<Lote>
     {
-        public bool Delete(Almacen o)
+
+        public bool Delete(Lote o)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    o.IsDeleted = true;
-                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                    db.Remove(o);
                     db.SaveChanges();
                     return true;
                 }
@@ -34,10 +35,10 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    var temp = db.Almacen.FirstOrDefault(x => x.AlmacenId == Id.Trim());
+                    var temp = db.Lote.FirstOrDefault(x => x.LoteId == Id.Trim());
                     if (temp != null)
                     {
-                        temp.IsDeleted = true;
+                        db.Remove(temp);
                         db.SaveChanges();
                         return true;
                     }
@@ -50,7 +51,7 @@ namespace PointOfSale.Controllers
             return false;
         }
 
-        public bool InsertOne(Almacen o)
+        public bool InsertOne(Lote o)
         {
             try
             {
@@ -68,7 +69,7 @@ namespace PointOfSale.Controllers
             return false;
         }
 
-        public bool InsertRange(List<Almacen> lista)
+        public bool InsertRange(List<Lote> lista)
         {
             try
             {
@@ -86,13 +87,13 @@ namespace PointOfSale.Controllers
             return false;
         }
 
-        public List<Almacen> SelectAll()
+        public List<Lote> SelectAll()
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.Almacen.ToList();
+                    return db.Lote.ToList();
                 }
             }
             catch (Exception ex)
@@ -102,13 +103,28 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-        public List<Almacen> SelectMany(int cantidad)
+        public List<Lote> SelectMany(int cantidad)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.Almacen.Take(cantidad).ToList();
+                    return db.Lote.Take(cantidad).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
+        public List<Lote> SelectMany(string Id)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Lote.Where(x => x.LoteId == Id && x.StockRestante > 0).ToList();
                 }
             }
             catch (Exception ex)
@@ -118,13 +134,13 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-        public Almacen SelectOne(string Id)
+        public Lote SelectOne(string Id)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.Almacen.FirstOrDefault(x => x.AlmacenId == Id.Trim());
+                    return db.Lote.FirstOrDefault(x => x.LoteId == Id.Trim());
                 }
             }
             catch (Exception ex)
@@ -134,13 +150,13 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-        public List<Almacen> SelectOneOverList(string Id)
+        public List<Lote> SelectOneOverList(string Id)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.Almacen.Where(x => x.AlmacenId == Id.Trim()).ToList();
+                    return db.Lote.Where(x => x.LoteId == Id.Trim()).ToList();
                 }
             }
             catch (Exception ex)
@@ -150,7 +166,7 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-        public bool Update(Almacen o)
+        public bool Update(Lote o)
         {
             try
             {

@@ -16,5 +16,7 @@ namespace PointOfSale.Models
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public string DeletedBy { get; set; }
+
+        public virtual Cxc Cxc { get; set; }
     }
 }

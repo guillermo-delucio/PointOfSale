@@ -5,12 +5,16 @@ namespace PointOfSale.Models
 {
     public partial class CRegimenfiscal
     {
-        public int Id { get; set; }
-        public string CRegimenFiscal1 { get; set; }
-        public string Descripción { get; set; }
+        public CRegimenfiscal()
+        {
+            Empresa = new HashSet<Empresa>();
+        }
+
+        public string RegimenFiscalId { get; set; }
+        public string Descripcion { get; set; }
         public string Física { get; set; }
         public string Moral { get; set; }
-        public string FechaDeInicioDeVigencia { get; set; }
-        public string FechaDeFinDeVigencia { get; set; }
+
+        public virtual ICollection<Empresa> Empresa { get; set; }
     }
 }

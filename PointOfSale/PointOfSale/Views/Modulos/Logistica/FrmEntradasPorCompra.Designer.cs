@@ -81,6 +81,7 @@
             this.TxtImpuestos = new System.Windows.Forms.TextBox();
             this.TxtTotal = new System.Windows.Forms.TextBox();
             this.TxtDescripcion = new System.Windows.Forms.TextBox();
+            this.TxtBuscarImpuesto = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.NDesc = new System.Windows.Forms.NumericUpDown();
             this.NCantidad = new System.Windows.Forms.NumericUpDown();
@@ -108,7 +109,6 @@
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnAceptar = new System.Windows.Forms.Button();
             this.GridImpuestos = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TxtRutaImg = new System.Windows.Forms.TextBox();
             this.PbxImagen = new System.Windows.Forms.PictureBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -120,8 +120,8 @@
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TxtBuscarImpuesto = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -688,6 +688,19 @@
             this.TxtDescripcion.TabIndex = 235;
             this.toolTip1.SetToolTip(this.TxtDescripcion, "Almacen donde de agregarán las existencias");
             // 
+            // TxtBuscarImpuesto
+            // 
+            this.TxtBuscarImpuesto.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtBuscarImpuesto.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtBuscarImpuesto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtBuscarImpuesto.ForeColor = System.Drawing.Color.Black;
+            this.TxtBuscarImpuesto.Location = new System.Drawing.Point(732, 303);
+            this.TxtBuscarImpuesto.Name = "TxtBuscarImpuesto";
+            this.TxtBuscarImpuesto.Size = new System.Drawing.Size(89, 24);
+            this.TxtBuscarImpuesto.TabIndex = 251;
+            this.toolTip1.SetToolTip(this.TxtBuscarImpuesto, "Almacen donde de agregarán las existencias");
+            this.TxtBuscarImpuesto.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtBuscarImpuesto_KeyDown);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.NDesc);
@@ -1015,13 +1028,6 @@
             this.GridImpuestos.TabIndex = 246;
             this.GridImpuestos.TabStop = false;
             // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.HeaderText = "IMPUESTO";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
             // TxtRutaImg
             // 
             this.TxtRutaImg.BackColor = System.Drawing.SystemColors.Control;
@@ -1119,19 +1125,6 @@
             this.Column6.HeaderText = "DESCUENTO";
             this.Column6.Name = "Column6";
             // 
-            // TxtBuscarImpuesto
-            // 
-            this.TxtBuscarImpuesto.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtBuscarImpuesto.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtBuscarImpuesto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBuscarImpuesto.ForeColor = System.Drawing.Color.Black;
-            this.TxtBuscarImpuesto.Location = new System.Drawing.Point(732, 303);
-            this.TxtBuscarImpuesto.Name = "TxtBuscarImpuesto";
-            this.TxtBuscarImpuesto.Size = new System.Drawing.Size(89, 24);
-            this.TxtBuscarImpuesto.TabIndex = 251;
-            this.toolTip1.SetToolTip(this.TxtBuscarImpuesto, "Almacen donde de agregarán las existencias");
-            this.TxtBuscarImpuesto.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtBuscarImpuesto_KeyDown);
-            // 
             // label28
             // 
             this.label28.AutoSize = true;
@@ -1142,6 +1135,13 @@
             this.label28.Size = new System.Drawing.Size(26, 18);
             this.label28.TabIndex = 252;
             this.label28.Text = "♥";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.HeaderText = "IMPUESTO";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // FrmEntradasPorCompra
             // 
@@ -1240,7 +1240,6 @@
         private System.Windows.Forms.Button BtnCancelar;
         private System.Windows.Forms.Button BtnAceptar;
         private System.Windows.Forms.DataGridView GridImpuestos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.TextBox TxtRutaImg;
         private System.Windows.Forms.PictureBox PbxImagen;
         private System.Windows.Forms.Label label7;
@@ -1273,5 +1272,6 @@
         private System.Windows.Forms.NumericUpDown NDesc;
         private System.Windows.Forms.TextBox TxtBuscarImpuesto;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     }
 }

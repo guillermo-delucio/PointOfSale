@@ -8,6 +8,7 @@ namespace PointOfSale.Models
         public Estacion()
         {
             Compra = new HashSet<Compra>();
+            Venta = new HashSet<Venta>();
         }
 
         public string EstacionId { get; set; }
@@ -18,7 +19,10 @@ namespace PointOfSale.Models
         public string ImpresoraF { get; set; }
         public string ImpresoraNc { get; set; }
         public int DefaultAlmacenId { get; set; }
+        public string MonedaId { get; set; }
 
+        public virtual CMoneda Moneda { get; set; }
         public virtual ICollection<Compra> Compra { get; set; }
+        public virtual ICollection<Venta> Venta { get; set; }
     }
 }

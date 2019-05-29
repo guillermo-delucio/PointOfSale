@@ -5,9 +5,14 @@ namespace PointOfSale.Models
 {
     public partial class Venta
     {
+        public Venta()
+        {
+            Ventap = new HashSet<Ventap>();
+        }
+
         public int VentaId { get; set; }
         public string TipoDocId { get; set; }
-        public string SerieDoc { get; set; }
+        public string SerieDocId { get; set; }
         public int NoReferencia { get; set; }
         public DateTime? FechaDoc { get; set; }
         public DateTime? FechaVencimiento { get; set; }
@@ -39,5 +44,14 @@ namespace PointOfSale.Models
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
         public string UpdatedBy { get; set; }
+        public string TipoComprobanteId { get; set; }
+
+        public virtual Cliente Cliente { get; set; }
+        public virtual Usuario CreatedByNavigation { get; set; }
+        public virtual Estacion Estacion { get; set; }
+        public virtual Serie SerieDoc { get; set; }
+        public virtual CTipodecomprobante TipoComprobante { get; set; }
+        public virtual TipoDoc TipoDoc { get; set; }
+        public virtual ICollection<Ventap> Ventap { get; set; }
     }
 }

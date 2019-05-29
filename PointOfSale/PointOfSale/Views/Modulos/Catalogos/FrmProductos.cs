@@ -12,6 +12,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
     public partial class FrmProductos : Form
     {
         private dynamic objeto;
+        private List<Impuesto> Impuestos;
         private ProductoController productoController;
         bool ModoCreate;
         bool ModoUpdate;
@@ -20,6 +21,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             InitializeComponent();
             productoController = new ProductoController();
+            Impuestos = new List<Impuesto>();
             ModoCreate = true;
             ModoUpdate = false;
         }
@@ -28,6 +30,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             InitializeComponent();
             productoController = new ProductoController();
+            Impuestos = new List<Impuesto>();
             this.objeto = objeto;
 
             if (this.objeto != null)
@@ -64,8 +67,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Unidades = TxtUnidades.Text.Trim().Length == 0 ? null : TxtUnidades.Text.Trim();
                 objeto.LaboratorioId = TxtLaboratorio.Text.Trim().Length == 0 ? "SYS" : TxtLaboratorio.Text.Trim();
                 objeto.CategoriaId = TxtCategoria.Text.Trim().Length == 0 ? "SYS" : TxtCategoria.Text.Trim();
-                objeto.UnidadCfdi = TxtUnidadCFDI.Text.Trim().Length == 0 ? "H87" : TxtUnidadCFDI.Text.Trim();
-                objeto.ClaveCfdiId = TxtClaveCFDI.Text.Trim().Length == 0 ? "01010101" : TxtClaveCFDI.Text.Trim();
+                objeto.ClaveUnidadId = TxtUnidadCFDI.Text.Trim().Length == 0 ? "H87" : TxtUnidadCFDI.Text.Trim();
+                objeto.ClaveProdServId = TxtClaveCFDI.Text.Trim().Length == 0 ? "01010101" : TxtClaveCFDI.Text.Trim();
 
 
                 bool success = true;
@@ -143,19 +146,22 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Utilidad3 = nMargen3;
                 objeto.Utilidad4 = nMargen4;
 
-
-                //Limiar la coleeccion de impuetos y agregar los nuevos
-                objeto.ProductoImpuesto.Clear();
-                for (int i = 0; i < GridImpuestos.RowCount - 1; i++)
+                //Reset Impuestos
+                objeto.Impuesto1Id = "SYS";
+                objeto.Impuesto2Id = "SYS";
+                objeto.Impuesto3Id = "SYS";
+                for (int i = 0; i < Impuestos.Count; i++)
                 {
-                    objeto.ProductoImpuesto.Add(
-                        new ProductoImpuesto()
-                        {
-                            ProductoId = objeto.ProductoId,
-                            ImpuestoId = GridImpuestos.Rows[i].Cells[1].Value.ToString().Trim()
+                    if (i == 0)
+                        objeto.Impuesto1Id = Impuestos[i].ImpuestoId;
 
-                        });
+                    if (i == 1)
+                        objeto.Impuesto2Id = Impuestos[i].ImpuestoId;
+
+                    if (i == 2)
+                        objeto.Impuesto3Id = Impuestos[i].ImpuestoId;
                 }
+
 
 
                 //Limiar la coleccion de sustancias y agregar los nuevos
@@ -202,8 +208,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Unidades = TxtUnidades.Text.Trim().Length == 0 ? null : TxtUnidades.Text.Trim();
                 objeto.LaboratorioId = TxtLaboratorio.Text.Trim().Length == 0 ? "SYS" : TxtLaboratorio.Text.Trim();
                 objeto.CategoriaId = TxtCategoria.Text.Trim().Length == 0 ? "SYS" : TxtCategoria.Text.Trim();
-                objeto.UnidadCfdi = TxtUnidadCFDI.Text.Trim().Length == 0 ? "H87" : TxtUnidadCFDI.Text.Trim();
-                objeto.ClaveCfdiId = TxtClaveCFDI.Text.Trim().Length == 0 ? "01010101" : TxtClaveCFDI.Text.Trim();
+                objeto.ClaveUnidadId = TxtUnidadCFDI.Text.Trim().Length == 0 ? "H87" : TxtUnidadCFDI.Text.Trim();
+                objeto.ClaveProdServId = TxtClaveCFDI.Text.Trim().Length == 0 ? "01010101" : TxtClaveCFDI.Text.Trim();
 
                 bool success = true;
 
@@ -281,17 +287,20 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Utilidad4 = nMargen4;
 
 
-                //Limiar la coleeccion de impuetos y agregar los nuevos
-                objeto.ProductoImpuesto.Clear();
-                for (int i = 0; i < GridImpuestos.RowCount; i++)
+                //Reset Impuestos
+                objeto.Impuesto1Id = "SYS";
+                objeto.Impuesto2Id = "SYS";
+                objeto.Impuesto3Id = "SYS";
+                for (int i = 0; i < Impuestos.Count; i++)
                 {
-                    objeto.ProductoImpuesto.Add(
-                        new ProductoImpuesto()
-                        {
-                            ProductoId = objeto.ProductoId,
-                            ImpuestoId = GridImpuestos.Rows[i].Cells[1].Value.ToString().Trim()
+                    if (i == 0)
+                        objeto.Impuesto1Id = Impuestos[i].ImpuestoId;
 
-                        });
+                    if (i == 1)
+                        objeto.Impuesto2Id = Impuestos[i].ImpuestoId;
+
+                    if (i == 2)
+                        objeto.Impuesto3Id = Impuestos[i].ImpuestoId;
                 }
 
 
@@ -317,39 +326,56 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto = null;
             }
         }
-        private void LlenaGridImpuestos(ICollection<ProductoImpuesto> productoImpuestos)
+        private void CargaListaImpuestos(Producto producto)
         {
 
-            GridImpuestos.Rows.Clear();
-            GridImpuestos.Refresh();
-            foreach (var productoImpuesto in productoImpuestos)
+            Impuestos = new List<Impuesto>();
+
+            ImpuestoController impuestoController = new ImpuestoController();
+
+            if (!producto.Impuesto1Id.Equals("SYS"))
             {
-                GridImpuestos.Rows.Add();
-                GridImpuestos.Rows[GridImpuestos.RowCount - 1].Cells[0].Value = productoImpuesto.ProductoId;
-                GridImpuestos.Rows[GridImpuestos.RowCount - 1].Cells[1].Value = productoImpuesto.ImpuestoId;
+                var impuesto1 = impuestoController.SelectOne(producto.Impuesto1Id);
+                if (impuesto1 != null)
+                    Impuestos.Add(impuesto1);
             }
 
-
-        }
-        private bool ExisteImpuesto(string impuestoId)
-        {
-            for (int i = 0; i < GridImpuestos.RowCount; i++)
+            if (!producto.Impuesto2Id.Equals("SYS"))
             {
-                if (GridImpuestos.Rows[i].Cells[1].Value.ToString().Trim().Equals(impuestoId))
+                var impuesto2 = impuestoController.SelectOne(producto.Impuesto2Id);
+                if (impuesto2 != null)
+                    Impuestos.Add(impuesto2);
+            }
+
+            if (!producto.Impuesto3Id.Equals("SYS"))
+            {
+                var impuesto3 = impuestoController.SelectOne(producto.Impuesto3Id);
+                if (impuesto3 != null)
+                    Impuestos.Add(impuesto3);
+            }
+        }
+
+
+
+
+
+        private bool ExisteImpuesto(Impuesto impuesto)
+        {
+            foreach (var i in Impuestos)
+            {
+                if (i.ImpuestoId.Equals(impuesto.ImpuestoId))
                     return true;
             }
             return false;
         }
-        private void AgregaImpuesto(string impuestoId)
+        private void AgregaImpuesto(Impuesto impuesto)
         {
-            if (!ExisteImpuesto(impuestoId))
+            if (!ExisteImpuesto(impuesto) && Impuestos.Count < 3)
             {
                 if (TxtProductoId.Text.Trim().Length > 0)
                 {
-                    GridImpuestos.Rows.Add();
-                    GridImpuestos.Rows[GridImpuestos.RowCount - 1].Cells[0].Value = TxtProductoId.Text;
-                    GridImpuestos.Rows[GridImpuestos.RowCount - 1].Cells[1].Value = impuestoId;
-
+                    Impuestos.Add(impuesto);
+                    CargaGridImpuestos();
                 }
             }
         }
@@ -438,15 +464,15 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 TxtUnidades.Text = objeto.Unidades;
                 TxtLaboratorio.Text = objeto.LaboratorioId;
                 TxtCategoria.Text = objeto.CategoriaId;
-                TxtUnidadCFDI.Text = objeto.UnidadCfdi;
-                TxtClaveCFDI.Text = objeto.ClaveCfdiId;
+                TxtUnidadCFDI.Text = objeto.ClaveUnidadId;
+                TxtClaveCFDI.Text = objeto.ClaveProdServId;
                 TxtPrecioCompra.Text = objeto.PrecioCompra.ToString();
                 TxtPrecioCaja.Text = objeto.PrecioCaja.ToString();
                 ChkEnCatalogo.Checked = !objeto.IsDeleted;
                 ChkLote.Checked = objeto.TieneLote;
-                LlenaGridImpuestos(objeto.ProductoImpuesto);
+                CargaListaImpuestos(objeto);
+                CargaGridImpuestos();
                 LlenaGridSustancias(objeto.ProductoSustancia);
-
 
 
                 TxtPrecio1.Text = objeto.Precio1.ToString();
@@ -457,15 +483,28 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 TxtU2.Text = objeto.Utilidad2.ToString();
                 TxtU3.Text = objeto.Utilidad3.ToString();
                 TxtU4.Text = objeto.Utilidad4.ToString();
-                TxtPrecioS1.Text = Ambiente.GetPrecioSstring(objeto.Precio1.ToString(), objeto.ProductoImpuesto);
-                TxtPrecioS2.Text = Ambiente.GetPrecioSstring(objeto.Precio2.ToString(), objeto.ProductoImpuesto);
-                TxtPrecioS3.Text = Ambiente.GetPrecioSstring(objeto.Precio3.ToString(), objeto.ProductoImpuesto);
-                TxtPrecioS4.Text = Ambiente.GetPrecioSstring(objeto.Precio4.ToString(), objeto.ProductoImpuesto);
+                //TxtPrecioS1.Text = Ambiente.GetPrecioSalida(objeto.Precio1.ToString(), objeto.ProductoImpuesto);
+                //TxtPrecioS2.Text = Ambiente.GetPrecioSalida(objeto.Precio2.ToString(), objeto.ProductoImpuesto);
+                //TxtPrecioS3.Text = Ambiente.GetPrecioSalida(objeto.Precio3.ToString(), objeto.ProductoImpuesto);
+                //TxtPrecioS4.Text = Ambiente.GetPrecioSalida(objeto.Precio4.ToString(), objeto.ProductoImpuesto);
                 TxtRutaImg.Text = objeto.RutaImg;
                 //GridExistencias.DataSource = objeto.ProductoAlmacen.Select(x => new { x.AlmacenId, x.ExistenciaId }).ToList();
                 PbxImagen.Image = GetImg(objeto.RutaImg);
             }
         }
+
+        private void CargaGridImpuestos()
+        {
+            GridImpuestos.Rows.Clear();
+            GridImpuestos.Refresh();
+            foreach (var i in Impuestos)
+            {
+                GridImpuestos.Rows.Add();
+                GridImpuestos.Rows[GridImpuestos.RowCount - 1].Cells[0].Value = i.ImpuestoId;
+                GridImpuestos.Rows[GridImpuestos.RowCount - 1].Cells[1].Value = i.Tasa;
+            }
+        }
+
 
         private Image GetImg(string ruta)
         {
@@ -666,7 +705,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                     form.ShowDialog();
                     if (form.DialogResult == DialogResult.OK)
                     {
-                        TxtClaveCFDI.Text = form.ClaveSat.ClaveSatId;
+                        TxtClaveCFDI.Text = form.CClaveProdServ.ClaveProdServId;
                     }
                 }
             }
@@ -680,7 +719,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 {
                     if (form.ShowDialog() == DialogResult.OK)
                     {
-                        AgregaImpuesto(form.Impuesto.ImpuestoId);
+                        AgregaImpuesto(form.Impuesto);
                     }
                 }
             }
@@ -770,68 +809,72 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void TxtU1_Leave(object sender, EventArgs e)
         {
             TxtU1.Text = Ambiente.FDinero(TxtU1.Text);
-            TxtPrecio1.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU1.Text);
+            TxtPrecio1.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU1.Text);
 
         }
 
         private void TxtU2_Leave(object sender, EventArgs e)
         {
             TxtU2.Text = Ambiente.FDinero(TxtU2.Text);
-            TxtPrecio2.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU2.Text);
+            TxtPrecio2.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU2.Text);
         }
 
         private void TxtU3_Leave(object sender, EventArgs e)
         {
             TxtU3.Text = Ambiente.FDinero(TxtU3.Text);
-            TxtPrecio3.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU3.Text);
+            TxtPrecio3.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU3.Text);
         }
 
         private void TxtU4_Leave(object sender, EventArgs e)
         {
             TxtU4.Text = Ambiente.FDinero(TxtU4.Text);
-            TxtPrecio4.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU4.Text);
+            TxtPrecio4.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU4.Text);
         }
 
         private void TxtPrecio1_Leave(object sender, EventArgs e)
         {
             TxtPrecio1.Text = Ambiente.FDinero(TxtPrecio1.Text);
-            TxtU1.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio1.Text);
-            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(TxtPrecio1.Text, GridImpuestos, 1);
+            TxtU1.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio1.Text);
+
+            TxtPrecioS1.Text = Ambiente.GetPrecioSalida(TxtPrecio1.Text, Impuestos);
         }
 
         private void TxtPrecio2_Leave(object sender, EventArgs e)
         {
             TxtPrecio2.Text = Ambiente.FDinero(TxtPrecio2.Text);
-            TxtU2.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio2.Text);
-            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(TxtPrecio2.Text, GridImpuestos, 1);
+            TxtU2.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio2.Text);
+            TxtPrecioS2.Text = Ambiente.GetPrecioSalida(TxtPrecio2.Text, Impuestos);
         }
 
         private void TxtPrecio3_Leave(object sender, EventArgs e)
         {
             TxtPrecio3.Text = Ambiente.FDinero(TxtPrecio3.Text);
-            TxtU3.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio3.Text);
-            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(TxtPrecio3.Text, GridImpuestos, 1);
+            TxtU3.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio3.Text);
+            TxtPrecioS3.Text = Ambiente.GetPrecioSalida(TxtPrecio3.Text, Impuestos);
         }
 
         private void TxtPrecio4_Leave(object sender, EventArgs e)
         {
             TxtPrecio4.Text = Ambiente.FDinero(TxtPrecio4.Text);
-            TxtU4.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio4.Text);
-            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(TxtPrecio4.Text, GridImpuestos, 1);
+            TxtU4.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio4.Text);
+            TxtPrecioS4.Text = Ambiente.GetPrecioSalida(TxtPrecio4.Text, Impuestos);
         }
 
         private void GridImpuestos_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
-                BorraFilaDgv(GridImpuestos.CurrentCell.RowIndex, GridImpuestos);
+            {
+                BorraImpuestoEnLista(GridImpuestos.Rows[GridImpuestos.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                CargaGridImpuestos();
+            }
         }
 
-        private void BorraFilaDgv(int fila, DataGridView gridView)
+        private void BorraImpuestoEnLista(string impuestoId)
         {
-            if (gridView.RowCount >= 0 && fila >= 0 && gridView.RowCount > 0)
+            for (int i = 0; i < Impuestos.Count; i++)
             {
-                gridView.Rows.RemoveAt(fila);
-
+                if (Impuestos[i].ImpuestoId.Equals(impuestoId))
+                    Impuestos.RemoveAt(i);
             }
         }
 
@@ -839,6 +882,14 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             if (e.KeyCode == Keys.Delete)
                 BorraFilaDgv(GridSustancias.CurrentCell.RowIndex, GridSustancias);
+        }
+
+        private void BorraFilaDgv(int rowIndex, DataGridView gridSustancias)
+        {
+            if (rowIndex >= 0 && gridSustancias.RowCount > 0)
+            {
+                gridSustancias.Rows.RemoveAt(rowIndex);
+            }
         }
 
         private void TxtPrecioCompra_Leave(object sender, EventArgs e)

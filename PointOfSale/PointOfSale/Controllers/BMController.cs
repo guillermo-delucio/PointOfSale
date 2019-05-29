@@ -110,18 +110,6 @@ namespace PointOfSale.Controllers
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
 
-        private void LlenaNodoNodoAlmacenes(DataGridView Grid1)
-        {
-            using (var db = new DymContext())
-            {
-                Grid1.DataSource = db.Almacen.Where(x => x.IsDeleted == false).Select(x => new
-                {
-                    x.AlmacenId,
-                    x.Nombre
-                }).ToList();
-            }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
-        }
 
         private void LlenaNodoEstaciones(DataGridView Grid1)
         {
@@ -140,9 +128,9 @@ namespace PointOfSale.Controllers
         {
             using (var db = new DymContext())
             {
-                Grid1.DataSource = db.ClaveSat.Where(x => x.IsDeleted == false).Select(x => new
+                Grid1.DataSource = db.CClaveProdServ.Select(x => new
                 {
-                    x.ClaveSatId,
+                    x.ClaveProdServId,
                     x.Nombre
                 }).ToList();
             }
@@ -236,12 +224,6 @@ namespace PointOfSale.Controllers
 
                     break;
 
-
-                case "NodoAlmacenes":
-                    LlenaNodoNodoAlmacenes(Grid1);
-
-                    break;
-
                 case "NodoEstaciones":
                     LlenaNodoEstaciones(Grid1);
 
@@ -327,11 +309,6 @@ namespace PointOfSale.Controllers
                     break;
 
 
-                case "NodoAlmacenes":
-                    ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.Almacenes);
-                    LlenaNodoNodoAlmacenes(Grid1);
-
-                    break;
 
                 case "NodoEstaciones":
                     ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.Estaciones);
@@ -458,14 +435,7 @@ namespace PointOfSale.Controllers
                     }
 
 
-                case "NodoAlmacenes":
 
-
-                    using (var db = new DymContext())
-                    {
-                        return db.Almacen.FirstOrDefault(x => x.AlmacenId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
-                    }
 
                 case "NodoEstaciones":
 
@@ -479,7 +449,7 @@ namespace PointOfSale.Controllers
                 case "NodoClavesSat":
                     using (var db = new DymContext())
                     {
-                        return db.ClaveSat.FirstOrDefault(x => x.ClaveSatId ==
+                        return db.CClaveProdServ.FirstOrDefault(x => x.ClaveProdServId ==
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
                     }
 
@@ -568,12 +538,7 @@ namespace PointOfSale.Controllers
                     form.Show();
                     break;
 
-                case "NodoAlmacenes":
 
-                    form = new FrmAlmacenes(objeto);
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
-                    break;
 
                 case "NodoEstaciones":
 
@@ -672,12 +637,7 @@ namespace PointOfSale.Controllers
                     form.Show();
                     break;
 
-                case "NodoAlmacenes":
 
-                    form = new FrmAlmacenes();
-                    form.MdiParent = Mdi.MdiParent;
-                    form.Show();
-                    break;
 
                 case "NodoEstaciones":
 
@@ -805,16 +765,7 @@ namespace PointOfSale.Controllers
                         MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
                     break;
 
-                case "NodoAlmacenes":
 
-                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
-                    {
-                        if (new AlmacenController().Delete(objeto))
-                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
-                    }
-                    else
-                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
-                    break;
 
                 case "NodoEstaciones":
 

@@ -18,5 +18,7 @@ namespace PointOfSale.Models
         public decimal? SubTotal { get; set; }
         public decimal? Total { get; set; }
         public string LoteId { get; set; }
+
+        public virtual Venta Venta { get; set; }
     }
 }

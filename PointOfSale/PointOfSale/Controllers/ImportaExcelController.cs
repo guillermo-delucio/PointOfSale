@@ -25,7 +25,7 @@ namespace PointOfSale.Controllers
         private List<Producto> Productos;
         private List<Cliente> Clientes;
         private List<Proveedor> Proveedores;
-        private List<ClaveSat> ClavesSat;
+        private List<CClaveProdServ> ClavesSat;
         private List<Sustancia> Sustancias;
         private List<Laboratorio> Laboratorios;
         private List<UnidadMedida> UnidadMedidas;
@@ -46,7 +46,7 @@ namespace PointOfSale.Controllers
             Ruta = string.Empty;
             tipo_per = string.Empty;
             Errores = new List<string>();
-            ClavesSat = new List<ClaveSat>();
+            ClavesSat = new List<CClaveProdServ>();
             Productos = new List<Producto>();
             Sustancias = new List<Sustancia>();
             Laboratorios = new List<Laboratorio>();
@@ -441,7 +441,7 @@ namespace PointOfSale.Controllers
                     for (int row = start.Row + 1; row <= end.Row; row++)
                     {
                         Fila = row;
-                        var claveSat = new ClaveSat();
+                        var claveSat = new CClaveProdServ();
 
                         for (int col = start.Column; col <= end.Column; col++)
                         {
@@ -450,7 +450,7 @@ namespace PointOfSale.Controllers
                             switch (col)
                             {
                                 case 1:
-                                    claveSat.ClaveSatId = workSheet.Cells[row, col].Text.Trim();
+                                    claveSat.ClaveProdServId = workSheet.Cells[row, col].Text.Trim();
                                     break;
                                 case 2:
                                     claveSat.Nombre = workSheet.Cells[row, col].Text.Trim().ToUpper();
@@ -728,7 +728,7 @@ namespace PointOfSale.Controllers
 
                 using (var db = new DymContext())
                 {
-                    ClavesSat = db.ClaveSat.AsNoTracking().ToList();
+                    ClavesSat = db.CClaveProdServ.AsNoTracking().ToList();
                     Sustancias = db.Sustancia.AsNoTracking().ToList();
                     Laboratorios = db.Laboratorio.AsNoTracking().ToList();
                     UnidadMedidas = db.UnidadMedida.AsNoTracking().ToList();
@@ -903,16 +903,16 @@ namespace PointOfSale.Controllers
                                 case 17:
                                     //ClaveCfdiId
 
-                                    var ClaveProdServ = ClavesSat.FirstOrDefault(x => x.ClaveSatId == workSheet.Cells[row, col].Text.Trim());
+                                    var ClaveProdServ = ClavesSat.FirstOrDefault(x => x.ClaveProdServId == workSheet.Cells[row, col].Text.Trim());
                                     if (ClaveProdServ != null)
-                                        producto.ClaveCfdiId = ClaveProdServ.ClaveSatId;
+                                        producto.ClaveProdServId = ClaveProdServ.ClaveProdServId;
                                     else
-                                        producto.ClaveCfdiId = "01010101";
+                                        producto.ClaveProdServId = "01010101";
 
                                     break;
                                 case 18:
                                     //UnidadCfdi
-                                    producto.UnidadCfdi = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "H87" : workSheet.Cells[row, col].Text.Trim();
+                                    producto.ClaveUnidadId = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "H87" : workSheet.Cells[row, col].Text.Trim();
 
                                     break;
                                 case 19:
@@ -1195,9 +1195,9 @@ namespace PointOfSale.Controllers
                                     cliente.LimiteCredito = 0;
                                     cliente.DiasCredito = 0;
                                     cliente.IsDeleted = false;
-                                    cliente.MetodoPago = "PUE";
+                                    cliente.MetodoPagoId = "PUE";
                                     cliente.PrecioDefault = "PRECIO 1";
-                                    cliente.FormaPago = "01";
+                                    cliente.FormaPagoId = "01";
                                     cliente.Saldo = 0;
 
                                     if (tipo_per.Equals("C"))

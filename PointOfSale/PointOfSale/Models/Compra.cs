@@ -27,7 +27,7 @@ namespace PointOfSale.Models
         public string CreatedBy { get; set; }
         public string Datos { get; set; }
 
-        public virtual Almacen Almacen { get; set; }
+        public virtual Usuario CreatedByNavigation { get; set; }
         public virtual Cxp Cxp { get; set; }
         public virtual Estacion Estacion { get; set; }
         public virtual EstadoDoc EstadoDoc { get; set; }

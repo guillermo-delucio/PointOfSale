@@ -7,7 +7,9 @@ namespace PointOfSale.Models
     {
         public Impuesto()
         {
-            ProductoImpuesto = new HashSet<ProductoImpuesto>();
+            ProductoImpuesto1 = new HashSet<Producto>();
+            ProductoImpuesto2 = new HashSet<Producto>();
+            ProductoImpuesto3 = new HashSet<Producto>();
         }
 
         public string ImpuestoId { get; set; }
@@ -15,6 +17,8 @@ namespace PointOfSale.Models
         public bool IsDeleted { get; set; }
         public string CImpuesto { get; set; }
 
-        public virtual ICollection<ProductoImpuesto> ProductoImpuesto { get; set; }
+        public virtual ICollection<Producto> ProductoImpuesto1 { get; set; }
+        public virtual ICollection<Producto> ProductoImpuesto2 { get; set; }
+        public virtual ICollection<Producto> ProductoImpuesto3 { get; set; }
     }
 }

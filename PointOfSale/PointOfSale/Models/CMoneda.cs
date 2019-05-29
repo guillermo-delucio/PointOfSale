@@ -5,10 +5,14 @@ namespace PointOfSale.Models
 {
     public partial class CMoneda
     {
-        public int Id { get; set; }
-        public string CMoneda1 { get; set; }
-        public string Descripción { get; set; }
-        public string Decimales { get; set; }
-        public string PorcentajeVariación { get; set; }
+        public CMoneda()
+        {
+            Estacion = new HashSet<Estacion>();
+        }
+
+        public string MonedaId { get; set; }
+        public string Descripcion { get; set; }
+
+        public virtual ICollection<Estacion> Estacion { get; set; }
     }
 }

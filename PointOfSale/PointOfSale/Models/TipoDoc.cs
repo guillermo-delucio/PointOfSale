@@ -9,6 +9,7 @@ namespace PointOfSale.Models
         {
             Compra = new HashSet<Compra>();
             Cxp = new HashSet<Cxp>();
+            Venta = new HashSet<Venta>();
         }
 
         public string TipoDocId { get; set; }
@@ -16,5 +17,6 @@ namespace PointOfSale.Models
 
         public virtual ICollection<Compra> Compra { get; set; }
         public virtual ICollection<Cxp> Cxp { get; set; }
+        public virtual ICollection<Venta> Venta { get; set; }
     }
 }

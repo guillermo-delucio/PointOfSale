@@ -67,8 +67,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
             TxtDiasCredito.Text = objeto.DiasCredito.ToString();
             TxtCelular.Text = objeto.Celular;
             TxtTelefono.Text = objeto.Telefono;
-            TxtFormaPago.Text = objeto.FormaPago;
-            TxtMetodoPago.Text = objeto.MetodoPago;
+            TxtFormaPago.Text = objeto.FormaPagoId;
+            TxtMetodoPago.Text = objeto.MetodoPagoId;
             CboPrecioDefault.Text = objeto.PrecioDefault;
 
         }
@@ -115,8 +115,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
                 objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
                 objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
-                objeto.MetodoPago = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
-                objeto.FormaPago = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
+                objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
+                objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
                 objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? "PRECIO 1" : CboPrecioDefault.Text.Trim();
 
                 success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
@@ -157,8 +157,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
                 objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
                 objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
-                objeto.MetodoPago = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
-                objeto.FormaPago = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
+                objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
+                objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
                 objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? "PRECIO 1" : CboPrecioDefault.Text.Trim();
 
                 success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);

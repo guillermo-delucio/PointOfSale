@@ -7,17 +7,14 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Controllers
 {
-    class ClaveSatController: IController<ClaveSat>
+    class ClaveSatController : IController<CClaveProdServ>
     {
-        public bool Delete(ClaveSat o)
+        public bool Delete(CClaveProdServ o)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    o.IsDeleted = true;
-                    db.Entry(o).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    db.SaveChanges();
                     return true;
                 }
             }
@@ -32,16 +29,7 @@ namespace PointOfSale.Controllers
         {
             try
             {
-                using (var db = new DymContext())
-                {
-                    var temp = db.ClaveSat.FirstOrDefault(x => x.ClaveSatId == Id.Trim());
-                    if (temp != null)
-                    {
-                        temp.IsDeleted = true;
-                        db.SaveChanges();
-                        return true;
-                    }
-                }
+                return false;
             }
             catch (Exception ex)
             {
@@ -50,7 +38,7 @@ namespace PointOfSale.Controllers
             return false;
         }
 
-        public bool InsertOne(ClaveSat o)
+        public bool InsertOne(CClaveProdServ o)
         {
             try
             {
@@ -68,7 +56,7 @@ namespace PointOfSale.Controllers
             return false;
         }
 
-        public bool InsertRange(List<ClaveSat> lista)
+        public bool InsertRange(List<CClaveProdServ> lista)
         {
             try
             {
@@ -86,13 +74,13 @@ namespace PointOfSale.Controllers
             return false;
         }
 
-        public List<ClaveSat> SelectAll()
+        public List<CClaveProdServ> SelectAll()
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.ClaveSat.ToList();
+                    return db.CClaveProdServ.ToList();
                 }
             }
             catch (Exception ex)
@@ -102,13 +90,13 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-        public List<ClaveSat> SelectMany(int cantidad)
+        public List<CClaveProdServ> SelectMany(int cantidad)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.ClaveSat.Take(cantidad).ToList();
+                    return db.CClaveProdServ.Take(cantidad).ToList();
                 }
             }
             catch (Exception ex)
@@ -118,13 +106,13 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-        public ClaveSat SelectOne(string Id)
+        public CClaveProdServ SelectOne(string Id)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.ClaveSat.FirstOrDefault(x => x.ClaveSatId == Id.Trim());
+                    return db.CClaveProdServ.FirstOrDefault(x => x.ClaveProdServId == Id.Trim());
                 }
             }
             catch (Exception ex)
@@ -134,13 +122,13 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-        public List<ClaveSat> SelectOneOverList(string Id)
+        public List<CClaveProdServ> SelectOneOverList(string Id)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.ClaveSat.Where(x => x.ClaveSatId == Id.Trim()).ToList();
+                    return db.CClaveProdServ.Where(x => x.ClaveProdServId == Id.Trim()).ToList();
                 }
             }
             catch (Exception ex)
@@ -150,7 +138,7 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-        public bool Update(ClaveSat o)
+        public bool Update(CClaveProdServ o)
         {
             try
             {

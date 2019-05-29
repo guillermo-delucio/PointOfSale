@@ -20,7 +20,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         CxpController cxpController;
         CxppController cxppController;
         CambioPrecioController cambioPrecioController;
-
+        private List<Impuesto> Impuestos;
 
         Producto producto;
         Proveedor proveedor;
@@ -55,6 +55,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             cxpController = new CxpController();
             cxppController = new CxppController();
             cambioPrecioController = new CambioPrecioController();
+            Impuestos = new List<Impuesto>();
             success = false;
             Reset();
         }
@@ -85,12 +86,30 @@ namespace PointOfSale.Views.Modulos.Logistica
             if (producto == null || proveedor == null)
                 return;
 
+            if (producto.TieneLote)
+            {
+                PideLotes();
+            }
+
+
             InsertaGrid();
             InsertaData();
             InsertaCambioPrecio();
             ActualizaPrecios();
             LimpiaData();
             TxtProductoId.Focus();
+        }
+
+        private void PideLotes()
+        {
+            using (var form = new FrmLotesCaducidad(producto, NCantidad.Value))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    Ambiente.Mensaje("LOTES ASIGNADOS CON ÉXITO");
+                }
+            }
+
         }
 
         private void ActualizaPrecios()
@@ -502,16 +521,55 @@ namespace PointOfSale.Views.Modulos.Logistica
             TxtPrecio2.Text = producto.Precio2.ToString();
             TxtPrecio3.Text = producto.Precio3.ToString();
             TxtPrecio4.Text = producto.Precio4.ToString();
-            LlenaGridImpuestos(producto.ProductoImpuesto);
-            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(TxtPrecio1.Text, GridImpuestos, 0);
-            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(TxtPrecio2.Text, GridImpuestos, 0);
-            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(TxtPrecio3.Text, GridImpuestos, 0);
-            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(TxtPrecio4.Text, GridImpuestos, 0);
+            CargaListaImpuestos(producto);
+            CargaGridImpuestos();
+            TxtPrecioS1.Text = Ambiente.GetPrecioSalida(TxtPrecio1.Text, Impuestos);
+            TxtPrecioS2.Text = Ambiente.GetPrecioSalida(TxtPrecio2.Text, Impuestos);
+            TxtPrecioS3.Text = Ambiente.GetPrecioSalida(TxtPrecio3.Text, Impuestos);
+            TxtPrecioS4.Text = Ambiente.GetPrecioSalida(TxtPrecio4.Text, Impuestos);
             TxtRutaImg.Text = producto.RutaImg;
             //GridExistencias.DataSource = producto.ProductoAlmacen.Select(x => new { x.AlmacenId, x.ExistenciaId }).ToList();
             PbxImagen.Image = GetImg(producto.RutaImg);
         }
+        private void CargaGridImpuestos()
+        {
+            GridImpuestos.Rows.Clear();
+            GridImpuestos.Refresh();
+            foreach (var i in Impuestos)
+            {
+                GridImpuestos.Rows.Add();
+                GridImpuestos.Rows[GridImpuestos.RowCount - 1].Cells[0].Value = i.ImpuestoId;
+                //GridImpuestos.Rows[GridImpuestos.RowCount - 1].Cells[1].Value = i.Tasa;
+            }
+        }
+        private void CargaListaImpuestos(Producto producto)
+        {
 
+            Impuestos = new List<Impuesto>();
+
+            ImpuestoController impuestoController = new ImpuestoController();
+
+            if (!producto.Impuesto1Id.Equals("SYS"))
+            {
+                var impuesto1 = impuestoController.SelectOne(producto.Impuesto1Id);
+                if (impuesto1 != null)
+                    Impuestos.Add(impuesto1);
+            }
+
+            if (!producto.Impuesto2Id.Equals("SYS"))
+            {
+                var impuesto2 = impuestoController.SelectOne(producto.Impuesto2Id);
+                if (impuesto2 != null)
+                    Impuestos.Add(impuesto2);
+            }
+
+            if (!producto.Impuesto3Id.Equals("SYS"))
+            {
+                var impuesto3 = impuestoController.SelectOne(producto.Impuesto3Id);
+                if (impuesto3 != null)
+                    Impuestos.Add(impuesto3);
+            }
+        }
         private Image GetImg(string ruta)
         {
             try
@@ -542,54 +600,54 @@ namespace PointOfSale.Views.Modulos.Logistica
         private void TxtU1_Leave(object sender, EventArgs e)
         {
             TxtU1.Text = Ambiente.FDinero(TxtU1.Text);
-            TxtPrecio1.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU1.Text);
+            TxtPrecio1.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU1.Text);
 
         }
 
         private void TxtU2_Leave(object sender, EventArgs e)
         {
             TxtU2.Text = Ambiente.FDinero(TxtU2.Text);
-            TxtPrecio2.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU2.Text);
+            TxtPrecio2.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU2.Text);
         }
 
         private void TxtU3_Leave(object sender, EventArgs e)
         {
             TxtU3.Text = Ambiente.FDinero(TxtU3.Text);
-            TxtPrecio3.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU3.Text);
+            TxtPrecio3.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU3.Text);
         }
 
         private void TxtU4_Leave(object sender, EventArgs e)
         {
             TxtU4.Text = Ambiente.FDinero(TxtU4.Text);
-            TxtPrecio4.Text = Ambiente.GetPrecioString(TxtPrecioCompra.Text, TxtU4.Text);
+            TxtPrecio4.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU4.Text);
         }
 
         private void TxtPrecio1_Leave(object sender, EventArgs e)
         {
             TxtPrecio1.Text = Ambiente.FDinero(TxtPrecio1.Text);
-            TxtU1.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio1.Text);
-            TxtPrecioS1.Text = Ambiente.GetPrecioSstring(TxtPrecio1.Text, GridImpuestos, 0);
+            TxtU1.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio1.Text);
+            TxtPrecioS1.Text = Ambiente.GetPrecioSalida(TxtPrecio1.Text, Impuestos);
         }
 
         private void TxtPrecio2_Leave(object sender, EventArgs e)
         {
             TxtPrecio2.Text = Ambiente.FDinero(TxtPrecio2.Text);
-            TxtU2.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio2.Text);
-            TxtPrecioS2.Text = Ambiente.GetPrecioSstring(TxtPrecio2.Text, GridImpuestos, 0);
+            TxtU2.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio2.Text);
+            TxtPrecioS2.Text = Ambiente.GetPrecioSalida(TxtPrecio2.Text, Impuestos);
         }
 
         private void TxtPrecio3_Leave(object sender, EventArgs e)
         {
             TxtPrecio3.Text = Ambiente.FDinero(TxtPrecio3.Text);
-            TxtU3.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio3.Text);
-            TxtPrecioS3.Text = Ambiente.GetPrecioSstring(TxtPrecio3.Text, GridImpuestos, 0);
+            TxtU3.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio3.Text);
+            TxtPrecioS3.Text = Ambiente.GetPrecioSalida(TxtPrecio3.Text, Impuestos);
         }
 
         private void TxtPrecio4_Leave(object sender, EventArgs e)
         {
             TxtPrecio4.Text = Ambiente.FDinero(TxtPrecio4.Text);
-            TxtU4.Text = Ambiente.GetMargenString(TxtPrecioCompra.Text, TxtPrecio4.Text);
-            TxtPrecioS4.Text = Ambiente.GetPrecioSstring(TxtPrecio4.Text, GridImpuestos, 0);
+            TxtU4.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio4.Text);
+            TxtPrecioS4.Text = Ambiente.GetPrecioSalida(TxtPrecio4.Text, Impuestos);
             BtnAgregar.Focus();
         }
 

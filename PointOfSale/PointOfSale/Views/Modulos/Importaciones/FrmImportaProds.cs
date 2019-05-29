@@ -18,7 +18,7 @@ namespace PointOfSale.Views.Modulos.Importaciones
     public partial class FrmImportaProds : Form
     {
         public List<string> Errores { get; private set; }
-        public List<ClaveSat> ClavesSat { get; private set; }
+        public List<CClaveProdServ> ClavesSat { get; private set; }
         public List<Producto> Productos { get; private set; }
         public List<Laboratorio> Laboratorios { get; private set; }
         public List<UnidadMedida> UnidadMedidas { get; private set; }
@@ -58,7 +58,7 @@ namespace PointOfSale.Views.Modulos.Importaciones
 
                     using (var db = new DymContext())
                     {
-                        ClavesSat = db.ClaveSat.AsNoTracking().ToList();
+                        ClavesSat = db.CClaveProdServ.AsNoTracking().ToList();
                         Laboratorios = db.Laboratorio.AsNoTracking().ToList();
                         UnidadMedidas = db.UnidadMedida.AsNoTracking().ToList();
                         Presentaciones = db.Presentacion.AsNoTracking().ToList();
@@ -232,16 +232,16 @@ namespace PointOfSale.Views.Modulos.Importaciones
                                     case 17:
                                         //ClaveCfdiId
 
-                                        var ClaveProdServ = ClavesSat.FirstOrDefault(x => x.ClaveSatId == workSheet.Cells[row, col].Text.Trim());
+                                        var ClaveProdServ = ClavesSat.FirstOrDefault(x => x.ClaveProdServId == workSheet.Cells[row, col].Text.Trim());
                                         if (ClaveProdServ != null)
-                                            producto.ClaveCfdiId = ClaveProdServ.ClaveSatId;
+                                            producto.ClaveProdServId = ClaveProdServ.ClaveProdServId;
                                         else
-                                            producto.ClaveCfdiId = "01010101";
+                                            producto.ClaveUnidadId = "01010101";
 
                                         break;
                                     case 18:
                                         //UnidadCfdi
-                                        producto.UnidadCfdi = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "H87" : workSheet.Cells[row, col].Text.Trim();
+                                        producto.ClaveUnidadId = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "H87" : workSheet.Cells[row, col].Text.Trim();
 
                                         break;
                                     case 19:

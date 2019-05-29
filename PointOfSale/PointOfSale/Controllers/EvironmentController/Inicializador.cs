@@ -38,6 +38,7 @@ namespace PointOfSale.Controllers
                 {-5, "MÓDULO NO IMPLEMENTADO :( \n" },
                 {-6, "EL REGISTRO YA NO EXISTE:( \n" },
                 {-7, "LA CADENA NO TIENE EN FORMATO CORRECTO:( \n" },
+                {-8, "OPERACIÓN DENEGADA:( \n" },
 
                 //[>0] MENSAJES POSITIVOS
                 {1, "COMPLETADO CON ÉXITO :) \n" },
@@ -86,14 +87,7 @@ namespace PointOfSale.Controllers
                         db.Add(categoria);
                     }
 
-                    var almacen = db.Almacen.FirstOrDefault(x => x.AlmacenId == "SYS");
-                    if (almacen == null)
-                    {
-                        almacen = new Almacen();
-                        almacen.AlmacenId = "SYS";
-                        almacen.Nombre = "DEFAUTL";
-                        db.Add(almacen);
-                    }
+                
                     var presentacion = db.Presentacion.FirstOrDefault(x => x.PresentacionId == "SYS");
                     if (presentacion == null)
                     {

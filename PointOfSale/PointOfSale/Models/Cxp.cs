@@ -25,6 +25,7 @@ namespace PointOfSale.Models
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
 
+        public virtual Usuario CreatedByNavigation { get; set; }
         public virtual EstadoDoc EstadoDoc { get; set; }
         public virtual Proveedor Proveedor { get; set; }
         public virtual TipoDoc TipoDoc { get; set; }

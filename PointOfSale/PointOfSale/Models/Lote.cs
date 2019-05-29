@@ -8,8 +8,10 @@ namespace PointOfSale.Models
         public string LoteId { get; set; }
         public string ProductoId { get; set; }
         public DateTime? Caducidad { get; set; }
-        public int? ExistenciaInicial { get; set; }
-        public int? Restante { get; set; }
+        public decimal? StockInicial { get; set; }
+        public decimal? StockRestante { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public string CreatedBy { get; set; }
 
         public virtual Producto Producto { get; set; }
     }

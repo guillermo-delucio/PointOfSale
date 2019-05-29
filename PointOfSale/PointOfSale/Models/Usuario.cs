@@ -8,7 +8,11 @@ namespace PointOfSale.Models
         public Usuario()
         {
             CambiosPrecio = new HashSet<CambiosPrecio>();
+            Compra = new HashSet<Compra>();
+            Cxc = new HashSet<Cxc>();
+            Cxp = new HashSet<Cxp>();
             UsuarioRole = new HashSet<UsuarioRole>();
+            Venta = new HashSet<Venta>();
         }
 
         public string UsuarioId { get; set; }
@@ -19,6 +23,10 @@ namespace PointOfSale.Models
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<CambiosPrecio> CambiosPrecio { get; set; }
+        public virtual ICollection<Compra> Compra { get; set; }
+        public virtual ICollection<Cxc> Cxc { get; set; }
+        public virtual ICollection<Cxp> Cxp { get; set; }
         public virtual ICollection<UsuarioRole> UsuarioRole { get; set; }
+        public virtual ICollection<Venta> Venta { get; set; }
     }
 }

@@ -96,7 +96,7 @@ namespace PointOfSale.Controllers
                 {
                     return db.Producto
 
-                        .Include(x => x.ProductoImpuesto)
+                      
                         .Include(x => x.ProductoSustancia)
                         .ToList();
                 }
@@ -115,7 +115,6 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Producto
-                        .Include(x => x.ProductoImpuesto)
                         .Include(x => x.ProductoSustancia)
                         .Take(cantidad).ToList();
                 }
@@ -134,7 +133,6 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Producto
-                        .Include(x => x.ProductoImpuesto)
                         .Include(x => x.ProductoSustancia)
                         .FirstOrDefault(x => x.ProductoId == Id.Trim());
                 }
@@ -155,7 +153,7 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Producto
-                        .Include(x => x.ProductoImpuesto)
+                     
                         .Include(x => x.ProductoSustancia)
                         .Where(x => x.ProductoId == Id.Trim()).ToList();
                 }
@@ -174,18 +172,11 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     db.Entry(o).State = EntityState.Modified;
-                    db.SaveChanges();
-
-                    foreach (var item in db.ProductoImpuesto.Where(x => x.ProductoId == o.ProductoId).ToList())
-                        db.Remove(item);
 
                     foreach (var item in db.ProductoSustancia.Where(x => x.ProductoId == o.ProductoId).ToList())
                         db.Remove(item);
 
                     db.SaveChanges();
-
-                    foreach (var impuesto in o.ProductoImpuesto)
-                        db.Add(impuesto);
 
                     foreach (var sustancia in o.ProductoSustancia)
                         db.Add(sustancia);
@@ -209,7 +200,7 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Producto
-                         .Include(x => x.ProductoImpuesto)
+                         
                         .Include(x => x.ProductoSustancia)
                         .Where(x => x.Descripcion.Contains(SearchText.Trim())).ToList();
                 }
@@ -231,7 +222,7 @@ namespace PointOfSale.Controllers
                     //var query= db.Categories.Where(c=>c.Category_ID==cat_id).SelectMany(c=>Articles);
 
                     var query = from prod in db.Producto
-                                   .Include(x => x.ProductoImpuesto)
+                                 
                                    .Include(x => x.ProductoSustancia)
                                 where prod.ProductoSustancia.Any(c => c.SustanciaId.Contains(SearchText.Trim()))
                                 select prod;

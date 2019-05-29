@@ -9,8 +9,6 @@ namespace PointOfSale.Models
         {
             CambiosPrecio = new HashSet<CambiosPrecio>();
             Lote = new HashSet<Lote>();
-            ProductoAlmacen = new HashSet<ProductoAlmacen>();
-            ProductoImpuesto = new HashSet<ProductoImpuesto>();
             ProductoSustancia = new HashSet<ProductoSustancia>();
         }
 
@@ -40,23 +38,27 @@ namespace PointOfSale.Models
         public string DeletedBy { get; set; }
         public string LoteId { get; set; }
         public string UnidadMedidaId { get; set; }
-        public string ClaveCfdiId { get; set; }
-        public string UnidadCfdi { get; set; }
+        public string ClaveProdServId { get; set; }
+        public string ClaveUnidadId { get; set; }
         public string Contenido { get; set; }
         public string RutaImg { get; set; }
         public bool ChkCaducidad { get; set; }
         public decimal LimiteCredito { get; set; }
         public int DiasCredito { get; set; }
+        public string Impuesto1Id { get; set; }
+        public string Impuesto2Id { get; set; }
+        public string Impuesto3Id { get; set; }
+        public string AlmacenId { get; set; }
 
         public virtual Categoria Categoria { get; set; }
-        public virtual ClaveSat ClaveCfdi { get; set; }
+        public virtual Impuesto Impuesto1 { get; set; }
+        public virtual Impuesto Impuesto2 { get; set; }
+        public virtual Impuesto Impuesto3 { get; set; }
         public virtual Laboratorio Laboratorio { get; set; }
         public virtual Presentacion Presentacion { get; set; }
         public virtual UnidadMedida UnidadMedida { get; set; }
         public virtual ICollection<CambiosPrecio> CambiosPrecio { get; set; }
         public virtual ICollection<Lote> Lote { get; set; }
-        public virtual ICollection<ProductoAlmacen> ProductoAlmacen { get; set; }
-        public virtual ICollection<ProductoImpuesto> ProductoImpuesto { get; set; }
         public virtual ICollection<ProductoSustancia> ProductoSustancia { get; set; }
     }
 }

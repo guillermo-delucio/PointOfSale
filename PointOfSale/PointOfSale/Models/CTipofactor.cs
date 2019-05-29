@@ -5,7 +5,6 @@ namespace PointOfSale.Models
 {
     public partial class CTipofactor
     {
-        public int Id { get; set; }
-        public string CTipoFactor1 { get; set; }
+        public string TipoFactorId { get; set; }
     }
 }

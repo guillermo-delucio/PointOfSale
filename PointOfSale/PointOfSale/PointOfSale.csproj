@@ -141,7 +141,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AlmacenController.cs" />
     <Compile Include="Controllers\BMController.cs" />
     <Compile Include="Controllers\CambioPrecioController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
@@ -160,6 +159,7 @@
     <Compile Include="Controllers\LaboratorioController.cs" />
     <Compile Include="Controllers\LoggerController\TraceLogger.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\PresentacionController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
@@ -177,7 +177,6 @@
     <Compile Include="Models\CClaveunidad.cs" />
     <Compile Include="Models\CFormapago.cs" />
     <Compile Include="Models\CImpuesto.cs" />
-    <Compile Include="Models\ClaveSat.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\CmetodoPago.cs" />
     <Compile Include="Models\CMoneda.cs" />
@@ -265,12 +264,6 @@
     </Compile>
     <Compile Include="Views\Menus\FrmMenuPuntoVenta.Designer.cs">
       <DependentUpon>FrmMenuPuntoVenta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Modulos\Catalogos\FrmAlmacenes.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Modulos\Catalogos\FrmAlmacenes.Designer.cs">
-      <DependentUpon>FrmAlmacenes.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Modulos\Catalogos\FrmBusinessManager.cs">
       <SubType>Form</SubType>
@@ -380,6 +373,12 @@
     <Compile Include="Views\Modulos\Logistica\FrmSalidasPorTraspaso.Designer.cs">
       <DependentUpon>FrmSalidasPorTraspaso.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmLotesCaducidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmLotesCaducidad.Designer.cs">
+      <DependentUpon>FrmLotesCaducidad.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modulos\PuntoVenta\FrmPointOfSale.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -419,9 +418,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Menus\FrmMenuPuntoVenta.resx">
       <DependentUpon>FrmMenuPuntoVenta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmAlmacenes.resx">
-      <DependentUpon>FrmAlmacenes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Catalogos\FrmBusinessManager.resx">
       <DependentUpon>FrmBusinessManager.cs</DependentUpon>
@@ -476,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Logistica\FrmSalidasPorTraspaso.resx">
       <DependentUpon>FrmSalidasPorTraspaso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Logistica\FrmLotesCaducidad.resx">
+      <DependentUpon>FrmLotesCaducidad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmPointOfSale.resx">
       <DependentUpon>FrmPointOfSale.cs</DependentUpon>

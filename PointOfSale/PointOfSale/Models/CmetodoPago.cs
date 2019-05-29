@@ -5,8 +5,14 @@ namespace PointOfSale.Models
 {
     public partial class CMetodopago
     {
-        public int Id { get; set; }
-        public string CMetodoPago1 { get; set; }
-        public string Descripción { get; set; }
+        public CMetodopago()
+        {
+            Cliente = new HashSet<Cliente>();
+        }
+
+        public string MetodoPagoId { get; set; }
+        public string Descripcion { get; set; }
+
+        public virtual ICollection<Cliente> Cliente { get; set; }
     }
 }
