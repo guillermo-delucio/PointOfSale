@@ -601,29 +601,47 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Comprap>(entity =>
             {
-                entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Caducidad)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.Descripcion).IsRequired();
-
-                entity.Property(e => e.Descuento).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.Importe).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.Impuesto1)
+                entity.Property(e => e.Cantidad)
                     .HasColumnType("decimal(18, 3)")
-                    .HasDefaultValueSql("((0.16))");
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Descuento)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.ImporteParcial).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.ImporteParcialNeto).HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.Impuesto1).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.Impuesto2).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Impuesto3).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.ImpuestoParcial).HasColumnType("decimal(18, 3)");
 
-                entity.Property(e => e.Impuestos).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.LaboratorioId)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
+
+                entity.Property(e => e.Lote)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
+
+                entity.Property(e => e.PrecioCaja).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.PrecioCompra).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.ProductoId)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.Stock)
+                    .HasColumnType("decimal(18, 3)")
+                    .HasDefaultValueSql("((0))");
 
                 entity.HasOne(d => d.Compra)
                     .WithMany(p => p.Comprap)
@@ -988,9 +1006,12 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Lote>(entity =>
             {
-                entity.Property(e => e.LoteId)
-                    .HasMaxLength(50)
-                    .ValueGeneratedNever();
+                entity.HasKey(e => new { e.LoteId, e.StockInicial })
+                    .HasName("PK_Lote_1");
+
+                entity.Property(e => e.LoteId).HasMaxLength(50);
+
+                entity.Property(e => e.StockInicial).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.Caducidad).HasColumnType("datetime");
 
@@ -998,11 +1019,13 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(50);
 
+                entity.Property(e => e.EstadoDocId)
+                    .HasMaxLength(3)
+                    .HasDefaultValueSql("(N'PEN')");
+
                 entity.Property(e => e.ProductoId)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.Property(e => e.StockInicial).HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.StockRestante).HasColumnType("decimal(18, 3)");
 

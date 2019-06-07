@@ -49,6 +49,7 @@ namespace PointOfSale.Models
         public string Impuesto2Id { get; set; }
         public string Impuesto3Id { get; set; }
         public string AlmacenId { get; set; }
+        public bool Ocupado { get; set; }
 
         public virtual Categoria Categoria { get; set; }
         public virtual Impuesto Impuesto1 { get; set; }

@@ -15,6 +15,7 @@ namespace PointOfSale.Views.Modulos.Logistica
 {
     public partial class FrmLotesCaducidad : Form
     {
+        public List<Lote> lotes { get; set; }
         private Producto producto;
         private decimal cantidad;
         private bool modover;
@@ -26,10 +27,13 @@ namespace PointOfSale.Views.Modulos.Logistica
             InitializeComponent();
             loteController = new LoteController();
             productoController = new ProductoController();
+            lotes = new List<Lote>();
             modover = true;
             this.producto = null;
             this.cantidad = 0;
+            TxtRestante.Text = cantidad.ToString();
             NCantidad.Maximum = cantidad;
+            groupBox1.Focus();
         }
 
         public FrmLotesCaducidad(Producto p, decimal c)
@@ -40,15 +44,20 @@ namespace PointOfSale.Views.Modulos.Logistica
             modover = false;
             loteController = new LoteController();
             productoController = new ProductoController();
+            lotes = new List<Lote>();
             TxtProductoId.Text = producto.ProductoId;
+            TxtRestante.Text = cantidad.ToString();
+            TxtDescrip.Text = producto.Descripcion;
             NCantidad.Maximum = cantidad;
+            NCantidad.Value = cantidad;
+            groupBox2.Focus();
         }
 
 
 
         private void CargaGrid(string productoId)
         {
-            List<Lote> lotes = loteController.SelectMany(productoId);
+            lotes = loteController.SelectMany(productoId);
 
             GridPartidas.Rows.Clear();
             GridPartidas.Refresh();
@@ -74,8 +83,6 @@ namespace PointOfSale.Views.Modulos.Logistica
                 if (producto != null)
                 {
                     CargaGrid(producto.ProductoId);
-                    NCantidad.Value = cantidad;
-                    NCantidad.Focus();
                     return;
                 }
                 using (var form = new FrmBusqueda(TxtProductoId.Text, (int)Ambiente.TipoBusqueda.Productos))
@@ -92,7 +99,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             if (!modover && cantidad > 0)
             {
-                if (TxtLoteId.Text.Trim().Length == 0 || producto == null || NCantidad.Value == 0)
+                if (TxtLoteId.Text.Trim().Length == 0 || producto == null || NCantidad.Value == 0 || NCantidad.Value > cantidad)
                 {
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[-8]);
                     return;
@@ -107,9 +114,9 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             GridPartidas.Rows.Add();
             GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[0].Value = TxtLoteId.Text;
-            GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[0].Value = DpFechaCaducidad.Value;
-            GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[0].Value = NCantidad.Value;
-            GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[0].Value = NCantidad.Value;
+            GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[1].Value = DpFechaCaducidad.Value;
+            GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[2].Value = NCantidad.Value;
+            GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[3].Value = NCantidad.Value;
         }
 
         private void InsertaPartidadb()
@@ -120,9 +127,13 @@ namespace PointOfSale.Views.Modulos.Logistica
             lotep.Caducidad = DpFechaCaducidad.Value;
             lotep.StockInicial = NCantidad.Value;
             lotep.StockRestante = NCantidad.Value;
+            lotep.EstadoDocId = "PEN";
             lotep.CreatedBy = Ambiente.LoggedUser.UsuarioId;
             lotep.CreatedAt = DateTime.Now;
             cantidad -= NCantidad.Value;
+            TxtRestante.Text = cantidad.ToString();
+            lotes.Add(lotep);
+
             if (!loteController.InsertOne(lotep))
                 Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1]);
 
@@ -147,7 +158,17 @@ namespace PointOfSale.Views.Modulos.Logistica
                 Close();
             }
             else
-                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-8] + " HAY " + cantidad + "EXISTENCIAS SIN LOTE");
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-8] + " HAY " + cantidad + " EXISTENCIAS SIN LOTE");
+        }
+
+        private void Label21_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtProductoId_Leave(object sender, EventArgs e)
+        {
+            TxtLoteId.Focus();
         }
     }
 }

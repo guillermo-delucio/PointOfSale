@@ -96,7 +96,7 @@ namespace PointOfSale.Controllers
                 {
                     return db.Producto
 
-                      
+
                         .Include(x => x.ProductoSustancia)
                         .ToList();
                 }
@@ -134,6 +134,7 @@ namespace PointOfSale.Controllers
                 {
                     return db.Producto
                         .Include(x => x.ProductoSustancia)
+                        .Include(x => x.Laboratorio)
                         .FirstOrDefault(x => x.ProductoId == Id.Trim());
                 }
             }
@@ -144,7 +145,7 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-       
+
 
         public List<Producto> SelectOneOverList(string Id)
         {
@@ -153,7 +154,7 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Producto
-                     
+
                         .Include(x => x.ProductoSustancia)
                         .Where(x => x.ProductoId == Id.Trim()).ToList();
                 }
@@ -200,7 +201,7 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Producto
-                         
+
                         .Include(x => x.ProductoSustancia)
                         .Where(x => x.Descripcion.Contains(SearchText.Trim())).ToList();
                 }
@@ -222,7 +223,7 @@ namespace PointOfSale.Controllers
                     //var query= db.Categories.Where(c=>c.Category_ID==cat_id).SelectMany(c=>Articles);
 
                     var query = from prod in db.Producto
-                                 
+
                                    .Include(x => x.ProductoSustancia)
                                 where prod.ProductoSustancia.Any(c => c.SustanciaId.Contains(SearchText.Trim()))
                                 select prod;

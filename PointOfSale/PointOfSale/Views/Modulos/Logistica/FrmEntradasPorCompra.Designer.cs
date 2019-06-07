@@ -81,7 +81,6 @@
             this.TxtImpuestos = new System.Windows.Forms.TextBox();
             this.TxtTotal = new System.Windows.Forms.TextBox();
             this.TxtDescripcion = new System.Windows.Forms.TextBox();
-            this.TxtBuscarImpuesto = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.NDesc = new System.Windows.Forms.NumericUpDown();
             this.NCantidad = new System.Windows.Forms.NumericUpDown();
@@ -96,20 +95,23 @@
             this.GridPartidas = new System.Windows.Forms.DataGridView();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnAceptar = new System.Windows.Forms.Button();
             this.GridImpuestos = new System.Windows.Forms.DataGridView();
-            this.TxtRutaImg = new System.Windows.Forms.TextBox();
             this.PbxImagen = new System.Windows.Forms.PictureBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label26 = new System.Windows.Forms.Label();
@@ -120,8 +122,8 @@
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label28 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -151,7 +153,7 @@
             this.label14.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.label14.Location = new System.Drawing.Point(0, 28);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(1025, 10);
+            this.label14.Size = new System.Drawing.Size(1192, 10);
             this.label14.TabIndex = 235;
             // 
             // groupBox3
@@ -688,19 +690,6 @@
             this.TxtDescripcion.TabIndex = 235;
             this.toolTip1.SetToolTip(this.TxtDescripcion, "Almacen donde de agregarán las existencias");
             // 
-            // TxtBuscarImpuesto
-            // 
-            this.TxtBuscarImpuesto.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtBuscarImpuesto.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtBuscarImpuesto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtBuscarImpuesto.ForeColor = System.Drawing.Color.Black;
-            this.TxtBuscarImpuesto.Location = new System.Drawing.Point(732, 303);
-            this.TxtBuscarImpuesto.Name = "TxtBuscarImpuesto";
-            this.TxtBuscarImpuesto.Size = new System.Drawing.Size(89, 24);
-            this.TxtBuscarImpuesto.TabIndex = 251;
-            this.toolTip1.SetToolTip(this.TxtBuscarImpuesto, "Almacen donde de agregarán las existencias");
-            this.TxtBuscarImpuesto.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtBuscarImpuesto_KeyDown);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.NDesc);
@@ -861,15 +850,20 @@
             this.GridPartidas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
             this.Column4,
+            this.Column17,
+            this.Column18,
             this.Column7,
             this.Column8,
+            this.Column19,
             this.Column9,
             this.Column11,
             this.Column12,
-            this.Column13,
             this.Column14,
             this.Column15,
-            this.Column16});
+            this.Column13,
+            this.Column16,
+            this.Column20,
+            this.Column21});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -889,89 +883,129 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.GridPartidas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.GridPartidas.Size = new System.Drawing.Size(701, 175);
+            this.GridPartidas.Size = new System.Drawing.Size(1014, 175);
             this.GridPartidas.TabIndex = 242;
             this.GridPartidas.TabStop = false;
             // 
             // Column3
             // 
-            this.Column3.HeaderText = "PRODUCTO";
+            this.Column3.HeaderText = "PRODUCTOID";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
+            this.Column3.Visible = false;
             // 
             // Column4
             // 
-            this.Column4.HeaderText = "DESCRIPCIÓN";
+            this.Column4.HeaderText = "PRODUCTO";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
+            this.Column4.Width = 150;
+            // 
+            // Column17
+            // 
+            this.Column17.HeaderText = "LABORATORIO";
+            this.Column17.Name = "Column17";
+            this.Column17.ReadOnly = true;
+            this.Column17.Width = 85;
+            // 
+            // Column18
+            // 
+            this.Column18.HeaderText = "STOCK";
+            this.Column18.Name = "Column18";
+            this.Column18.ReadOnly = true;
+            this.Column18.Width = 50;
             // 
             // Column7
             // 
-            this.Column7.HeaderText = "CANTIDAD";
+            this.Column7.HeaderText = "CANT.";
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
+            this.Column7.Width = 50;
             // 
             // Column8
             // 
-            this.Column8.HeaderText = "PRECIOC";
+            this.Column8.HeaderText = "PCOMPRA";
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
+            this.Column8.Width = 80;
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "PCAJA";
+            this.Column19.Name = "Column19";
+            this.Column19.ReadOnly = true;
+            this.Column19.Width = 80;
             // 
             // Column9
             // 
-            this.Column9.HeaderText = "DESCUENTO";
+            this.Column9.FillWeight = 50F;
+            this.Column9.HeaderText = "DESC.";
             this.Column9.Name = "Column9";
             this.Column9.ReadOnly = true;
+            this.Column9.Width = 50;
             // 
             // Column11
             // 
-            this.Column11.HeaderText = "IMPUESTO1";
+            this.Column11.FillWeight = 50F;
+            this.Column11.HeaderText = "IMP.1";
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
+            this.Column11.Width = 50;
             // 
             // Column12
             // 
-            this.Column12.HeaderText = "IMPUESTO2";
+            this.Column12.HeaderText = "IMP.2";
             this.Column12.Name = "Column12";
             this.Column12.ReadOnly = true;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "IMPUESTO3";
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
+            this.Column12.Width = 50;
             // 
             // Column14
             // 
             this.Column14.HeaderText = "IMPORTE";
             this.Column14.Name = "Column14";
             this.Column14.ReadOnly = true;
+            this.Column14.Width = 80;
             // 
             // Column15
             // 
             this.Column15.HeaderText = "IMPUESTOS";
             this.Column15.Name = "Column15";
             this.Column15.ReadOnly = true;
+            this.Column15.Visible = false;
+            this.Column15.Width = 80;
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "IMPORTE NETO";
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            this.Column13.Width = 115;
             // 
             // Column16
             // 
             this.Column16.HeaderText = "CANTIMP";
             this.Column16.Name = "Column16";
             this.Column16.ReadOnly = true;
+            this.Column16.Visible = false;
+            this.Column16.Width = 50;
             // 
-            // groupBox4
+            // Column20
             // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Location = new System.Drawing.Point(3, 484);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1052, 10);
-            this.groupBox4.TabIndex = 243;
-            this.groupBox4.TabStop = false;
+            this.Column20.HeaderText = "LOTE";
+            this.Column20.Name = "Column20";
+            this.Column20.ReadOnly = true;
+            this.Column20.Width = 50;
+            // 
+            // Column21
+            // 
+            this.Column21.HeaderText = "CADUCIDAD";
+            this.Column21.Name = "Column21";
+            this.Column21.ReadOnly = true;
+            this.Column21.Width = 80;
             // 
             // BtnCancelar
             // 
-            this.BtnCancelar.Location = new System.Drawing.Point(816, 508);
+            this.BtnCancelar.Location = new System.Drawing.Point(971, 14);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(95, 39);
             this.BtnCancelar.TabIndex = 245;
@@ -982,7 +1016,7 @@
             // BtnAceptar
             // 
             this.BtnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAceptar.Location = new System.Drawing.Point(922, 508);
+            this.BtnAceptar.Location = new System.Drawing.Point(1072, 14);
             this.BtnAceptar.Name = "BtnAceptar";
             this.BtnAceptar.Size = new System.Drawing.Size(95, 39);
             this.BtnAceptar.TabIndex = 244;
@@ -1004,7 +1038,8 @@
             this.GridImpuestos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.GridImpuestos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridImpuestos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn2});
+            this.dataGridViewTextBoxColumn2,
+            this.Column22});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1013,7 +1048,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.GridImpuestos.DefaultCellStyle = dataGridViewCellStyle5;
-            this.GridImpuestos.Location = new System.Drawing.Point(703, 331);
+            this.GridImpuestos.Location = new System.Drawing.Point(1023, 59);
             this.GridImpuestos.Name = "GridImpuestos";
             this.GridImpuestos.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -1024,30 +1059,17 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.GridImpuestos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.GridImpuestos.Size = new System.Drawing.Size(118, 147);
+            this.GridImpuestos.Size = new System.Drawing.Size(153, 232);
             this.GridImpuestos.TabIndex = 246;
             this.GridImpuestos.TabStop = false;
-            // 
-            // TxtRutaImg
-            // 
-            this.TxtRutaImg.BackColor = System.Drawing.SystemColors.Control;
-            this.TxtRutaImg.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtRutaImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.TxtRutaImg.ForeColor = System.Drawing.Color.Black;
-            this.TxtRutaImg.Location = new System.Drawing.Point(827, 303);
-            this.TxtRutaImg.Name = "TxtRutaImg";
-            this.TxtRutaImg.ReadOnly = true;
-            this.TxtRutaImg.Size = new System.Drawing.Size(153, 24);
-            this.TxtRutaImg.TabIndex = 249;
-            this.TxtRutaImg.TabStop = false;
             // 
             // PbxImagen
             // 
             this.PbxImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PbxImagen.Image = global::PointOfSale.Properties.Resources.Aspirina1;
-            this.PbxImagen.Location = new System.Drawing.Point(827, 331);
+            this.PbxImagen.Location = new System.Drawing.Point(1023, 303);
             this.PbxImagen.Name = "PbxImagen";
-            this.PbxImagen.Size = new System.Drawing.Size(153, 147);
+            this.PbxImagen.Size = new System.Drawing.Size(153, 175);
             this.PbxImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PbxImagen.TabIndex = 247;
             this.PbxImagen.TabStop = false;
@@ -1057,12 +1079,14 @@
             this.groupBox5.Controls.Add(this.TxtTotal);
             this.groupBox5.Controls.Add(this.label26);
             this.groupBox5.Controls.Add(this.TxtImpuestos);
+            this.groupBox5.Controls.Add(this.BtnAceptar);
+            this.groupBox5.Controls.Add(this.BtnCancelar);
             this.groupBox5.Controls.Add(this.label25);
             this.groupBox5.Controls.Add(this.TxtSubtotal);
             this.groupBox5.Controls.Add(this.label8);
-            this.groupBox5.Location = new System.Drawing.Point(3, 503);
+            this.groupBox5.Location = new System.Drawing.Point(3, 484);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(807, 44);
+            this.groupBox5.Size = new System.Drawing.Size(1173, 63);
             this.groupBox5.TabIndex = 250;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "RESUMEN";
@@ -1125,38 +1149,28 @@
             this.Column6.HeaderText = "DESCUENTO";
             this.Column6.Name = "Column6";
             // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label28.Location = new System.Drawing.Point(705, 306);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(26, 18);
-            this.label28.TabIndex = 252;
-            this.label28.Text = "♥";
-            // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn2.HeaderText = "IMPUESTO";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 60;
+            // 
+            // Column22
+            // 
+            this.Column22.HeaderText = "TASA";
+            this.Column22.Name = "Column22";
+            this.Column22.ReadOnly = true;
+            this.Column22.Width = 50;
             // 
             // FrmEntradasPorCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1023, 566);
-            this.Controls.Add(this.TxtBuscarImpuesto);
-            this.Controls.Add(this.label28);
+            this.ClientSize = new System.Drawing.Size(1190, 556);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.TxtRutaImg);
             this.Controls.Add(this.PbxImagen);
             this.Controls.Add(this.GridImpuestos);
-            this.Controls.Add(this.BtnCancelar);
-            this.Controls.Add(this.BtnAceptar);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.GridPartidas);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -1236,11 +1250,9 @@
         private System.Windows.Forms.TextBox TxtPrecioCaja;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.DataGridView GridPartidas;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button BtnCancelar;
         private System.Windows.Forms.Button BtnAceptar;
         private System.Windows.Forms.DataGridView GridImpuestos;
-        private System.Windows.Forms.TextBox TxtRutaImg;
         private System.Windows.Forms.PictureBox PbxImagen;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button BtnAgregar;
@@ -1253,25 +1265,29 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown NCantidad;
         private System.Windows.Forms.TextBox TxtDescripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.NumericUpDown NDesc;
-        private System.Windows.Forms.TextBox TxtBuscarImpuesto;
-        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
     }
 }
