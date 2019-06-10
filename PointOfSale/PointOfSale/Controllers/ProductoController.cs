@@ -95,8 +95,6 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Producto
-
-
                         .Include(x => x.ProductoSustancia)
                         .ToList();
                 }
@@ -116,6 +114,7 @@ namespace PointOfSale.Controllers
                 {
                     return db.Producto
                         .Include(x => x.ProductoSustancia)
+                        .Where(x => x.IsDeleted == false)
                         .Take(cantidad).ToList();
                 }
             }
@@ -135,7 +134,7 @@ namespace PointOfSale.Controllers
                     return db.Producto
                         .Include(x => x.ProductoSustancia)
                         .Include(x => x.Laboratorio)
-                        .FirstOrDefault(x => x.ProductoId == Id.Trim());
+                        .FirstOrDefault(x => x.ProductoId == Id.Trim() && x.IsDeleted == false);
                 }
             }
             catch (Exception ex)
@@ -156,7 +155,7 @@ namespace PointOfSale.Controllers
                     return db.Producto
 
                         .Include(x => x.ProductoSustancia)
-                        .Where(x => x.ProductoId == Id.Trim()).ToList();
+                        .Where(x => x.ProductoId == Id.Trim() && x.IsDeleted == false).ToList();
                 }
             }
             catch (Exception ex)
@@ -203,7 +202,7 @@ namespace PointOfSale.Controllers
                     return db.Producto
 
                         .Include(x => x.ProductoSustancia)
-                        .Where(x => x.Descripcion.Contains(SearchText.Trim())).ToList();
+                        .Where(x => x.Descripcion.Contains(SearchText.Trim()) && x.IsDeleted == false).ToList();
                 }
             }
             catch (Exception ex)

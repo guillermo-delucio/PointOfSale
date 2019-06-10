@@ -31,6 +31,27 @@ namespace PointOfSale.Controllers
             }
             return false;
         }
+        public bool DeletePartida(int Id)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    var temp = db.Comprap.FirstOrDefault(x => x.ComprapId == Id);
+                    if (temp != null)
+                    {
+                        db.Remove(temp);
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return false;
+        }
 
         public bool InsertOne(Compra o)
         {
@@ -57,6 +78,21 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Compra.FirstOrDefault(x => x.CompraId == Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
+        public Comprap SelectPartida(int Id)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Comprap.FirstOrDefault(x => x.ComprapId == Id);
                 }
             }
             catch (Exception ex)

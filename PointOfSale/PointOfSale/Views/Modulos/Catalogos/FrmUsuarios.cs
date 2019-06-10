@@ -38,14 +38,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
             }
         }
 
-        private void TxtUserId_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                LlenaCampos();
-            }
-
-        }
+       
         private void LlenaCampos()
         {
             if (objeto == null)
@@ -109,6 +102,11 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void BtnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void TxtUserId_Leave(object sender, EventArgs e)
+        {
+            LlenaCampos();
         }
     }
 }

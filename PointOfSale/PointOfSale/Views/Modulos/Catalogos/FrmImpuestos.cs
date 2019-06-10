@@ -34,12 +34,12 @@ namespace PointOfSale.Views.Modulos.Catalogos
             if (this.objeto != null)
             {
                 objeto = (Impuesto)this.objeto;
-                TxtClave.Text = objeto.ImpuestoId;
+                TxtImpuestoId.Text = objeto.ImpuestoId;
             }
 
         }
 
-    
+
         private void LlenaCampos()
         {
             if (objeto == null)
@@ -47,8 +47,9 @@ namespace PointOfSale.Views.Modulos.Catalogos
             else
             {
                 ModoCreate = false;
-                TxtClave.Text = objeto.ImpuestoId;
-                TxtNombre.Text = (objeto.Tasa * 100).ToString();
+                TxtImpuestoId.Text = objeto.ImpuestoId;
+                TxtTasa.Text = objeto.Tasa.ToString();
+                TxtClaveSat.Text = objeto.CImpuesto;
 
             }
 
@@ -64,13 +65,14 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             if (ModoCreate)
             {
-                if (TxtClave.Text.Trim().Length == 0)
+                if (TxtImpuestoId.Text.Trim().Length == 0)
                     return;
 
                 objeto = new Impuesto();
-                objeto.ImpuestoId = TxtClave.Text.Trim();
-               // objeto.
-                if (decimal.TryParse(TxtNombre.Text.Trim(), out decimal DecTasa))
+                objeto.ImpuestoId = TxtImpuestoId.Text.Trim();
+                objeto.CImpuesto = TxtClaveSat.Text.Trim().Length == 0 ? "002" : TxtClaveSat.Text.Trim();
+                // objeto.
+                if (decimal.TryParse(TxtTasa.Text.Trim(), out decimal DecTasa))
                     objeto.Tasa = DecTasa;
                 else
                 {
@@ -90,14 +92,16 @@ namespace PointOfSale.Views.Modulos.Catalogos
             }
             else
             {
-                if (decimal.TryParse(TxtNombre.Text.Trim(), out decimal DecTasa))
-                    objeto.Tasa = DecTasa / 100;
+                if (decimal.TryParse(TxtTasa.Text.Trim(), out decimal DecTasa))
+                    objeto.Tasa = DecTasa;
+
                 else
                 {
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[-7]);
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1]);
                     return;
                 }
+                objeto.CImpuesto = TxtClaveSat.Text.Trim().Length == 0 ? "002" : TxtClaveSat.Text.Trim();
                 if (impuestoController.Update(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
                 else

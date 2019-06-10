@@ -153,7 +153,7 @@
             this.TxtUserId.Name = "TxtUserId";
             this.TxtUserId.Size = new System.Drawing.Size(623, 24);
             this.TxtUserId.TabIndex = 182;
-            this.TxtUserId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtUserId_KeyDown);
+            this.TxtUserId.Leave += new System.EventHandler(this.TxtUserId_Leave);
             // 
             // label1
             // 

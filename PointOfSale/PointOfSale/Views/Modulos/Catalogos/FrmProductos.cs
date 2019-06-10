@@ -473,7 +473,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 CargaListaImpuestos(objeto);
                 CargaGridImpuestos();
                 LlenaGridSustancias(objeto.ProductoSustancia);
-
+                CargaGridExitencia(objeto.Stock);
 
                 TxtPrecio1.Text = objeto.Precio1.ToString();
                 TxtPrecio2.Text = objeto.Precio2.ToString();
@@ -491,6 +491,15 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 //GridExistencias.DataSource = objeto.ProductoAlmacen.Select(x => new { x.AlmacenId, x.ExistenciaId }).ToList();
                 PbxImagen.Image = GetImg(objeto.RutaImg);
             }
+        }
+
+        private void CargaGridExitencia(decimal stock)
+        {
+            GridExistencias.Rows.Clear();
+            GridExistencias.Refresh();
+            GridExistencias.Rows.Add();
+            GridExistencias.Rows[GridExistencias.RowCount - 1].Cells[0].Value = "ALMACEN1";
+            GridExistencias.Rows[GridExistencias.RowCount - 1].Cells[1].Value = stock;
         }
 
         private void CargaGridImpuestos()
@@ -601,6 +610,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
             TxtBuscarImpuestos.Text = string.Empty;
             GridImpuestos.Rows.Clear();
             GridSustancias.Rows.Clear();
+            GridExistencias.Rows.Clear();
 
 
             TxtU1.Text = string.Empty;
@@ -900,6 +910,12 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void TxtPrecioCaja_Leave(object sender, EventArgs e)
         {
             TxtPrecioCaja.Text = Ambiente.FDinero(TxtPrecioCaja.Text);
+        }
+
+        private void TxtProductoId_Leave(object sender, EventArgs e)
+        {
+
+
         }
     }
 }

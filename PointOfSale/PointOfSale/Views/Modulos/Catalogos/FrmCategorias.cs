@@ -39,13 +39,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
         }
 
-        private void TxtClave_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                LlenaCampos();
-            }
-        }
+      
 
         private void LlenaCampos()
         {
@@ -103,6 +97,11 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void FrmCategorias_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void TxtClave_Leave(object sender, EventArgs e)
+        {
+            LlenaCampos();
         }
     }
 }

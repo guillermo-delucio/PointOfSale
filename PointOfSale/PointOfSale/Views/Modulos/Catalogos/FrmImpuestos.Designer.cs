@@ -30,13 +30,13 @@
         {
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnAceptar = new System.Windows.Forms.Button();
-            this.TxtNombre = new System.Windows.Forms.TextBox();
+            this.TxtTasa = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.TxtClave = new System.Windows.Forms.TextBox();
+            this.TxtImpuestoId = new System.Windows.Forms.TextBox();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TxtClaveSat = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -45,7 +45,7 @@
             this.BtnCancelar.Location = new System.Drawing.Point(164, 183);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(148, 40);
-            this.BtnCancelar.TabIndex = 127;
+            this.BtnCancelar.TabIndex = 4;
             this.BtnCancelar.Text = "SALIR";
             this.BtnCancelar.UseVisualStyleBackColor = true;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
@@ -55,21 +55,21 @@
             this.BtnAceptar.Location = new System.Drawing.Point(11, 183);
             this.BtnAceptar.Name = "BtnAceptar";
             this.BtnAceptar.Size = new System.Drawing.Size(148, 40);
-            this.BtnAceptar.TabIndex = 126;
+            this.BtnAceptar.TabIndex = 3;
             this.BtnAceptar.Text = "ACEPTAR";
             this.BtnAceptar.UseVisualStyleBackColor = true;
             this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
             // 
-            // TxtNombre
+            // TxtTasa
             // 
-            this.TxtNombre.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtNombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtNombre.ForeColor = System.Drawing.Color.Black;
-            this.TxtNombre.Location = new System.Drawing.Point(11, 131);
-            this.TxtNombre.Name = "TxtNombre";
-            this.TxtNombre.Size = new System.Drawing.Size(148, 24);
-            this.TxtNombre.TabIndex = 124;
+            this.TxtTasa.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtTasa.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtTasa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtTasa.ForeColor = System.Drawing.Color.Black;
+            this.TxtTasa.Location = new System.Drawing.Point(11, 131);
+            this.TxtTasa.Name = "TxtTasa";
+            this.TxtTasa.Size = new System.Drawing.Size(148, 24);
+            this.TxtTasa.TabIndex = 1;
             // 
             // label1
             // 
@@ -82,17 +82,17 @@
             this.label1.TabIndex = 125;
             this.label1.Text = "TASA / 100";
             // 
-            // TxtClave
+            // TxtImpuestoId
             // 
-            this.TxtClave.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtClave.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtClave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtClave.ForeColor = System.Drawing.Color.Black;
-            this.TxtClave.Location = new System.Drawing.Point(11, 78);
-            this.TxtClave.Name = "TxtClave";
-            this.TxtClave.Size = new System.Drawing.Size(297, 24);
-            this.TxtClave.TabIndex = 122;
-            this.TxtClave.Leave += new System.EventHandler(this.TxtClave_Leave);
+            this.TxtImpuestoId.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtImpuestoId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtImpuestoId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtImpuestoId.ForeColor = System.Drawing.Color.Black;
+            this.TxtImpuestoId.Location = new System.Drawing.Point(11, 78);
+            this.TxtImpuestoId.Name = "TxtImpuestoId";
+            this.TxtImpuestoId.Size = new System.Drawing.Size(297, 24);
+            this.TxtImpuestoId.TabIndex = 0;
+            this.TxtImpuestoId.Leave += new System.EventHandler(this.TxtClave_Leave);
             // 
             // lblTitulo
             // 
@@ -126,16 +126,16 @@
             this.label6.TabIndex = 128;
             this.label6.Text = "♥CLAVE";
             // 
-            // textBox1
+            // TxtClaveSat
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.Black;
-            this.textBox1.Location = new System.Drawing.Point(164, 131);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(148, 24);
-            this.textBox1.TabIndex = 129;
+            this.TxtClaveSat.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtClaveSat.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtClaveSat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtClaveSat.ForeColor = System.Drawing.Color.Black;
+            this.TxtClaveSat.Location = new System.Drawing.Point(164, 131);
+            this.TxtClaveSat.Name = "TxtClaveSat";
+            this.TxtClaveSat.Size = new System.Drawing.Size(148, 24);
+            this.TxtClaveSat.TabIndex = 2;
             // 
             // label2
             // 
@@ -153,14 +153,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(320, 232);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TxtClaveSat);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnAceptar);
-            this.Controls.Add(this.TxtNombre);
+            this.Controls.Add(this.TxtTasa);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.TxtClave);
+            this.Controls.Add(this.TxtImpuestoId);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.label14);
             this.MaximumSize = new System.Drawing.Size(336, 271);
@@ -176,13 +176,13 @@
 
         private System.Windows.Forms.Button BtnCancelar;
         private System.Windows.Forms.Button BtnAceptar;
-        private System.Windows.Forms.TextBox TxtNombre;
+        private System.Windows.Forms.TextBox TxtTasa;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TxtClave;
+        private System.Windows.Forms.TextBox TxtImpuestoId;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TxtClaveSat;
         private System.Windows.Forms.Label label2;
     }
 }

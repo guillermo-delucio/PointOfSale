@@ -103,7 +103,8 @@
             this.TxtClave.Name = "TxtClave";
             this.TxtClave.Size = new System.Drawing.Size(148, 24);
             this.TxtClave.TabIndex = 0;
-            this.TxtClave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtClave_KeyDown);
+            
+            this.TxtClave.Leave += new System.EventHandler(this.TxtClave_Leave);
             // 
             // lblTitulo
             // 

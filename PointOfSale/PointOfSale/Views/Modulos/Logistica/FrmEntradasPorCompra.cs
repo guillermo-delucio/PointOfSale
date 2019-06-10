@@ -440,6 +440,8 @@ namespace PointOfSale.Views.Modulos.Logistica
                     };
 
                     success = compraController.InsertaPartida(comprap);
+                    if (success)
+                        GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[15].Value = comprap.ComprapId;
                 }
                 else
                     Ambiente.Mensaje("La compra no se guardó, No continue.");
@@ -475,6 +477,8 @@ namespace PointOfSale.Views.Modulos.Logistica
                     };
 
                     success = compraController.InsertaPartida(comprap);
+                    if (success)
+                        GridPartidas.Rows[GridPartidas.RowCount - 1].Cells[15].Value = comprap.ComprapId;
                 }
                 else
                     Ambiente.Mensaje("La parida anterior no se guardó, No continue.");
@@ -855,5 +859,33 @@ namespace PointOfSale.Views.Modulos.Logistica
             Close();
         }
 
+        private void GridPartidas_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && GridPartidas.RowCount > 0)
+            {
+                if (Ambiente.Pregunta("REALMENTE QUIERE BORRAR " + GridPartidas.Rows[GridPartidas.CurrentCell.RowIndex].Cells[1].Value))
+                    BorrarPartida((int)GridPartidas.Rows[GridPartidas.CurrentCell.RowIndex].Cells[15].Value);
+            }
+        }
+
+        private void BorrarPartida(int comprapId)
+        {
+
+            var comprap = compraController.SelectPartida(comprapId);
+            if (comprap != null)
+            {
+                importeTotal -= (decimal)comprap.ImporteParcial;
+                impuestoTotal -= (decimal)comprap.ImpuestoParcial;
+                if (compraController.DeletePartida(comprapId))
+                {
+                    TxtSubtotal.Text = importeTotal.ToString();
+                    TxtImpuestos.Text = impuestoTotal.ToString();
+                    TxtTotal.Text = (importeTotal + impuestoTotal).ToString();
+                    GridPartidas.Rows.RemoveAt(GridPartidas.CurrentCell.RowIndex);
+                }
+            }
+
+
+        }
     }
 }

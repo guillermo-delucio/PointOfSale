@@ -24,7 +24,7 @@ namespace PointOfSale.Controllers
                 {
                     x.ClienteId,
                     x.RazonSocial
-                }).ToList();
+                }).OrderBy(x => x.RazonSocial).ToList();
             }
 
             Ambiente.AdditionalSettingsDataGridView(Grid1);
@@ -38,7 +38,7 @@ namespace PointOfSale.Controllers
                 {
                     x.ProveedorId,
                     x.RazonSocial
-                }).ToList();
+                }).OrderBy(x => x.RazonSocial).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -52,7 +52,7 @@ namespace PointOfSale.Controllers
                     x.ProductoId,
                     x.Stock,
                     x.Descripcion
-                }).ToList();
+                }).OrderBy(x => x.Descripcion).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -66,7 +66,7 @@ namespace PointOfSale.Controllers
                 {
                     x.CategoriaId,
                     x.Nombre
-                }).ToList();
+                }).OrderBy(x => x.Nombre).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -79,7 +79,7 @@ namespace PointOfSale.Controllers
                 {
                     x.LaboratorioId,
                     x.Nombre
-                }).ToList();
+                }).OrderBy(x => x.Nombre).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -92,7 +92,7 @@ namespace PointOfSale.Controllers
                 {
                     x.ImpuestoId,
                     x.Tasa
-                }).ToList();
+                }).OrderBy(x => x.ImpuestoId).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -105,7 +105,7 @@ namespace PointOfSale.Controllers
                 {
                     x.SustanciaId,
                     x.Nombre
-                }).ToList();
+                }).OrderBy(x => x.Nombre).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -119,7 +119,7 @@ namespace PointOfSale.Controllers
                 {
                     x.EstacionId,
                     x.Nombre
-                }).ToList();
+                }).OrderBy(x => x.Nombre).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -132,7 +132,7 @@ namespace PointOfSale.Controllers
                 {
                     x.ClaveProdServId,
                     x.Nombre
-                }).ToList();
+                }).OrderBy(x => x.Nombre).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -145,7 +145,7 @@ namespace PointOfSale.Controllers
                 {
                     x.PresentacionId,
                     x.Nombre
-                }).ToList();
+                }).OrderBy(x => x.Nombre).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -159,7 +159,7 @@ namespace PointOfSale.Controllers
                     x.UnidadMedidaId,
                     x.UnidadSat,
                     x.Nombre
-                }).ToList();
+                }).OrderBy(x => x.Nombre).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -173,7 +173,7 @@ namespace PointOfSale.Controllers
                     x.UsuarioId,
                     x.Nombre,
                     x.Area
-                }).ToList();
+                }).OrderBy(x => x.Nombre).ToList();
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
@@ -688,7 +688,7 @@ namespace PointOfSale.Controllers
             switch (NodoName)
             {
                 case "NodoClientes":
-                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.RazonSocial))
                     {
                         if (new ClienteController().Delete(objeto))
                             MessageBox.Show(Ambiente.CatalgoMensajes[2]);
