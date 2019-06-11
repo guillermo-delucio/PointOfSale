@@ -43,13 +43,12 @@ namespace PointOfSale.Models
         public string Contenido { get; set; }
         public string RutaImg { get; set; }
         public bool ChkCaducidad { get; set; }
-        public decimal LimiteCredito { get; set; }
         public int DiasCredito { get; set; }
         public string Impuesto1Id { get; set; }
         public string Impuesto2Id { get; set; }
         public string Impuesto3Id { get; set; }
         public string AlmacenId { get; set; }
-        public bool Ocupado { get; set; }
+        public bool? Ocupado { get; set; }
 
         public virtual Categoria Categoria { get; set; }
         public virtual Impuesto Impuesto1 { get; set; }

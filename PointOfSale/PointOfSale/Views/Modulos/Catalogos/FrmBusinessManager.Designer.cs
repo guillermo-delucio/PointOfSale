@@ -36,13 +36,12 @@
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Laboratorios");
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Impuestos");
             System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Sustancias");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Almacenes");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Estaciones");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Claves Sat");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Presentaciones", 1, 2);
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Unidades Medida");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Usuarios", 1, 2);
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Catalogos", 5, 5, new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Estaciones");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Claves Sat");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Presentaciones", 1, 2);
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Unidades Medida");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Usuarios", 1, 2);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Catalogos", 5, 5, new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2,
             treeNode3,
@@ -54,15 +53,14 @@
             treeNode9,
             treeNode10,
             treeNode11,
-            treeNode12,
-            treeNode13});
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Producto-Sustancias", 1, 2);
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Producto-Impuesto");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Productos Completo", 1, 2);
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Configuración", 3, 3, new System.Windows.Forms.TreeNode[] {
+            treeNode12});
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Producto-Sustancias", 1, 2);
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Productos Completo", 1, 2);
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Producto Impuesto", 1, 2);
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Configuración", 3, 3, new System.Windows.Forms.TreeNode[] {
+            treeNode14,
             treeNode15,
-            treeNode16,
-            treeNode17});
+            treeNode16});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBusinessManager));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importarDesdeExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -217,59 +215,55 @@
             treeNode7.SelectedImageKey = "folderOpen.png";
             treeNode7.Text = "Sustancias";
             treeNode8.ImageKey = "folder.png";
-            treeNode8.Name = "NodoAlmacenes";
-            treeNode8.SelectedImageKey = "folderOpen.png";
-            treeNode8.Text = "Almacenes";
+            treeNode8.Name = "NodoEstaciones";
+            treeNode8.SelectedImageIndex = 2;
+            treeNode8.Text = "Estaciones";
+            treeNode9.ContextMenuStrip = this.contextMenuStrip1;
             treeNode9.ImageKey = "folder.png";
-            treeNode9.Name = "NodoEstaciones";
-            treeNode9.SelectedImageIndex = 2;
-            treeNode9.Text = "Estaciones";
+            treeNode9.Name = "NodoClavesSat";
+            treeNode9.SelectedImageKey = "folderOpen.png";
+            treeNode9.Text = "Claves Sat";
             treeNode10.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode10.ImageKey = "folder.png";
-            treeNode10.Name = "NodoClavesSat";
-            treeNode10.SelectedImageKey = "folderOpen.png";
-            treeNode10.Text = "Claves Sat";
+            treeNode10.ImageIndex = 1;
+            treeNode10.Name = "NodoPresentaciones";
+            treeNode10.SelectedImageIndex = 2;
+            treeNode10.Text = "Presentaciones";
             treeNode11.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode11.ImageIndex = 1;
-            treeNode11.Name = "NodoPresentaciones";
-            treeNode11.SelectedImageIndex = 2;
-            treeNode11.Text = "Presentaciones";
-            treeNode12.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode12.ImageKey = "folder.png";
-            treeNode12.Name = "NodoUnidadesMedida";
-            treeNode12.SelectedImageKey = "folderOpen.png";
-            treeNode12.Text = "Unidades Medida";
-            treeNode13.ImageIndex = 1;
-            treeNode13.Name = "NodoUsuarios";
-            treeNode13.SelectedImageIndex = 2;
-            treeNode13.Text = "Usuarios";
-            treeNode14.ImageIndex = 5;
-            treeNode14.Name = "NodoRoot";
-            treeNode14.SelectedImageIndex = 5;
-            treeNode14.Text = "Catalogos";
+            treeNode11.ImageKey = "folder.png";
+            treeNode11.Name = "NodoUnidadesMedida";
+            treeNode11.SelectedImageKey = "folderOpen.png";
+            treeNode11.Text = "Unidades Medida";
+            treeNode12.ImageIndex = 1;
+            treeNode12.Name = "NodoUsuarios";
+            treeNode12.SelectedImageIndex = 2;
+            treeNode12.Text = "Usuarios";
+            treeNode13.ImageIndex = 5;
+            treeNode13.Name = "NodoRoot";
+            treeNode13.SelectedImageIndex = 5;
+            treeNode13.Text = "Catalogos";
+            treeNode14.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode14.ImageIndex = 1;
+            treeNode14.Name = "NodoProdSus";
+            treeNode14.SelectedImageIndex = 2;
+            treeNode14.Text = "Producto-Sustancias";
             treeNode15.ContextMenuStrip = this.contextMenuStrip1;
             treeNode15.ImageIndex = 1;
-            treeNode15.Name = "NodoProdSus";
+            treeNode15.Name = "NodoProductosCompleto";
             treeNode15.SelectedImageIndex = 2;
-            treeNode15.Text = "Producto-Sustancias";
+            treeNode15.Text = "Productos Completo";
             treeNode16.ContextMenuStrip = this.contextMenuStrip1;
             treeNode16.ImageIndex = 1;
             treeNode16.Name = "NodoProdImp";
-            treeNode16.SelectedImageKey = "folderOpen.png";
-            treeNode16.Text = "Producto-Impuesto";
+            treeNode16.SelectedImageIndex = 2;
+            treeNode16.Text = "Producto Impuesto";
             treeNode17.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode17.ImageIndex = 1;
-            treeNode17.Name = "NodoProductosCompleto";
-            treeNode17.SelectedImageIndex = 2;
-            treeNode17.Text = "Productos Completo";
-            treeNode18.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode18.ImageIndex = 3;
-            treeNode18.Name = "NodoConfiguracion";
-            treeNode18.SelectedImageIndex = 3;
-            treeNode18.Text = "Configuración";
+            treeNode17.ImageIndex = 3;
+            treeNode17.Name = "NodoConfiguracion";
+            treeNode17.SelectedImageIndex = 3;
+            treeNode17.Text = "Configuración";
             this.BMtree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode18});
+            treeNode13,
+            treeNode17});
             this.BMtree.SelectedImageIndex = 0;
             this.BMtree.Size = new System.Drawing.Size(238, 509);
             this.BMtree.TabIndex = 4;

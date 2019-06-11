@@ -1131,22 +1131,28 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Descripcion).HasMaxLength(300);
 
-                entity.Property(e => e.Impuesto1Id).HasMaxLength(50);
+                entity.Property(e => e.Impuesto1Id)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
-                entity.Property(e => e.Impuesto2Id).HasMaxLength(50);
+                entity.Property(e => e.Impuesto2Id)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
-                entity.Property(e => e.Impuesto3Id).HasMaxLength(50);
+                entity.Property(e => e.Impuesto3Id)
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
                 entity.Property(e => e.LaboratorioId)
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'SYS')");
 
-                entity.Property(e => e.LimiteCredito).HasColumnType("decimal(18, 3)");
-
                 entity.Property(e => e.LoteId)
                     .HasMaxLength(50)
                     .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Ocupado).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Precio1)
                     .HasColumnType("decimal(18, 3)")

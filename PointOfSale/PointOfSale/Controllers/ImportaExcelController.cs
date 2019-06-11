@@ -232,15 +232,14 @@ namespace PointOfSale.Controllers
                 using (ExcelPackage excelPackage = new ExcelPackage(fi))
                 {
                     ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
-
+                    ProductoController productoController = new ProductoController();
                     var start = workSheet.Dimension.Start;
                     var end = workSheet.Dimension.End;
 
                     for (int row = start.Row + 1; row <= end.Row; row++)
                     {
                         Fila = row;
-                        var productoImpuesto = new ProductoImpuesto();
-
+                        Producto p = null;
                         for (int col = start.Column; col <= end.Column; col++)
                         {
                             // ... Cell by cell: 1Clave, 2Descripcion
@@ -248,11 +247,17 @@ namespace PointOfSale.Controllers
                             switch (col)
                             {
                                 case 1:
-                                    productoImpuesto.ProductoId = workSheet.Cells[row, col].Text.Trim();
+                                    p = productoController.SelectOne(workSheet.Cells[row, col].Text.Trim());
                                     break;
                                 case 2:
-                                    productoImpuesto.ImpuestoId = workSheet.Cells[row, col].Text.Trim();
-                                    ProductoImpuestos.Add(productoImpuesto);
+                                    p.Impuesto1Id = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "SYS" : workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 3:
+                                    p.Impuesto2Id = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "SYS" : workSheet.Cells[row, col].Text.Trim();
+                                    break;
+                                case 4:
+                                    p.Impuesto3Id = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "SYS" : workSheet.Cells[row, col].Text.Trim();
+                                    productoController.Update(p);
                                     break;
                                 default:
                                     Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
@@ -263,9 +268,7 @@ namespace PointOfSale.Controllers
                         Application.DoEvents();
 
                     }
-
-                    var productoImpuestoController = new ProductoImpuestoController();
-                    Ambiente.Mensaje(productoImpuestoController.InsertRange(ProductoImpuestos));
+                    Ambiente.Mensaje("PROCESO CONCLUIDO");
 
                     if (Errores.Count > 0)
                         Ambiente.Mensaje(Errores.ToString());
@@ -773,6 +776,9 @@ namespace PointOfSale.Controllers
                                 case 1:
                                     //ProductoId
                                     producto.ProductoId = workSheet.Cells[row, col].Text.Trim();
+                                    producto.Impuesto1Id = "SYS";
+                                    producto.Impuesto2Id = "SYS";
+                                    producto.Impuesto3Id = "SYS";
                                     break;
                                 case 2:
                                     //Descripcion
@@ -917,6 +923,7 @@ namespace PointOfSale.Controllers
                                     break;
                                 case 19:
                                     //RutaImg
+
                                     producto.RutaImg = workSheet.Cells[row, col].Text.Trim().Length == 0 ? null : workSheet.Cells[row, col].Text.Trim();
                                     producto.CratedAt = DateTime.Now;
                                     producto.UpdatedAt = DateTime.Now;

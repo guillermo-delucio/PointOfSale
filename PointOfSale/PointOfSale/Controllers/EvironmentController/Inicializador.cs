@@ -110,6 +110,7 @@ namespace PointOfSale.Controllers
                         impuesto = new Impuesto();
                         impuesto.ImpuestoId = "SYS";
                         impuesto.Tasa = 0;
+                        impuesto.CImpuesto = "002";
                         db.Add(impuesto);
                     }
                     var unidadMedida = db.UnidadMedida.FirstOrDefault(x => x.UnidadMedidaId == "SYS");
