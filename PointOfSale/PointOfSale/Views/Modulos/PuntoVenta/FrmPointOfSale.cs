@@ -16,12 +16,16 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
     public partial class FrmPointOfSale : Form
     {
         Cliente cliente;
+        Venta venta;
+        Ventap ventaP;
+        Producto producto;
 
 
 
         public FrmPointOfSale()
         {
             InitializeComponent();
+
         }
 
 
@@ -30,7 +34,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             InicializaPOS();
         }
 
-      
+
 
         private void TxtCliente_KeyDown(object sender, KeyEventArgs e)
         {
@@ -62,6 +66,31 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void BtnBuscarCliente_Click(object sender, EventArgs e)
         {
             LanzaBusquedaClientes();
+        }
+
+        private void BtnBuscarProd_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmBuscaProducto())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    TxtProductoId.Text = form.Producto.ProductoId;
+                    TxtProductoId.Focus();
+                }
+            }
+        }
+
+        private void TxtProductoId_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                InsertaPartida();
+            }
+        }
+
+        private void InsertaPartida()
+        {
+            MessageBox.Show("Partida Insertada");
         }
     }
 }

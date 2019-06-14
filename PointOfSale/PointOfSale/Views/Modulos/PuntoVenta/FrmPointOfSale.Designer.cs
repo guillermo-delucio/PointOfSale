@@ -67,6 +67,8 @@
             this.BtnBuscarCliente = new System.Windows.Forms.Button();
             this.BtnBuscarProd = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.BtnSalir = new System.Windows.Forms.Button();
+            this.BtnMinimizar = new System.Windows.Forms.Button();
             this.BtnOpcionesImpr = new System.Windows.Forms.Button();
             this.BtnVisualizacionPrev = new System.Windows.Forms.Button();
             this.BtnDirectoImp = new System.Windows.Forms.Button();
@@ -74,7 +76,6 @@
             this.PbxImagen = new System.Windows.Forms.PictureBox();
             this.BtnBorrarPartida = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.BtnSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Malla)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxImagen)).BeginInit();
@@ -274,12 +275,13 @@
             // 
             this.TxtProductoId.BackColor = System.Drawing.SystemColors.Window;
             this.TxtProductoId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtProductoId.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtProductoId.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtProductoId.ForeColor = System.Drawing.Color.Black;
-            this.TxtProductoId.Location = new System.Drawing.Point(833, 384);
+            this.TxtProductoId.Location = new System.Drawing.Point(833, 388);
             this.TxtProductoId.Name = "TxtProductoId";
-            this.TxtProductoId.Size = new System.Drawing.Size(136, 35);
+            this.TxtProductoId.Size = new System.Drawing.Size(136, 31);
             this.TxtProductoId.TabIndex = 244;
+            this.TxtProductoId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtProductoId_KeyDown);
             // 
             // TxtDescrip
             // 
@@ -445,6 +447,31 @@
             this.BtnBuscarProd.TabIndex = 256;
             this.BtnBuscarProd.Text = "♥";
             this.BtnBuscarProd.UseVisualStyleBackColor = true;
+            this.BtnBuscarProd.Click += new System.EventHandler(this.BtnBuscarProd_Click);
+            // 
+            // BtnSalir
+            // 
+            this.BtnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSalir.Image = global::PointOfSale.Properties.Resources.exit;
+            this.BtnSalir.Location = new System.Drawing.Point(896, 438);
+            this.BtnSalir.Name = "BtnSalir";
+            this.BtnSalir.Size = new System.Drawing.Size(117, 46);
+            this.BtnSalir.TabIndex = 264;
+            this.BtnSalir.Text = "&Salir";
+            this.BtnSalir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnSalir.UseVisualStyleBackColor = true;
+            // 
+            // BtnMinimizar
+            // 
+            this.BtnMinimizar.Image = global::PointOfSale.Properties.Resources.inside;
+            this.BtnMinimizar.Location = new System.Drawing.Point(833, 438);
+            this.BtnMinimizar.Name = "BtnMinimizar";
+            this.BtnMinimizar.Size = new System.Drawing.Size(57, 46);
+            this.BtnMinimizar.TabIndex = 263;
+            this.BtnMinimizar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnMinimizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnMinimizar.UseVisualStyleBackColor = true;
             // 
             // BtnOpcionesImpr
             // 
@@ -523,16 +550,6 @@
             this.pictureBox1.TabIndex = 230;
             this.pictureBox1.TabStop = false;
             // 
-            // BtnSalir
-            // 
-            this.BtnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSalir.Location = new System.Drawing.Point(879, 438);
-            this.BtnSalir.Name = "BtnSalir";
-            this.BtnSalir.Size = new System.Drawing.Size(134, 46);
-            this.BtnSalir.TabIndex = 262;
-            this.BtnSalir.Text = "&Salir";
-            this.BtnSalir.UseVisualStyleBackColor = true;
-            // 
             // FrmPointOfSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -540,6 +557,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1023, 496);
             this.Controls.Add(this.BtnSalir);
+            this.Controls.Add(this.BtnMinimizar);
             this.Controls.Add(this.BtnOpcionesImpr);
             this.Controls.Add(this.BtnVisualizacionPrev);
             this.Controls.Add(this.BtnDirectoImp);
@@ -622,6 +640,7 @@
         private System.Windows.Forms.Button BtnVisualizacionPrev;
         private System.Windows.Forms.Button BtnOpcionesImpr;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button BtnMinimizar;
         private System.Windows.Forms.Button BtnSalir;
     }
 }

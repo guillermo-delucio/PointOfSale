@@ -200,9 +200,8 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Producto
-
                         .Include(x => x.ProductoSustancia)
-                        .Where(x => x.Descripcion.Contains(SearchText.Trim()) && x.IsDeleted == false).ToList();
+                        .Where(x => x.Descripcion.Contains(SearchText.Trim()) && x.IsDeleted == false).Take(100).ToList();
                 }
             }
             catch (Exception ex)

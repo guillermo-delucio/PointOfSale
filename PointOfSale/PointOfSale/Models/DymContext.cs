@@ -1441,15 +1441,13 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Venta>(entity =>
             {
-                entity.Property(e => e.AlmacenId).HasDefaultValueSql("((1))");
-
                 entity.Property(e => e.ClienteId)
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'SYS')");
 
                 entity.Property(e => e.ConceptoPago1)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'EFE')");
 
                 entity.Property(e => e.ConceptoPago2).HasMaxLength(50);
 
@@ -1464,19 +1462,19 @@ namespace PointOfSale.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.DatosCliente)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'SYS')");
 
                 entity.Property(e => e.Descuento)
                     .HasColumnType("decimal(18, 0)")
                     .HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.EstacionId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'ESTACION01')");
 
                 entity.Property(e => e.EstadoDocId)
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .HasDefaultValueSql("(N'PEN')");
 
                 entity.Property(e => e.FechaDoc)
@@ -1486,8 +1484,6 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Importe)
                     .HasColumnType("decimal(18, 3)")
                     .HasDefaultValueSql("((0))");
-
-                entity.Property(e => e.ImporteLetra).IsRequired();
 
                 entity.Property(e => e.Impuesto)
                     .HasColumnType("decimal(18, 3)")
@@ -1499,25 +1495,23 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.NoPrecio).HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Pago1).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Pago1)
+                    .HasColumnType("decimal(18, 6)")
+                    .HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.Pago2).HasMaxLength(50);
+                entity.Property(e => e.Pago2).HasColumnType("decimal(18, 6)");
 
-                entity.Property(e => e.Pago3).HasMaxLength(50);
+                entity.Property(e => e.Pago3).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.RutaXml).HasMaxLength(250);
 
                 entity.Property(e => e.SerieDocId)
-                    .IsRequired()
                     .HasMaxLength(50)
-                    .HasDefaultValueSql("(N'TCK')");
-
-                entity.Property(e => e.TipoComprobanteId).HasMaxLength(1);
+                    .HasDefaultValueSql("(N'F')");
 
                 entity.Property(e => e.TipoDocId)
-                    .IsRequired()
                     .HasMaxLength(50)
-                    .HasDefaultValueSql("(N'T')");
+                    .HasDefaultValueSql("(N'TIC')");
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
 
@@ -1537,24 +1531,16 @@ namespace PointOfSale.Models
                 entity.HasOne(d => d.Estacion)
                     .WithMany(p => p.Venta)
                     .HasForeignKey(d => d.EstacionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Venta_Estacion");
 
                 entity.HasOne(d => d.SerieDoc)
                     .WithMany(p => p.Venta)
                     .HasForeignKey(d => d.SerieDocId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Venta_Serie");
-
-                entity.HasOne(d => d.TipoComprobante)
-                    .WithMany(p => p.Venta)
-                    .HasForeignKey(d => d.TipoComprobanteId)
-                    .HasConstraintName("FK_Venta_C_Tipodecomprobante");
 
                 entity.HasOne(d => d.TipoDoc)
                     .WithMany(p => p.Venta)
                     .HasForeignKey(d => d.TipoDocId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Venta_TipoDoc");
             });
 

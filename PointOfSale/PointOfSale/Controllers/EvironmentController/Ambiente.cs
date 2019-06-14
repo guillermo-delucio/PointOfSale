@@ -357,6 +357,67 @@ namespace PointOfSale.Controllers
             return FDinero((precio + acumulado).ToString());
         }
 
+        public static decimal GetPrecioSalida(Producto producto, int listaPrecio = 1)
+        {
+            decimal precio = 0;
+            try
+            {
+
+                if (producto == null)
+                    return 0;
+
+                decimal tasa1 = GetTasaImpuesto(producto.Impuesto1Id);
+                decimal tasa2 = GetTasaImpuesto(producto.Impuesto2Id);
+                if (listaPrecio == 1)
+                {
+                    precio = producto.Precio1;
+
+                    if (tasa1 > 0)
+                        precio += precio * tasa1;
+
+                    if (tasa2 > 0)
+                        precio += precio * tasa2;
+
+                }
+                else if (listaPrecio == 2)
+                {
+                    precio = producto.Precio2;
+
+                    if (tasa1 > 0)
+                        precio += precio * tasa1;
+
+                    if (tasa2 > 0)
+                        precio += precio * tasa2;
+                }
+                else if (listaPrecio == 3)
+                {
+                    precio = producto.Precio3;
+
+                    if (tasa1 > 0)
+                        precio += precio * tasa1;
+
+                    if (tasa2 > 0)
+                        precio += precio * tasa2;
+                }
+                else if (listaPrecio == 4)
+                {
+                    precio = producto.Precio4;
+
+                    if (tasa1 > 0)
+                        precio += precio * tasa1;
+
+                    if (tasa2 > 0)
+                        precio += precio * tasa2;
+                }
+
+
+            }
+            catch (Exception)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + " AL CACULAR EL PRECIO DE SALIDA");
+            }
+            return precio;
+        }
 
 
         public static decimal ToDecimal(string precio)
@@ -430,8 +491,6 @@ namespace PointOfSale.Controllers
                         return impuesto.Tasa;
                     else
                         return 0;
-
-
                 }
             }
             catch (Exception ex)
