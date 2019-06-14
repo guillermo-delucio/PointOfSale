@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PointOfSale.Views.Modulos.PuntoVenta;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,15 @@ namespace PointOfSale.Views.Menus
         public FrmMenuPuntoVenta()
         {
             InitializeComponent();
+        }
+
+        private void BtnPOS_Click(object sender, EventArgs e)
+        {
+            var o = new FrmPointOfSale
+            {
+                MdiParent = this.ParentForm
+            };
+            o.Show();
         }
     }
 }

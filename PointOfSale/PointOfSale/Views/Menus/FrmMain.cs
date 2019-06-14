@@ -1,4 +1,5 @@
 ﻿
+using PointOfSale.Views.Menus;
 using PointOfSale.Views.Modulos.Catalogos;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,11 @@ namespace DYM.Views
 
         private void BtnPuntoVenta_Click(object sender, EventArgs e)
         {
-
+            var form = new FrmMenuPuntoVenta
+            {
+                MdiParent = MdiParent.MdiParent
+            };
+            form.Show();
         }
 
         private void Button7_Click(object sender, EventArgs e)

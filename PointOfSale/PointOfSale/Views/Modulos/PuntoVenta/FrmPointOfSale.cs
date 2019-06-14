@@ -16,5 +16,16 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             InitializeComponent();
         }
+
+
+        private void FrmPointOfSale_Load(object sender, EventArgs e)
+        {
+            InicializaPOS();
+        }
+
+        private void InicializaPOS()
+        {
+
+        }
     }
 }

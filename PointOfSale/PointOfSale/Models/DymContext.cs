@@ -1483,10 +1483,6 @@ namespace PointOfSale.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.FechaVencimiento)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
                 entity.Property(e => e.Importe)
                     .HasColumnType("decimal(18, 3)")
                     .HasDefaultValueSql("((0))");

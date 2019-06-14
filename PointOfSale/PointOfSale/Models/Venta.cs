@@ -13,9 +13,7 @@ namespace PointOfSale.Models
         public int VentaId { get; set; }
         public string TipoDocId { get; set; }
         public string SerieDocId { get; set; }
-        public int NoReferencia { get; set; }
-        public DateTime? FechaDoc { get; set; }
-        public DateTime? FechaVencimiento { get; set; }
+        public DateTime FechaDoc { get; set; }
         public string ClienteId { get; set; }
         public decimal? Importe { get; set; }
         public decimal? Impuesto { get; set; }
