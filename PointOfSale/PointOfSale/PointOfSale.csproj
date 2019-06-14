@@ -379,6 +379,18 @@
     <Compile Include="Views\Modulos\Logistica\FrmLotesCaducidad.Designer.cs">
       <DependentUpon>FrmLotesCaducidad.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmBuscaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmBuscaCliente.Designer.cs">
+      <DependentUpon>FrmBuscaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmBuscaProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmBuscaProducto.Designer.cs">
+      <DependentUpon>FrmBuscaProducto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modulos\PuntoVenta\FrmPointOfSale.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -476,6 +488,9 @@
     <EmbeddedResource Include="Views\Modulos\Logistica\FrmLotesCaducidad.resx">
       <DependentUpon>FrmLotesCaducidad.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmBuscaProducto.resx">
+      <DependentUpon>FrmBuscaProducto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmPointOfSale.resx">
       <DependentUpon>FrmPointOfSale.cs</DependentUpon>
     </EmbeddedResource>
@@ -537,6 +552,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\punto de venta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buscap.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
