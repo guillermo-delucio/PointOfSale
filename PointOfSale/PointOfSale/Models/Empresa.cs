@@ -5,11 +5,6 @@ namespace PointOfSale.Models
 {
     public partial class Empresa
     {
-        public Empresa()
-        {
-            Serie = new HashSet<Serie>();
-        }
-
         public int EmpresaId { get; set; }
         public string Nombre { get; set; }
         public string Rfc { get; set; }
@@ -29,6 +24,5 @@ namespace PointOfSale.Models
         public string RegimenFiscalId { get; set; }
 
         public virtual CRegimenfiscal RegimenFiscal { get; set; }
-        public virtual ICollection<Serie> Serie { get; set; }
     }
 }

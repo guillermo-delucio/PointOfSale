@@ -17,6 +17,7 @@ namespace PointOfSale.Controllers
         public static Dictionary<int, string> CatalgoMensajes { get; set; }
 
         public static Usuario LoggedUser { get; set; }
+        public static Estacion Estacion { get; set; }
         public static string RutaImgs { get; set; }
         public static string PrefijoRutaImg { get; set; }
 

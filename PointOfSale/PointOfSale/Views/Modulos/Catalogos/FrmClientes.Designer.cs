@@ -559,10 +559,10 @@
             this.CboPrecioDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.CboPrecioDefault.FormattingEnabled = true;
             this.CboPrecioDefault.Items.AddRange(new object[] {
-            "PRECIO 1",
-            "PRECIO 2",
-            "PRECIO 3",
-            "PRECIO 4"});
+            "1",
+            "2",
+            "3",
+            "4"});
             this.CboPrecioDefault.Location = new System.Drawing.Point(18, 611);
             this.CboPrecioDefault.Name = "CboPrecioDefault";
             this.CboPrecioDefault.Size = new System.Drawing.Size(297, 26);

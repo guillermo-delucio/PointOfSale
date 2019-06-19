@@ -221,7 +221,6 @@ namespace PointOfSale.Controllers
                     //var query= db.Categories.Where(c=>c.Category_ID==cat_id).SelectMany(c=>Articles);
 
                     var query = from prod in db.Producto
-
                                    .Include(x => x.ProductoSustancia)
                                 where prod.ProductoSustancia.Any(c => c.SustanciaId.Contains(SearchText.Trim()))
                                 select prod;
@@ -235,5 +234,36 @@ namespace PointOfSale.Controllers
 
             return null;
         }
+
+
+        public string TraeSiguienteLote(Producto producto, decimal cantidad)
+        {
+            try
+            {
+                string l = "";
+                using (var db = new DymContext())
+                {
+                    //var query= db.Categories.Where(c=>c.Category_ID==cat_id).SelectMany(c=>Articles);
+                    var lotes = db.Lote.Where(x => x.ProductoId == producto.ProductoId && x.StockRestante > 0).OrderBy(x => x.CreatedAt);
+
+                    foreach (var lote in lotes)
+                    {
+                        if (lote.StockRestante >= cantidad)
+                            return l + lote.LoteId;
+                        else
+                        {
+                            l += lote + ",";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+            }
+
+            return null;
+        }
+
     }
 }

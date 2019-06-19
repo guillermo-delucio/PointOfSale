@@ -33,7 +33,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
             if (this.objeto != null)
             {
-                objeto = (Categoria)this.objeto;
+                objeto = (Venta)this.objeto;
                 TxtClave.Text = objeto.CategoriaId;
             }
 
@@ -68,7 +68,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 if (TxtClave.Text.Trim().Length == 0)
                     return;
 
-                objeto = new Categoria();
+                objeto = new Categoria(); 
                 objeto.CategoriaId = TxtClave.Text.Trim();
                 objeto.Nombre = TxtNombre.Text.Trim();
                 if (categoriaController.InsertOne(objeto))

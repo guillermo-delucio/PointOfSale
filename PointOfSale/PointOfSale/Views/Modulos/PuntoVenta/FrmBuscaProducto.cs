@@ -15,9 +15,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
     public partial class FrmBuscaProducto : Form
     {
         public Producto Producto { get; set; }
-        ProductoController ProductoController;
-        PresentacionController PresentacionController;
-        LaboratorioController LaboratorioController;
+
+        readonly ProductoController ProductoController;
+        readonly PresentacionController PresentacionController;
+        readonly LaboratorioController LaboratorioController;
 
 
         public FrmBuscaProducto()
@@ -64,7 +65,12 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Mallap.Rows[Mallap.RowCount - 1].Cells[7].Value = p.ProductoId;
             }
             LblCoincidencias.Text = productos.Count + " Coincidencias";
-            Mallap.Focus();
+            if (Mallap.RowCount > 0)
+            {
+                Mallap.Focus();
+                Mallap.Rows[0].Selected = true;
+            }
+
         }
 
         private void TxtSustancia_KeyDown(object sender, KeyEventArgs e)

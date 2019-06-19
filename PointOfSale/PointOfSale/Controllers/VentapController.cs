@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Controllers
 {
-    public class VentaController
+    public class VentapController
     {
-        public Venta SelectOne(int Id)
+        public Ventap SelectOne(int Id)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.Venta.FirstOrDefault(x => x.VentaId == Id);
+                    return db.Ventap.FirstOrDefault(x => x.VentapId == Id);
                 }
             }
             catch (Exception ex)
@@ -25,7 +25,7 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
-        public bool InsertOne(Venta o)
+        public bool InsertOne(Ventap o)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace PointOfSale.Controllers
             }
             return false;
         }
-        public bool UpdateOne(Venta o)
+        public bool UpdateOne(Ventap o)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace PointOfSale.Controllers
             }
             return false;
         }
-        public bool DeleteOne(Venta o)
+        public bool DeleteOne(Ventap o)
         {
             try
             {

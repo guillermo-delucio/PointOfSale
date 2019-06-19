@@ -69,7 +69,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
             TxtTelefono.Text = objeto.Telefono;
             TxtFormaPago.Text = objeto.FormaPagoId;
             TxtMetodoPago.Text = objeto.MetodoPagoId;
-            CboPrecioDefault.Text = objeto.PrecioDefault;
+            CboPrecioDefault.Text = objeto.PrecioDefault.ToString();
 
         }
 
@@ -117,7 +117,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
                 objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
                 objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
-                objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? "PRECIO 1" : CboPrecioDefault.Text.Trim();
+                objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
 
                 success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                 success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
@@ -159,7 +159,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
                 objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
                 objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
-                objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? "PRECIO 1" : CboPrecioDefault.Text.Trim();
+                objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
 
                 success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                 success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);

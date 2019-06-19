@@ -12,11 +12,8 @@ namespace PointOfSale.Models
 
         public int VentaId { get; set; }
         public string TipoDocId { get; set; }
-        public string SerieDocId { get; set; }
         public DateTime? FechaDoc { get; set; }
         public string ClienteId { get; set; }
-        public decimal? Importe { get; set; }
-        public decimal? Impuesto { get; set; }
         public decimal? Descuento { get; set; }
         public int? NoPrecio { get; set; }
         public string EstadoDocId { get; set; }
@@ -37,15 +34,17 @@ namespace PointOfSale.Models
         public string Xml { get; set; }
         public string RutaXml { get; set; }
         public string UuId { get; set; }
-        public string ImporteLetra { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string UpdatedBy { get; set; }
+        public decimal? SubTotal { get; set; }
+        public decimal? Impuesto { get; set; }
+        public decimal? Total { get; set; }
+        public string TotalConLetra { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual Usuario CreatedByNavigation { get; set; }
         public virtual Estacion Estacion { get; set; }
-        public virtual Serie SerieDoc { get; set; }
         public virtual TipoDoc TipoDoc { get; set; }
         public virtual ICollection<Ventap> Ventap { get; set; }
     }

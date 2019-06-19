@@ -169,6 +169,7 @@
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VentaController.cs" />
+    <Compile Include="Controllers\VentapController.cs" />
     <Compile Include="Models\Almacen.cs" />
     <Compile Include="Models\CAduana.cs" />
     <Compile Include="Models\CambiosPrecio.cs" />

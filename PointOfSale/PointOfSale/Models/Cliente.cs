@@ -31,7 +31,7 @@ namespace PointOfSale.Models
         public string Correo { get; set; }
         public string MetodoPagoId { get; set; }
         public string FormaPagoId { get; set; }
-        public string PrecioDefault { get; set; }
+        public int? PrecioDefault { get; set; }
         public bool TieneLicencia { get; set; }
         public string UsoCfdiid { get; set; }
 

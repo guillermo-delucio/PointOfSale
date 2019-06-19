@@ -87,7 +87,7 @@ namespace PointOfSale.Controllers
                         db.Add(categoria);
                     }
 
-                
+
                     var presentacion = db.Presentacion.FirstOrDefault(x => x.PresentacionId == "SYS");
                     if (presentacion == null)
                     {
@@ -220,6 +220,17 @@ namespace PointOfSale.Controllers
                         db.Add(tipoDocCxp);
                     }
 
+                    var clienteSYS = db.Cliente.FirstOrDefault(x => x.ClienteId == "SYS");
+                    if (clienteSYS == null)
+                    {
+                        clienteSYS = new Cliente();
+                        clienteSYS.ClienteId = "SYS";
+                        clienteSYS.Negocio = "PUBLICO EN GENERAL";
+                        clienteSYS.RazonSocial = "PUBLICO EN GENERAL";
+                        clienteSYS.MetodoPagoId = "PUE";
+                        clienteSYS.FormaPagoId = "01";
+                        db.Add(clienteSYS);
+                    }
 
                     db.SaveChanges();
                 }

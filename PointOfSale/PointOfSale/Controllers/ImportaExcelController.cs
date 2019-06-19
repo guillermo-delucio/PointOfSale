@@ -1203,7 +1203,7 @@ namespace PointOfSale.Controllers
                                     cliente.DiasCredito = 0;
                                     cliente.IsDeleted = false;
                                     cliente.MetodoPagoId = "PUE";
-                                    cliente.PrecioDefault = "PRECIO 1";
+                                    cliente.PrecioDefault = 1;
                                     cliente.FormaPagoId = "01";
                                     cliente.Saldo = 0;
 

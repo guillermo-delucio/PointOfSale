@@ -21,6 +21,7 @@ namespace PointOfSale.Models
         public string Area { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsDeleted { get; set; }
+        public string EstacionId { get; set; }
 
         public virtual ICollection<CambiosPrecio> CambiosPrecio { get; set; }
         public virtual ICollection<Compra> Compra { get; set; }

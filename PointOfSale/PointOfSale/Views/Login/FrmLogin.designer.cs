@@ -37,6 +37,8 @@
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.TxtEstacionId = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,11 +48,11 @@
             this.txtPassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.ForeColor = System.Drawing.Color.Black;
-            this.txtPassword.Location = new System.Drawing.Point(12, 225);
+            this.txtPassword.Location = new System.Drawing.Point(229, 172);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(415, 24);
-            this.txtPassword.TabIndex = 2;
+            this.txtPassword.Size = new System.Drawing.Size(211, 24);
+            this.txtPassword.TabIndex = 1;
             this.txtPassword.Text = "ADMIN";
             this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPassword_KeyDown);
             // 
@@ -59,7 +61,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label1.Location = new System.Drawing.Point(13, 204);
+            this.label1.Location = new System.Drawing.Point(226, 151);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 18);
             this.label1.TabIndex = 123;
@@ -73,9 +75,10 @@
             this.txtUser.ForeColor = System.Drawing.Color.Black;
             this.txtUser.Location = new System.Drawing.Point(12, 172);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(415, 24);
+            this.txtUser.Size = new System.Drawing.Size(211, 24);
             this.txtUser.TabIndex = 0;
             this.txtUser.Text = "JESUS.M";
+            this.txtUser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtUser_KeyDown);
             // 
             // label6
             // 
@@ -84,9 +87,9 @@
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label6.Location = new System.Drawing.Point(13, 151);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 18);
+            this.label6.Size = new System.Drawing.Size(93, 18);
             this.label6.TabIndex = 121;
-            this.label6.Text = "USUARIO";
+            this.label6.Text = "♥USUARIO";
             // 
             // lblTitulo
             // 
@@ -106,12 +109,12 @@
             this.label14.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.label14.Location = new System.Drawing.Point(0, 88);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(438, 10);
+            this.label14.Size = new System.Drawing.Size(445, 10);
             this.label14.TabIndex = 118;
             // 
             // BtnCancelar
             // 
-            this.BtnCancelar.Location = new System.Drawing.Point(279, 306);
+            this.BtnCancelar.Location = new System.Drawing.Point(292, 301);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(148, 40);
             this.BtnCancelar.TabIndex = 4;
@@ -121,7 +124,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(126, 306);
+            this.btnAceptar.Location = new System.Drawing.Point(139, 301);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(148, 40);
             this.btnAceptar.TabIndex = 3;
@@ -139,12 +142,38 @@
             this.pictureBox1.TabIndex = 124;
             this.pictureBox1.TabStop = false;
             // 
+            // TxtEstacionId
+            // 
+            this.TxtEstacionId.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtEstacionId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtEstacionId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtEstacionId.ForeColor = System.Drawing.Color.Black;
+            this.TxtEstacionId.Location = new System.Drawing.Point(12, 229);
+            this.TxtEstacionId.Name = "TxtEstacionId";
+            this.TxtEstacionId.Size = new System.Drawing.Size(428, 24);
+            this.TxtEstacionId.TabIndex = 2;
+            this.TxtEstacionId.Text = "SYS";
+            this.TxtEstacionId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtEstacionId_KeyDown);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label2.Location = new System.Drawing.Point(9, 208);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(101, 18);
+            this.label2.TabIndex = 126;
+            this.label2.Text = "♥ESTACIÓN";
+            // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(439, 358);
+            this.ClientSize = new System.Drawing.Size(446, 353);
+            this.Controls.Add(this.TxtEstacionId);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.pictureBox1);
@@ -154,7 +183,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.label14);
-            this.MaximumSize = new System.Drawing.Size(455, 397);
+            this.MaximumSize = new System.Drawing.Size(462, 392);
             this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmLogin";
@@ -175,5 +204,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button BtnCancelar;
         private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.TextBox TxtEstacionId;
+        private System.Windows.Forms.Label label2;
     }
 }
