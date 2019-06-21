@@ -29,6 +29,9 @@ namespace PointOfSale.Models
         public string ConceptoPago1 { get; set; }
         public string ConceptoPago2 { get; set; }
         public string ConceptoPago3 { get; set; }
+        public string FormaPago1 { get; set; }
+        public string FormaPago2 { get; set; }
+        public string FormaPago3 { get; set; }
         public string EstacionId { get; set; }
         public bool Cortada { get; set; }
         public string Xml { get; set; }
@@ -41,6 +44,7 @@ namespace PointOfSale.Models
         public decimal? Impuesto { get; set; }
         public decimal? Total { get; set; }
         public string TotalConLetra { get; set; }
+        public bool? EsCxc { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual Usuario CreatedByNavigation { get; set; }

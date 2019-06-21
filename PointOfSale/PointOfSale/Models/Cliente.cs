@@ -34,6 +34,7 @@ namespace PointOfSale.Models
         public int? PrecioDefault { get; set; }
         public bool TieneLicencia { get; set; }
         public string UsoCfdiid { get; set; }
+        public bool? EsCxc { get; set; }
 
         public virtual CFormapago FormaPago { get; set; }
         public virtual FormaPago FormaPagoNavigation { get; set; }

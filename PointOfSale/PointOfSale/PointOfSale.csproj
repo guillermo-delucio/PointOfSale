@@ -168,6 +168,7 @@
     <Compile Include="Controllers\TablasIntermedia\ProductoSustanciaController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\Utils\Moneda.cs" />
     <Compile Include="Controllers\VentaController.cs" />
     <Compile Include="Controllers\VentapController.cs" />
     <Compile Include="Models\Almacen.cs" />
@@ -393,6 +394,12 @@
     <Compile Include="Views\Modulos\PuntoVenta\FrmBuscaProducto.Designer.cs">
       <DependentUpon>FrmBuscaProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmCobroRapido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmCobroRapido.Designer.cs">
+      <DependentUpon>FrmCobroRapido.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modulos\PuntoVenta\FrmPointOfSale.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -493,6 +500,9 @@
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmBuscaProducto.resx">
       <DependentUpon>FrmBuscaProducto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmCobroRapido.resx">
+      <DependentUpon>FrmCobroRapido.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmPointOfSale.resx">
       <DependentUpon>FrmPointOfSale.cs</DependentUpon>
     </EmbeddedResource>
@@ -566,6 +576,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\exit2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\writing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

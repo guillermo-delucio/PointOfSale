@@ -16,9 +16,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
     public partial class FrmPointOfSale : Form
     {
         private Cliente oCliente;
-        private Venta oVenta;
+        public Venta oVenta;
         private Ventap oVentap;
         private Producto oProducto;
+        private Cxc oCxc;
         private VentaController oVentaController;
         private VentapController oVentapController;
         private ProductoController oProductoController;
@@ -27,7 +28,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private int SigPartida;
         private int nImpuestos;
         bool succes;
-        bool CambioDeCliente;
+
 
 
 
@@ -41,15 +42,18 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             oVenta = null;
             oVentap = null;
             oProducto = null;
+            oCxc = null;
             oVentaController = new VentaController();
             oVentapController = new VentapController();
             oProductoController = new ProductoController();
             oClienteController = new ClienteController();
+            //oCxcController = new CxcController();
+
             MaxPartidas = 100;
             SigPartida = 0;
             nImpuestos = 0;
             succes = true;
-            CambioDeCliente = false;
+
         }
 
         private void InicializaPOS()
@@ -152,8 +156,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Malla.Rows[SigPartida].Cells[9].Value = oVentap.VentapId;
                 Malla.Rows[SigPartida].Cells[10].Value = oProducto.ProductoId;
                 SigPartida++;
-                ResetPartida();
                 CalculaTotales();
+                ResetPartida();
 
             }
             else Ambiente.Mensaje("Algo salio mal con la venta");
@@ -321,14 +325,67 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 else
                     InsertaPartida();
             }
+            else if (e.KeyCode == Keys.F5)
+            {
+                using (var form = new FrmCobroRapido((decimal)oVenta.Total))
+                {
+                    
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        oVenta.TipoDocId = form.tipoDoc;
+                        oVenta.TotalConLetra = form.totalLetra;
+                        oVenta.EsCxc = form.Cxc;
+
+                        oVenta.FormaPago1 = form.formapago1;
+                        oVenta.FormaPago2 = form.formapago2;
+                        oVenta.FormaPago3 = form.formapago3;
+
+                        oVenta.ConceptoPago1 = form.concepto1;
+                        oVenta.ConceptoPago2 = form.concepto2;
+                        oVenta.ConceptoPago3 = form.concepto3;
+
+                        oVenta.Pago1 = form.pago1;
+                        oVenta.Pago2 = form.pago2;
+                        oVenta.Pago3 = form.pago3;
+                        oVenta.EstadoDocId = "CON";
+
+                        if ((bool)oVenta.EsCxc)
+                        {
+                            InsertaCXC();
+
+                        }
+
+
+                        if (!oVentaController.UpdateOne(oVenta))
+                            Ambiente.Mensaje("Algo salío mal al confirmar la venta");
+                        MessageBox.Show("Venta cerrada");
+                    }
+                }
+            }
         }
 
-
+        private void InsertaCXC()
+        {
+            MessageBox.Show("CXC insertada");
+        }
 
         private void TxtCliente_Leave(object sender, EventArgs e)
         {
             CalculaTotales();
+            ActualizaDatosCliente();
             TxtProductoId.Focus();
+        }
+
+        private void ActualizaDatosCliente()
+        {
+            if (oVenta == null)
+                return;
+
+            oVenta.ClienteId = oCliente.ClienteId;
+            oVenta.DatosCliente = oCliente.Negocio + " " + oCliente.Direccion + " " + oCliente.Colonia
+                            + " " + oCliente.Municipio + " " + oCliente.Localidad + " " + oCliente.Estado + " TEL." + oCliente.Telefono;
+            if (!oVentaController.UpdateOne(oVenta))
+                Ambiente.Mensaje("Error al actualizar los datos del cliente");
         }
 
         private void BtnMinimizar_Click(object sender, EventArgs e)
@@ -343,6 +400,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void FinalizaVenta()
         {
+
+
             Close();
         }
 
@@ -362,13 +421,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             }
         }
 
-        private void Malla_KeyDown(object sender, KeyEventArgs e)
+        private void BtnRecalculaTotales_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
+            var o = new FrmCobroRapido(455.90m);
+            o.Show();
 
-
-            }
         }
     }
 }

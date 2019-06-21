@@ -22,7 +22,7 @@ namespace PointOfSale.Views.Menus
         {
             var o = new FrmPointOfSale
             {
-                MdiParent = this.ParentForm
+               // MdiParent = MdiParent.MdiParent
             };
             o.Show();
         }

@@ -201,7 +201,7 @@ namespace PointOfSale.Controllers
                 {
                     return db.Producto
                         .Include(x => x.ProductoSustancia)
-                        .Where(x => x.Descripcion.Contains(SearchText.Trim()) && x.IsDeleted == false).Take(100).ToList();
+                        .Where(x => x.Descripcion.Contains(SearchText.Trim()) && x.IsDeleted == false).Take(50).ToList();
                 }
             }
             catch (Exception ex)
@@ -220,11 +220,23 @@ namespace PointOfSale.Controllers
                 {
                     //var query= db.Categories.Where(c=>c.Category_ID==cat_id).SelectMany(c=>Articles);
 
-                    var query = from prod in db.Producto
-                                   .Include(x => x.ProductoSustancia)
-                                where prod.ProductoSustancia.Any(c => c.SustanciaId.Contains(SearchText.Trim()))
-                                select prod;
-                    return query.ToList();
+                    if (SearchText.Trim().Length == 0)
+                    {
+                        var query = from prod in db.Producto.Take(50)
+                                       .Include(x => x.ProductoSustancia)
+                                    where prod.ProductoSustancia.Any(c => c.SustanciaId.Contains(SearchText.Trim()))
+                                    select prod;
+                        return query.ToList();
+                    }
+                    else
+                    {
+                        var query = from prod in db.Producto
+                                       .Include(x => x.ProductoSustancia)
+                                    where prod.ProductoSustancia.Any(c => c.SustanciaId.Contains(SearchText.Trim()))
+                                    select prod;
+                        return query.ToList();
+                    }
+
                 }
             }
             catch (Exception ex)

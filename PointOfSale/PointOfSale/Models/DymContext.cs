@@ -442,6 +442,8 @@ namespace PointOfSale.Models
                     .HasColumnName("CP")
                     .HasMaxLength(50);
 
+                entity.Property(e => e.EsCxc).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.Estado).HasMaxLength(50);
 
                 entity.Property(e => e.FormaPagoId)
@@ -1438,6 +1440,8 @@ namespace PointOfSale.Models
                     .HasColumnType("decimal(18, 0)")
                     .HasDefaultValueSql("((0))");
 
+                entity.Property(e => e.EsCxc).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.EstacionId)
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'ESTACION01')");
@@ -1449,6 +1453,14 @@ namespace PointOfSale.Models
                 entity.Property(e => e.FechaDoc)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.FormaPago1)
+                    .HasMaxLength(2)
+                    .HasDefaultValueSql("(N'01')");
+
+                entity.Property(e => e.FormaPago2).HasMaxLength(2);
+
+                entity.Property(e => e.FormaPago3).HasMaxLength(2);
 
                 entity.Property(e => e.Impuesto)
                     .HasColumnType("decimal(18, 6)")
