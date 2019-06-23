@@ -19,6 +19,7 @@ namespace PointOfSale.Controllers
                .Include(x => x.UsuarioRole)
                .FirstOrDefault();
 
+
                 if (user != null)
                 {
                     if (Decrypt(user.Password).Equals(password.Trim()))
