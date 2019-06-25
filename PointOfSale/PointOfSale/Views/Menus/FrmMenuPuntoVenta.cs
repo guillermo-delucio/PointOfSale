@@ -1,12 +1,4 @@
-﻿using PointOfSale.Views.Modulos.PuntoVenta;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace PointOfSale.Views.Menus
@@ -20,11 +12,13 @@ namespace PointOfSale.Views.Menus
 
         private void BtnPOS_Click(object sender, EventArgs e)
         {
-            var o = new FrmPointOfSale
-            {
-               // MdiParent = MdiParent.MdiParent
-            };
+            var o = new PointOfSale.Views.Modulos.PuntoVenta.PointOfSale();
             o.Show();
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

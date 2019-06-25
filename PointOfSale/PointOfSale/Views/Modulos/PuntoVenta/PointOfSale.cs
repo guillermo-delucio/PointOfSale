@@ -1,0 +1,432 @@
+﻿using PointOfSale.Controllers;
+using PointOfSale.Models;
+using PointOfSale.Views.Modulos.Busquedas;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PointOfSale.Views.Modulos.PuntoVenta
+{
+    public partial class PointOfSale : Form
+    {
+        //Declaraciones
+        public Venta venta;
+        List<Ventap> partidas;
+        public Cliente cliente;
+        public Producto producto;
+
+        private VentaController ventaController;
+        private VentapController ventapController;
+        private ProductoController productoController;
+        private ClienteController clienteController;
+        private InventarioController inventarioController;
+
+        private const int NPARTIDAS = 100;
+        private int SigPartida;
+        private string datosCliente;
+
+
+        public PointOfSale()
+        {
+            InitializeComponent();
+            ResetPDV();
+        }
+
+        private void CalculaTotales()
+        {
+            venta.SubTotal = 0;
+            venta.Impuesto = 0;
+            venta.Total = 0;
+            int index = 0;
+            foreach (var partida in partidas)
+            {
+                //partida.Cantidad = 1; actualizado desde el grid o incrementos rapidos
+                //Calcular el total por partida
+                producto = productoController.SelectOne(partida.ProductoId);
+
+                partida.Precio = SeleccionaPrecio(producto, cliente);
+                partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
+                partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
+                partida.LoteId = TraeLote(producto, partida.Cantidad);
+                partida.SubTotal = partida.Cantidad * partida.Precio;
+                partida.ImporteImpuesto1 = partida.SubTotal * partida.Impuesto1;
+                partida.ImporteImpuesto2 = partida.SubTotal * partida.Impuesto2;
+                partida.Total = partida.SubTotal + partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+
+                //sumar el total por partida a los totales de la venta
+                venta.SubTotal += partida.SubTotal;
+                venta.Impuesto += partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+                venta.Total = venta.SubTotal + venta.Impuesto;
+
+                //Refleajar el cambio  de precio y columnas calculadas en la malla                
+                Malla.Rows[index].Cells[2].Value = partida.Cantidad;
+                Malla.Rows[index].Cells[3].Value = Math.Round(partida.Precio, 2);
+                Malla.Rows[index].Cells[4].Value = partida.SubTotal;
+                Malla.Rows[index].Cells[5].Value = partida.Impuesto1;
+                Malla.Rows[index].Cells[6].Value = partida.Impuesto2;
+                Malla.Rows[index].Cells[7].Value = partida.Total;
+                Malla.Rows[index].Cells[8].Value = partida.LoteId;
+                Malla.Rows[index].Cells[9].Value = partida.ProductoId;
+
+
+                //Reflear totales en el PDV
+                TxtSubtotal.Text = Ambiente.FDinero(venta.SubTotal.ToString());
+                TxtTotal.Text = Ambiente.FDinero(venta.Total.ToString());
+
+                index++;
+            }
+
+        }
+        private void Incrementa()
+        {
+
+        }
+        private void Decrementa()
+        {
+
+        }
+        private void ActualizaCantidad()
+        {
+
+        }
+        private void ResetPartida()
+        {
+            producto = null;
+            TxtProductoId.Text = "";
+            SigPartida++;
+        }
+        private void ResetPDV()
+        {
+            venta = new Venta();
+            partidas = new List<Ventap>();
+            cliente = null;
+            producto = null;
+            SigPartida = 0;
+            datosCliente = "PUBLICO EN GENERAL";
+            TxtSubtotal.Text = "";
+            TxtTotal.Text = "";
+            TxtCliente.Text = "";
+
+            ventaController = new VentaController();
+            ventapController = new VentapController();
+            productoController = new ProductoController();
+            clienteController = new ClienteController();
+            inventarioController = new InventarioController();
+
+            //Reset malla
+            Malla.Rows.Clear();
+            for (int i = 0; i < NPARTIDAS; i++)
+            {
+                Malla.Rows.Add();
+                Malla.Rows[i].Cells[2].Style.BackColor = Color.Yellow;
+                Malla.Rows[i].Cells[8].Style.BackColor = Color.Yellow;
+            }
+
+            CreaVenta();
+
+        }
+        private void CreaVenta()
+        {
+
+
+            if (cliente == null)
+            {
+                venta.ClienteId = "SYS";
+                venta.DatosCliente = "PUBLICO EN GENERAL";
+                venta.NoPrecio = 1;
+            }
+            else
+            {
+                venta.ClienteId = cliente.ClienteId;
+                venta.DatosCliente = datosCliente;
+                venta.NoPrecio = cliente.PrecioDefault;
+            }
+
+
+            venta.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+            venta.EstacionId = Ambiente.Estacion.EstacionId;
+            venta.CreatedAt = DateTime.Now;
+            venta.SubTotal = 0;
+            venta.Impuesto = 0;
+            venta.Total = 0;
+            venta.Pago1 = 0;
+            venta.Pago2 = 0;
+            venta.Pago3 = 0;
+            venta.NoRef = 0;
+            ventaController.InsertOne(venta);
+
+        }
+        private void CierraVenta(FrmCobroRapido form)
+        {
+            venta.TipoDocId = form.tipoDoc;
+
+            if (venta.TipoDocId.Equals("TIC"))
+                venta.NoRef = Ambiente.TraeSiguiente("TIC");
+
+            else if (venta.TipoDocId.Equals("FAC"))
+                venta.NoRef = Ambiente.TraeSiguiente("FAC");
+
+
+            venta.TotalConLetra = form.totalLetra;
+            venta.EsCxc = form.Cxc;
+
+            venta.FormaPago1 = form.formapago1;
+            venta.FormaPago2 = form.formapago2;
+            venta.FormaPago3 = form.formapago3;
+
+            venta.ConceptoPago1 = form.concepto1;
+            venta.ConceptoPago2 = form.concepto2;
+            venta.ConceptoPago3 = form.concepto3;
+
+            venta.Pago1 = form.pago1;
+            venta.Pago2 = form.pago2;
+            venta.Pago3 = form.pago3;
+            venta.Cambio = form.cambio;
+            venta.EstadoDocId = "CON";
+
+
+            if (ventaController.UpdateOne(venta))
+            {
+
+                GuardaPartidas();
+
+
+                if (venta.TipoDocId.Equals("TIC"))
+                {
+                    Ambiente.UpdateSiguiente("TIC");
+                    LblUltDocumento.Text = "TICKET  T" + venta.NoRef + " " + DateTime.Now.ToShortTimeString();
+                }
+                else if (venta.TipoDocId.Equals("FAC"))
+                {
+                    Ambiente.UpdateSiguiente("FAC");
+                    LblUltDocumento.Text = "FACTURA  F" + venta.NoRef + " " + DateTime.Now.ToShortTimeString();
+                }
+
+                LblCambio.Text = "SU CAMBIO: " + Ambiente.FDinero(venta.Cambio.ToString());
+                ResetPDV();
+            }
+            else
+                Ambiente.Mensaje("Cierre de la venta fue incorrecto");
+
+
+
+        }
+        private void EliminaVenta()
+        {
+            if (venta != null)
+                ventaController.DeleteOne(venta);
+        }
+        private void PendienteOdescarta()
+        {
+            if (partidas.Count > 0)
+            {
+                if (Ambiente.Pregunta("Quiere dejar la venta como pendiente"))
+                    GuardaPartidas();
+                else
+                    EliminaVenta();
+            }
+            else
+                EliminaVenta();
+            Close();
+        }
+        private void InsertaPartida()
+        {
+            if (producto == null && TxtProductoId.Text.Trim().Length == 0)
+                Ambiente.Mensaje("Producto no encontrado");
+
+            producto = productoController.SelectOne(TxtProductoId.Text.Trim());
+            if (producto == null)
+                return;
+
+            if (venta.VentaId <= 0)
+            {
+                Ambiente.Mensaje("La venta no existe");
+                return;
+            }
+            //partida a la lista
+            var partida = new Ventap();
+            partida.VentaId = venta.VentaId;
+            partida.ProductoId = producto.ProductoId;
+            partida.Descripcion = producto.Descripcion;
+            partida.Descuento = 0;
+            partida.Cantidad = 1;
+            partida.Precio = SeleccionaPrecio(producto, cliente);
+            partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
+            partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
+            partida.LoteId = TraeLote(producto, partida.Cantidad);
+            partida.SubTotal = partida.Cantidad * partida.Precio;
+            partida.ImporteImpuesto1 = partida.SubTotal * partida.Impuesto1;
+            partida.ImporteImpuesto2 = partida.SubTotal * partida.Impuesto2;
+            partida.Total = partida.SubTotal + partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+            partidas.Add(partida);
+
+            //Calcular totales de partidas y venta();
+            CalculaTotales();
+
+            // partida al grid
+            Malla.Rows[SigPartida].Cells[0].Value = partida.Descripcion;
+            Malla.Rows[SigPartida].Cells[1].Value = producto.Stock;
+            Malla.Rows[SigPartida].Cells[2].Value = partida.Cantidad;
+            Malla.Rows[SigPartida].Cells[3].Value = Math.Round(partida.Precio, 2);
+            Malla.Rows[SigPartida].Cells[4].Value = partida.SubTotal;
+            Malla.Rows[SigPartida].Cells[5].Value = partida.Impuesto1;
+            Malla.Rows[SigPartida].Cells[6].Value = partida.Impuesto2;
+            Malla.Rows[SigPartida].Cells[7].Value = partida.Total;
+            Malla.Rows[SigPartida].Cells[8].Value = partida.LoteId;
+            Malla.Rows[SigPartida].Cells[9].Value = partida.ProductoId;
+
+
+            ResetPartida();
+        }
+        private void GuardaPartidas()
+        {
+            foreach (var p in partidas)
+            {
+                if (!ventapController.InsertOne(p))
+                    Ambiente.Mensaje("Algo salió mal con la partida: " + p.Descripcion);
+            }
+        }
+        private void GuardaCXC()
+        {
+
+        }
+        private void ValidaExistencia()
+        {
+
+        }
+        private void RestaExistencias()
+        {
+
+        }
+        private string TraeLote(Producto producto, decimal cant)
+        {
+            if (producto.TieneLote)
+                return productoController.TraeSiguienteLote(producto, cant);
+            else
+                return null;
+        }
+        private void LanzaBusquedaClientes()
+        {
+            using (var form = new FrmBusqueda(TxtCliente.Text.Trim(), (int)Ambiente.TipoBusqueda.Clientes))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    cliente = form.Cliente;
+                    TxtCliente.Text = form.Cliente.RazonSocial;
+                    TxtPrecioCliente.Text = cliente.PrecioDefault.ToString();
+                    datosCliente = cliente.Negocio + " " + cliente.Direccion + " " + cliente.Colonia
+                            + " " + cliente.Municipio + " " + cliente.Localidad + " " + cliente.Estado + " TEL." + cliente.Telefono;
+                    CalculaTotales();
+                }
+            }
+        }
+        private decimal SeleccionaPrecio(Producto producto, Cliente cliente)
+        {
+
+            if (cliente == null)
+                return producto.Precio1;
+            else
+            {
+                if (cliente.PrecioDefault == 1)
+                    return producto.Precio1;
+
+                else if (cliente.PrecioDefault == 2)
+                    return producto.Precio2;
+
+                else if (cliente.PrecioDefault == 3)
+                    return producto.Precio3;
+
+                else if (cliente.PrecioDefault == 4)
+                    return producto.Precio4;
+                else
+                    return 1;
+            }
+        }
+
+
+
+        //EVENTOS
+        private void Malla_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnCant_KeyPress);
+            if (Malla.CurrentCell.ColumnIndex == 2) //Desired Column
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(ColumnCant_KeyPress);
+                }
+            }
+        }
+
+        private void ColumnCant_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void BtnBuscarProd_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmBuscaProducto())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    producto = form.Producto;
+                    TxtProductoId.Text = producto.ProductoId;
+                    TxtProductoId.Focus();
+                }
+            }
+        }
+
+        private void TxtProductoId_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                InsertaPartida();
+            }
+        }
+
+        private void TxtCliente_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LanzaBusquedaClientes();
+            }
+        }
+
+        private void BtnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            LanzaBusquedaClientes();
+        }
+
+        private void BtnCobroPago_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmCobroRapido(venta.Total))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    //Cierra venta
+                    CierraVenta(form);
+                }
+            }
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            PendienteOdescarta();
+        }
+
+        private void BtnRecalculaTotales_Click(object sender, EventArgs e)
+        {
+            CalculaTotales();
+        }
+    }
+}

@@ -60,6 +60,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             pago2 = 0;
             pago3 = 0;
             Cxc = false;
+            tipoDoc = "TIC";
             moneda = new Moneda();
         }
 

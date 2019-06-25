@@ -23,9 +23,9 @@ namespace PointOfSale.Models
         public bool EsConversiondeTaF { get; set; }
         public int? VentaOrigen { get; set; }
         public int? CxcId { get; set; }
-        public decimal? Pago1 { get; set; }
-        public decimal? Pago2 { get; set; }
-        public decimal? Pago3 { get; set; }
+        public decimal Pago1 { get; set; }
+        public decimal Pago2 { get; set; }
+        public decimal Pago3 { get; set; }
         public string ConceptoPago1 { get; set; }
         public string ConceptoPago2 { get; set; }
         public string ConceptoPago3 { get; set; }
@@ -40,11 +40,13 @@ namespace PointOfSale.Models
         public string CreatedBy { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string UpdatedBy { get; set; }
-        public decimal? SubTotal { get; set; }
-        public decimal? Impuesto { get; set; }
-        public decimal? Total { get; set; }
+        public decimal SubTotal { get; set; }
+        public decimal Impuesto { get; set; }
+        public decimal Total { get; set; }
+        public decimal? Cambio { get; set; }
         public string TotalConLetra { get; set; }
         public bool? EsCxc { get; set; }
+        public int? NoRef { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual Usuario CreatedByNavigation { get; set; }

@@ -121,18 +121,13 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
             //impuestos
             if (Ambiente.GetTasaImpuesto(oProducto.Impuesto1Id) > 0)
-            {
                 oVentap.Impuesto1 = Ambiente.GetTasaImpuesto(oProducto.Impuesto1Id);
-                nImpuestos++;
-            }
+
             if (Ambiente.GetTasaImpuesto(oProducto.Impuesto2Id) > 0)
-            {
                 oVentap.Impuesto2 = Ambiente.GetTasaImpuesto(oProducto.Impuesto2Id);
-                nImpuestos++;
-            }
 
 
-            oVentap.CantImpuestos = nImpuestos;
+
             oVentap.LoteId = oProductoController.TraeSiguienteLote(oProducto, (decimal)oVentap.Cantidad);
 
 
@@ -329,7 +324,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             {
                 using (var form = new FrmCobroRapido((decimal)oVenta.Total))
                 {
-                    
+
                     if (form.ShowDialog() == DialogResult.OK)
                     {
                         oVenta.TipoDocId = form.tipoDoc;

@@ -201,13 +201,13 @@ namespace PointOfSale.Controllers
         {
             valor = valor.Trim();
             if (valor == null)
-                return string.Format("{0:0.000}", "1");
+                return string.Format("{0:0.00}", "1");
 
 
             bool successv = decimal.TryParse(valor, out decimal nValor);
             if (!successv)
-                return "1.000";
-            return string.Format("{0:0.000}", nValor);
+                return "1.00";
+            return string.Format("{0:0.00}", nValor);
         }
         public static Tuple<string, string> GetRuta()
         {
@@ -238,7 +238,7 @@ namespace PointOfSale.Controllers
                     var consecutivo = db.Consecutivo.FirstOrDefault(x => x.ConsecutivoId == consecutivoId.Trim());
                     if (consecutivo != null)
                     {
-                        return consecutivo.Folio;
+                        return ++consecutivo.Folio;
                     }
                     else
                     {

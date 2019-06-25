@@ -624,7 +624,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FrmPointOfSale";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmPointOfSale";
+            this.Text = "PUNTO DE VENTA";
             this.Load += new System.EventHandler(this.FrmPointOfSale_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Malla)).EndInit();
             this.groupBox1.ResumeLayout(false);
