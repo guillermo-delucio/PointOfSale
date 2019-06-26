@@ -83,17 +83,33 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             }
 
         }
-        private void Incrementa()
+        private void Incrementa(int rowIndex)
         {
-
+            if (partidas.Count > 0)
+            {
+                partidas[rowIndex].Cantidad++;
+                CalculaTotales();
+            }
         }
-        private void Decrementa()
+        private void Decrementa(int rowIndex)
         {
-
+            if (partidas.Count > 0)
+            {
+                if (partidas[rowIndex].Cantidad >= 2)
+                {
+                    partidas[rowIndex].Cantidad--;
+                    CalculaTotales();
+                }
+                else
+                    Ambiente.Mensaje("Operación denegada");
+            }
         }
-        private void ActualizaCantidad()
+        private void ActualizaCantidad(decimal cant, int rowIndex)
         {
-
+            if (partidas.Count > 0)
+            {
+                partidas[rowIndex].Cantidad = cant;
+            }
         }
         private void ResetPartida()
         {
@@ -134,7 +150,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void CreaVenta()
         {
 
-
             if (cliente == null)
             {
                 venta.ClienteId = "SYS";
@@ -147,7 +162,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 venta.DatosCliente = datosCliente;
                 venta.NoPrecio = cliente.PrecioDefault;
             }
-
 
             venta.CreatedBy = Ambiente.LoggedUser.UsuarioId;
             venta.EstacionId = Ambiente.Estacion.EstacionId;
@@ -193,10 +207,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
             if (ventaController.UpdateOne(venta))
             {
-
                 GuardaPartidas();
-
-
                 if (venta.TipoDocId.Equals("TIC"))
                 {
                     Ambiente.UpdateSiguiente("TIC");
@@ -331,6 +342,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
             if (cliente == null)
                 return producto.Precio1;
+
             else
             {
                 if (cliente.PrecioDefault == 1)
@@ -348,8 +360,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     return 1;
             }
         }
-
-
 
         //EVENTOS
         private void Malla_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -392,6 +402,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             {
                 InsertaPartida();
             }
+
         }
 
         private void TxtCliente_KeyDown(object sender, KeyEventArgs e)
@@ -427,6 +438,31 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void BtnRecalculaTotales_Click(object sender, EventArgs e)
         {
             CalculaTotales();
+        }
+
+        private void Malla_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            ActualizaCantidad(decimal.Parse(Malla.CurrentCell.Value.ToString()), e.RowIndex);
+            CalculaTotales();
+            TxtProductoId.Focus();
+        }
+
+        private void Malla_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Oemplus)
+                Incrementa(Malla.CurrentCell.RowIndex);
+            else if (e.KeyCode == Keys.OemMinus)
+                Decrementa(Malla.CurrentCell.RowIndex);
+        }
+
+        private void TxtProductoId_TextChanged(object sender, EventArgs e)
+        {
+            if (TxtProductoId.Text.Trim().Equals("*"))
+            {
+                TxtProductoId.Text = "";
+                Malla.Focus();
+                Malla.CurrentCell = Malla.Rows[SigPartida - 1].Cells[2];
+            }
         }
     }
 }
