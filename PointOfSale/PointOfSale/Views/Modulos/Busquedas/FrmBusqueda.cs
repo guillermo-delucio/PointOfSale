@@ -13,6 +13,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
         private string SearchText;
         private int Catalogo;
+        private bool SoloConLicencia;
 
         public Cliente Cliente;
         public Proveedor Proveedor;
@@ -35,12 +36,13 @@ namespace PointOfSale.Views.Modulos.Busquedas
         {
             InitializeComponent();
         }
-        public FrmBusqueda(string searchText, int tipoBuscqueda)
+        public FrmBusqueda(string searchText, int tipoBuscqueda, bool licencia = false)
         {
 
             InitializeComponent();
             SearchText = searchText;
             Catalogo = tipoBuscqueda;
+            SoloConLicencia = licencia;
             CargaGrid();
         }
 
@@ -57,9 +59,19 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.Cliente.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText) || x.Negocio.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
+                        if (SoloConLicencia)
+                        {
+                            Grid1.DataSource = db.Cliente.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText) || x.Negocio.Contains(SearchText) && (x.IsDeleted == false && x.TieneLicencia == true)).OrderBy(x => x.RazonSocial).
                             Select(x => new { x.ClienteId, x.RazonSocial, x.Negocio }).ToList();
-                        Ambiente.AdditionalSettingsDataGridView(Grid1);
+                            Ambiente.AdditionalSettingsDataGridView(Grid1);
+                        }
+                        else
+                        {
+                            Grid1.DataSource = db.Cliente.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText) || x.Negocio.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
+                            Select(x => new { x.ClienteId, x.RazonSocial, x.Negocio }).ToList();
+                            Ambiente.AdditionalSettingsDataGridView(Grid1);
+                        }
+
                     }
 
 
@@ -129,7 +141,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     break;
 
-             
+
 
                 case (int)Ambiente.TipoBusqueda.Estaciones:
                     using (var db = new DymContext())
@@ -207,17 +219,8 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Grid1.Rows.Count <= 0)
-            {
-                DialogResult = DialogResult.Abort;
-                Dispose();
-                return;
-            }
-
-
-            CargaGrid();
-            DialogResult = DialogResult.OK;
-            this.Dispose();
+            SeleccionaRegistro();
+            Close();
         }
 
 
@@ -234,136 +237,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (Grid1.Rows.Count <= 0)
-                {
-                    DialogResult = DialogResult.Abort;
-                    Dispose();
-                    return;
-                }
-
-
-                switch (Catalogo)
-                {
-                    case (int)Ambiente.TipoBusqueda.Clientes:
-
-                        using (var db = new DymContext())
-                        {
-                            Cliente = db.Cliente.Where(x => x.ClienteId ==
-                            Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-
-                        break;
-
-                    case (int)Ambiente.TipoBusqueda.Proveedores:
-                        using (var db = new DymContext())
-                        {
-                            Proveedor = db.Proveedor.Where(x => x.ProveedorId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-
-                    case (int)Ambiente.TipoBusqueda.Productos:
-                        using (var db = new DymContext())
-                        {
-                            Producto = db.Producto.Where(x => x.ProductoId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-
-                    case (int)Ambiente.TipoBusqueda.Categorias:
-                        using (var db = new DymContext())
-                        {
-                            Categoria = db.Categoria.Where(x => x.CategoriaId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-
-                    case (int)Ambiente.TipoBusqueda.Laboratorios:
-                        using (var db = new DymContext())
-                        {
-                            Laboratorio = db.Laboratorio.Where(x => x.LaboratorioId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-
-                    case (int)Ambiente.TipoBusqueda.Impuestos:
-                        using (var db = new DymContext())
-                        {
-                            Impuesto = db.Impuesto.Where(x => x.ImpuestoId ==
-                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-
-                    case (int)Ambiente.TipoBusqueda.Sustancias:
-                        using (var db = new DymContext())
-                        {
-                            Sustancia = db.Sustancia.Where(x => x.SustanciaId ==
-                          Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-
-                        break;
-
-                  
-
-                    case (int)Ambiente.TipoBusqueda.Estaciones:
-                        using (var db = new DymContext())
-                        {
-                            Estacion = db.Estacion.Where(x => x.EstacionId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-
-                    case (int)Ambiente.TipoBusqueda.ClavesSat:
-                        using (var db = new DymContext())
-                        {
-                            CClaveProdServ = db.CClaveProdServ.Where(x => x.ClaveProdServId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-
-                    case (int)Ambiente.TipoBusqueda.Presentaciones:
-
-                        using (var db = new DymContext())
-                        {
-                            Presentacion = db.Presentacion.Where(x => x.PresentacionId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-
-                    case (int)Ambiente.TipoBusqueda.UnidadesMedida:
-                        using (var db = new DymContext())
-                        {
-                            UnidadMedida = db.UnidadMedida.Where(x => x.UnidadMedidaId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-                    case (int)Ambiente.TipoBusqueda.Usuarios:
-                        using (var db = new DymContext())
-                        {
-                            Usuario = db.Usuario.Where(x => x.UsuarioId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-                    case (int)Ambiente.TipoBusqueda.MetodoPago:
-                        using (var db = new DymContext())
-                        {
-                            MetodoPago = db.MetodoPago.Where(x => x.MetodoPagoId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-                    case (int)Ambiente.TipoBusqueda.FormaPago:
-                        using (var db = new DymContext())
-                        {
-                            FormaPago = db.FormaPago.Where(x => x.FormaPagoId ==
-                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
-                        }
-                        break;
-                    default:
-                        MessageBox.Show("Error, no hay enumerador para catalogo");
-                        break;
-                }
-
-                DialogResult = DialogResult.OK;
+                SeleccionaRegistro();
             }
             else if (e.KeyCode == Keys.Escape)
             {
@@ -372,9 +246,140 @@ namespace PointOfSale.Views.Modulos.Busquedas
             }
         }
 
-        private void Grid1_SelectionChanged(object sender, EventArgs e)
+        private void SeleccionaRegistro()
         {
+            if (Grid1.Rows.Count <= 0)
+            {
+                DialogResult = DialogResult.Abort;
+                Dispose();
+                return;
+            }
 
+
+            switch (Catalogo)
+            {
+                case (int)Ambiente.TipoBusqueda.Clientes:
+
+                    using (var db = new DymContext())
+                    {
+                        Cliente = db.Cliente.Where(x => x.ClienteId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+
+                    break;
+
+                case (int)Ambiente.TipoBusqueda.Proveedores:
+                    using (var db = new DymContext())
+                    {
+                        Proveedor = db.Proveedor.Where(x => x.ProveedorId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+
+                case (int)Ambiente.TipoBusqueda.Productos:
+                    using (var db = new DymContext())
+                    {
+                        Producto = db.Producto.Where(x => x.ProductoId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+
+                case (int)Ambiente.TipoBusqueda.Categorias:
+                    using (var db = new DymContext())
+                    {
+                        Categoria = db.Categoria.Where(x => x.CategoriaId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+
+                case (int)Ambiente.TipoBusqueda.Laboratorios:
+                    using (var db = new DymContext())
+                    {
+                        Laboratorio = db.Laboratorio.Where(x => x.LaboratorioId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+
+                case (int)Ambiente.TipoBusqueda.Impuestos:
+                    using (var db = new DymContext())
+                    {
+                        Impuesto = db.Impuesto.Where(x => x.ImpuestoId ==
+                     Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+
+                case (int)Ambiente.TipoBusqueda.Sustancias:
+                    using (var db = new DymContext())
+                    {
+                        Sustancia = db.Sustancia.Where(x => x.SustanciaId ==
+                      Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+
+                    break;
+
+
+
+                case (int)Ambiente.TipoBusqueda.Estaciones:
+                    using (var db = new DymContext())
+                    {
+                        Estacion = db.Estacion.Where(x => x.EstacionId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+
+                case (int)Ambiente.TipoBusqueda.ClavesSat:
+                    using (var db = new DymContext())
+                    {
+                        CClaveProdServ = db.CClaveProdServ.Where(x => x.ClaveProdServId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+
+                case (int)Ambiente.TipoBusqueda.Presentaciones:
+
+                    using (var db = new DymContext())
+                    {
+                        Presentacion = db.Presentacion.Where(x => x.PresentacionId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+
+                case (int)Ambiente.TipoBusqueda.UnidadesMedida:
+                    using (var db = new DymContext())
+                    {
+                        UnidadMedida = db.UnidadMedida.Where(x => x.UnidadMedidaId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.Usuarios:
+                    using (var db = new DymContext())
+                    {
+                        Usuario = db.Usuario.Where(x => x.UsuarioId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.MetodoPago:
+                    using (var db = new DymContext())
+                    {
+                        MetodoPago = db.MetodoPago.Where(x => x.MetodoPagoId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.FormaPago:
+                    using (var db = new DymContext())
+                    {
+                        FormaPago = db.FormaPago.Where(x => x.FormaPagoId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+                default:
+                    MessageBox.Show("Error, no hay enumerador para catalogo");
+                    break;
+            }
+
+            DialogResult = DialogResult.OK;
         }
+
+       
     }
 }

@@ -44,6 +44,14 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             venta.Impuesto = 0;
             venta.Total = 0;
             int index = 0;
+
+            if (partidas.Count == 0)
+            {
+                //Reflear totales en el PDV
+                TxtSubtotal.Text = Ambiente.FDinero(0.ToString());
+                TxtTotal.Text = Ambiente.FDinero(0.ToString());
+                return;
+            }
             foreach (var partida in partidas)
             {
                 //partida.Cantidad = 1; actualizado desde el grid o incrementos rapidos
@@ -65,6 +73,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 venta.Total = venta.SubTotal + venta.Impuesto;
 
                 //Refleajar el cambio  de precio y columnas calculadas en la malla                
+                Malla.Rows[index].Cells[0].Value = partida.Descripcion;
+                Malla.Rows[index].Cells[1].Value = producto.Stock;
                 Malla.Rows[index].Cells[2].Value = partida.Cantidad;
                 Malla.Rows[index].Cells[3].Value = Math.Round(partida.Precio, 2);
                 Malla.Rows[index].Cells[4].Value = partida.SubTotal;
@@ -83,12 +93,43 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             }
 
         }
+        private void LimpiarFilaMalla(int index)
+        {
+            Malla.Rows[index].Cells[0].Value = null;
+            Malla.Rows[index].Cells[1].Value = null;
+            Malla.Rows[index].Cells[2].Value = null;
+            Malla.Rows[index].Cells[3].Value = null;
+            Malla.Rows[index].Cells[4].Value = null;
+            Malla.Rows[index].Cells[5].Value = null;
+            Malla.Rows[index].Cells[6].Value = null;
+            Malla.Rows[index].Cells[7].Value = null;
+            Malla.Rows[index].Cells[8].Value = null;
+            Malla.Rows[index].Cells[9].Value = null;
+        }
         private void Incrementa(int rowIndex)
         {
             if (partidas.Count > 0)
             {
-                partidas[rowIndex].Cantidad++;
-                CalculaTotales();
+                if (Ambiente.Estacion.VenderSinStock)
+                {
+                    partidas[rowIndex].Cantidad++;
+                    CalculaTotales();
+                }
+                else
+                {
+                    if (HayStockSuficiente(partidas[rowIndex].ProductoId, partidas[rowIndex].Cantidad + 1))
+                    {
+                        partidas[rowIndex].Cantidad++;
+                        CalculaTotales();
+                    }
+
+                    else
+                    {
+                        Ambiente.Mensaje("Stock insuficiente");
+                        return;
+                    }
+                }
+
             }
         }
         private void Decrementa(int rowIndex)
@@ -108,7 +149,27 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             if (partidas.Count > 0)
             {
-                partidas[rowIndex].Cantidad = cant;
+
+                if (Ambiente.Estacion.VenderSinStock)
+                {
+                    partidas[rowIndex].Cantidad = cant;
+                    CalculaTotales();
+                }
+                else
+                {
+                    if (HayStockSuficiente(partidas[rowIndex].ProductoId, cant))
+                    {
+                        partidas[rowIndex].Cantidad = cant;
+                        CalculaTotales();
+                    }
+
+                    else
+                    {
+                        Ambiente.Mensaje("Stock insuficiente");
+                        return;
+                    }
+                }
+
             }
         }
         private void ResetPartida()
@@ -233,6 +294,20 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             if (venta != null)
                 ventaController.DeleteOne(venta);
         }
+        private void EliminaPartida(int rowIndex, string descrip)
+        {
+            if (Ambiente.Pregunta("Realmente quiere borrar: " + descrip))
+            {
+                if (partidas.Count > 0 && rowIndex >= 0)
+                {
+                    partidas.RemoveAt(rowIndex);
+                    SigPartida -= 1;
+                    LimpiarFilaMalla(SigPartida);
+                    CalculaTotales();
+                }
+            }
+
+        }
         private void PendienteOdescarta()
         {
             if (partidas.Count > 0)
@@ -260,13 +335,33 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Ambiente.Mensaje("La venta no existe");
                 return;
             }
+
             //partida a la lista
             var partida = new Ventap();
             partida.VentaId = venta.VentaId;
             partida.ProductoId = producto.ProductoId;
             partida.Descripcion = producto.Descripcion;
             partida.Descuento = 0;
-            partida.Cantidad = 1;
+
+            if (Ambiente.Estacion.VenderSinStock)
+            {
+                partida.Cantidad = 1;
+            }
+            else
+            {
+                if (HayStockSuficiente(producto, 1))
+                {
+                    partida.Cantidad = 1;
+                }
+                else
+                {
+                    Ambiente.Mensaje("Stock insuficiente");
+                    return;
+                }
+            }
+
+
+
             partida.Precio = SeleccionaPrecio(producto, cliente);
             partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
             partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
@@ -307,9 +402,30 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
 
         }
-        private void ValidaExistencia()
+        private bool HayStockSuficiente(Producto producto, decimal cant)
         {
-
+            if (producto == null)
+            {
+                Ambiente.Mensaje("Advertencia el producto no fue encontrado");
+                return false;
+            }
+            else
+            {
+                return producto.Stock >= cant;
+            }
+        }
+        private bool HayStockSuficiente(string productoId, decimal cant)
+        {
+            var p = productoController.SelectOne(productoId);
+            if (p == null)
+            {
+                Ambiente.Mensaje("Advertencia el producto no fue encontrado");
+                return false;
+            }
+            else
+            {
+                return p.Stock >= cant;
+            }
         }
         private void RestaExistencias()
         {
@@ -324,7 +440,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         }
         private void LanzaBusquedaClientes()
         {
-            using (var form = new FrmBusqueda(TxtCliente.Text.Trim(), (int)Ambiente.TipoBusqueda.Clientes))
+            using (var form = new FrmBusqueda(TxtCliente.Text.Trim(), (int)Ambiente.TipoBusqueda.Clientes, ChkSoloConLicencia.Checked))
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -360,6 +476,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     return 1;
             }
         }
+
+
 
         //EVENTOS
         private void Malla_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -453,6 +571,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Incrementa(Malla.CurrentCell.RowIndex);
             else if (e.KeyCode == Keys.OemMinus)
                 Decrementa(Malla.CurrentCell.RowIndex);
+            else if (e.KeyCode == Keys.Delete)
+            {
+                if (Malla.Rows[Malla.CurrentCell.RowIndex].Cells[9].Value != null)
+                    EliminaPartida(Malla.CurrentCell.RowIndex, Malla.Rows[Malla.CurrentCell.RowIndex].Cells[0].Value.ToString());
+            }
         }
 
         private void TxtProductoId_TextChanged(object sender, EventArgs e)
@@ -463,6 +586,16 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Malla.Focus();
                 Malla.CurrentCell = Malla.Rows[SigPartida - 1].Cells[2];
             }
+        }
+
+        private void BtnBorrarPartida_Click(object sender, EventArgs e)
+        {
+            EliminaPartida(Malla.CurrentCell.RowIndex, Malla.Rows[Malla.CurrentCell.RowIndex].Cells[0].Value.ToString());
+        }
+
+        private void TimerPDV_Tick(object sender, EventArgs e)
+        {
+            TxtFecha.Text = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToString("hh:mm:ss");
         }
     }
 }

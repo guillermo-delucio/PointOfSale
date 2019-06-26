@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label6 = new System.Windows.Forms.Label();
             this.BtnCobroPago = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -77,6 +77,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LblUltDocumento = new System.Windows.Forms.Label();
             this.LblCambio = new System.Windows.Forms.Label();
+            this.TimerPDV = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxImagen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Malla)).BeginInit();
@@ -366,6 +367,7 @@
             this.BtnBorrarPartida.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnBorrarPartida.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnBorrarPartida.UseVisualStyleBackColor = true;
+            this.BtnBorrarPartida.Click += new System.EventHandler(this.BtnBorrarPartida_Click);
             // 
             // label3
             // 
@@ -432,14 +434,14 @@
             this.Column8,
             this.Column9,
             this.Column11});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Malla.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Malla.DefaultCellStyle = dataGridViewCellStyle3;
             this.Malla.EnableHeadersVisualStyles = false;
             this.Malla.Location = new System.Drawing.Point(17, 164);
             this.Malla.MultiSelect = false;
@@ -593,9 +595,9 @@
             this.LblUltDocumento.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.LblUltDocumento.Location = new System.Drawing.Point(324, 466);
             this.LblUltDocumento.Name = "LblUltDocumento";
-            this.LblUltDocumento.Size = new System.Drawing.Size(229, 24);
+            this.LblUltDocumento.Size = new System.Drawing.Size(92, 24);
             this.LblUltDocumento.TabIndex = 291;
-            this.LblUltDocumento.Text = "TICKET  T1593 09:34 a.m.";
+            this.LblUltDocumento.Text = "TICKET  -";
             // 
             // LblCambio
             // 
@@ -606,7 +608,13 @@
             this.LblCambio.Name = "LblCambio";
             this.LblCambio.Size = new System.Drawing.Size(168, 24);
             this.LblCambio.TabIndex = 290;
-            this.LblCambio.Text = "SU CAMBIO: 27.60";
+            this.LblCambio.Text = "SU CAMBIO: 00.00";
+            // 
+            // TimerPDV
+            // 
+            this.TimerPDV.Enabled = true;
+            this.TimerPDV.Interval = 1000;
+            this.TimerPDV.Tick += new System.EventHandler(this.TimerPDV_Tick);
             // 
             // PointOfSale
             // 
@@ -701,5 +709,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.Timer TimerPDV;
     }
 }

@@ -906,11 +906,6 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'N/A')");
 
-                entity.Property(e => e.ImpresoraR)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasDefaultValueSql("(N'N/A')");
-
                 entity.Property(e => e.ImpresoraT)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -922,6 +917,10 @@ namespace PointOfSale.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'SIN NOMBRE')");
+
+                entity.Property(e => e.SolicitarFmpago).HasColumnName("SolicitarFMPago");
+
+                entity.Property(e => e.SumarUnidadesPdv).HasColumnName("SumarUnidadesPDV");
             });
 
             modelBuilder.Entity<Estado>(entity =>
@@ -1415,7 +1414,7 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.ConceptoPago1)
                     .HasMaxLength(50)
-                    .HasDefaultValueSql("(N'EFE')");
+                    .HasDefaultValueSql("(N'EFECTIVO')");
 
                 entity.Property(e => e.ConceptoPago2).HasMaxLength(50);
 

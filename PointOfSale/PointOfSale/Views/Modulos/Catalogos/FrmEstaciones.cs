@@ -39,7 +39,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
         }
 
-       
+
 
         private void LlenaCampos()
         {
@@ -50,20 +50,19 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 ModoCreate = false;
                 TxtClave.Text = objeto.EstacionId;
                 TxtNombre.Text = objeto.Nombre;
-                TxtAlmacenId.Text = objeto.DefaultAlmacenId.ToString();
                 CboIT.Text = objeto.ImpresoraT;
-                CboIR.Text = objeto.ImpresoraR;
                 CboIF.Text = objeto.ImpresoraF;
                 CboINC.Text = objeto.ImpresoraNc;
+                ChkVentaSinExistencia.Checked = objeto.VenderSinStock;
+                ChkSolicitarFMpago.Checked = objeto.SolicitarFmpago;
+                ChkSumarUnidades.Checked = objeto.SumarUnidadesPdv;
+
             }
 
 
         }
 
-        private void BtnAceptar_Click(object sender, EventArgs e)
-        {
-            InsertOrUpdate();
-        }
+      
 
         private void InsertOrUpdate()
         {
@@ -75,6 +74,11 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto = new Estacion();
                 objeto.EstacionId = TxtClave.Text.Trim();
                 objeto.Nombre = TxtNombre.Text.Trim();
+
+                objeto.VenderSinStock = ChkVentaSinExistencia.Checked;
+                objeto.SolicitarFmpago = ChkSolicitarFMpago.Checked;
+                objeto.SumarUnidadesPdv = ChkSumarUnidades.Checked;
+
                 if (estacionController.InsertOne(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
                 else
@@ -84,11 +88,12 @@ namespace PointOfSale.Views.Modulos.Catalogos
             else
             {
                 objeto.Nombre = TxtNombre.Text.Trim();
-                TxtAlmacenId.Text = objeto.DefaultAlmacenId.ToString();
-                CboIT.Text = objeto.ImpresoraT;
-                CboIR.Text = objeto.ImpresoraR;
-                CboIF.Text = objeto.ImpresoraF;
-                CboINC.Text = objeto.ImpresoraNc;
+                objeto.ImpresoraT = CboIT.Text.Trim();
+                objeto.ImpresoraF = CboIF.Text.Trim();
+                objeto.ImpresoraNc = CboINC.Text.Trim();
+                objeto.VenderSinStock = ChkVentaSinExistencia.Checked;
+                objeto.SolicitarFmpago = ChkSolicitarFMpago.Checked;
+                objeto.SumarUnidadesPdv = ChkSumarUnidades.Checked;
 
                 if (estacionController.Update(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
@@ -99,14 +104,21 @@ namespace PointOfSale.Views.Modulos.Catalogos
             }
         }
 
-        private void BtnCancelar_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+     
 
         private void TxtClave_Leave(object sender, EventArgs e)
         {
             LlenaCampos();
+        }
+
+        private void BtnAceptar_Click_1(object sender, EventArgs e)
+        {
+            InsertOrUpdate();
+        }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -400,12 +400,6 @@
     <Compile Include="Views\Modulos\PuntoVenta\FrmCobroRapido.Designer.cs">
       <DependentUpon>FrmCobroRapido.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Modulos\PuntoVenta\FrmPointOfSale.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Modulos\PuntoVenta\FrmPointOfSale.Designer.cs">
-      <DependentUpon>FrmPointOfSale.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Modulos\PuntoVenta\PointOfSale.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -508,9 +502,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmCobroRapido.resx">
       <DependentUpon>FrmCobroRapido.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmPointOfSale.resx">
-      <DependentUpon>FrmPointOfSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\PointOfSale.resx">
       <DependentUpon>PointOfSale.cs</DependentUpon>

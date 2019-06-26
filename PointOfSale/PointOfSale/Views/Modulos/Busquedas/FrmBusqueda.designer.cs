@@ -45,7 +45,7 @@
             this.Grid1.Name = "Grid1";
             this.Grid1.Size = new System.Drawing.Size(618, 262);
             this.Grid1.TabIndex = 0;
-            this.Grid1.SelectionChanged += new System.EventHandler(this.Grid1_SelectionChanged);
+            
             this.Grid1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Grid1_KeyDown);
             // 
             // button1
