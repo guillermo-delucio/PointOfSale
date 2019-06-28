@@ -257,15 +257,14 @@ namespace PointOfSale.Controllers
                                     break;
                                 case 4:
                                     p.Impuesto3Id = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "SYS" : workSheet.Cells[row, col].Text.Trim();
-                                    productoController.Update(p);
+                                    
                                     break;
                                 default:
                                     Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
                                     break;
-                            }
+                            }                             
                         }
-
-                        Application.DoEvents();
+                        productoController.Update(p);
 
                     }
                     Ambiente.Mensaje("PROCESO CONCLUIDO");

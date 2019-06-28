@@ -494,7 +494,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         }
 
 
-
         //EVENTOS
         private void Malla_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
