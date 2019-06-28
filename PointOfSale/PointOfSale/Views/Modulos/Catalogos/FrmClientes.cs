@@ -45,7 +45,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
         }
         private void LlenaCampos()
         {
-            if (objeto == null)
+            
                 objeto = clienteController.SelectOne(TxtClienteId.Text.Trim());
 
             if (objeto == null)
@@ -118,6 +118,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
                 objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
                 objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
+                objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
 
                 success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                 success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
@@ -160,6 +161,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
                 objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
                 objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
+                objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
 
                 success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                 success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
@@ -253,6 +255,24 @@ namespace PointOfSale.Views.Modulos.Catalogos
                     form.ShowDialog();
                     if (form.DialogResult == DialogResult.OK)
                         TxtFormaPago.Text = form.FormaPago.FormaPagoId;
+                }
+            }
+        }
+
+        private void FrmClientes_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtUsoCFDI_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                using (var form = new FrmBusqueda(TxtUsoCFDI.Text.Trim(), (int)Ambiente.TipoBusqueda.UsoCDFI))
+                {
+                    form.ShowDialog();
+                    if (form.DialogResult == DialogResult.OK)
+                        TxtUsoCFDI.Text = form.Usocfdi.UsoCfdiid;
                 }
             }
         }

@@ -8,6 +8,7 @@ namespace PointOfSale.Models
         public CUsocfdi()
         {
             Cliente = new HashSet<Cliente>();
+            Venta = new HashSet<Venta>();
         }
 
         public string UsoCfdiid { get; set; }
@@ -16,5 +17,6 @@ namespace PointOfSale.Models
         public string Moral { get; set; }
 
         public virtual ICollection<Cliente> Cliente { get; set; }
+        public virtual ICollection<Venta> Venta { get; set; }
     }
 }

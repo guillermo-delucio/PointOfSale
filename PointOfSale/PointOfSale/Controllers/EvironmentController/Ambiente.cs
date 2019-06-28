@@ -29,7 +29,7 @@ namespace PointOfSale.Controllers
             Sustancias, Almacenes, Estaciones,
             ClavesSat, Presentaciones, UnidadesMedida,
             Usuarios, ProductoImpuesto, ProductoSustancia,
-            ProductosCompleto, MetodoPago, FormaPago
+            ProductosCompleto, MetodoPago, FormaPago, UsoCDFI
 
         };
 

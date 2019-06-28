@@ -247,6 +247,16 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             else if (venta.TipoDocId.Equals("FAC"))
                 venta.NoRef = Ambiente.TraeSiguiente("FAC");
 
+            if (venta.TipoDocId.Equals("FAC") && venta.ClienteId.Equals("SYS"))
+            {
+                Ambiente.Mensaje("Operación denegada, selecciona un cliente valido para facturar");
+                return;
+            }
+
+            else if (venta.TipoDocId.Equals("FAC") && !Ambiente.Estacion.SolicitarFmpago)
+            {
+                venta.MetodoPago = cliente.FormaPagoId.Trim().Length == 0 ? "PUE" : cliente.FormaPagoId.Trim();
+            }
 
             venta.TotalConLetra = form.totalLetra;
             venta.EsCxc = form.Cxc;
@@ -263,7 +273,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             venta.Pago2 = form.pago2;
             venta.Pago3 = form.pago3;
             venta.Cambio = form.cambio;
+            venta.MetodoPago = form.metodoPago;
             venta.EstadoDocId = "CON";
+
 
 
             if (ventaController.UpdateOne(venta))
@@ -450,6 +462,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     datosCliente = cliente.Negocio + " " + cliente.Direccion + " " + cliente.Colonia
                             + " " + cliente.Municipio + " " + cliente.Localidad + " " + cliente.Estado + " TEL." + cliente.Telefono;
                     CalculaTotales();
+                    venta.ClienteId = cliente.ClienteId;
+                    if (!ventaController.UpdateOne(venta))
+                        Ambiente.Mensaje("No se puedo actualizar el cliente en el objeto venta");
+
                 }
             }
         }
@@ -596,6 +612,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void TimerPDV_Tick(object sender, EventArgs e)
         {
             TxtFecha.Text = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToString("hh:mm:ss");
+        }
+
+        private void BtnDirectoImp_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

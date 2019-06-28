@@ -47,11 +47,14 @@ namespace PointOfSale.Models
         public string TotalConLetra { get; set; }
         public bool? EsCxc { get; set; }
         public int? NoRef { get; set; }
+        public string MetodoPago { get; set; }
+        public string UsoCfdi { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual Usuario CreatedByNavigation { get; set; }
         public virtual Estacion Estacion { get; set; }
         public virtual TipoDoc TipoDoc { get; set; }
+        public virtual CUsocfdi UsoCfdiNavigation { get; set; }
         public virtual ICollection<Ventap> Ventap { get; set; }
     }
 }

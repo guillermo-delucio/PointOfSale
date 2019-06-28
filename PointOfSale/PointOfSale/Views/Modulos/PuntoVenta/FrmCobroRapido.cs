@@ -30,6 +30,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         public string concepto3;
         public string totalLetra;
         public string tipoDoc;
+        public string formaPago;
+        public string metodoPago;
+
         public bool Cxc;
 
 
@@ -225,7 +228,17 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 return;
             }
 
-
+            if (tipoDoc.Equals("FAC") && Ambiente.Estacion.SolicitarFmpago)
+            {
+                using (var form = new FrmFormaPago())
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                        metodoPago = form.MetodoPago;
+                    else
+                        metodoPago = "PUE";
+                }
+            }
+           
             totalLetra = moneda.Convertir(total.ToString(), true);
             DialogResult = DialogResult.OK;
             Close();

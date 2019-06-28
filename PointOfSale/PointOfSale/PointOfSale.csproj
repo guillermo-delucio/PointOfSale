@@ -382,12 +382,6 @@
     <Compile Include="Views\Modulos\Logistica\FrmLotesCaducidad.Designer.cs">
       <DependentUpon>FrmLotesCaducidad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Modulos\PuntoVenta\FrmBuscaCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Modulos\PuntoVenta\FrmBuscaCliente.Designer.cs">
-      <DependentUpon>FrmBuscaCliente.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Modulos\PuntoVenta\FrmBuscaProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -399,6 +393,12 @@
     </Compile>
     <Compile Include="Views\Modulos\PuntoVenta\FrmCobroRapido.Designer.cs">
       <DependentUpon>FrmCobroRapido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmFormaPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmFormaPago.Designer.cs">
+      <DependentUpon>FrmFormaPago.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Modulos\PuntoVenta\PointOfSale.cs">
       <SubType>Form</SubType>
@@ -502,6 +502,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmCobroRapido.resx">
       <DependentUpon>FrmCobroRapido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmFormaPago.resx">
+      <DependentUpon>FrmFormaPago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\PointOfSale.resx">
       <DependentUpon>PointOfSale.cs</DependentUpon>

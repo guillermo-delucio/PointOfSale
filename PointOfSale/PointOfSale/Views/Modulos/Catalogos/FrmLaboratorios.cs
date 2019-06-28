@@ -43,6 +43,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
         private void LlenaCampos()
         {
+
+            objeto = laboratorioController.SelectOne(TxtClave.Text.Trim());
             if (objeto == null)
                 ModoCreate = true;
             else

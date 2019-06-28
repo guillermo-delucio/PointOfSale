@@ -17,6 +17,7 @@ namespace PointOfSale.Models
         public bool IsDeleted { get; set; }
         public string CImpuesto { get; set; }
 
+        public virtual CImpuesto CImpuestoNavigation { get; set; }
         public virtual ICollection<Producto> ProductoImpuesto1 { get; set; }
         public virtual ICollection<Producto> ProductoImpuesto2 { get; set; }
         public virtual ICollection<Producto> ProductoImpuesto3 { get; set; }

@@ -39,7 +39,6 @@ namespace PointOfSale.Models
         public virtual CFormapago FormaPago { get; set; }
         public virtual FormaPago FormaPagoNavigation { get; set; }
         public virtual CMetodopago MetodoPago { get; set; }
-        public virtual MetodoPago MetodoPagoNavigation { get; set; }
         public virtual CUsocfdi UsoCfdi { get; set; }
         public virtual ICollection<Venta> Venta { get; set; }
     }

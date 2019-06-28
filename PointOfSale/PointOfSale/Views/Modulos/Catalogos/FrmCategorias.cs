@@ -33,16 +33,18 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
             if (this.objeto != null)
             {
-                objeto = (Venta)this.objeto;
+                objeto = (Categoria)this.objeto;
                 TxtClave.Text = objeto.CategoriaId;
             }
 
         }
 
-      
+
 
         private void LlenaCampos()
         {
+            objeto = categoriaController.SelectOne(TxtClave.Text.Trim());
+
             if (objeto == null)
                 ModoCreate = true;
             else
@@ -50,9 +52,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 ModoCreate = false;
                 TxtClave.Text = objeto.CategoriaId;
                 TxtNombre.Text = objeto.Nombre;
-
             }
-
 
         }
 
@@ -68,7 +68,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 if (TxtClave.Text.Trim().Length == 0)
                     return;
 
-                objeto = new Categoria(); 
+                objeto = new Categoria();
                 objeto.CategoriaId = TxtClave.Text.Trim();
                 objeto.Nombre = TxtNombre.Text.Trim();
                 if (categoriaController.InsertOne(objeto))

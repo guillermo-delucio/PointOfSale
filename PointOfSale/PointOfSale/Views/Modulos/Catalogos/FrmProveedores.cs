@@ -40,7 +40,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
         }
         private void LlenaCampos()
         {
-            if (objeto == null)
+            
                 objeto = proveedorController.SelectOne(TxtProveedorId.Text.Trim());
 
             if (objeto == null)

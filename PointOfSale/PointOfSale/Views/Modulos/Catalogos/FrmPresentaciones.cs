@@ -39,16 +39,11 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
         }
 
-        private void TxtClave_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                LlenaCampos();
-            }
-        }
+       
 
         private void LlenaCampos()
         {
+            objeto = presentacionController.SelectOne(TxtClave.Text.Trim());
             if (objeto == null)
                 ModoCreate = true;
             else
@@ -98,6 +93,11 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void TxtClave_Leave(object sender, EventArgs e)
+        {
+            LlenaCampos();
         }
     }
 }

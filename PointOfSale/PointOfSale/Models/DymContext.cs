@@ -50,7 +50,6 @@ namespace PointOfSale.Models
         public virtual DbSet<Impuesto> Impuesto { get; set; }
         public virtual DbSet<Laboratorio> Laboratorio { get; set; }
         public virtual DbSet<Lote> Lote { get; set; }
-        public virtual DbSet<MetodoPago> MetodoPago { get; set; }
         public virtual DbSet<Municipio> Municipio { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
         public virtual DbSet<Permiso> Permiso { get; set; }
@@ -160,7 +159,7 @@ namespace PointOfSale.Models
                 entity.ToTable("C_Impuesto");
 
                 entity.Property(e => e.ImpuestoId)
-                    .HasMaxLength(255)
+                    .HasMaxLength(5)
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.Descripcion).HasMaxLength(255);
@@ -492,11 +491,6 @@ namespace PointOfSale.Models
                     .WithMany(p => p.Cliente)
                     .HasForeignKey(d => d.MetodoPagoId)
                     .HasConstraintName("FK_Cliente_C_Metodopago");
-
-                entity.HasOne(d => d.MetodoPagoNavigation)
-                    .WithMany(p => p.Cliente)
-                    .HasForeignKey(d => d.MetodoPagoId)
-                    .HasConstraintName("FK_Cliente_MetodoPago");
 
                 entity.HasOne(d => d.UsoCfdi)
                     .WithMany(p => p.Cliente)
@@ -968,11 +962,17 @@ namespace PointOfSale.Models
                 entity.Property(e => e.CImpuesto)
                     .IsRequired()
                     .HasColumnName("C_Impuesto")
-                    .HasMaxLength(50);
+                    .HasMaxLength(5);
 
                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
                 entity.Property(e => e.Tasa).HasColumnType("decimal(18, 2)");
+
+                entity.HasOne(d => d.CImpuestoNavigation)
+                    .WithMany(p => p.Impuesto)
+                    .HasForeignKey(d => d.CImpuesto)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Impuesto_C_Impuesto_ImpuestoId_fk");
             });
 
             modelBuilder.Entity<Laboratorio>(entity =>
@@ -1013,17 +1013,6 @@ namespace PointOfSale.Models
                     .WithMany(p => p.Lote)
                     .HasForeignKey(d => d.ProductoId)
                     .HasConstraintName("FK_Lote_Producto1");
-            });
-
-            modelBuilder.Entity<MetodoPago>(entity =>
-            {
-                entity.Property(e => e.MetodoPagoId)
-                    .HasMaxLength(5)
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Descripcion)
-                    .IsRequired()
-                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Municipio>(entity =>
@@ -1458,6 +1447,8 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Impuesto).HasColumnType("decimal(18, 6)");
 
+                entity.Property(e => e.MetodoPago).HasMaxLength(50);
+
                 entity.Property(e => e.MonedaId)
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'MXN')");
@@ -1484,6 +1475,10 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
 
+                entity.Property(e => e.UsoCfdi)
+                    .HasColumnName("UsoCFDI")
+                    .HasMaxLength(5);
+
                 entity.Property(e => e.UuId).HasMaxLength(40);
 
                 entity.HasOne(d => d.Cliente)
@@ -1506,6 +1501,11 @@ namespace PointOfSale.Models
                     .WithMany(p => p.Venta)
                     .HasForeignKey(d => d.TipoDocId)
                     .HasConstraintName("FK_Venta_TipoDoc");
+
+                entity.HasOne(d => d.UsoCfdiNavigation)
+                    .WithMany(p => p.Venta)
+                    .HasForeignKey(d => d.UsoCfdi)
+                    .HasConstraintName("Venta_C_Usocfdi_UsoCFDIId_fk");
             });
 
             modelBuilder.Entity<Ventap>(entity =>
@@ -1524,7 +1524,11 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Impuesto1).HasColumnType("decimal(18, 6)");
 
+                entity.Property(e => e.Impuesto1Id).HasMaxLength(5);
+
                 entity.Property(e => e.Impuesto2).HasColumnType("decimal(18, 6)");
+
+                entity.Property(e => e.Impuesto2Id).HasMaxLength(5);
 
                 entity.Property(e => e.LoteId).HasMaxLength(50);
 
@@ -1537,6 +1541,10 @@ namespace PointOfSale.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.SubTotal).HasColumnType("decimal(18, 6)");
+
+                entity.Property(e => e.TasaOcuota1).HasMaxLength(50);
+
+                entity.Property(e => e.TasaOcuota2).HasMaxLength(50);
 
                 entity.Property(e => e.Total).HasColumnType("decimal(18, 6)");
 

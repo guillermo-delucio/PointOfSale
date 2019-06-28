@@ -29,7 +29,8 @@ namespace PointOfSale.Views.Modulos.Busquedas
         public UnidadMedida UnidadMedida;
         public Usuario Usuario;
         public FormaPago FormaPago;
-        public MetodoPago MetodoPago;
+        public CMetodopago MetodoPago;
+        public CUsocfdi Usocfdi;
 
 
         public FrmBusqueda()
@@ -205,8 +206,17 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.MetodoPago:
                     using (var db = new DymContext())
                     {
-                        Grid1.DataSource = db.MetodoPago.AsNoTracking().Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
+                        Grid1.DataSource = db.CMetodopago.AsNoTracking().Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
                             Select(x => new { x.MetodoPagoId, x.Descripcion }).ToList();
+
+                        Ambiente.AdditionalSettingsDataGridView(Grid1);
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.UsoCDFI:
+                    using (var db = new DymContext())
+                    {
+                        Grid1.DataSource = db.CUsocfdi.AsNoTracking().Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
+                            Select(x => new { x.UsoCfdiid, x.Descripcion }).ToList();
 
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
@@ -361,7 +371,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                 case (int)Ambiente.TipoBusqueda.MetodoPago:
                     using (var db = new DymContext())
                     {
-                        MetodoPago = db.MetodoPago.Where(x => x.MetodoPagoId ==
+                        MetodoPago = db.CMetodopago.Where(x => x.MetodoPagoId ==
                     Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                     }
                     break;
@@ -369,6 +379,13 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     using (var db = new DymContext())
                     {
                         FormaPago = db.FormaPago.Where(x => x.FormaPagoId ==
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.UsoCDFI:
+                    using (var db = new DymContext())
+                    {
+                        Usocfdi = db.CUsocfdi.Where(x => x.UsoCfdiid ==
                     Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
                     }
                     break;
@@ -380,6 +397,6 @@ namespace PointOfSale.Views.Modulos.Busquedas
             DialogResult = DialogResult.OK;
         }
 
-       
+
     }
 }

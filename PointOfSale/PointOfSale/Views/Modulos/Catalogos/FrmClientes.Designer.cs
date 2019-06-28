@@ -72,6 +72,8 @@
             this.TxtFormaPago = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.CboPrecioDefault = new System.Windows.Forms.ComboBox();
+            this.TxtUsoCFDI = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label18
@@ -524,7 +526,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label21.Location = new System.Drawing.Point(16, 592);
+            this.label21.Location = new System.Drawing.Point(162, 592);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(154, 18);
             this.label21.TabIndex = 254;
@@ -563,16 +565,41 @@
             "2",
             "3",
             "4"});
-            this.CboPrecioDefault.Location = new System.Drawing.Point(18, 611);
+            this.CboPrecioDefault.Location = new System.Drawing.Point(164, 611);
             this.CboPrecioDefault.Name = "CboPrecioDefault";
-            this.CboPrecioDefault.Size = new System.Drawing.Size(297, 26);
+            this.CboPrecioDefault.Size = new System.Drawing.Size(152, 26);
             this.CboPrecioDefault.TabIndex = 19;
+            // 
+            // TxtUsoCFDI
+            // 
+            this.TxtUsoCFDI.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtUsoCFDI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtUsoCFDI.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtUsoCFDI.ForeColor = System.Drawing.Color.Black;
+            this.TxtUsoCFDI.Location = new System.Drawing.Point(18, 611);
+            this.TxtUsoCFDI.Name = "TxtUsoCFDI";
+            this.TxtUsoCFDI.Size = new System.Drawing.Size(140, 24);
+            this.TxtUsoCFDI.TabIndex = 258;
+            this.TxtUsoCFDI.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtUsoCFDI_KeyDown);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label23.Location = new System.Drawing.Point(15, 590);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(97, 18);
+            this.label23.TabIndex = 259;
+            this.label23.Text = "♥USO CFDI";
             // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 640);
+            this.Controls.Add(this.TxtUsoCFDI);
+            this.Controls.Add(this.label23);
             this.Controls.Add(this.CboPrecioDefault);
             this.Controls.Add(this.TxtFormaPago);
             this.Controls.Add(this.label22);
@@ -620,6 +647,7 @@
             this.Name = "FrmClientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmClientes";
+            this.Load += new System.EventHandler(this.FrmClientes_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -671,5 +699,7 @@
         private System.Windows.Forms.TextBox TxtFormaPago;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox CboPrecioDefault;
+        private System.Windows.Forms.TextBox TxtUsoCFDI;
+        private System.Windows.Forms.Label label23;
     }
 }
