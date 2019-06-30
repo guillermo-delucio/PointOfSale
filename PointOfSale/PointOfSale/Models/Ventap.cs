@@ -13,8 +13,8 @@ namespace PointOfSale.Models
         public decimal Precio { get; set; }
         public decimal Descuento { get; set; }
         public string LoteId { get; set; }
-        public string Impuesto1Id { get; set; }
-        public string Impuesto2Id { get; set; }
+        public string ClaveImpuesto1 { get; set; }
+        public string ClaveImpuesto2 { get; set; }
         public string TasaOcuota1 { get; set; }
         public string TasaOcuota2 { get; set; }
         public decimal Impuesto1 { get; set; }
@@ -24,6 +24,8 @@ namespace PointOfSale.Models
         public decimal SubTotal { get; set; }
         public decimal Total { get; set; }
 
+        public virtual CImpuesto ClaveImpuesto1Navigation { get; set; }
+        public virtual CImpuesto ClaveImpuesto2Navigation { get; set; }
         public virtual Venta Venta { get; set; }
     }
 }

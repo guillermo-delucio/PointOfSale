@@ -24,8 +24,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private VentaController ventaController;
         private VentapController ventapController;
         private ProductoController productoController;
+        private ImpuestoController ImpuestoController;
         private ClienteController clienteController;
         private InventarioController inventarioController;
+
 
         private const int NPARTIDAS = 100;
         private int SigPartida;
@@ -195,6 +197,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             productoController = new ProductoController();
             clienteController = new ClienteController();
             inventarioController = new InventarioController();
+            ImpuestoController = new ImpuestoController();
 
             //Reset malla
             Malla.Rows.Clear();
@@ -372,12 +375,14 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 }
             }
 
-
-
             partida.Precio = SeleccionaPrecio(producto, cliente);
             partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
             partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
             partida.LoteId = TraeLote(producto, partida.Cantidad);
+            partida.ClaveImpuesto1 = SeleccionaClaveImpuesto(producto, 1);
+            partida.ClaveImpuesto2 = SeleccionaClaveImpuesto(producto, 2);
+            partida.TasaOcuota1 = "Tasa";
+            partida.TasaOcuota2 = "Tasa";
             partida.SubTotal = partida.Cantidad * partida.Precio;
             partida.ImporteImpuesto1 = partida.SubTotal * partida.Impuesto1;
             partida.ImporteImpuesto2 = partida.SubTotal * partida.Impuesto2;
@@ -492,7 +497,41 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     return 1;
             }
         }
+        private string SeleccionaClaveImpuesto(Producto producto, int NoImpuesto = 1)
+        {
 
+            if (producto == null)
+            {
+                Ambiente.Mensaje("Imposible obtener el impuesto de un producto null");
+                return "002";
+            }
+            else
+            {
+                Impuesto impuesto = null;
+                if (NoImpuesto == 1)
+                {
+
+                    impuesto = ImpuestoController.SelectOne(producto.Impuesto1Id);
+                    if (impuesto != null)
+                    {
+                        return impuesto.CImpuesto;
+                    }
+                    else
+                        return "002";
+                }
+                else
+                {
+                    impuesto = ImpuestoController.SelectOne(producto.Impuesto2Id);
+                    if (impuesto != null)
+                    {
+                        return impuesto.CImpuesto;
+                    }
+                    else
+                        return "002";
+
+                }
+            }
+        }
 
         //EVENTOS
         private void Malla_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)

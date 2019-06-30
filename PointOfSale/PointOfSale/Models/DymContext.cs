@@ -1514,6 +1514,10 @@ namespace PointOfSale.Models
                     .HasColumnType("decimal(18, 6)")
                     .HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.ClaveImpuesto1).HasMaxLength(5);
+
+                entity.Property(e => e.ClaveImpuesto2).HasMaxLength(5);
+
                 entity.Property(e => e.Descripcion).HasMaxLength(250);
 
                 entity.Property(e => e.Descuento).HasColumnType("decimal(18, 6)");
@@ -1524,11 +1528,7 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Impuesto1).HasColumnType("decimal(18, 6)");
 
-                entity.Property(e => e.Impuesto1Id).HasMaxLength(5);
-
                 entity.Property(e => e.Impuesto2).HasColumnType("decimal(18, 6)");
-
-                entity.Property(e => e.Impuesto2Id).HasMaxLength(5);
 
                 entity.Property(e => e.LoteId).HasMaxLength(50);
 
@@ -1547,6 +1547,16 @@ namespace PointOfSale.Models
                 entity.Property(e => e.TasaOcuota2).HasMaxLength(50);
 
                 entity.Property(e => e.Total).HasColumnType("decimal(18, 6)");
+
+                entity.HasOne(d => d.ClaveImpuesto1Navigation)
+                    .WithMany(p => p.VentapClaveImpuesto1Navigation)
+                    .HasForeignKey(d => d.ClaveImpuesto1)
+                    .HasConstraintName("Ventap_C_Impuesto_ImpuestoId_fk");
+
+                entity.HasOne(d => d.ClaveImpuesto2Navigation)
+                    .WithMany(p => p.VentapClaveImpuesto2Navigation)
+                    .HasForeignKey(d => d.ClaveImpuesto2)
+                    .HasConstraintName("Ventap_C_Impuesto_ImpuestoId_fk_2");
 
                 entity.HasOne(d => d.Venta)
                     .WithMany(p => p.Ventap)
