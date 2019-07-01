@@ -21,6 +21,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         public Cliente cliente;
         public Producto producto;
 
+
         private VentaController ventaController;
         private VentapController ventapController;
         private ProductoController productoController;
@@ -42,6 +43,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void CalculaTotales()
         {
+            venta.Unidades = 0;
             venta.SubTotal = 0;
             venta.Impuesto = 0;
             venta.Total = 0;
@@ -68,6 +70,17 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 partida.ImporteImpuesto1 = partida.SubTotal * partida.Impuesto1;
                 partida.ImporteImpuesto2 = partida.SubTotal * partida.Impuesto2;
                 partida.Total = partida.SubTotal + partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+
+                //sumar unidades
+
+                venta.Unidades += partida.Cantidad;
+                if (Ambiente.Estacion.SumarUnidadesPdv)
+                {
+                    LblUnidades.Visible = true;
+                    LblUnidades.Text = venta.Unidades + " Unidades";
+                }
+                else
+                    LblUnidades.Visible = false;
 
                 //sumar el total por partida a los totales de la venta
                 venta.SubTotal += partida.SubTotal;

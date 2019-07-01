@@ -1,7 +1,10 @@
 ﻿using DYM.Views;
+using Microsoft.EntityFrameworkCore;
 using PointOfSale.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -507,5 +510,15 @@ namespace PointOfSale.Controllers
         #endregion
 
 
+        public static DataSet DS(string SQL)
+        {
+            using (var db = new DymContext())
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(SQL.Trim(), db.Database.GetDbConnection() as SqlConnection);
+                DataSet dataSet = new DataSet();
+                adapter.Fill(dataSet);
+                return dataSet;
+            }
+        }
     }
 }

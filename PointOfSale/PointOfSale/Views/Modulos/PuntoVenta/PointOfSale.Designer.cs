@@ -78,6 +78,7 @@
             this.LblUltDocumento = new System.Windows.Forms.Label();
             this.LblCambio = new System.Windows.Forms.Label();
             this.TimerPDV = new System.Windows.Forms.Timer(this.components);
+            this.LblUnidades = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxImagen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Malla)).BeginInit();
@@ -617,11 +618,23 @@
             this.TimerPDV.Interval = 1000;
             this.TimerPDV.Tick += new System.EventHandler(this.TimerPDV_Tick);
             // 
+            // LblUnidades
+            // 
+            this.LblUnidades.AutoSize = true;
+            this.LblUnidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUnidades.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.LblUnidades.Location = new System.Drawing.Point(676, 466);
+            this.LblUnidades.Name = "LblUnidades";
+            this.LblUnidades.Size = new System.Drawing.Size(14, 20);
+            this.LblUnidades.TabIndex = 292;
+            this.LblUnidades.Text = "-";
+            // 
             // PointOfSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1023, 496);
+            this.Controls.Add(this.LblUnidades);
             this.Controls.Add(this.LblUltDocumento);
             this.Controls.Add(this.LblCambio);
             this.Controls.Add(this.BtnCobroPago);
@@ -711,5 +724,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.Timer TimerPDV;
+        private System.Windows.Forms.Label LblUnidades;
     }
 }

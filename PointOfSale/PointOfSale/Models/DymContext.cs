@@ -1473,6 +1473,8 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Total).HasColumnType("decimal(18, 6)");
 
+                entity.Property(e => e.Unidades).HasColumnType("decimal(18, 6)");
+
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
 
                 entity.Property(e => e.UsoCfdi)

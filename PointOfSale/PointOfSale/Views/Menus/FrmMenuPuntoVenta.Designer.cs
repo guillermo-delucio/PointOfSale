@@ -122,6 +122,7 @@
             this.BtnCerrarCaja.TabIndex = 245;
             this.BtnCerrarCaja.Text = "&Cerrar Caja.";
             this.BtnCerrarCaja.UseVisualStyleBackColor = true;
+            this.BtnCerrarCaja.Click += new System.EventHandler(this.BtnCerrarCaja_Click);
             // 
             // BtnVentasDelDia
             // 
