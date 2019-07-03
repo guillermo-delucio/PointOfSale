@@ -247,41 +247,6 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-        public Tuple<string, DateTime> TraeDatosLote(Producto producto, decimal cantidad)
-        {
-
-            Tuple<string, DateTime> datos;// = Tuple.Create("", DateTime.Now);
-            string sLote = "";
-            DateTime caducidad = DateTime.Now;
-
-            if (producto.TieneLote && cantidad > 0)
-            {
-                using (var db = new DymContext())
-                {
-                    var lotes = db.Lote.Where(x => x.ProductoId.Equals(producto.ProductoId) && x.StockRestante > 0).OrderBy(x => x.CreatedAt).ToList();
-                    foreach (var lote in lotes)
-                    {
-                        if (lote.StockRestante >= cantidad && cantidad > 0)
-                        {
-                            sLote += lote.LoteId + ",";
-                            caducidad = (DateTime)lote.Caducidad;
-                            cantidad = 0;
-                        }
-                        else if (cantidad > 0)
-                        {
-                            sLote += lote.LoteId + ",";
-                            caducidad = (DateTime)lote.Caducidad;
-                            cantidad -= (decimal)lote.StockRestante;
-                        }
-                    }
-                    datos = Tuple.Create(sLote, caducidad);
-                    return datos;
-                }
-            }
-            else
-            {
-                return Tuple.Create("", DateTime.Now);
-            }
-        }
+    
     }
 }

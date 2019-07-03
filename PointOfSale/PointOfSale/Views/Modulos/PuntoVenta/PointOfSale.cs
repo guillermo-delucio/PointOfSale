@@ -28,6 +28,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private ImpuestoController ImpuestoController;
         private ClienteController clienteController;
         private InventarioController inventarioController;
+        private LoteController loteController;
 
 
         private const int NPARTIDAS = 100;
@@ -65,8 +66,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 partida.Precio = SeleccionaPrecio(producto, cliente);
                 partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
                 partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
-                partida.LoteId = productoController.TraeDatosLote(producto, partida.Cantidad).Item1;
-                partida.Caducidad = productoController.TraeDatosLote(producto, partida.Cantidad).Item2;
+                if (producto.TieneLote)
+                {
+                    partida.LoteId = loteController.TraeDatosLote(producto, partida.Cantidad).Item1;
+                    partida.Caducidad = loteController.TraeDatosLote(producto, partida.Cantidad).Item2;
+                }
                 partida.SubTotal = partida.Cantidad * partida.Precio;
                 partida.ImporteImpuesto1 = partida.SubTotal * partida.Impuesto1;
                 partida.ImporteImpuesto2 = partida.SubTotal * partida.Impuesto2;
@@ -212,7 +216,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             clienteController = new ClienteController();
             inventarioController = new InventarioController();
             ImpuestoController = new ImpuestoController();
-
+            loteController = new LoteController();
             //Reset malla
             Malla.Rows.Clear();
             for (int i = 0; i < NPARTIDAS; i++)
@@ -392,8 +396,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             partida.Precio = SeleccionaPrecio(producto, cliente);
             partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
             partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
-            partida.LoteId = productoController.TraeDatosLote(producto, partida.Cantidad).Item1;
-            partida.Caducidad = productoController.TraeDatosLote(producto, partida.Cantidad).Item2;
+            if (producto.TieneLote)
+            {
+                partida.LoteId = loteController.TraeDatosLote(producto, partida.Cantidad).Item1;
+                partida.Caducidad = loteController.TraeDatosLote(producto, partida.Cantidad).Item2;
+            }
             partida.ClaveImpuesto1 = SeleccionaClaveImpuesto(producto, 1);
             partida.ClaveImpuesto2 = SeleccionaClaveImpuesto(producto, 2);
             partida.TasaOcuota1 = "Tasa";
@@ -426,13 +433,27 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             foreach (var p in partidas)
             {
-                if (!ventapController.InsertOne(p))
+                if (ventapController.InsertOne(p))
+                {
+                    var prod = productoController.SelectOne(p.ProductoId);
+                    if (prod != null)
+                    {
+                        if (loteController.RestaLote(prod, p.Cantidad))
+                        {
+                            if (!inventarioController.AfectaInventario(p.ProductoId, -p.Cantidad))
+                                Ambiente.Mensaje("Algo salió mal al afectar el inventario");
+                        }
+                        else
+                            Ambiente.Mensaje("Algo salió mal al restar el lote");
+                    }
+                    else
+                        Ambiente.Mensaje("Algo salió mal con la partida: " + p.Descripcion);
+                }
+                else
+                {
                     Ambiente.Mensaje("Algo salió mal con la partida: " + p.Descripcion);
+                }
             }
-        }
-        private void GuardaCXC()
-        {
-
         }
         private bool HayStockSuficiente(Producto producto, decimal cant)
         {

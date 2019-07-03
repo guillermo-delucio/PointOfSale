@@ -52,7 +52,27 @@ namespace PointOfSale.Controllers
             }
             return false;
         }
-
+        public bool DeletePartidas(Compra compra)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    var partidas = db.Comprap.Where(x => x.CompraId == compra.CompraId).ToList();
+                    if (partidas != null)
+                    {
+                        db.RemoveRange(partidas);
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return false;
+        }
         public bool InsertOne(Compra o)
         {
             try

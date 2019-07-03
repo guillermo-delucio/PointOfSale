@@ -21,6 +21,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         CxppController cxppController;
         CambioPrecioController cambioPrecioController;
         private List<Impuesto> Impuestos;
+        public List<Lote> Lotes { get; set; }
 
         Producto producto;
         Proveedor proveedor;
@@ -60,6 +61,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             cxppController = new CxppController();
             cambioPrecioController = new CambioPrecioController();
             Impuestos = new List<Impuesto>();
+            Lotes = new List<Lote>();
             success = false;
             ResetParcial();
         }
@@ -120,6 +122,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                         lote = l.LoteId;
                         caducidad = (DateTime)l.Caducidad;
                         loteController.Update(l);
+                        Lotes.Add(l);
                     }
                 }
             }
@@ -748,7 +751,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             impuestoTotal = 0;
             nImpuestos = 0;
             GridPartidas.Rows.Clear();
-
+            Lotes = new List<Lote>();
         }
 
         private void ActualizaStock()
@@ -856,6 +859,26 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
+            Descarta();
+        }
+
+        private void Descarta()
+        {
+            LoteController loteController = new LoteController();
+            foreach (var l in Lotes)
+            {
+                if (!loteController.Delete(l))
+                    Ambiente.Mensaje("Error al descartar los lotes");
+            }
+            if (compra != null)
+            {
+
+                if (compra.EstadoDocId.Equals("PEN"))
+                {
+                    compraController.DeletePartidas(compra);
+                    compraController.DeleteOne(compra.CompraId);
+                }
+            }
             Close();
         }
 
