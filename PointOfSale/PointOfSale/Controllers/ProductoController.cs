@@ -247,35 +247,41 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-
-        public string TraeSiguienteLote(Producto producto, decimal cantidad)
+        public Tuple<string, DateTime> TraeDatosLote(Producto producto, decimal cantidad)
         {
-            try
+
+            Tuple<string, DateTime> datos;// = Tuple.Create("", DateTime.Now);
+            string sLote = "";
+            DateTime caducidad = DateTime.Now;
+
+            if (producto.TieneLote && cantidad > 0)
             {
-                string l = "";
                 using (var db = new DymContext())
                 {
-                    //var query= db.Categories.Where(c=>c.Category_ID==cat_id).SelectMany(c=>Articles);
-                    var lotes = db.Lote.Where(x => x.ProductoId == producto.ProductoId && x.StockRestante > 0).OrderBy(x => x.CreatedAt);
-
+                    var lotes = db.Lote.Where(x => x.ProductoId.Equals(producto.ProductoId) && x.StockRestante > 0).OrderBy(x => x.CreatedAt).ToList();
                     foreach (var lote in lotes)
                     {
-                        if (lote.StockRestante >= cantidad)
-                            return l + lote.LoteId;
-                        else
+                        if (lote.StockRestante >= cantidad && cantidad > 0)
                         {
-                            l += lote + ",";
+                            sLote += lote.LoteId + ",";
+                            caducidad = (DateTime)lote.Caducidad;
+                            cantidad = 0;
+                        }
+                        else if (cantidad > 0)
+                        {
+                            sLote += lote.LoteId + ",";
+                            caducidad = (DateTime)lote.Caducidad;
+                            cantidad -= (decimal)lote.StockRestante;
                         }
                     }
+                    datos = Tuple.Create(sLote, caducidad);
+                    return datos;
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Ambiente.Mensaje("ProductoController: " + ex.ToString());
+                return Tuple.Create("", DateTime.Now);
             }
-
-            return null;
         }
-
     }
 }

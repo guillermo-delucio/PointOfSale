@@ -36,6 +36,7 @@ namespace PointOfSale.Models
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Compra> Compra { get; set; }
         public virtual DbSet<Comprap> Comprap { get; set; }
+        public virtual DbSet<Configuracion> Configuracion { get; set; }
         public virtual DbSet<Consecutivo> Consecutivo { get; set; }
         public virtual DbSet<Cp> Cp { get; set; }
         public virtual DbSet<Cxc> Cxc { get; set; }
@@ -57,6 +58,7 @@ namespace PointOfSale.Models
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<ProductoSustancia> ProductoSustancia { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
+        public virtual DbSet<Query> Query { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<RolePermiso> RolePermiso { get; set; }
         public virtual DbSet<Sustancia> Sustancia { get; set; }
@@ -632,6 +634,27 @@ namespace PointOfSale.Models
                     .HasForeignKey(d => d.CompraId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Comprap_Compra");
+            });
+
+            modelBuilder.Entity<Configuracion>(entity =>
+            {
+                entity.Property(e => e.RutaCadenaOriginal).HasMaxLength(250);
+
+                entity.Property(e => e.RutaCer).HasMaxLength(250);
+
+                entity.Property(e => e.RutaComprobantes).HasMaxLength(250);
+
+                entity.Property(e => e.RutaCortes).HasMaxLength(250);
+
+                entity.Property(e => e.RutaFormatoCorte).HasMaxLength(250);
+
+                entity.Property(e => e.RutaFormatoFactura).HasMaxLength(250);
+
+                entity.Property(e => e.RutaFormatoTicket).HasMaxLength(250);
+
+                entity.Property(e => e.RutaKey).HasMaxLength(250);
+
+                entity.Property(e => e.RutaPlantillas).HasMaxLength(250);
             });
 
             modelBuilder.Entity<Consecutivo>(entity =>
@@ -1282,6 +1305,17 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Telefono).HasMaxLength(100);
             });
 
+            modelBuilder.Entity<Query>(entity =>
+            {
+                entity.Property(e => e.QueryId)
+                    .HasMaxLength(50)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Descripcion).HasMaxLength(50);
+
+                entity.Property(e => e.Sql).HasColumnName("SQL");
+            });
+
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.Property(e => e.RoleId)
@@ -1512,6 +1546,8 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Ventap>(entity =>
             {
+                entity.Property(e => e.Caducidad).HasColumnType("datetime");
+
                 entity.Property(e => e.Cantidad)
                     .HasColumnType("decimal(18, 6)")
                     .HasDefaultValueSql("((1))");

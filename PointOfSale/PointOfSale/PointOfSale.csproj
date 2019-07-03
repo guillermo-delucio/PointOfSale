@@ -234,6 +234,7 @@
     <Compile Include="Models\CNumpedimentoaduana.cs" />
     <Compile Include="Models\Compra.cs" />
     <Compile Include="Models\CompraP.cs" />
+    <Compile Include="Models\Configuracion.cs" />
     <Compile Include="Models\Consecutivo.cs" />
     <Compile Include="Models\Cp.cs" />
     <Compile Include="Models\CPatenteaduanal.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="Models\ProductoImpuesto.cs" />
     <Compile Include="Models\ProductoSustancia.cs" />
     <Compile Include="Models\Proveedor.cs" />
+    <Compile Include="Models\Query.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\RolePermiso.cs" />
     <Compile Include="Models\Serie.cs" />

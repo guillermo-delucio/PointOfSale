@@ -13,6 +13,7 @@ namespace PointOfSale.Models
         public decimal Precio { get; set; }
         public decimal Descuento { get; set; }
         public string LoteId { get; set; }
+        public DateTime? Caducidad { get; set; }
         public string ClaveImpuesto1 { get; set; }
         public string ClaveImpuesto2 { get; set; }
         public string TasaOcuota1 { get; set; }

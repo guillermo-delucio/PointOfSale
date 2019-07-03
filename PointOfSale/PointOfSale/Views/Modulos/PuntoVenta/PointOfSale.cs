@@ -65,7 +65,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 partida.Precio = SeleccionaPrecio(producto, cliente);
                 partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
                 partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
-                partida.LoteId = TraeLote(producto, partida.Cantidad);
+                partida.LoteId = productoController.TraeDatosLote(producto, partida.Cantidad).Item1;
+                partida.Caducidad = productoController.TraeDatosLote(producto, partida.Cantidad).Item2;
                 partida.SubTotal = partida.Cantidad * partida.Precio;
                 partida.ImporteImpuesto1 = partida.SubTotal * partida.Impuesto1;
                 partida.ImporteImpuesto2 = partida.SubTotal * partida.Impuesto2;
@@ -391,7 +392,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             partida.Precio = SeleccionaPrecio(producto, cliente);
             partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
             partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
-            partida.LoteId = TraeLote(producto, partida.Cantidad);
+            partida.LoteId = productoController.TraeDatosLote(producto, partida.Cantidad).Item1;
+            partida.Caducidad = productoController.TraeDatosLote(producto, partida.Cantidad).Item2;
             partida.ClaveImpuesto1 = SeleccionaClaveImpuesto(producto, 1);
             partida.ClaveImpuesto2 = SeleccionaClaveImpuesto(producto, 2);
             partida.TasaOcuota1 = "Tasa";
@@ -460,13 +462,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void RestaExistencias()
         {
 
-        }
-        private string TraeLote(Producto producto, decimal cant)
-        {
-            if (producto.TieneLote)
-                return productoController.TraeSiguienteLote(producto, cant);
-            else
-                return null;
         }
         private void LanzaBusquedaClientes()
         {
