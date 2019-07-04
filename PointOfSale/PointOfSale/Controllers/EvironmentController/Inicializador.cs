@@ -54,6 +54,7 @@ namespace PointOfSale.Controllers
         {
             Ambiente.RutaImgs = @"C:\Dympos\IMGS";
             Ambiente.PrefijoRutaImg = @"C:\Dympos\";
+            Ambiente.FormatoTicket = @"C:\Dympos\Formatos\Ticket.mrt";
         }
 
         public static void InicializaDatabaseDefaultsValues()

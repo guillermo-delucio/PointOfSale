@@ -283,6 +283,7 @@
             this.BtnVisualizacionPrev.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnVisualizacionPrev.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnVisualizacionPrev.UseVisualStyleBackColor = true;
+            this.BtnVisualizacionPrev.Click += new System.EventHandler(this.BtnVisualizacionPrev_Click);
             // 
             // BtnDirectoImp
             // 

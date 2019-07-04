@@ -1,6 +1,7 @@
 ﻿using PointOfSale.Controllers;
 using PointOfSale.Models;
 using PointOfSale.Views.Modulos.Busquedas;
+using Stimulsoft.Report;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +30,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private ClienteController clienteController;
         private InventarioController inventarioController;
         private LoteController loteController;
-
+        private StiReport report;
+        private DataSet ds;
+        private int UltVenta;
 
         private const int NPARTIDAS = 100;
         private int SigPartida;
@@ -40,6 +43,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             InitializeComponent();
             ResetPDV();
+            UltVenta = 0;
         }
 
         private void CalculaTotales()
@@ -217,6 +221,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             inventarioController = new InventarioController();
             ImpuestoController = new ImpuestoController();
             loteController = new LoteController();
+            report = new StiReport();
+            ds = new DataSet();
+            report.Load(Ambiente.FormatoTicket);
             //Reset malla
             Malla.Rows.Clear();
             for (int i = 0; i < NPARTIDAS; i++)
@@ -312,7 +319,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     Ambiente.UpdateSiguiente("FAC");
                     LblUltDocumento.Text = "FACTURA  F" + venta.NoRef + " " + DateTime.Now.ToShortTimeString();
                 }
-
+                UltVenta = venta.VentaId;
                 LblCambio.Text = "SU CAMBIO: " + Ambiente.FDinero(venta.Cambio.ToString());
                 ResetPDV();
             }
@@ -443,8 +450,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                             if (!inventarioController.AfectaInventario(p.ProductoId, -p.Cantidad))
                                 Ambiente.Mensaje("Algo salió mal al afectar el inventario");
                         }
-                        else
-                            Ambiente.Mensaje("Algo salió mal al restar el lote");
+                        //else
+                        // Ambiente.Mensaje("Algo salió mal al restar el lote");
                     }
                     else
                         Ambiente.Mensaje("Algo salió mal con la partida: " + p.Descripcion);
@@ -683,7 +690,28 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnDirectoImp_Click(object sender, EventArgs e)
         {
+            if (UltVenta > 0)
+            {
+                ds = new DataSet();
+                ds.Tables.Add(Ambiente.DT("select * from venta where VentaId=" + UltVenta, "v"));
+                ds.Tables.Add(Ambiente.DT("select * from ventap where VentaId=" + UltVenta, "vp"));
+                report.RegData(ds);
+                report.Print();
 
+            }
+
+        }
+
+        private void BtnVisualizacionPrev_Click(object sender, EventArgs e)
+        {
+            if (UltVenta > 0)
+            {
+                ds = new DataSet();
+                ds.Tables.Add(Ambiente.DT("select * from venta where VentaId=" + UltVenta, "v"));
+                ds.Tables.Add(Ambiente.DT("select * from ventap where VentaId=" + UltVenta, "vp"));
+                report.RegData(ds);
+                report.Show();
+            }
         }
     }
 }

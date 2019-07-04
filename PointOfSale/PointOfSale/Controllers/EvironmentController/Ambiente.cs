@@ -23,6 +23,7 @@ namespace PointOfSale.Controllers
         public static Estacion Estacion { get; set; }
         public static string RutaImgs { get; set; }
         public static string PrefijoRutaImg { get; set; }
+        public static string FormatoTicket { get; set; }
 
         #region Enums
         public enum TipoBusqueda
@@ -509,15 +510,15 @@ namespace PointOfSale.Controllers
 
         #endregion
 
-
-        public static DataSet DS(string SQL)
+        //Generador de datatables
+        public static DataTable DT(string Query, string nombre)
         {
             using (var db = new DymContext())
             {
-                SqlDataAdapter adapter = new SqlDataAdapter(SQL.Trim(), db.Database.GetDbConnection() as SqlConnection);
-                DataSet dataSet = new DataSet();
-                adapter.Fill(dataSet);
-                return dataSet;
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(Query, db.Database.GetDbConnection() as SqlConnection);
+                DataTable dataTable = new DataTable(nombre.Trim());
+                dataAdapter.Fill(dataTable);
+                return dataTable;
             }
         }
     }
