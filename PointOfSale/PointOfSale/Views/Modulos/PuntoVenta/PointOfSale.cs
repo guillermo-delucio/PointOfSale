@@ -696,7 +696,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 ds.Tables.Add(Ambiente.DT("select * from venta where VentaId=" + UltVenta, "v"));
                 ds.Tables.Add(Ambiente.DT("select * from ventap where VentaId=" + UltVenta, "vp"));
                 report.RegData(ds);
-                report.Print();
+                report.Print(false);
 
             }
 
