@@ -24,6 +24,9 @@ namespace PointOfSale.Models
         public decimal ImporteImpuesto2 { get; set; }
         public decimal SubTotal { get; set; }
         public decimal Total { get; set; }
+        public string ClaveProdServ { get; set; }
+        public string ClaveUnidad { get; set; }
+        public string Unidad { get; set; }
 
         public virtual CImpuesto ClaveImpuesto1Navigation { get; set; }
         public virtual CImpuesto ClaveImpuesto2Navigation { get; set; }

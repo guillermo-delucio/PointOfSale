@@ -400,6 +400,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 }
             }
 
+
             partida.Precio = SeleccionaPrecio(producto, cliente);
             partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
             partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
@@ -408,6 +409,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 partida.LoteId = loteController.TraeDatosLote(producto, partida.Cantidad).Item1;
                 partida.Caducidad = loteController.TraeDatosLote(producto, partida.Cantidad).Item2;
             }
+            partida.ClaveProdServ = producto.ClaveProdServId.Trim().Length == 0 ? "01010101" : producto.ClaveProdServId.Trim();
+            partida.ClaveUnidad = producto.ClaveUnidadId.Trim().Length == 0 ? "H87" : producto.ClaveUnidadId.Trim();
+            partida.Unidad = producto.UnidadMedidaId.Trim().Length == 0 ? "SYS" : producto.UnidadMedidaId.Trim();
             partida.ClaveImpuesto1 = SeleccionaClaveImpuesto(producto, 1);
             partida.ClaveImpuesto2 = SeleccionaClaveImpuesto(producto, 2);
             partida.TasaOcuota1 = "Tasa";
