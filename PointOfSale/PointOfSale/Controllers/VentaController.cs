@@ -25,6 +25,21 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
+        public Venta SelectTicket(int Id)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Venta.FirstOrDefault(x => x.NoRef == Id && x.Anulada == false && x.EstadoDocId.Equals("CON") && x.TipoDocId.Equals("TIC"));
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
         public bool InsertOne(Venta o)
         {
             try

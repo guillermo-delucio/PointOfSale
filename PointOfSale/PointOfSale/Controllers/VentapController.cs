@@ -25,6 +25,21 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
+        public List<Ventap> SelectPartidas(int Id)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Ventap.Where(x => x.VentaId == Id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
         public bool InsertOne(Ventap o)
         {
             try

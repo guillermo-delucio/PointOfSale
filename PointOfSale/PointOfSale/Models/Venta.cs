@@ -50,6 +50,7 @@ namespace PointOfSale.Models
         public string MetodoPago { get; set; }
         public string UsoCfdi { get; set; }
         public decimal? Unidades { get; set; }
+        public bool? Anulada { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual Usuario CreatedByNavigation { get; set; }

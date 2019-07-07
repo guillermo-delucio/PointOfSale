@@ -1429,6 +1429,8 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Venta>(entity =>
             {
+                entity.Property(e => e.Anulada).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.Cambio).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.ClienteId)

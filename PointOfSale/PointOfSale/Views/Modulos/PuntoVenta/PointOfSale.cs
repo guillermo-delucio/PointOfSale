@@ -262,6 +262,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             venta.Pago2 = 0;
             venta.Pago3 = 0;
             venta.NoRef = 0;
+            venta.Anulada = false;
             ventaController.InsertOne(venta);
 
         }
@@ -491,10 +492,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 return p.Stock >= cant;
             }
         }
-        private void RestaExistencias()
-        {
 
-        }
         private void LanzaBusquedaClientes()
         {
             using (var form = new FrmBusqueda(TxtCliente.Text.Trim(), (int)Ambiente.TipoBusqueda.Clientes, ChkSoloConLicencia.Checked))
@@ -508,6 +506,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                             + " " + cliente.Municipio + " " + cliente.Localidad + " " + cliente.Estado + " TEL." + cliente.Telefono;
                     CalculaTotales();
                     venta.ClienteId = cliente.ClienteId;
+                    venta.DatosCliente = datosCliente;
                     if (!ventaController.UpdateOne(venta))
                         Ambiente.Mensaje("No se puedo actualizar el cliente en el objeto venta");
 

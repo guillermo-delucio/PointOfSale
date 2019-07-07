@@ -39,6 +39,7 @@
             this.BtnVentasDelDia = new System.Windows.Forms.Button();
             this.BtnSalir = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.BtnTicketAFactura = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnPOS
@@ -155,11 +156,23 @@
             this.button1.Text = "&Tarjetas";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // BtnTicketAFactura
+            // 
+            this.BtnTicketAFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnTicketAFactura.Location = new System.Drawing.Point(297, 60);
+            this.BtnTicketAFactura.Name = "BtnTicketAFactura";
+            this.BtnTicketAFactura.Size = new System.Drawing.Size(105, 95);
+            this.BtnTicketAFactura.TabIndex = 249;
+            this.BtnTicketAFactura.Text = "&Ticket a factura";
+            this.BtnTicketAFactura.UseVisualStyleBackColor = true;
+            this.BtnTicketAFactura.Click += new System.EventHandler(this.BtnTicketAFactura_Click);
+            // 
             // FrmMenuPuntoVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(639, 409);
+            this.Controls.Add(this.BtnTicketAFactura);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.BtnSalir);
             this.Controls.Add(this.BtnVentasDelDia);
@@ -192,5 +205,6 @@
         private System.Windows.Forms.Button BtnVentasDelDia;
         private System.Windows.Forms.Button BtnSalir;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnTicketAFactura;
     }
 }

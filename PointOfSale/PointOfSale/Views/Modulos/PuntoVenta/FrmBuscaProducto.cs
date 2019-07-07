@@ -86,6 +86,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             if (e.KeyCode == Keys.Enter)
             {
+                if (Mallap.Rows[Mallap.CurrentCell.RowIndex].Cells[0].Value != null)
+                {
+                    Producto = ProductoController.SelectOne(Mallap.Rows[Mallap.CurrentCell.RowIndex].Cells[7].Value.ToString());
+                    CargaConfigProd();
+                }
                 DescargaForma();
             }
         }
@@ -98,11 +103,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void Mallap_SelectionChanged(object sender, EventArgs e)
         {
-            if (Mallap.Rows[Mallap.CurrentCell.RowIndex].Cells[0].Value != null)
-            {
-                Producto = ProductoController.SelectOne(Mallap.Rows[Mallap.CurrentCell.RowIndex].Cells[7].Value.ToString());
-                CargaConfigProd();
-            }
+           
         }
 
         private void CargaConfigProd()

@@ -1,5 +1,6 @@
 ﻿using PointOfSale.Controllers;
 using PointOfSale.Models;
+using PointOfSale.Views.Modulos.PuntoVenta;
 using Stimulsoft.Report;
 using Stimulsoft.Report.Components;
 using System;
@@ -44,6 +45,11 @@ namespace PointOfSale.Views.Menus
 
         }
 
+        private void BtnTicketAFactura_Click(object sender, EventArgs e)
+        {
+            var o = new FrmTicketFactura();
+            o.Show();
 
+        }
     }
 }

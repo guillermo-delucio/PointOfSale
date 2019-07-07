@@ -31,6 +31,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
         public FormaPago FormaPago;
         public CMetodopago MetodoPago;
         public CUsocfdi Usocfdi;
+        public Venta Venta;
 
 
         public FrmBusqueda()
@@ -221,6 +222,15 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
                     break;
+                case (int)Ambiente.TipoBusqueda.Tickets:
+                    using (var db = new DymContext())
+                    {
+                        Grid1.DataSource = db.Venta.AsNoTracking().Where(x => x.NoRef == int.Parse(SearchText) && x.EstadoDocId.Equals("CON")).
+                            Select(x => new { Ticket = x.NoRef, Status = x.EstadoDocId, x.DatosCliente }).ToList();
+
+                        Ambiente.AdditionalSettingsDataGridView(Grid1);
+                    }
+                    break;
                 default:
                     MessageBox.Show("Error, no hay enumerador para catalogo");
                     break;
@@ -387,6 +397,13 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     {
                         Usocfdi = db.CUsocfdi.Where(x => x.UsoCfdiid ==
                     Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim()).FirstOrDefault();
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.Tickets:
+                    using (var db = new DymContext())
+                    {
+                        Venta = db.Venta.Where(x => x.NoRef ==
+                    (int)Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value).FirstOrDefault();
                     }
                     break;
                 default:
