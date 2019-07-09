@@ -32,7 +32,8 @@ namespace PointOfSale.Views.Modulos.Busquedas
         public CMetodopago MetodoPago;
         public CUsocfdi Usocfdi;
         public Venta Venta;
-
+        public Empresa Empresa;
+        public CRegimenfiscal Regimenfiscal;
 
         public FrmBusqueda()
         {
@@ -231,6 +232,24 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
                     break;
+                case (int)Ambiente.TipoBusqueda.Empresas:
+                    using (var db = new DymContext())
+                    {
+                        Grid1.DataSource = db.Empresa.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && !(bool)x.IsDeleted).
+                            Select(x => new { ID = x.EmpresaId, x.Nombre }).ToList();
+
+                        Ambiente.AdditionalSettingsDataGridView(Grid1);
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.RegimenFiscal:
+                    using (var db = new DymContext())
+                    {
+                        Grid1.DataSource = db.CRegimenfiscal.AsNoTracking().Where(x => x.Descripcion.Contains(SearchText)).
+                            Select(x => new { ID = x.RegimenFiscalId, x.Descripcion }).ToList();
+
+                        Ambiente.AdditionalSettingsDataGridView(Grid1);
+                    }
+                    break;
                 default:
                     MessageBox.Show("Error, no hay enumerador para catalogo");
                     break;
@@ -404,6 +423,20 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     {
                         Venta = db.Venta.Where(x => x.NoRef ==
                     (int)Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value).FirstOrDefault();
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.Empresas:
+                    using (var db = new DymContext())
+                    {
+                        Empresa = db.Empresa.Where(x => x.EmpresaId ==
+                    (int)Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value).FirstOrDefault();
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.RegimenFiscal:
+                    using (var db = new DymContext())
+                    {
+                        Regimenfiscal = db.CRegimenfiscal.Where(x => x.RegimenFiscalId.Equals(
+                    Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString())).FirstOrDefault();
                     }
                     break;
                 default:

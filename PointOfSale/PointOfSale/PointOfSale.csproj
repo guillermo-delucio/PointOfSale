@@ -177,7 +177,9 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -189,6 +191,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CFDI33\CFDI.cs" />
+    <Compile Include="CFDI33\cfdv33_tdCFDI_catCFDI.cs" />
+    <Compile Include="CFDI33\opensslkey.cs" />
+    <Compile Include="CFDI33\SelloDigital.cs" />
+    <Compile Include="CFDI33\StringWriterEncoding.cs" />
+    <Compile Include="CFDI33\TimbreFiscalDigitalv11_tdCFDI.cs" />
+    <Compile Include="Connected Services\WsTimbrado\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\BMController.cs" />
     <Compile Include="Controllers\CambioPrecioController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
@@ -197,8 +210,10 @@
     <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\CxpController.cs" />
     <Compile Include="Controllers\CxppController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EstacionController.cs" />
     <Compile Include="Controllers\EvironmentController\Ambiente.cs" />
+    <Compile Include="Controllers\EvironmentController\CommonOpenFileDialog.cs" />
     <Compile Include="Controllers\EvironmentController\Inicializador.cs" />
     <Compile Include="Controllers\ImportaExcelController.cs" />
     <Compile Include="Controllers\EvironmentController\IController.cs" />
@@ -306,6 +321,12 @@
     <Compile Include="Views\Menus\FrmMain.designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Menus\FrmMenuConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Menus\FrmMenuConfig.Designer.cs">
+      <DependentUpon>FrmMenuConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Menus\FrmMenuLogistica.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -402,6 +423,12 @@
     <Compile Include="Views\Modulos\Catalogos\FrmUsuarios.Designer.cs">
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\Config\FrmEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Config\FrmEmpresa.Designer.cs">
+      <DependentUpon>FrmEmpresa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modulos\Importaciones\FrmImportaProds.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -490,6 +517,9 @@
     <EmbeddedResource Include="Views\Menus\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Menus\FrmMenuConfig.resx">
+      <DependentUpon>FrmMenuConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Menus\FrmMenuLogistica.resx">
       <DependentUpon>FrmMenuLogistica.cs</DependentUpon>
     </EmbeddedResource>
@@ -538,6 +568,9 @@
     <EmbeddedResource Include="Views\Modulos\Catalogos\FrmUsuarios.resx">
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Config\FrmEmpresa.resx">
+      <DependentUpon>FrmEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Importaciones\FrmImportaProds.resx">
       <DependentUpon>FrmImportaProds.cs</DependentUpon>
     </EmbeddedResource>
@@ -571,6 +604,22 @@
     <EmbeddedResource Include="Views\RootShell.resx">
       <DependentUpon>RootShell.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Connected Services\WsTimbrado\PointOfSale.WsTimbrado.RespuestaCFDi.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\WsTimbrado\svcTimbrado.wsdl" />
+    <None Include="Connected Services\WsTimbrado\Timbrado.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\WsTimbrado\Timbrado1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\WsTimbrado\Timbrado2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\WsTimbrado\Timbrado3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -652,6 +701,12 @@
     <None Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\WsTimbrado\configuration91.svcinfo" />
+    <None Include="Connected Services\WsTimbrado\configuration.svcinfo" />
+    <None Include="Connected Services\WsTimbrado\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Localization\ar.xml" />
     <Content Include="Localization\be.xml" />
     <Content Include="Localization\bg.xml" />
@@ -699,7 +754,10 @@
     <Content Include="Localization\zh-CHT.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CFDI33\" />
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\WsTimbrado\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

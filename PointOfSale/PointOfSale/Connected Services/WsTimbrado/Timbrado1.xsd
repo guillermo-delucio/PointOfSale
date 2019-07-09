@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://webservice.facturacenter.com.mx/Timbrado.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FacturaService" />
+  <xs:import schemaLocation="http://webservice.facturacenter.com.mx/Timbrado.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="Timbrar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Usuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ArchivoXML" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TimbrarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/FacturaService" minOccurs="0" name="TimbrarResult" nillable="true" type="q1:RespuestaCFDi" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TimbrarTest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Usuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ArchivoXML" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TimbrarTestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/FacturaService" minOccurs="0" name="TimbrarTestResult" nillable="true" type="q2:RespuestaCFDi" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PDF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Usuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ArchivoXML" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="ArchivoACK" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PDFResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/FacturaService" minOccurs="0" name="PDFResult" nillable="true" type="q3:RespuestaCFDi" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Cancelar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Usuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PFX" nillable="true" type="xs:base64Binary" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="UUID" nillable="true" type="q4:ArrayOfstring" />
+        <xs:element minOccurs="0" name="ContraseñaPFX" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/FacturaService" minOccurs="0" name="CancelarResult" nillable="true" type="q5:RespuestaCFDi" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CambiarContrasena">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Usuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="NuevoPassword" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CambiarContrasenaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/FacturaService" minOccurs="0" name="CambiarContrasenaResult" nillable="true" type="q6:RespuestaCFDi" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Login">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Usuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/FacturaService" minOccurs="0" name="LoginResult" nillable="true" type="q7:RespuestaCFDi" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PFX">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Usuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PAssword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ArchivoCER" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="ArchivoKey" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="ClavePrivada" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PFXResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/FacturaService" minOccurs="0" name="PFXResult" nillable="true" type="q8:RespuestaCFDi" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarAsincrono">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Usuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PFX" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="UUID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ContraseñaPFX" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Total" type="xs:double" />
+        <xs:element minOccurs="0" name="RFCEmior" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="RFCReceptor" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarAsincronoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/FacturaService" minOccurs="0" name="CancelarAsincronoResult" nillable="true" type="q9:RespuestaCFDi" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Usuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UUID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Total" type="xs:double" />
+        <xs:element minOccurs="0" name="RFCEmisor" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="RFCReceptor" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/FacturaService" minOccurs="0" name="VerStatusResult" nillable="true" type="q10:RespuestaCFDi" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

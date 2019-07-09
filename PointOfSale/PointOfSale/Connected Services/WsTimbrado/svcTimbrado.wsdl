@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="svcTimbrado" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://webservice.facturacenter.com.mx/Timbrado.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://webservice.facturacenter.com.mx/Timbrado.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://webservice.facturacenter.com.mx/Timbrado.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FacturaService" />
+      <xsd:import schemaLocation="http://webservice.facturacenter.com.mx/Timbrado.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITimbrado_Timbrar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Timbrar" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_Timbrar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TimbrarResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_TimbrarTest_InputMessage">
+    <wsdl:part name="parameters" element="tns:TimbrarTest" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_TimbrarTest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TimbrarTestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_PDF_InputMessage">
+    <wsdl:part name="parameters" element="tns:PDF" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_PDF_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PDFResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_Cancelar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Cancelar" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_Cancelar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelarResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_CambiarContrasena_InputMessage">
+    <wsdl:part name="parameters" element="tns:CambiarContrasena" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_CambiarContrasena_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CambiarContrasenaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_PFX_InputMessage">
+    <wsdl:part name="parameters" element="tns:PFX" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_PFX_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PFXResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_CancelarAsincrono_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelarAsincrono" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_CancelarAsincrono_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelarAsincronoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_VerStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerStatus" />
+  </wsdl:message>
+  <wsdl:message name="ITimbrado_VerStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerStatusResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITimbrado">
+    <wsdl:operation name="Timbrar">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimbrado/Timbrar" message="tns:ITimbrado_Timbrar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimbrado/TimbrarResponse" message="tns:ITimbrado_Timbrar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TimbrarTest">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimbrado/TimbrarTest" message="tns:ITimbrado_TimbrarTest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimbrado/TimbrarTestResponse" message="tns:ITimbrado_TimbrarTest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PDF">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimbrado/PDF" message="tns:ITimbrado_PDF_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimbrado/PDFResponse" message="tns:ITimbrado_PDF_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Cancelar">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimbrado/Cancelar" message="tns:ITimbrado_Cancelar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimbrado/CancelarResponse" message="tns:ITimbrado_Cancelar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CambiarContrasena">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimbrado/CambiarContrasena" message="tns:ITimbrado_CambiarContrasena_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimbrado/CambiarContrasenaResponse" message="tns:ITimbrado_CambiarContrasena_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimbrado/Login" message="tns:ITimbrado_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimbrado/LoginResponse" message="tns:ITimbrado_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PFX">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimbrado/PFX" message="tns:ITimbrado_PFX_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimbrado/PFXResponse" message="tns:ITimbrado_PFX_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelarAsincrono">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimbrado/CancelarAsincrono" message="tns:ITimbrado_CancelarAsincrono_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimbrado/CancelarAsincronoResponse" message="tns:ITimbrado_CancelarAsincrono_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimbrado/VerStatus" message="tns:ITimbrado_VerStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimbrado/VerStatusResponse" message="tns:ITimbrado_VerStatus_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITimbrado" type="tns:ITimbrado">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Timbrar">
+      <soap:operation soapAction="http://tempuri.org/ITimbrado/Timbrar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TimbrarTest">
+      <soap:operation soapAction="http://tempuri.org/ITimbrado/TimbrarTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PDF">
+      <soap:operation soapAction="http://tempuri.org/ITimbrado/PDF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Cancelar">
+      <soap:operation soapAction="http://tempuri.org/ITimbrado/Cancelar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambiarContrasena">
+      <soap:operation soapAction="http://tempuri.org/ITimbrado/CambiarContrasena" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/ITimbrado/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PFX">
+      <soap:operation soapAction="http://tempuri.org/ITimbrado/PFX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelarAsincrono">
+      <soap:operation soapAction="http://tempuri.org/ITimbrado/CancelarAsincrono" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerStatus">
+      <soap:operation soapAction="http://tempuri.org/ITimbrado/VerStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="svcTimbrado">
+    <wsdl:port name="BasicHttpBinding_ITimbrado" binding="tns:BasicHttpBinding_ITimbrado">
+      <soap:address location="http://webservice.facturacenter.com.mx/Timbrado.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

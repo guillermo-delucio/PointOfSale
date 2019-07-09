@@ -137,6 +137,7 @@
             this.BtnReportesGraficas.TabIndex = 8;
             this.BtnReportesGraficas.Text = "&REPORTES GRAFICAS";
             this.BtnReportesGraficas.UseVisualStyleBackColor = true;
+            this.BtnReportesGraficas.Click += new System.EventHandler(this.BtnReportesGraficas_Click);
             // 
             // BtnSalida
             // 

@@ -11,6 +11,7 @@ namespace PointOfSale.Models
         }
 
         public int VentaId { get; set; }
+        public int? NoRef { get; set; }
         public string TipoDocId { get; set; }
         public DateTime? FechaDoc { get; set; }
         public string ClienteId { get; set; }
@@ -34,9 +35,6 @@ namespace PointOfSale.Models
         public string FormaPago3 { get; set; }
         public string EstacionId { get; set; }
         public bool Cortada { get; set; }
-        public string Xml { get; set; }
-        public string RutaXml { get; set; }
-        public string UuId { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string UpdatedBy { get; set; }
@@ -46,11 +44,13 @@ namespace PointOfSale.Models
         public decimal? Cambio { get; set; }
         public string TotalConLetra { get; set; }
         public bool? EsCxc { get; set; }
-        public int? NoRef { get; set; }
         public string MetodoPago { get; set; }
         public string UsoCfdi { get; set; }
         public decimal? Unidades { get; set; }
         public bool? Anulada { get; set; }
+        public string UuId { get; set; }
+        public string RutaXml { get; set; }
+        public string NoCertificado { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual Usuario CreatedByNavigation { get; set; }

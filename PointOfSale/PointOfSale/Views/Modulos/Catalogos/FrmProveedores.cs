@@ -202,5 +202,10 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             TraeCP(TxtCp.Text);
         }
+
+        private void FrmProveedores_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

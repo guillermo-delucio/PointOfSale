@@ -1,4 +1,6 @@
 ﻿
+using PointOfSale.CFDI33;
+using PointOfSale.Controllers;
 using PointOfSale.Views.Menus;
 using PointOfSale.Views.Modulos.Catalogos;
 using System;
@@ -48,13 +50,30 @@ namespace DYM.Views
 
         private void BtnConfiguracion_Click(object sender, EventArgs e)
         {
-
+            var o = new FrmMenuConfig();
+            o.MdiParent = this.MdiParent;
+            o.Show();
 
         }
 
         private void BtnSalida_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void BtnReportesGraficas_Click(object sender, EventArgs e)
+        {
+
+            var ventacontroller = new VentaController();
+            var ventapcontroller = new VentapController();
+            var clienteController = new ClienteController();
+
+            var cfdi = new CFDI();
+            cfdi.Venta = ventacontroller.SelectOne(258);
+            cfdi.Partidas = ventapcontroller.SelectPartidas(258);
+            cfdi.Cliente = clienteController.SelectOne("3012");
+
+            cfdi.Facturar();
         }
     }
 }

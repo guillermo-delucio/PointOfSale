@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -34,7 +35,7 @@ namespace PointOfSale.Controllers
             ClavesSat, Presentaciones, UnidadesMedida,
             Usuarios, ProductoImpuesto, ProductoSustancia,
             ProductosCompleto, MetodoPago, FormaPago, UsoCDFI,
-            Tickets
+            Tickets, Empresas, RegimenFiscal
 
         };
 
@@ -214,24 +215,47 @@ namespace PointOfSale.Controllers
                 return "1.00";
             return string.Format("{0:0.00}", nValor);
         }
-        public static Tuple<string, string> GetRuta()
+        public static Tuple<string, string> GetFilePath()
         {
 
             var filePath = string.Empty;
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "JPG files (*.JPG)|*.JPG|PNG files (*.PNG)|*.PNG";
+                openFileDialog.Filter = "All files (*.*)|*.*";
                 openFileDialog.RestoreDirectory = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     //Get the path of specified file
                     filePath = openFileDialog.FileName;
+                    if (filePath.Length == 0 || openFileDialog.SafeFileName.Length == 0)
+                        return new Tuple<string, string>("", "");
+
                     return new Tuple<string, string>(filePath, openFileDialog.SafeFileName);
                 }
             }
             return null;
         }
+
+        public static string GetFolderPath()
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.SelectedPath = @"C:\";
+
+            using (dialog)
+            {
+                DialogResult result = dialog.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.SelectedPath))
+                    return dialog.SelectedPath + @"\";
+                else
+                    return "";
+            }
+        }
+
+
+
+
 
         public static int TraeSiguiente(string consecutivoId)
         {

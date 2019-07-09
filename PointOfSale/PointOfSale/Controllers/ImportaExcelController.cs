@@ -257,12 +257,12 @@ namespace PointOfSale.Controllers
                                     break;
                                 case 4:
                                     p.Impuesto3Id = workSheet.Cells[row, col].Text.Trim().Length == 0 ? "SYS" : workSheet.Cells[row, col].Text.Trim();
-                                    
+
                                     break;
                                 default:
                                     Errores.Add("SE OMITIÓ REGISTRO A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
                                     break;
-                            }                             
+                            }
                         }
                         productoController.Update(p);
 
@@ -1134,6 +1134,14 @@ namespace PointOfSale.Controllers
                                 case 2:
                                     //ClienteId
                                     cliente.ClienteId = workSheet.Cells[row, col].Text.Trim();
+                                    cliente.LimiteCredito = 0;
+                                    cliente.DiasCredito = 0;
+                                    cliente.IsDeleted = false;
+                                    cliente.FormaPagoId = "01";
+                                    cliente.MetodoPagoId = "PUE";
+                                    cliente.UsoCfdiid = "G01";
+                                    cliente.PrecioDefault = 1;
+                                    cliente.Saldo = 0;
                                     break;
                                 case 3:
                                     //RFC
@@ -1198,13 +1206,7 @@ namespace PointOfSale.Controllers
                                 case 17:
                                     //Correo
                                     cliente.Correo = workSheet.Cells[row, col].Text.Trim();
-                                    cliente.LimiteCredito = 0;
-                                    cliente.DiasCredito = 0;
-                                    cliente.IsDeleted = false;
-                                    cliente.MetodoPagoId = "PUE";
-                                    cliente.PrecioDefault = 1;
-                                    cliente.FormaPagoId = "01";
-                                    cliente.Saldo = 0;
+
 
                                     if (tipo_per.Equals("C"))
                                         Clientes.Add(cliente);

@@ -536,6 +536,7 @@
             this.Name = "FrmProveedores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmProveedores";
+            this.Load += new System.EventHandler(this.FrmProveedores_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

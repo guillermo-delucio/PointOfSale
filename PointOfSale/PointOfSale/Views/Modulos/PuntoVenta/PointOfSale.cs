@@ -93,7 +93,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
                 //sumar el total por partida a los totales de la venta
                 venta.SubTotal += partida.SubTotal;
-                venta.Impuesto += partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+                //venta.Impuesto = 0;
+                venta.Impuesto += Math.Round(partida.ImporteImpuesto1, 2) + Math.Round(partida.ImporteImpuesto2, 2);
                 venta.Total = venta.SubTotal + venta.Impuesto;
 
                 //Refleajar el cambio  de precio y columnas calculadas en la malla                
@@ -281,10 +282,19 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Ambiente.Mensaje("Operación denegada, selecciona un cliente valido para facturar");
                 return;
             }
-
-            else if (venta.TipoDocId.Equals("FAC") && !Ambiente.Estacion.SolicitarFmpago)
+            if (venta.TipoDocId.Equals("TIC") && !Ambiente.Estacion.SolicitarFmpago)
             {
-                venta.MetodoPago = cliente.FormaPagoId.Trim().Length == 0 ? "PUE" : cliente.FormaPagoId.Trim();
+                if (cliente == null)
+                {
+                    venta.MetodoPago = "PUE";
+                    venta.UsoCfdi = "G01";
+                }
+                else
+                {
+                    venta.MetodoPago = cliente.MetodoPagoId.Trim().Length == 0 ? "PUE" : cliente.MetodoPagoId.Trim();
+                    venta.UsoCfdi = cliente.UsoCfdiid.Trim().Length == 0 ? "G01" : cliente.UsoCfdiid.Trim();
+                }
+
             }
 
             venta.TotalConLetra = form.totalLetra;
@@ -302,7 +312,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             venta.Pago2 = form.pago2;
             venta.Pago3 = form.pago3;
             venta.Cambio = form.cambio;
-            venta.MetodoPago = form.metodoPago;
             venta.EstadoDocId = "CON";
 
 

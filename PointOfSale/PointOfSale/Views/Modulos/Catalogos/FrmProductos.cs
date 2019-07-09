@@ -762,7 +762,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
         private void BtnImagen_Click(object sender, EventArgs e)
         {
-            var imgdata = Ambiente.GetRuta();
+            var imgdata = Ambiente.GetFilePath();
 
 
             EstableceImgen(imgdata);
@@ -772,7 +772,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void TxtRutaImg_TextChanged(object sender, EventArgs e)
         {
 
-            EstableceImgen(Ambiente.GetRuta());
+            EstableceImgen(Ambiente.GetFilePath());
         }
 
         private bool EstableceImgen(Tuple<string, string> imgdata)

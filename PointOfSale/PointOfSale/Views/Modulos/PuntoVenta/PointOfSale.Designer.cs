@@ -664,6 +664,7 @@
             this.Controls.Add(this.TxtCliente);
             this.Controls.Add(this.label1);
             this.Name = "PointOfSale";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PointOfSale";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
