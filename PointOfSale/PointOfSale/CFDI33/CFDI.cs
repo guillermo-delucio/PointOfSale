@@ -112,6 +112,9 @@ namespace PointOfSale.CFDI33
 
             //inicializacion de propiedades
             Empresa = empresaController.SelectTopOne();
+            Partidas = ventapController.SelectPartidas(Venta.VentaId);
+            Cliente = clienteController.SelectOne(Venta.ClienteId);
+
 
         }
 
@@ -192,13 +195,6 @@ namespace PointOfSale.CFDI33
                     //Agregar impuestos al concepto y concepto a la lista
                     concepto.Impuestos.Traslados = impuestosConcepto.ToArray();
                     conceptos.Add(concepto);
-
-
-
-
-
-
-
                 }
                 else if (p.Impuesto1 == 0 && p.Impuesto2 > 0)
                 {
@@ -302,9 +298,7 @@ namespace PointOfSale.CFDI33
             comprobante.Sello = selloDigital.Sellar(CadenaOriginal, Empresa.RutaKey, Empresa.ClavePrivada);
             Serializar(comprobante);
 
-            Timbrar(FacturaActual);
-
-            return true;
+            return Timbrar(FacturaActual);
         }
 
         public bool GenerarPDF()
@@ -392,7 +386,7 @@ namespace PointOfSale.CFDI33
 
         }
 
-        private void Timbrar(String pathXML)
+        private bool Timbrar(String pathXML)
         {
 
             //TIMBRE DEL XML
@@ -404,6 +398,7 @@ namespace PointOfSale.CFDI33
             if (respuestaCFDI.Documento == null)
             {
                 Ambiente.Mensaje(respuestaCFDI.Mensaje);
+                return false;
             }
             else
             {
@@ -417,10 +412,7 @@ namespace PointOfSale.CFDI33
                 Venta.NoCertificado = NoCertificado;
                 Venta.RutaXml = FacturaActual;
 
-                if (ventaController.UpdateOne(Venta))
-                {
-                    Ambiente.Mensaje(comprobante.TimbreFiscalDigital.UUID);
-                }
+                return ventaController.UpdateOne(Venta);
             }
         }
     }

@@ -25,13 +25,13 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
-        public Venta SelectTicket(int Id)
+        public Venta SelectTicket(int NoRef)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.Venta.FirstOrDefault(x => x.NoRef == Id && x.Anulada == false && x.EstadoDocId.Equals("CON") && x.TipoDocId.Equals("TIC"));
+                    return db.Venta.FirstOrDefault(x => x.NoRef == NoRef && x.Anulada == false && x.EstadoDocId.Equals("CON") && x.TipoDocId.Equals("TIC"));
                 }
             }
             catch (Exception ex)
