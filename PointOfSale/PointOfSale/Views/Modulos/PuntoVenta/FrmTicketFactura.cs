@@ -48,7 +48,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             ds = new DataSet();
 
             empresa = empresaController.SelectTopOne();
-            report.Load(empresa.RutaFormatoFactura);
+
             cliente = null;
             venta = null;
 
@@ -153,15 +153,22 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         }
         private bool GenerarPDF()
         {
-            ds = new DataSet();
+            //Exportar
+            report = new StiReport();
+            report.Load(empresa.RutaFormatoFactura);
+            var ds = new DataSet("DS");
             ds.Tables.Add(Ambiente.DT("select * from venta where VentaId=" + venta.VentaId, "v"));
             ds.Tables.Add(Ambiente.DT("select * from ventap where VentaId=" + venta.VentaId, "vp"));
-            ds.Tables.Add(Ambiente.DT("select * from cliente where ClienteId=" + venta.ClienteId, "c"));
+            ds.Tables.Add(Ambiente.DT("select * from cliente where ClienteId='" + venta.ClienteId + "'", "c"));
             ds.Tables.Add(Ambiente.DT("select top 1 * from Empresa", "e"));
             report.RegData(ds);
-            report.Dictionary.Synchronize();
-            // Design report in Designer dialog window
-            report.Design();
+            report.Render(false);
+            var file = empresa.RutaComprobantes + "FACTURA-" + venta.NoRef.ToString() + ".PDF";
+            report.ExportDocument(StiExportFormat.Pdf, file);
+            System.Diagnostics.Process.Start(file);
+
+
+
             return true;
         }
 

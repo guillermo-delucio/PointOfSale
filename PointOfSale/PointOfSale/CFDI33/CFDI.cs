@@ -5,10 +5,7 @@ using PointOfSale.WsTimbrado;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Xsl;
@@ -407,10 +404,13 @@ namespace PointOfSale.CFDI33
 
                 Deserializar(pathXML);
 
-
+                Venta.CadenaOriginal = CadenaOriginal;
+                Venta.SelloCfdi = comprobante.TimbreFiscalDigital.SelloCFD;
+                Venta.SelloSat = comprobante.TimbreFiscalDigital.SelloSAT;
                 Venta.UuId = comprobante.TimbreFiscalDigital.UUID;
                 Venta.NoCertificado = NoCertificado;
                 Venta.RutaXml = FacturaActual;
+
 
                 return ventaController.UpdateOne(Venta);
             }

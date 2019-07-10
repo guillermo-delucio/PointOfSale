@@ -21,6 +21,7 @@ namespace PointOfSale.Models
         public string MonedaId { get; set; }
         public string DatosCliente { get; set; }
         public bool EnFactCierre { get; set; }
+        public bool? Anulada { get; set; }
         public bool EsConversiondeTaF { get; set; }
         public int? VentaOrigen { get; set; }
         public int? CxcId { get; set; }
@@ -47,10 +48,12 @@ namespace PointOfSale.Models
         public string MetodoPago { get; set; }
         public string UsoCfdi { get; set; }
         public decimal? Unidades { get; set; }
-        public bool? Anulada { get; set; }
         public string UuId { get; set; }
         public string RutaXml { get; set; }
         public string NoCertificado { get; set; }
+        public string CadenaOriginal { get; set; }
+        public string SelloCfdi { get; set; }
+        public string SelloSat { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual Usuario CreatedByNavigation { get; set; }

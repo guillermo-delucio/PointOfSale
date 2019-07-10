@@ -1488,6 +1488,10 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.RutaXml).HasMaxLength(250);
 
+                entity.Property(e => e.SelloCfdi).HasColumnName("SelloCFDI");
+
+                entity.Property(e => e.SelloSat).HasColumnName("SelloSAT");
+
                 entity.Property(e => e.SubTotal).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.TipoDocId)
