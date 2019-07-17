@@ -65,13 +65,13 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         if (SoloConLicencia)
                         {
                             Grid1.DataSource = db.Cliente.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText) || x.Negocio.Contains(SearchText) && (x.IsDeleted == false && x.TieneLicencia == true)).OrderBy(x => x.RazonSocial).
-                            Select(x => new { x.ClienteId, x.RazonSocial, x.Negocio }).ToList();
+                            Select(x => new { x.ClienteId, x.RazonSocial, x.Negocio, x.Rfc }).ToList();
                             Ambiente.AdditionalSettingsDataGridView(Grid1);
                         }
                         else
                         {
                             Grid1.DataSource = db.Cliente.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText) || x.Negocio.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
-                            Select(x => new { x.ClienteId, x.RazonSocial, x.Negocio }).ToList();
+                            Select(x => new { x.ClienteId, x.RazonSocial, x.Negocio, x.Rfc }).ToList();
                             Ambiente.AdditionalSettingsDataGridView(Grid1);
                         }
 

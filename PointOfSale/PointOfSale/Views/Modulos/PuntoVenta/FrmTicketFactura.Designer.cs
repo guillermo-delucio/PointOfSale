@@ -31,6 +31,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.Malla = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtnAceptar = new System.Windows.Forms.Button();
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.TxtNoRereren = new System.Windows.Forms.TextBox();
@@ -43,9 +46,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.TxtCliente = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.Malla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,6 +88,23 @@
             this.Malla.TabIndex = 274;
             this.Malla.TabStop = false;
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "TICKET";
+            this.Column1.Name = "Column1";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "STATUS";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 70;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "DATOS";
+            this.Column2.Name = "Column2";
+            // 
             // BtnAceptar
             // 
             this.BtnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -107,6 +124,7 @@
             this.BtnCancelar.TabIndex = 7;
             this.BtnCancelar.Text = "SALIR";
             this.BtnCancelar.UseVisualStyleBackColor = true;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // TxtNoRereren
             // 
@@ -227,23 +245,6 @@
             this.label5.Size = new System.Drawing.Size(88, 18);
             this.label5.TabIndex = 293;
             this.label5.Text = "♥CLIENTE";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "TICKET";
-            this.Column1.Name = "Column1";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "STATUS";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 70;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "DATOS";
-            this.Column2.Name = "Column2";
             // 
             // FrmTicketFactura
             // 

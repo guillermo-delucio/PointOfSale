@@ -31,15 +31,14 @@
             this.BtnPOS = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.BtnReimpresionT = new System.Windows.Forms.Button();
             this.BtnMovsCaja = new System.Windows.Forms.Button();
             this.BtnCerrarCaja = new System.Windows.Forms.Button();
             this.BtnVentasDelDia = new System.Windows.Forms.Button();
             this.BtnSalir = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.BtnTicketAFactura = new System.Windows.Forms.Button();
+            this.BtnFacturas = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnPOS
@@ -74,20 +73,10 @@
             this.label14.Size = new System.Drawing.Size(637, 10);
             this.label14.TabIndex = 239;
             // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(108, 191);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(132, 48);
-            this.button2.TabIndex = 241;
-            this.button2.Text = "&Busca Precios";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(108, 251);
+            this.button3.Location = new System.Drawing.Point(408, 278);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(132, 48);
             this.button3.TabIndex = 242;
@@ -146,41 +135,41 @@
             this.BtnSalir.UseVisualStyleBackColor = true;
             this.BtnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(408, 286);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 48);
-            this.button1.TabIndex = 248;
-            this.button1.Text = "&Tarjetas";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // BtnTicketAFactura
             // 
             this.BtnTicketAFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnTicketAFactura.Location = new System.Drawing.Point(297, 60);
+            this.BtnTicketAFactura.Location = new System.Drawing.Point(108, 181);
             this.BtnTicketAFactura.Name = "BtnTicketAFactura";
-            this.BtnTicketAFactura.Size = new System.Drawing.Size(105, 95);
+            this.BtnTicketAFactura.Size = new System.Drawing.Size(132, 48);
             this.BtnTicketAFactura.TabIndex = 249;
             this.BtnTicketAFactura.Text = "&Ticket a factura";
             this.BtnTicketAFactura.UseVisualStyleBackColor = true;
             this.BtnTicketAFactura.Click += new System.EventHandler(this.BtnTicketAFactura_Click);
+            // 
+            // BtnFacturas
+            // 
+            this.BtnFacturas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnFacturas.Location = new System.Drawing.Point(108, 245);
+            this.BtnFacturas.Name = "BtnFacturas";
+            this.BtnFacturas.Size = new System.Drawing.Size(132, 48);
+            this.BtnFacturas.TabIndex = 250;
+            this.BtnFacturas.Text = "&Facturas";
+            this.BtnFacturas.UseVisualStyleBackColor = true;
+            this.BtnFacturas.Click += new System.EventHandler(this.BtnFacturas_Click);
             // 
             // FrmMenuPuntoVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(639, 409);
+            this.Controls.Add(this.BtnFacturas);
             this.Controls.Add(this.BtnTicketAFactura);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.BtnSalir);
             this.Controls.Add(this.BtnVentasDelDia);
             this.Controls.Add(this.BtnCerrarCaja);
             this.Controls.Add(this.BtnMovsCaja);
             this.Controls.Add(this.BtnReimpresionT);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.BtnPOS);
@@ -197,14 +186,13 @@
         private System.Windows.Forms.Button BtnPOS;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button BtnReimpresionT;
         private System.Windows.Forms.Button BtnMovsCaja;
         private System.Windows.Forms.Button BtnCerrarCaja;
         private System.Windows.Forms.Button BtnVentasDelDia;
         private System.Windows.Forms.Button BtnSalir;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button BtnTicketAFactura;
+        private System.Windows.Forms.Button BtnFacturas;
     }
 }

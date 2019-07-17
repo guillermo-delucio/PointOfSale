@@ -327,7 +327,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 else if (venta.TipoDocId.Equals("FAC"))
                 {
                     Ambiente.UpdateSiguiente("FAC");
-                    LblUltDocumento.Text = "FACTURA  F" + venta.NoRef + " " + DateTime.Now.ToShortTimeString();
+                    LblUltDocumento.Text = "FACTURA: " + venta.NoRef + " " + DateTime.Now.ToShortTimeString();
                 }
                 UltVenta = venta.VentaId;
                 LblCambio.Text = "SU CAMBIO: " + Ambiente.FDinero(venta.Cambio.ToString());

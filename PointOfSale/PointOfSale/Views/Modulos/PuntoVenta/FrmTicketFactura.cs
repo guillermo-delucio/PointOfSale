@@ -106,6 +106,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                         if (!ventapController.InsertOne(p))
                             Ambiente.Mensaje("La partida tuvo problemas al re-insertarse");
                     }
+                    Ambiente.UpdateSiguiente("FAC");
                 }
                 else
                 {
@@ -234,12 +235,24 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
+
+            if (cliente == null)
+                cliente = clienteController.SelectOne(venta.ClienteId);
+
+            if (cliente.Rfc.Trim().Length < 12)
+            {
+                Ambiente.Mensaje("El cliente no es un receptor válido");
+                return;
+            }
+            BtnAceptar.Enabled = false;
             if (ClonarVenta())
                 if (Facturar())
                     if (!GenerarPDF())
                         Ambiente.Mensaje("Algo salio mal al generar el PDF");
                     else
-                        Ambiente.Mensaje("Proceso completado");
+                    {
+                        Close();
+                    }
 
 
 
@@ -262,6 +275,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
 
+        }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
