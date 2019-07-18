@@ -34,7 +34,6 @@
             this.BtnAceptar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.TxtRegimenFiscalId = new System.Windows.Forms.TextBox();
             this.TxtCP = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -48,6 +47,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TxtRazonSocial = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.TxtPassWS = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.TxtUserWS = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.TxtClavePrivada = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -75,10 +79,9 @@
             this.label11 = new System.Windows.Forms.Label();
             this.BtnCo = new System.Windows.Forms.Button();
             this.TxtRutaCO = new System.Windows.Forms.TextBox();
-            this.TxtUserWS = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.TxtPassWS = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.BtnTickets = new System.Windows.Forms.Button();
+            this.TxtDirectorioTickets = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -160,29 +163,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Datos fiscales";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.TxtPassWS);
-            this.tabPage2.Controls.Add(this.label19);
-            this.tabPage2.Controls.Add(this.TxtUserWS);
-            this.tabPage2.Controls.Add(this.label18);
-            this.tabPage2.Controls.Add(this.TxtClavePrivada);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.BtnKey);
-            this.tabPage2.Controls.Add(this.TxtRutaKey);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.BtnCer);
-            this.tabPage2.Controls.Add(this.TxtRutaCer);
-            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(710, 381);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Facturación";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // TxtRegimenFiscalId
             // 
@@ -331,6 +311,77 @@
             this.label2.TabIndex = 308;
             this.label2.Text = "RAZÓN SOCIAL";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.TxtPassWS);
+            this.tabPage2.Controls.Add(this.label19);
+            this.tabPage2.Controls.Add(this.TxtUserWS);
+            this.tabPage2.Controls.Add(this.label18);
+            this.tabPage2.Controls.Add(this.TxtClavePrivada);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.BtnKey);
+            this.tabPage2.Controls.Add(this.TxtRutaKey);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.BtnCer);
+            this.tabPage2.Controls.Add(this.TxtRutaCer);
+            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(710, 381);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Facturación";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // TxtPassWS
+            // 
+            this.TxtPassWS.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtPassWS.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtPassWS.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtPassWS.ForeColor = System.Drawing.Color.Black;
+            this.TxtPassWS.Location = new System.Drawing.Point(355, 36);
+            this.TxtPassWS.Name = "TxtPassWS";
+            this.TxtPassWS.ReadOnly = true;
+            this.TxtPassWS.Size = new System.Drawing.Size(332, 24);
+            this.TxtPassWS.TabIndex = 348;
+            this.TxtPassWS.Text = "9616FB2B81E89673495F";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label19.Location = new System.Drawing.Point(353, 15);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(226, 18);
+            this.label19.TabIndex = 349;
+            this.label19.Text = "CONTRASEÑA  WS TIMBRADO";
+            // 
+            // TxtUserWS
+            // 
+            this.TxtUserWS.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtUserWS.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtUserWS.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtUserWS.ForeColor = System.Drawing.Color.Black;
+            this.TxtUserWS.Location = new System.Drawing.Point(13, 36);
+            this.TxtUserWS.Name = "TxtUserWS";
+            this.TxtUserWS.ReadOnly = true;
+            this.TxtUserWS.Size = new System.Drawing.Size(327, 24);
+            this.TxtUserWS.TabIndex = 346;
+            this.TxtUserWS.Text = "DGE131017IP1";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label18.Location = new System.Drawing.Point(11, 15);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(149, 18);
+            this.label18.TabIndex = 347;
+            this.label18.Text = "URL WS TIMBRADO";
+            // 
             // TxtClavePrivada
             // 
             this.TxtClavePrivada.BackColor = System.Drawing.SystemColors.Window;
@@ -424,6 +475,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label20);
+            this.tabPage3.Controls.Add(this.BtnTickets);
+            this.tabPage3.Controls.Add(this.TxtDirectorioTickets);
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.BtnComprobantes);
             this.tabPage3.Controls.Add(this.TxtRutaComprobantes);
@@ -654,53 +708,39 @@
             this.TxtRutaCO.TabIndex = 362;
             this.TxtRutaCO.TabStop = false;
             // 
-            // TxtUserWS
+            // label20
             // 
-            this.TxtUserWS.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtUserWS.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtUserWS.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtUserWS.ForeColor = System.Drawing.Color.Black;
-            this.TxtUserWS.Location = new System.Drawing.Point(13, 36);
-            this.TxtUserWS.Name = "TxtUserWS";
-            this.TxtUserWS.ReadOnly = true;
-            this.TxtUserWS.Size = new System.Drawing.Size(327, 24);
-            this.TxtUserWS.TabIndex = 346;
-            this.TxtUserWS.Text = "DGE131017IP1";
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label20.Location = new System.Drawing.Point(7, 185);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(167, 18);
+            this.label20.TabIndex = 375;
+            this.label20.Text = "DIRECTORIO TICKETS";
             // 
-            // label18
+            // BtnTickets
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label18.Location = new System.Drawing.Point(11, 15);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(149, 18);
-            this.label18.TabIndex = 347;
-            this.label18.Text = "URL WS TIMBRADO";
+            this.BtnTickets.Location = new System.Drawing.Point(297, 204);
+            this.BtnTickets.Name = "BtnTickets";
+            this.BtnTickets.Size = new System.Drawing.Size(42, 26);
+            this.BtnTickets.TabIndex = 373;
+            this.BtnTickets.Text = "- - -";
+            this.BtnTickets.UseVisualStyleBackColor = true;
+            this.BtnTickets.Click += new System.EventHandler(this.BtnTickets_Click);
             // 
-            // TxtPassWS
+            // TxtDirectorioTickets
             // 
-            this.TxtPassWS.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtPassWS.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtPassWS.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtPassWS.ForeColor = System.Drawing.Color.Black;
-            this.TxtPassWS.Location = new System.Drawing.Point(355, 36);
-            this.TxtPassWS.Name = "TxtPassWS";
-            this.TxtPassWS.ReadOnly = true;
-            this.TxtPassWS.Size = new System.Drawing.Size(332, 24);
-            this.TxtPassWS.TabIndex = 348;
-            this.TxtPassWS.Text = "9616FB2B81E89673495F";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label19.Location = new System.Drawing.Point(353, 15);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(226, 18);
-            this.label19.TabIndex = 349;
-            this.label19.Text = "CONTRASEÑA  WS TIMBRADO";
+            this.TxtDirectorioTickets.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtDirectorioTickets.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtDirectorioTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.TxtDirectorioTickets.ForeColor = System.Drawing.Color.Black;
+            this.TxtDirectorioTickets.Location = new System.Drawing.Point(6, 206);
+            this.TxtDirectorioTickets.Name = "TxtDirectorioTickets";
+            this.TxtDirectorioTickets.ReadOnly = true;
+            this.TxtDirectorioTickets.Size = new System.Drawing.Size(284, 24);
+            this.TxtDirectorioTickets.TabIndex = 374;
+            this.TxtDirectorioTickets.TabStop = false;
             // 
             // FrmEmpresa
             // 
@@ -780,5 +820,8 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox TxtUserWS;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button BtnTickets;
+        private System.Windows.Forms.TextBox TxtDirectorioTickets;
     }
 }

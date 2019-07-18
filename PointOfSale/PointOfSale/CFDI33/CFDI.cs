@@ -286,7 +286,7 @@ namespace PointOfSale.CFDI33
             }
 
             /**********************************CREAR XML********************************/
-            FacturaActual = Empresa.RutaComprobantes + "FACTURA-" + comprobante.Folio + ".xml";
+            FacturaActual = Empresa.DirectorioComprobantes + "FACTURA-" + comprobante.Folio + ".xml";
 
             //Crear Xml
             Serializar(comprobante);
@@ -370,7 +370,7 @@ namespace PointOfSale.CFDI33
         {
 
             XslCompiledTransform transformador = new XslCompiledTransform(true);
-            transformador.Load(Empresa.RutaCo);
+            transformador.Load(Empresa.RutaCadenaOriginal);
 
             using (StringWriter sw = new StringWriter())
             using (XmlWriter xwo = XmlWriter.Create(sw, transformador.OutputSettings))

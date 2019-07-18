@@ -1,11 +1,14 @@
 ﻿using DYM.Views;
 using Microsoft.EntityFrameworkCore;
 using PointOfSale.Models;
+using Stimulsoft.Report;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -545,6 +548,167 @@ namespace PointOfSale.Controllers
                 dataAdapter.Fill(dataTable);
                 return dataTable;
             }
+        }
+        public static void Export(string RutaFormato, string DirectorioOut, string NombreArchivo, StiExportFormat FileFormat, bool abrir, string Q1, string Q2 = "", string Q3 = "", string Q4 = "", string Q5 = "", string Q6 = "")
+        {
+            //Exportar
+            var report = new StiReport();
+            var ds = new DataSet("DS");
+            report.Load(@RutaFormato);
+
+
+            if (Q1.Trim().Length > 0)
+                ds.Tables.Add(DT(Q1, "Q1"));
+
+            if (Q2.Trim().Length > 0)
+                ds.Tables.Add(DT(Q2, "Q2"));
+
+            if (Q3.Trim().Length > 0)
+                ds.Tables.Add(DT(Q3, "Q3"));
+
+            if (Q4.Trim().Length > 0)
+                ds.Tables.Add(DT(Q4, "Q4"));
+
+            if (Q5.Trim().Length > 0)
+                ds.Tables.Add(DT(Q5, "Q5"));
+
+            if (Q6.Trim().Length > 0)
+                ds.Tables.Add(DT(Q6, "Q6"));
+
+            report.RegData(ds);
+            report.Render(true);
+            var file = DirectorioOut + NombreArchivo;
+            report.ExportDocument(FileFormat, file);
+            if (abrir)
+                Process.Start(file);
+            report.Print(false);
+        }
+        public static void Desing(string RutaFormato, string Q1, string Q2 = "", string Q3 = "", string Q4 = "", string Q5 = "", string Q6 = "")
+        {
+            //Ver
+            var report = new StiReport();
+            var ds = new DataSet("DS");
+            report.Load(@RutaFormato);
+
+            if (Q1.Trim().Length > 0)
+                ds.Tables.Add(DT(Q1, "Q1"));
+
+            if (Q2.Trim().Length > 0)
+                ds.Tables.Add(DT(Q2, "Q2"));
+
+            if (Q3.Trim().Length > 0)
+                ds.Tables.Add(DT(Q3, "Q3"));
+
+            if (Q4.Trim().Length > 0)
+                ds.Tables.Add(DT(Q4, "Q4"));
+
+            if (Q5.Trim().Length > 0)
+                ds.Tables.Add(DT(Q5, "Q5"));
+
+            if (Q6.Trim().Length > 0)
+                ds.Tables.Add(DT(Q6, "Q6"));
+
+
+            //Diseñar
+            report.Load(@RutaFormato);
+            report.RegData(ds);
+            report.Dictionary.Synchronize();
+            report.Design();
+        }
+        public static void Preview(string RutaFormato, string Q1, string Q2 = "", string Q3 = "", string Q4 = "", string Q5 = "", string Q6 = "")
+        {
+            //Ver
+            var report = new StiReport();
+            report.Load(@RutaFormato);
+            var ds = new DataSet("DS");
+
+            if (Q1.Trim().Length > 0)
+                ds.Tables.Add(DT(Q1, "Q1"));
+
+            if (Q2.Trim().Length > 0)
+                ds.Tables.Add(DT(Q2, "Q2"));
+
+            if (Q3.Trim().Length > 0)
+                ds.Tables.Add(DT(Q3, "Q3"));
+
+            if (Q4.Trim().Length > 0)
+                ds.Tables.Add(DT(Q4, "Q4"));
+
+            if (Q5.Trim().Length > 0)
+                ds.Tables.Add(DT(Q5, "Q5"));
+
+            if (Q6.Trim().Length > 0)
+                ds.Tables.Add(DT(Q6, "Q6"));
+
+            report.RegData(ds);
+            report.Show();
+
+        }
+        public static void Print(string RutaFormato, PrinterSettings printerSettings, string Q1, string Q2 = "", string Q3 = "", string Q4 = "", string Q5 = "", string Q6 = "")
+        {
+            //Ver
+            var report = new StiReport();
+            report.Load(@RutaFormato);
+            var ds = new DataSet("DS");
+
+            if (Q1.Trim().Length > 0)
+                ds.Tables.Add(DT(Q1, "Q1"));
+
+            if (Q2.Trim().Length > 0)
+                ds.Tables.Add(DT(Q2, "Q2"));
+
+            if (Q3.Trim().Length > 0)
+                ds.Tables.Add(DT(Q3, "Q3"));
+
+            if (Q4.Trim().Length > 0)
+                ds.Tables.Add(DT(Q4, "Q4"));
+
+            if (Q5.Trim().Length > 0)
+                ds.Tables.Add(DT(Q5, "Q5"));
+
+            if (Q6.Trim().Length > 0)
+                ds.Tables.Add(DT(Q6, "Q6"));
+
+            report.RegData(ds);
+            report.Print(false, printerSettings);
+        }
+        public static void ExportAndPrint(string RutaFormato, string DirectorioOut, string NombreArchivo, StiExportFormat FileFormat, PrinterSettings printerSettings, bool abrir, string Q1, string Q2 = "", string Q3 = "", string Q4 = "", string Q5 = "", string Q6 = "")
+        {
+            //Exportar
+            var report = new StiReport();
+            var ds = new DataSet("DS");
+            report.Load(@RutaFormato);
+
+
+            if (Q1.Trim().Length > 0)
+                ds.Tables.Add(DT(Q1, "Q1"));
+
+            if (Q2.Trim().Length > 0)
+                ds.Tables.Add(DT(Q2, "Q2"));
+
+            if (Q3.Trim().Length > 0)
+                ds.Tables.Add(DT(Q3, "Q3"));
+
+            if (Q4.Trim().Length > 0)
+                ds.Tables.Add(DT(Q4, "Q4"));
+
+            if (Q5.Trim().Length > 0)
+                ds.Tables.Add(DT(Q5, "Q5"));
+
+            if (Q6.Trim().Length > 0)
+                ds.Tables.Add(DT(Q6, "Q6"));
+
+            report.RegData(ds);
+            report.Render(false);
+            var file = DirectorioOut + NombreArchivo;
+            report.ExportDocument(FileFormat, file);
+            if (abrir)
+                Process.Start(file);
+            report.Print(false, printerSettings);
+        }
+        public static string TextTime(string name, DateTime date)
+        {
+            return name + "_" + date.ToString("dd.MM.yyyy_hh.mm.ss");
         }
     }
 }

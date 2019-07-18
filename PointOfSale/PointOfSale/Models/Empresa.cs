@@ -14,14 +14,15 @@ namespace PointOfSale.Models
         public string Domicilio { get; set; }
         public string Cp { get; set; }
         public string RutaCer { get; set; }
-        public string RutaComprobantes { get; set; }
         public string RutaKey { get; set; }
         public string ClavePrivada { get; set; }
         public string RutaFormatoTicket { get; set; }
         public string RutaFormatoFactura { get; set; }
         public string RutaFormatoCorte { get; set; }
-        public string RutaCo { get; set; }
-        public string RutaCortes { get; set; }
+        public string RutaCadenaOriginal { get; set; }
+        public string DirectorioComprobantes { get; set; }
+        public string DirectorioTickets { get; set; }
+        public string DirectorioCortes { get; set; }
         public bool? IsDeleted { get; set; }
         public string UserWstimbrado { get; set; }
         public string PassWstimbrado { get; set; }

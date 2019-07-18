@@ -336,7 +336,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             else
                 Ambiente.Mensaje("Cierre de la venta fue incorrecto");
 
-
+           
 
         }
         private void EliminaVenta()

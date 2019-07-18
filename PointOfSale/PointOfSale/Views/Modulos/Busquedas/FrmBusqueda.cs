@@ -51,7 +51,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
         private void FrmBusqueda_Load(object sender, EventArgs e)
         {
-            CargaGrid();
+           // CargaGrid();
         }
 
         private void CargaGrid()

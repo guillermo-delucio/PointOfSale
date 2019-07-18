@@ -847,6 +847,12 @@ namespace PointOfSale.Models
                     .HasColumnName("CP")
                     .HasMaxLength(50);
 
+                entity.Property(e => e.DirectorioComprobantes).HasMaxLength(250);
+
+                entity.Property(e => e.DirectorioCortes).HasMaxLength(250);
+
+                entity.Property(e => e.DirectorioTickets).HasMaxLength(250);
+
                 entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Nombre).HasMaxLength(50);
@@ -861,15 +867,9 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Rfc).HasMaxLength(13);
 
+                entity.Property(e => e.RutaCadenaOriginal).HasMaxLength(250);
+
                 entity.Property(e => e.RutaCer).HasMaxLength(250);
-
-                entity.Property(e => e.RutaCo)
-                    .HasColumnName("RutaCO")
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.RutaComprobantes).HasMaxLength(250);
-
-                entity.Property(e => e.RutaCortes).HasMaxLength(250);
 
                 entity.Property(e => e.RutaFormatoCorte).HasMaxLength(250);
 

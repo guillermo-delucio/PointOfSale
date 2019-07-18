@@ -125,7 +125,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             ds.Tables.Add(Ambiente.DT("select top 1 * from Empresa", "e"));
             report.RegData(ds);
             report.Render(false);
-            var file = empresa.RutaComprobantes + "FACTURA-" + oCFDI.Venta.NoRef.ToString() + ".PDF";
+            var file = empresa.DirectorioComprobantes + "FACTURA-" + oCFDI.Venta.NoRef.ToString() + ".PDF";
             report.ExportDocument(StiExportFormat.Pdf, file);
             System.Diagnostics.Process.Start(file);
 

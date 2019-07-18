@@ -37,16 +37,22 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.Domicilio = TxtDomicilio.Text;
                 empresa.Cp = TxtCP.Text;
                 empresa.RutaCer = TxtRutaCer.Text;
-                empresa.RutaComprobantes = TxtRutaComprobantes.Text;
+                empresa.DirectorioComprobantes = TxtRutaComprobantes.Text;
                 empresa.RutaKey = TxtRutaKey.Text;
                 empresa.ClavePrivada = TxtClavePrivada.Text;
                 empresa.RutaFormatoTicket = TxtFormatoTicket.Text;
-                empresa.RutaCo = TxtRutaCO.Text;
+                empresa.RutaCadenaOriginal = TxtRutaCO.Text;
                 empresa.RutaFormatoCorte = TxtFormatoCorte.Text;
                 empresa.RutaFormatoFactura = TxtFormatoFactura.Text;
-                empresa.RutaCortes = TxtRutaCortes.Text;
+                empresa.DirectorioCortes = TxtRutaCortes.Text;
                 empresa.UserWstimbrado = TxtUserWS.Text.Trim();
                 empresa.PassWstimbrado = TxtPassWS.Text.Trim();
+                empresa.DirectorioTickets = TxtDirectorioTickets.Text;
+                if (empresa.RegimenFiscalId.Trim().Length == 0)
+                {
+                    Ambiente.Mensaje("Nada que guardar");
+                    return;
+                }
                 if (empresaController.InsertOne(empresa))
                     Ambiente.Mensaje("Cambios Guarados");
                 else
@@ -62,16 +68,22 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.Domicilio = TxtDomicilio.Text;
                 empresa.Cp = TxtCP.Text;
                 empresa.RutaCer = TxtRutaCer.Text;
-                empresa.RutaComprobantes = TxtRutaComprobantes.Text;
+                empresa.DirectorioComprobantes = TxtRutaComprobantes.Text;
                 empresa.RutaKey = TxtRutaKey.Text;
                 empresa.ClavePrivada = TxtClavePrivada.Text;
                 empresa.RutaFormatoTicket = TxtFormatoTicket.Text;
-                empresa.RutaCo = TxtRutaCO.Text;
+                empresa.RutaCadenaOriginal = TxtRutaCO.Text;
                 empresa.RutaFormatoCorte = TxtFormatoCorte.Text;
                 empresa.RutaFormatoFactura = TxtFormatoFactura.Text;
-                empresa.RutaCortes = TxtRutaCortes.Text;
+                empresa.DirectorioCortes = TxtRutaCortes.Text;
                 empresa.UserWstimbrado = TxtUserWS.Text.Trim();
                 empresa.PassWstimbrado = TxtPassWS.Text.Trim();
+                empresa.DirectorioTickets = TxtDirectorioTickets.Text;
+                if (empresa.RegimenFiscalId.Trim().Length == 0)
+                {
+                    Ambiente.Mensaje("Nada que guardar");
+                    return;
+                }
                 if (empresaController.Update(empresa))
                     Ambiente.Mensaje("Cambios Guarados");
                 else
@@ -91,16 +103,17 @@ namespace PointOfSale.Views.Modulos.Config
             TxtDomicilio.Text = empresa.Domicilio;
             TxtCP.Text = empresa.Cp;
             TxtRutaCer.Text = empresa.RutaCer;
-            TxtRutaComprobantes.Text = empresa.RutaComprobantes;
+            TxtRutaComprobantes.Text = empresa.DirectorioComprobantes;
             TxtRutaKey.Text = empresa.RutaKey;
             TxtClavePrivada.Text = empresa.ClavePrivada;
             TxtFormatoTicket.Text = empresa.RutaFormatoTicket;
-            TxtRutaCO.Text = empresa.RutaCo;
+            TxtRutaCO.Text = empresa.RutaCadenaOriginal;
             TxtFormatoCorte.Text = empresa.RutaFormatoCorte;
             TxtFormatoFactura.Text = empresa.RutaFormatoFactura;
-            TxtRutaCortes.Text = empresa.RutaCortes;
+            TxtRutaCortes.Text = empresa.DirectorioCortes;
             TxtPassWS.Text = empresa.PassWstimbrado;
             TxtUserWS.Text = empresa.UserWstimbrado;
+            TxtDirectorioTickets.Text = empresa.DirectorioTickets;
 
         }
 
@@ -186,6 +199,11 @@ namespace PointOfSale.Views.Modulos.Config
 
                 }
             }
+        }
+
+        private void BtnTickets_Click(object sender, EventArgs e)
+        {
+            TxtDirectorioTickets.Text = Ambiente.GetFolderPath();
         }
     }
 }
