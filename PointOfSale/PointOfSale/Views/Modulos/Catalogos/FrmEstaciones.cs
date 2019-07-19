@@ -1,10 +1,12 @@
 ﻿using PointOfSale.Controllers;
 using PointOfSale.Models;
+using PointOfSale.Views.Modulos.Busquedas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +45,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
         private void LlenaCampos()
         {
+            objeto = estacionController.SelectOne(TxtClave.Text.Trim());
             if (objeto == null)
                 ModoCreate = true;
             else
@@ -56,13 +59,18 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 ChkVentaSinExistencia.Checked = objeto.VenderSinStock;
                 ChkSolicitarFMpago.Checked = objeto.SolicitarFmpago;
                 ChkSumarUnidades.Checked = objeto.SumarUnidadesPdv;
-
+                CboImpresoraT.Text = objeto.ImpresoraT;
+                CboImpresoraF.Text = objeto.ImpresoraF;
+                CboImpresoraNC.Text = objeto.ImpresoraNc;
+                NTickets.Value = objeto.TantosT;
+                NFacturas.Value = objeto.TantosF;
+                NNc.Value = objeto.TantosNc;
             }
 
 
         }
 
-      
+
 
         private void InsertOrUpdate()
         {
@@ -78,7 +86,12 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.VenderSinStock = ChkVentaSinExistencia.Checked;
                 objeto.SolicitarFmpago = ChkSolicitarFMpago.Checked;
                 objeto.SumarUnidadesPdv = ChkSumarUnidades.Checked;
-
+                objeto.ImpresoraT = CboImpresoraT.Text;
+                objeto.ImpresoraF = CboImpresoraF.Text;
+                objeto.ImpresoraNC = CboImpresoraNC.Text;
+                objeto.TantosT = NTickets.Value;
+                objeto.TantosF = NFacturas.Value;
+                objeto.TantosNc = NNc.Value;
                 if (estacionController.InsertOne(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
                 else
@@ -94,7 +107,12 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.VenderSinStock = ChkVentaSinExistencia.Checked;
                 objeto.SolicitarFmpago = ChkSolicitarFMpago.Checked;
                 objeto.SumarUnidadesPdv = ChkSumarUnidades.Checked;
-
+                objeto.ImpresoraT = CboImpresoraT.Text;
+                objeto.ImpresoraF = CboImpresoraF.Text;
+                objeto.ImpresoraNc = CboImpresoraNC.Text;
+                objeto.TantosT = (int)NTickets.Value;
+                objeto.TantosF = (int)NFacturas.Value;
+                objeto.TantosNc = (int)NNc.Value;
                 if (estacionController.Update(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
                 else
@@ -104,7 +122,15 @@ namespace PointOfSale.Views.Modulos.Catalogos
             }
         }
 
-     
+        private void LlenaImpresoras()
+        {
+            foreach (string printer in PrinterSettings.InstalledPrinters)
+            {
+                CboImpresoraT.Items.Add(printer);
+                CboImpresoraF.Items.Add(printer);
+                CboImpresoraNC.Items.Add(printer);
+            }
+        }
 
         private void TxtClave_Leave(object sender, EventArgs e)
         {
@@ -119,6 +145,26 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void FrmEstaciones_Load(object sender, EventArgs e)
+        {
+            LlenaImpresoras();
+        }
+
+        private void TxtClave_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                using (var form = new FrmBusqueda(TxtClave.Text.Trim(), (int)Ambiente.TipoBusqueda.Estaciones))
+                {
+                    form.ShowDialog();
+                    if (form.DialogResult == DialogResult.OK)
+                    {
+                        TxtClave.Text = form.Estacion.EstacionId;
+                    }
+                }
+            }
         }
     }
 }

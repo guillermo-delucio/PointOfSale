@@ -32,7 +32,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.BtnEmpresa = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtnEstaciones = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -79,15 +79,16 @@
             this.button1.Text = "&TRASPASOS";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // BtnEstaciones
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(271, 71);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(133, 49);
-            this.button2.TabIndex = 245;
-            this.button2.Text = "&PUNTO DE VENTA";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtnEstaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnEstaciones.Location = new System.Drawing.Point(271, 71);
+            this.BtnEstaciones.Name = "BtnEstaciones";
+            this.BtnEstaciones.Size = new System.Drawing.Size(133, 49);
+            this.BtnEstaciones.TabIndex = 245;
+            this.BtnEstaciones.Text = "&ESTACIONES";
+            this.BtnEstaciones.UseVisualStyleBackColor = true;
+            this.BtnEstaciones.Click += new System.EventHandler(this.BtnEstaciones_Click);
             // 
             // button3
             // 
@@ -116,7 +117,7 @@
             this.ClientSize = new System.Drawing.Size(517, 373);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.BtnEstaciones);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.BtnEmpresa);
             this.Controls.Add(this.label13);
@@ -135,7 +136,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button BtnEmpresa;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtnEstaciones;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
     }

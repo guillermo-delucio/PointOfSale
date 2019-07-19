@@ -21,6 +21,9 @@ namespace PointOfSale.Models
         public bool VenderSinStock { get; set; }
         public bool SolicitarFmpago { get; set; }
         public bool SumarUnidadesPdv { get; set; }
+        public int TantosT { get; set; }
+        public int TantosF { get; set; }
+        public int TantosNc { get; set; }
 
         public virtual ICollection<Compra> Compra { get; set; }
         public virtual ICollection<Venta> Venta { get; set; }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.Malla = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,14 +72,14 @@
             this.Column1,
             this.Column3,
             this.Column2});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Malla.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Malla.DefaultCellStyle = dataGridViewCellStyle2;
             this.Malla.EnableHeadersVisualStyles = false;
             this.Malla.Location = new System.Drawing.Point(12, 196);
             this.Malla.MultiSelect = false;
@@ -143,6 +143,7 @@
             // 
             this.TxtFormaPago.BackColor = System.Drawing.SystemColors.Window;
             this.TxtFormaPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtFormaPago.Enabled = false;
             this.TxtFormaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtFormaPago.ForeColor = System.Drawing.Color.Black;
             this.TxtFormaPago.Location = new System.Drawing.Point(12, 153);
@@ -176,11 +177,13 @@
             this.ChkMismoCliente.TabIndex = 1;
             this.ChkMismoCliente.Text = "FACTURAR AL CLIENTE DEL TICKET";
             this.ChkMismoCliente.UseVisualStyleBackColor = false;
+            this.ChkMismoCliente.CheckedChanged += new System.EventHandler(this.ChkMismoCliente_CheckedChanged);
             // 
             // TxtMetodoPago
             // 
             this.TxtMetodoPago.BackColor = System.Drawing.SystemColors.Window;
             this.TxtMetodoPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtMetodoPago.Enabled = false;
             this.TxtMetodoPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtMetodoPago.ForeColor = System.Drawing.Color.Black;
             this.TxtMetodoPago.Location = new System.Drawing.Point(341, 153);
@@ -204,6 +207,7 @@
             // 
             this.TxtUsoCFDI.BackColor = System.Drawing.SystemColors.Window;
             this.TxtUsoCFDI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtUsoCFDI.Enabled = false;
             this.TxtUsoCFDI.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUsoCFDI.ForeColor = System.Drawing.Color.Black;
             this.TxtUsoCFDI.Location = new System.Drawing.Point(341, 93);
@@ -227,6 +231,7 @@
             // 
             this.TxtCliente.BackColor = System.Drawing.SystemColors.Window;
             this.TxtCliente.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtCliente.Enabled = false;
             this.TxtCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtCliente.ForeColor = System.Drawing.Color.Black;
             this.TxtCliente.Location = new System.Drawing.Point(12, 93);

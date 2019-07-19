@@ -25,6 +25,7 @@ namespace PointOfSale.Controllers
 
         public static Usuario LoggedUser { get; set; }
         public static Estacion Estacion { get; set; }
+        public static Empresa Empresa { get; set; }
         public static string RutaImgs { get; set; }
         public static string PrefijoRutaImg { get; set; }
         public static string FormatoTicket { get; set; }
@@ -255,8 +256,19 @@ namespace PointOfSale.Controllers
                     return "";
             }
         }
+        public static void OpenDirectory(string RutaDirectorio)
+        {
+            Process.Start(RutaDirectorio);
+        }
 
 
+        public static bool RFCvalido(string rfc)
+        {
+            string expresion;
+            expresion = @"^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))((-)?([A-Z\d]{3}))?$";
+            Regex automata = new Regex(expresion);
+            return automata.IsMatch(rfc.Trim());
+        }
 
 
 
@@ -538,7 +550,7 @@ namespace PointOfSale.Controllers
 
         #endregion
 
-        //Generador de datatables
+        //Generador de reportes
         public static DataTable DT(string Query, string nombre)
         {
             using (var db = new DymContext())
@@ -614,6 +626,7 @@ namespace PointOfSale.Controllers
             report.RegData(ds);
             report.Dictionary.Synchronize();
             report.Design();
+            report.Save(@RutaFormato);
         }
         public static void Preview(string RutaFormato, string Q1, string Q2 = "", string Q3 = "", string Q4 = "", string Q5 = "", string Q6 = "")
         {
@@ -706,9 +719,90 @@ namespace PointOfSale.Controllers
                 Process.Start(file);
             report.Print(false, printerSettings);
         }
-        public static string TextTime(string name, DateTime date)
+        public static void SaveAndPrintTicket(Venta venta)
         {
-            return name + "_" + date.ToString("dd.MM.yyyy_hh.mm.ss");
+            if (venta != null)
+            {
+                var empresa = new EmpresaController().SelectTopOne();
+                var estacion = new EstacionController().SelectOne(venta.EstacionId);
+                if (estacion != null && empresa != null)
+                {
+                    if (empresa.DirectorioTickets.Trim().Length == 0 || empresa.RutaFormatoTicket.Trim().Length == 0 || estacion.ImpresoraT.Trim().Length == 0)
+                    {
+                        Mensaje("DirectorioTickets|| RutaFormatoTicket || ImpresoraT, No configurado.");
+                        return;
+                    }
+
+                    var report = new StiReport();
+                    var ds = new DataSet("DS");
+                    var settings = new PrinterSettings();
+                    var file = empresa.DirectorioTickets + "TICKET " + venta.NoRef.ToString() + "_" + venta.CreatedBy + "_" + Ambiente.TimeText((DateTime)venta.CreatedAt) + ".PDF"; ;
+
+                    report.Load(empresa.RutaFormatoTicket);
+                    settings.PrinterName = estacion.ImpresoraT;
+                    settings.Copies = (short)estacion.TantosT;
+
+                    ds.Tables.Add(DT("select * from venta where ventaid=" + venta.VentaId, "Q1"));
+                    ds.Tables.Add(DT("select * from ventap where ventaid = " + venta.VentaId, "Q2"));
+                    ds.Tables.Add(DT("select * from cliente where clienteid='" + venta.ClienteId + "'", "Q3"));
+
+                    report.RegData(ds);
+                    report.Render(false);
+                    report.ExportDocument(StiExportFormat.Pdf, file);
+                    report.Print(false, settings);
+                }
+                else
+                    Mensaje("Imposible imprimir, la empresa o estación carece de información.");
+            }
+            else
+                Mensaje("Imposible imprimir, el documento llegó null");
         }
+        public static void SaveAndPrintFactura(Venta venta, bool OpenDoc = false)
+        {
+            if (venta != null)
+            {
+                var empresa = new EmpresaController().SelectTopOne();
+                var estacion = new EstacionController().SelectOne(venta.EstacionId);
+                if (estacion != null && empresa != null)
+                {
+                    if (empresa.DirectorioComprobantes.Trim().Length == 0 || empresa.RutaFormatoFactura.Trim().Length == 0 || estacion.ImpresoraF.Trim().Length == 0)
+                    {
+                        Mensaje("DirectorioComprobantes|| RutaFormatoFactura || ImpresoraF, No configurado.");
+                        return;
+                    }
+
+                    var report = new StiReport();
+                    var ds = new DataSet("DS");
+                    var settings = new PrinterSettings();
+                    var file = empresa.DirectorioComprobantes + "FACTURA " + venta.NoRef.ToString() + "_" + venta.CreatedBy + "_" + Ambiente.TimeText((DateTime)venta.CreatedAt) + ".PDF"; ;
+
+                    report.Load(empresa.RutaFormatoFactura);
+                    settings.PrinterName = estacion.ImpresoraF;
+                    settings.Copies = (short)estacion.TantosF;
+
+                    ds.Tables.Add(DT("select * from venta where ventaid=" + venta.VentaId, "v"));
+                    ds.Tables.Add(DT("select * from ventap where ventaid = " + venta.VentaId, "vp"));
+                    ds.Tables.Add(DT("select * from cliente where clienteid='" + venta.ClienteId + "'", "c"));
+                    ds.Tables.Add(Ambiente.DT("select top 1 * from Empresa", "e"));
+
+                    report.RegData(ds);
+                    report.Render(false);
+                    report.ExportDocument(StiExportFormat.Pdf, file);
+                    if (OpenDoc)
+                        Process.Start(file);
+                    report.Print(false, settings);
+                }
+                else
+                    Mensaje("Imposible imprimir, la empresa o estación carece de información.");
+            }
+            else
+                Mensaje("Imposible imprimir, el documento llegó null");
+        }
+        public static string TimeText(DateTime date)
+        {
+            return date.ToString("dd.MM.yyyy_hh.mm.ss");
+        }
+
+
     }
 }

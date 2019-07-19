@@ -44,8 +44,6 @@
             this.PbxImagen = new System.Windows.Forms.PictureBox();
             this.BtnSalir = new System.Windows.Forms.Button();
             this.BtnMinimizar = new System.Windows.Forms.Button();
-            this.BtnOpcionesImpr = new System.Windows.Forms.Button();
-            this.BtnVisualizacionPrev = new System.Windows.Forms.Button();
             this.BtnDirectoImp = new System.Windows.Forms.Button();
             this.BtnBuscarProd = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -79,6 +77,7 @@
             this.LblCambio = new System.Windows.Forms.Label();
             this.TimerPDV = new System.Windows.Forms.Timer(this.components);
             this.LblUnidades = new System.Windows.Forms.Label();
+            this.BtnOpcionesImpr = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbxImagen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Malla)).BeginInit();
@@ -260,35 +259,10 @@
             this.BtnMinimizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnMinimizar.UseVisualStyleBackColor = true;
             // 
-            // BtnOpcionesImpr
-            // 
-            this.BtnOpcionesImpr.Image = global::PointOfSale.Properties.Resources.searchO;
-            this.BtnOpcionesImpr.Location = new System.Drawing.Point(981, 118);
-            this.BtnOpcionesImpr.Name = "BtnOpcionesImpr";
-            this.BtnOpcionesImpr.Size = new System.Drawing.Size(35, 35);
-            this.BtnOpcionesImpr.TabIndex = 287;
-            this.BtnOpcionesImpr.TabStop = false;
-            this.BtnOpcionesImpr.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnOpcionesImpr.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BtnOpcionesImpr.UseVisualStyleBackColor = true;
-            // 
-            // BtnVisualizacionPrev
-            // 
-            this.BtnVisualizacionPrev.Image = global::PointOfSale.Properties.Resources.monitor;
-            this.BtnVisualizacionPrev.Location = new System.Drawing.Point(940, 118);
-            this.BtnVisualizacionPrev.Name = "BtnVisualizacionPrev";
-            this.BtnVisualizacionPrev.Size = new System.Drawing.Size(35, 35);
-            this.BtnVisualizacionPrev.TabIndex = 286;
-            this.BtnVisualizacionPrev.TabStop = false;
-            this.BtnVisualizacionPrev.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnVisualizacionPrev.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BtnVisualizacionPrev.UseVisualStyleBackColor = true;
-            this.BtnVisualizacionPrev.Click += new System.EventHandler(this.BtnVisualizacionPrev_Click);
-            // 
             // BtnDirectoImp
             // 
             this.BtnDirectoImp.Image = global::PointOfSale.Properties.Resources.printer;
-            this.BtnDirectoImp.Location = new System.Drawing.Point(899, 118);
+            this.BtnDirectoImp.Location = new System.Drawing.Point(940, 119);
             this.BtnDirectoImp.Name = "BtnDirectoImp";
             this.BtnDirectoImp.Size = new System.Drawing.Size(35, 35);
             this.BtnDirectoImp.TabIndex = 285;
@@ -630,6 +604,18 @@
             this.LblUnidades.TabIndex = 292;
             this.LblUnidades.Text = "-";
             // 
+            // BtnOpcionesImpr
+            // 
+            this.BtnOpcionesImpr.Image = global::PointOfSale.Properties.Resources.searchO;
+            this.BtnOpcionesImpr.Location = new System.Drawing.Point(981, 118);
+            this.BtnOpcionesImpr.Name = "BtnOpcionesImpr";
+            this.BtnOpcionesImpr.Size = new System.Drawing.Size(35, 35);
+            this.BtnOpcionesImpr.TabIndex = 287;
+            this.BtnOpcionesImpr.TabStop = false;
+            this.BtnOpcionesImpr.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnOpcionesImpr.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnOpcionesImpr.UseVisualStyleBackColor = true;
+            // 
             // PointOfSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -644,7 +630,6 @@
             this.Controls.Add(this.BtnSalir);
             this.Controls.Add(this.BtnMinimizar);
             this.Controls.Add(this.BtnOpcionesImpr);
-            this.Controls.Add(this.BtnVisualizacionPrev);
             this.Controls.Add(this.BtnDirectoImp);
             this.Controls.Add(this.BtnBuscarProd);
             this.Controls.Add(this.label8);
@@ -692,8 +677,6 @@
         private System.Windows.Forms.PictureBox PbxImagen;
         private System.Windows.Forms.Button BtnSalir;
         private System.Windows.Forms.Button BtnMinimizar;
-        private System.Windows.Forms.Button BtnOpcionesImpr;
-        private System.Windows.Forms.Button BtnVisualizacionPrev;
         private System.Windows.Forms.Button BtnDirectoImp;
         private System.Windows.Forms.Button BtnBuscarProd;
         private System.Windows.Forms.Label label8;
@@ -727,5 +710,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.Timer TimerPDV;
         private System.Windows.Forms.Label LblUnidades;
+        private System.Windows.Forms.Button BtnOpcionesImpr;
     }
 }

@@ -45,8 +45,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
         }
         private void LlenaCampos()
         {
-            
-                objeto = clienteController.SelectOne(TxtClienteId.Text.Trim());
+
+            objeto = clienteController.SelectOne(TxtClienteId.Text.Trim());
 
             if (objeto == null)
                 return;
@@ -89,6 +89,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
+
             InsertOrUpdate();
         }
 
@@ -96,91 +97,191 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             bool success = false;
 
-            if (objeto == null && TxtClienteId.Text.Trim().Length > 0)
+            if (Ambiente.RFCvalido(TxtRFC.Text.Trim()))
             {
-
-                objeto = new Cliente();
-                objeto.ClienteId = TxtClienteId.Text.Trim();
-                objeto.Rfc = TxtRFC.Text.Trim().Length == 0 ? "XAXX010101000" : TxtRFC.Text.Trim();
-                objeto.Negocio = TxtNegocio.Text.Trim().Length == 0 ? "" : TxtNegocio.Text.Trim();
-                objeto.RazonSocial = TxtRazonSocial.Text.Trim().Length == 0 ? "" : TxtRazonSocial.Text.Trim();
-                objeto.Contancto = TxtContacto.Text.Trim().Length == 0 ? "" : TxtContacto.Text.Trim();
-                objeto.Direccion = TxtDireccion.Text.Trim().Length == 0 ? "" : TxtDireccion.Text.Trim();
-                objeto.Cp = TxtCp.Text.Trim().Length == 0 ? "" : TxtCp.Text.Trim();
-                objeto.Colonia = TxtColonia.Text.Trim().Length == 0 ? "" : TxtColonia.Text.Trim();
-                objeto.Municipio = TxtMunicipio.Text.Trim().Length == 0 ? "" : TxtMunicipio.Text.Trim();
-                objeto.Localidad = TxtLocalidad.Text.Trim().Length == 0 ? "" : TxtLocalidad.Text.Trim();
-                objeto.Estado = TxtEstado.Text.Trim().Length == 0 ? "" : TxtEstado.Text.Trim();
-                objeto.Pais = TxtPais.Text.Trim().Length == 0 ? "" : TxtPais.Text.Trim();
-                objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
-                objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
-                objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
-                objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
-                objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
-                objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
-                objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
-
-                success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
-                success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
-                if (success)
+                if (objeto == null && TxtClienteId.Text.Trim().Length > 0)
                 {
-                    objeto.LimiteCredito = nLimite;
-                    objeto.DiasCredito = nDias;
+
+                    objeto = new Cliente();
+                    objeto.ClienteId = TxtClienteId.Text.Trim();
+                    objeto.Rfc = TxtRFC.Text.Trim().Length == 0 ? "XAXX010101000" : TxtRFC.Text.Trim();
+                    objeto.Negocio = TxtNegocio.Text.Trim().Length == 0 ? "" : TxtNegocio.Text.Trim();
+                    objeto.RazonSocial = TxtRazonSocial.Text.Trim().Length == 0 ? "" : TxtRazonSocial.Text.Trim();
+                    objeto.Contancto = TxtContacto.Text.Trim().Length == 0 ? "" : TxtContacto.Text.Trim();
+                    objeto.Direccion = TxtDireccion.Text.Trim().Length == 0 ? "" : TxtDireccion.Text.Trim();
+                    objeto.Cp = TxtCp.Text.Trim().Length == 0 ? "" : TxtCp.Text.Trim();
+                    objeto.Colonia = TxtColonia.Text.Trim().Length == 0 ? "" : TxtColonia.Text.Trim();
+                    objeto.Municipio = TxtMunicipio.Text.Trim().Length == 0 ? "" : TxtMunicipio.Text.Trim();
+                    objeto.Localidad = TxtLocalidad.Text.Trim().Length == 0 ? "" : TxtLocalidad.Text.Trim();
+                    objeto.Estado = TxtEstado.Text.Trim().Length == 0 ? "" : TxtEstado.Text.Trim();
+                    objeto.Pais = TxtPais.Text.Trim().Length == 0 ? "" : TxtPais.Text.Trim();
+                    objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
+                    objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
+                    objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
+                    objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
+                    objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
+                    objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
+                    objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
+
+                    success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
+                    success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
+                    if (success)
+                    {
+                        objeto.LimiteCredito = nLimite;
+                        objeto.DiasCredito = nDias;
+                    }
+                    else
+                    {
+                        objeto.LimiteCredito = 0M;
+                        objeto.DiasCredito = 0;
+                    }
+
+                    if (clienteController.InsertOne(objeto))
+                        Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
+                    else
+                        Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name);
                 }
                 else
                 {
-                    objeto.LimiteCredito = 0M;
-                    objeto.DiasCredito = 0;
+
+                    if (objeto == null)
+                        return;
+
+                    objeto.Rfc = TxtRFC.Text.Trim().Length == 0 ? "XAXX010101000" : TxtRFC.Text.Trim();
+                    objeto.Negocio = TxtNegocio.Text.Trim().Length == 0 ? "" : TxtNegocio.Text.Trim();
+                    objeto.RazonSocial = TxtRazonSocial.Text.Trim().Length == 0 ? "" : TxtRazonSocial.Text.Trim();
+                    objeto.Contancto = TxtContacto.Text.Trim().Length == 0 ? "" : TxtContacto.Text.Trim();
+                    objeto.Direccion = TxtDireccion.Text.Trim().Length == 0 ? "" : TxtDireccion.Text.Trim();
+                    objeto.Cp = TxtCp.Text.Trim().Length == 0 ? "" : TxtCp.Text.Trim();
+                    objeto.Colonia = TxtColonia.Text.Trim().Length == 0 ? "" : TxtColonia.Text.Trim();
+                    objeto.Municipio = TxtMunicipio.Text.Trim().Length == 0 ? "" : TxtMunicipio.Text.Trim();
+                    objeto.Localidad = TxtLocalidad.Text.Trim().Length == 0 ? "" : TxtLocalidad.Text.Trim();
+                    objeto.Estado = TxtEstado.Text.Trim().Length == 0 ? "" : TxtEstado.Text.Trim();
+                    objeto.Pais = TxtPais.Text.Trim().Length == 0 ? "" : TxtPais.Text.Trim();
+                    objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
+                    objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
+                    objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
+                    objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
+                    objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
+                    objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
+                    objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
+
+                    success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
+                    success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
+                    if (success)
+                    {
+                        objeto.LimiteCredito = nLimite;
+                        objeto.DiasCredito = nDias;
+                    }
+                    else
+                    {
+                        objeto.LimiteCredito = 0M;
+                        objeto.DiasCredito = 0;
+                    }
+
+                    if (clienteController.Update(objeto))
+                        Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
+                    else
+                        Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name);
                 }
 
-                if (clienteController.InsertOne(objeto))
-                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
-                else
-                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name);
             }
             else
             {
+                if (Ambiente.Pregunta("El rfc podría estar mal formado, quiere continuar"))
+                {
+                    if (objeto == null && TxtClienteId.Text.Trim().Length > 0)
+                    {
 
-                if (objeto == null)
+                        objeto = new Cliente();
+                        objeto.ClienteId = TxtClienteId.Text.Trim();
+                        objeto.Rfc = TxtRFC.Text.Trim().Length == 0 ? "XAXX010101000" : TxtRFC.Text.Trim();
+                        objeto.Negocio = TxtNegocio.Text.Trim().Length == 0 ? "" : TxtNegocio.Text.Trim();
+                        objeto.RazonSocial = TxtRazonSocial.Text.Trim().Length == 0 ? "" : TxtRazonSocial.Text.Trim();
+                        objeto.Contancto = TxtContacto.Text.Trim().Length == 0 ? "" : TxtContacto.Text.Trim();
+                        objeto.Direccion = TxtDireccion.Text.Trim().Length == 0 ? "" : TxtDireccion.Text.Trim();
+                        objeto.Cp = TxtCp.Text.Trim().Length == 0 ? "" : TxtCp.Text.Trim();
+                        objeto.Colonia = TxtColonia.Text.Trim().Length == 0 ? "" : TxtColonia.Text.Trim();
+                        objeto.Municipio = TxtMunicipio.Text.Trim().Length == 0 ? "" : TxtMunicipio.Text.Trim();
+                        objeto.Localidad = TxtLocalidad.Text.Trim().Length == 0 ? "" : TxtLocalidad.Text.Trim();
+                        objeto.Estado = TxtEstado.Text.Trim().Length == 0 ? "" : TxtEstado.Text.Trim();
+                        objeto.Pais = TxtPais.Text.Trim().Length == 0 ? "" : TxtPais.Text.Trim();
+                        objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
+                        objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
+                        objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
+                        objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
+                        objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
+                        objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
+                        objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
+
+                        success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
+                        success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
+                        if (success)
+                        {
+                            objeto.LimiteCredito = nLimite;
+                            objeto.DiasCredito = nDias;
+                        }
+                        else
+                        {
+                            objeto.LimiteCredito = 0M;
+                            objeto.DiasCredito = 0;
+                        }
+
+                        if (clienteController.InsertOne(objeto))
+                            Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
+                        else
+                            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name);
+                    }
+                    else
+                    {
+
+                        if (objeto == null)
+                            return;
+
+                        objeto.Rfc = TxtRFC.Text.Trim().Length == 0 ? "XAXX010101000" : TxtRFC.Text.Trim();
+                        objeto.Negocio = TxtNegocio.Text.Trim().Length == 0 ? "" : TxtNegocio.Text.Trim();
+                        objeto.RazonSocial = TxtRazonSocial.Text.Trim().Length == 0 ? "" : TxtRazonSocial.Text.Trim();
+                        objeto.Contancto = TxtContacto.Text.Trim().Length == 0 ? "" : TxtContacto.Text.Trim();
+                        objeto.Direccion = TxtDireccion.Text.Trim().Length == 0 ? "" : TxtDireccion.Text.Trim();
+                        objeto.Cp = TxtCp.Text.Trim().Length == 0 ? "" : TxtCp.Text.Trim();
+                        objeto.Colonia = TxtColonia.Text.Trim().Length == 0 ? "" : TxtColonia.Text.Trim();
+                        objeto.Municipio = TxtMunicipio.Text.Trim().Length == 0 ? "" : TxtMunicipio.Text.Trim();
+                        objeto.Localidad = TxtLocalidad.Text.Trim().Length == 0 ? "" : TxtLocalidad.Text.Trim();
+                        objeto.Estado = TxtEstado.Text.Trim().Length == 0 ? "" : TxtEstado.Text.Trim();
+                        objeto.Pais = TxtPais.Text.Trim().Length == 0 ? "" : TxtPais.Text.Trim();
+                        objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
+                        objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
+                        objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
+                        objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
+                        objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
+                        objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
+                        objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
+
+                        success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
+                        success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
+                        if (success)
+                        {
+                            objeto.LimiteCredito = nLimite;
+                            objeto.DiasCredito = nDias;
+                        }
+                        else
+                        {
+                            objeto.LimiteCredito = 0M;
+                            objeto.DiasCredito = 0;
+                        }
+
+                        if (clienteController.Update(objeto))
+                            Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
+                        else
+                            Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name);
+                    }
+                }
+                else
                     return;
-
-                objeto.Rfc = TxtRFC.Text.Trim().Length == 0 ? "XAXX010101000" : TxtRFC.Text.Trim();
-                objeto.Negocio = TxtNegocio.Text.Trim().Length == 0 ? "" : TxtNegocio.Text.Trim();
-                objeto.RazonSocial = TxtRazonSocial.Text.Trim().Length == 0 ? "" : TxtRazonSocial.Text.Trim();
-                objeto.Contancto = TxtContacto.Text.Trim().Length == 0 ? "" : TxtContacto.Text.Trim();
-                objeto.Direccion = TxtDireccion.Text.Trim().Length == 0 ? "" : TxtDireccion.Text.Trim();
-                objeto.Cp = TxtCp.Text.Trim().Length == 0 ? "" : TxtCp.Text.Trim();
-                objeto.Colonia = TxtColonia.Text.Trim().Length == 0 ? "" : TxtColonia.Text.Trim();
-                objeto.Municipio = TxtMunicipio.Text.Trim().Length == 0 ? "" : TxtMunicipio.Text.Trim();
-                objeto.Localidad = TxtLocalidad.Text.Trim().Length == 0 ? "" : TxtLocalidad.Text.Trim();
-                objeto.Estado = TxtEstado.Text.Trim().Length == 0 ? "" : TxtEstado.Text.Trim();
-                objeto.Pais = TxtPais.Text.Trim().Length == 0 ? "" : TxtPais.Text.Trim();
-                objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
-                objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
-                objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
-                objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
-                objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
-                objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
-                objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
-
-                success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
-                success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
-                if (success)
-                {
-                    objeto.LimiteCredito = nLimite;
-                    objeto.DiasCredito = nDias;
-                }
-                else
-                {
-                    objeto.LimiteCredito = 0M;
-                    objeto.DiasCredito = 0;
-                }
-
-                if (clienteController.Update(objeto))
-                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
-                else
-                    Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name);
             }
+
+
+
         }
 
         private void TxtClienteId_Leave(object sender, EventArgs e)

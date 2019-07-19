@@ -899,18 +899,18 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.ImpresoraF)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(250)
                     .HasDefaultValueSql("(N'N/A')");
 
                 entity.Property(e => e.ImpresoraNc)
                     .IsRequired()
                     .HasColumnName("ImpresoraNC")
-                    .HasMaxLength(50)
+                    .HasMaxLength(250)
                     .HasDefaultValueSql("(N'N/A')");
 
                 entity.Property(e => e.ImpresoraT)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(250)
                     .HasDefaultValueSql("(N'N/A')");
 
                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
@@ -923,6 +923,14 @@ namespace PointOfSale.Models
                 entity.Property(e => e.SolicitarFmpago).HasColumnName("SolicitarFMPago");
 
                 entity.Property(e => e.SumarUnidadesPdv).HasColumnName("SumarUnidadesPDV");
+
+                entity.Property(e => e.TantosF).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TantosNc)
+                    .HasColumnName("TantosNC")
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TantosT).HasDefaultValueSql("((1))");
             });
 
             modelBuilder.Entity<Estado>(entity =>

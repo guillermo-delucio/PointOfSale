@@ -61,6 +61,9 @@
             this.BtnCer = new System.Windows.Forms.Button();
             this.TxtRutaCer = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
+            this.BtnTickets = new System.Windows.Forms.Button();
+            this.TxtDirectorioTickets = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.BtnComprobantes = new System.Windows.Forms.Button();
             this.TxtRutaComprobantes = new System.Windows.Forms.TextBox();
@@ -79,9 +82,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.BtnCo = new System.Windows.Forms.Button();
             this.TxtRutaCO = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.BtnTickets = new System.Windows.Forms.Button();
-            this.TxtDirectorioTickets = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -337,7 +337,6 @@
             // TxtPassWS
             // 
             this.TxtPassWS.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtPassWS.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtPassWS.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtPassWS.ForeColor = System.Drawing.Color.Black;
             this.TxtPassWS.Location = new System.Drawing.Point(355, 36);
@@ -345,7 +344,7 @@
             this.TxtPassWS.ReadOnly = true;
             this.TxtPassWS.Size = new System.Drawing.Size(332, 24);
             this.TxtPassWS.TabIndex = 348;
-            this.TxtPassWS.Text = "9616FB2B81E89673495F";
+            this.TxtPassWS.Text = "9616fb2b81e89673495f";
             // 
             // label19
             // 
@@ -361,7 +360,6 @@
             // TxtUserWS
             // 
             this.TxtUserWS.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtUserWS.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtUserWS.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUserWS.ForeColor = System.Drawing.Color.Black;
             this.TxtUserWS.Location = new System.Drawing.Point(13, 36);
@@ -369,7 +367,7 @@
             this.TxtUserWS.ReadOnly = true;
             this.TxtUserWS.Size = new System.Drawing.Size(327, 24);
             this.TxtUserWS.TabIndex = 346;
-            this.TxtUserWS.Text = "DGE131017IP1";
+            this.TxtUserWS.Text = "dge131017ip1";
             // 
             // label18
             // 
@@ -385,12 +383,10 @@
             // TxtClavePrivada
             // 
             this.TxtClavePrivada.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtClavePrivada.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtClavePrivada.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtClavePrivada.ForeColor = System.Drawing.Color.Black;
             this.TxtClavePrivada.Location = new System.Drawing.Point(13, 164);
             this.TxtClavePrivada.Name = "TxtClavePrivada";
-            this.TxtClavePrivada.PasswordChar = '*';
             this.TxtClavePrivada.Size = new System.Drawing.Size(327, 24);
             this.TxtClavePrivada.TabIndex = 332;
             // 
@@ -503,6 +499,40 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Directorios y formatos";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label20.Location = new System.Drawing.Point(7, 185);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(167, 18);
+            this.label20.TabIndex = 375;
+            this.label20.Text = "DIRECTORIO TICKETS";
+            // 
+            // BtnTickets
+            // 
+            this.BtnTickets.Location = new System.Drawing.Point(297, 204);
+            this.BtnTickets.Name = "BtnTickets";
+            this.BtnTickets.Size = new System.Drawing.Size(42, 26);
+            this.BtnTickets.TabIndex = 373;
+            this.BtnTickets.Text = "- - -";
+            this.BtnTickets.UseVisualStyleBackColor = true;
+            this.BtnTickets.Click += new System.EventHandler(this.BtnTickets_Click);
+            // 
+            // TxtDirectorioTickets
+            // 
+            this.TxtDirectorioTickets.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtDirectorioTickets.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtDirectorioTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.TxtDirectorioTickets.ForeColor = System.Drawing.Color.Black;
+            this.TxtDirectorioTickets.Location = new System.Drawing.Point(6, 206);
+            this.TxtDirectorioTickets.Name = "TxtDirectorioTickets";
+            this.TxtDirectorioTickets.ReadOnly = true;
+            this.TxtDirectorioTickets.Size = new System.Drawing.Size(284, 24);
+            this.TxtDirectorioTickets.TabIndex = 374;
+            this.TxtDirectorioTickets.TabStop = false;
             // 
             // label9
             // 
@@ -707,40 +737,6 @@
             this.TxtRutaCO.Size = new System.Drawing.Size(284, 24);
             this.TxtRutaCO.TabIndex = 362;
             this.TxtRutaCO.TabStop = false;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label20.Location = new System.Drawing.Point(7, 185);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(167, 18);
-            this.label20.TabIndex = 375;
-            this.label20.Text = "DIRECTORIO TICKETS";
-            // 
-            // BtnTickets
-            // 
-            this.BtnTickets.Location = new System.Drawing.Point(297, 204);
-            this.BtnTickets.Name = "BtnTickets";
-            this.BtnTickets.Size = new System.Drawing.Size(42, 26);
-            this.BtnTickets.TabIndex = 373;
-            this.BtnTickets.Text = "- - -";
-            this.BtnTickets.UseVisualStyleBackColor = true;
-            this.BtnTickets.Click += new System.EventHandler(this.BtnTickets_Click);
-            // 
-            // TxtDirectorioTickets
-            // 
-            this.TxtDirectorioTickets.BackColor = System.Drawing.SystemColors.Control;
-            this.TxtDirectorioTickets.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtDirectorioTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.TxtDirectorioTickets.ForeColor = System.Drawing.Color.Black;
-            this.TxtDirectorioTickets.Location = new System.Drawing.Point(6, 206);
-            this.TxtDirectorioTickets.Name = "TxtDirectorioTickets";
-            this.TxtDirectorioTickets.ReadOnly = true;
-            this.TxtDirectorioTickets.Size = new System.Drawing.Size(284, 24);
-            this.TxtDirectorioTickets.TabIndex = 374;
-            this.TxtDirectorioTickets.TabStop = false;
             // 
             // FrmEmpresa
             // 

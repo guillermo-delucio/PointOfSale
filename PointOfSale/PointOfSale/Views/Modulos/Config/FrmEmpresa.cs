@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -204,6 +205,14 @@ namespace PointOfSale.Views.Modulos.Config
         private void BtnTickets_Click(object sender, EventArgs e)
         {
             TxtDirectorioTickets.Text = Ambiente.GetFolderPath();
+        }
+
+
+       
+
+        private void FrmEmpresa_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

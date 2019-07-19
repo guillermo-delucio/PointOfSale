@@ -42,15 +42,32 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.CboIF = new System.Windows.Forms.ComboBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label23 = new System.Windows.Forms.Label();
+            this.CboImpresoraNC = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.CboImpresoraF = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.CboImpresoraT = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ChkSumarUnidades = new System.Windows.Forms.CheckBox();
             this.ChkSolicitarFMpago = new System.Windows.Forms.CheckBox();
             this.ChkVentaSinExistencia = new System.Windows.Forms.CheckBox();
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnAceptar = new System.Windows.Forms.Button();
+            this.NFacturas = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.NNc = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.NTickets = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NFacturas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NNc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NTickets)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -77,6 +94,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(4, 44);
             this.tabControl1.Name = "tabControl1";
@@ -134,6 +152,7 @@
             this.TxtClave.Name = "TxtClave";
             this.TxtClave.Size = new System.Drawing.Size(206, 24);
             this.TxtClave.TabIndex = 0;
+            this.TxtClave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtClave_KeyDown);
             this.TxtClave.Leave += new System.EventHandler(this.TxtClave_Leave);
             // 
             // label1
@@ -209,6 +228,87 @@
             this.CboIF.Size = new System.Drawing.Size(433, 26);
             this.CboIF.TabIndex = 5;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.NTickets);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.NNc);
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Controls.Add(this.NFacturas);
+            this.tabPage3.Controls.Add(this.label23);
+            this.tabPage3.Controls.Add(this.CboImpresoraNC);
+            this.tabPage3.Controls.Add(this.label22);
+            this.tabPage3.Controls.Add(this.CboImpresoraF);
+            this.tabPage3.Controls.Add(this.label21);
+            this.tabPage3.Controls.Add(this.CboImpresoraT);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(547, 325);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Impresoras";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label23.Location = new System.Drawing.Point(10, 75);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(148, 18);
+            this.label23.TabIndex = 321;
+            this.label23.Text = "IMPRESORA DE NC";
+            // 
+            // CboImpresoraNC
+            // 
+            this.CboImpresoraNC.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.CboImpresoraNC.FormattingEnabled = true;
+            this.CboImpresoraNC.Location = new System.Drawing.Point(13, 96);
+            this.CboImpresoraNC.Name = "CboImpresoraNC";
+            this.CboImpresoraNC.Size = new System.Drawing.Size(252, 26);
+            this.CboImpresoraNC.TabIndex = 320;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label22.Location = new System.Drawing.Point(10, 11);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(205, 18);
+            this.label22.TabIndex = 319;
+            this.label22.Text = "IMPRESORA DE FACTURAS";
+            // 
+            // CboImpresoraF
+            // 
+            this.CboImpresoraF.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.CboImpresoraF.FormattingEnabled = true;
+            this.CboImpresoraF.Location = new System.Drawing.Point(13, 32);
+            this.CboImpresoraF.Name = "CboImpresoraF";
+            this.CboImpresoraF.Size = new System.Drawing.Size(252, 26);
+            this.CboImpresoraF.TabIndex = 318;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label21.Location = new System.Drawing.Point(10, 141);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(188, 18);
+            this.label21.TabIndex = 317;
+            this.label21.Text = "IMPRESORA DE TICKETS";
+            // 
+            // CboImpresoraT
+            // 
+            this.CboImpresoraT.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.CboImpresoraT.FormattingEnabled = true;
+            this.CboImpresoraT.Location = new System.Drawing.Point(13, 162);
+            this.CboImpresoraT.Name = "CboImpresoraT";
+            this.CboImpresoraT.Size = new System.Drawing.Size(252, 26);
+            this.CboImpresoraT.TabIndex = 316;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.ChkSumarUnidades);
@@ -282,6 +382,109 @@
             this.BtnAceptar.UseVisualStyleBackColor = true;
             this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click_1);
             // 
+            // NFacturas
+            // 
+            this.NFacturas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NFacturas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.NFacturas.Location = new System.Drawing.Point(289, 29);
+            this.NFacturas.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.NFacturas.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NFacturas.Name = "NFacturas";
+            this.NFacturas.Size = new System.Drawing.Size(202, 29);
+            this.NFacturas.TabIndex = 322;
+            this.NFacturas.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label3.Location = new System.Drawing.Point(286, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(176, 18);
+            this.label3.TabIndex = 323;
+            this.label3.Text = "TANTOS DE FACTURAS";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label7.Location = new System.Drawing.Point(286, 75);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(119, 18);
+            this.label7.TabIndex = 325;
+            this.label7.Text = "TANTOS DE NC";
+            // 
+            // NNc
+            // 
+            this.NNc.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NNc.Location = new System.Drawing.Point(289, 96);
+            this.NNc.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.NNc.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NNc.Name = "NNc";
+            this.NNc.Size = new System.Drawing.Size(202, 29);
+            this.NNc.TabIndex = 324;
+            this.NNc.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label8.Location = new System.Drawing.Point(286, 141);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(159, 18);
+            this.label8.TabIndex = 327;
+            this.label8.Text = "TANTOS DE TICKETS";
+            // 
+            // NTickets
+            // 
+            this.NTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NTickets.Location = new System.Drawing.Point(289, 162);
+            this.NTickets.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.NTickets.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NTickets.Name = "NTickets";
+            this.NTickets.Size = new System.Drawing.Size(202, 29);
+            this.NTickets.TabIndex = 326;
+            this.NTickets.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // FrmEstaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,11 +498,17 @@
             this.Name = "FrmEstaciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmEstaciones";
+            this.Load += new System.EventHandler(this.FrmEstaciones_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NFacturas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NNc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NTickets)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,5 +535,18 @@
         private System.Windows.Forms.Button BtnAceptar;
         private System.Windows.Forms.CheckBox ChkSolicitarFMpago;
         private System.Windows.Forms.CheckBox ChkSumarUnidades;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ComboBox CboImpresoraNC;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox CboImpresoraF;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox CboImpresoraT;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown NTickets;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown NNc;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown NFacturas;
     }
 }

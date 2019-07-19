@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,21 +30,21 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private ImpuestoController ImpuestoController;
         private ClienteController clienteController;
         private InventarioController inventarioController;
+        private EmpresaController empresaController;
         private LoteController loteController;
-        private StiReport report;
-        private DataSet ds;
-        private int UltVenta;
+
 
         private const int NPARTIDAS = 100;
         private int SigPartida;
         private string datosCliente;
 
 
+
         public PointOfSale()
         {
             InitializeComponent();
             ResetPDV();
-            UltVenta = 0;
+
         }
 
         private void CalculaTotales()
@@ -221,10 +222,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             clienteController = new ClienteController();
             inventarioController = new InventarioController();
             ImpuestoController = new ImpuestoController();
+            empresaController = new EmpresaController();
             loteController = new LoteController();
-            report = new StiReport();
-            ds = new DataSet();
-            report.Load(Ambiente.FormatoTicket);
+
+
             //Reset malla
             Malla.Rows.Clear();
             for (int i = 0; i < NPARTIDAS; i++)
@@ -319,26 +320,19 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             if (ventaController.UpdateOne(venta))
             {
                 GuardaPartidas();
-                if (venta.TipoDocId.Equals("TIC"))
-                {
-                    Ambiente.UpdateSiguiente("TIC");
-                    LblUltDocumento.Text = "TICKET  T" + venta.NoRef + " " + DateTime.Now.ToShortTimeString();
-                }
-                else if (venta.TipoDocId.Equals("FAC"))
-                {
-                    Ambiente.UpdateSiguiente("FAC");
-                    LblUltDocumento.Text = "FACTURA: " + venta.NoRef + " " + DateTime.Now.ToShortTimeString();
-                }
-                UltVenta = venta.VentaId;
+                Ambiente.UpdateSiguiente("TIC");
+                LblUltDocumento.Text = "TICKET " + venta.NoRef + " " + DateTime.Now.ToShortTimeString();
                 LblCambio.Text = "SU CAMBIO: " + Ambiente.FDinero(venta.Cambio.ToString());
+
+                Ambiente.SaveAndPrintTicket(venta);
                 ResetPDV();
             }
             else
-                Ambiente.Mensaje("Cierre de la venta fue incorrecto");
-
-           
-
+                Ambiente.Mensaje("Cierre de la venta salió mal :(");
         }
+
+
+
         private void EliminaVenta()
         {
             if (venta != null)
@@ -640,14 +634,18 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnCobroPago_Click(object sender, EventArgs e)
         {
-            using (var form = new FrmCobroRapido(venta.Total))
+            if (venta.Total > 0)
             {
-                if (form.ShowDialog() == DialogResult.OK)
+                using (var form = new FrmCobroRapido(venta.Total))
                 {
-                    //Cierra venta
-                    CierraVenta(form);
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        //Cierra venta
+                        CierraVenta(form);
+                    }
                 }
             }
+
         }
 
         private void BtnSalir_Click(object sender, EventArgs e)
@@ -702,28 +700,15 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnDirectoImp_Click(object sender, EventArgs e)
         {
-            if (UltVenta > 0)
-            {
-                ds = new DataSet();
-                ds.Tables.Add(Ambiente.DT("select * from venta where VentaId=" + UltVenta, "v"));
-                ds.Tables.Add(Ambiente.DT("select * from ventap where VentaId=" + UltVenta, "vp"));
-                report.RegData(ds);
-                report.Print(false);
-
-            }
+            Ambiente.OpenDirectory(Ambiente.Empresa.DirectorioTickets);
 
         }
 
         private void BtnVisualizacionPrev_Click(object sender, EventArgs e)
         {
-            if (UltVenta > 0)
-            {
-                ds = new DataSet();
-                ds.Tables.Add(Ambiente.DT("select * from venta where VentaId=" + UltVenta, "v"));
-                ds.Tables.Add(Ambiente.DT("select * from ventap where VentaId=" + UltVenta, "vp"));
-                report.RegData(ds);
-                report.Show();
-            }
+            string path = @"C:\Dympos\Tickets\";
+            System.Diagnostics.Process.Start(path);
+
         }
     }
 }

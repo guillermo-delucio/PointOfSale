@@ -1,10 +1,11 @@
 ﻿//**********************************************************************************
-//
-//OpenSSLKey
-// .NET 2.0  OpenSSL Public & Private Key Parser
-//
-// Copyright (C) 2008  	JavaScience Consulting
-//
+//------------------------------------------------------------------------------
+// <Jesus Mendoza>.
+//     Versión de runtime:4.0.30319.42000
+//     Los cambios en este archivo podrían causar un comportamiento incorrecto y se perderán si
+// </Jesus Mendoza>
+//------------------------------------------------------------------------------
+
 //***********************************************************************************
 //
 //  opensslkey.cs

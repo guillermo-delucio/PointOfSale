@@ -125,6 +125,18 @@ namespace PointOfSale.CFDI33
                 return false;
             }
 
+            if (Cliente.Rfc == null)
+            {
+                Ambiente.Mensaje("PROCESO ABORTADO, RFC DEL CLIENTE NO ES VÁLIDO");
+                return false;
+            }
+
+            if (Cliente.Rfc.Trim().Length == 0)
+            {
+                Ambiente.Mensaje("PROCESO ABORTADO, RFC DEL CLIENTE NO ES VÁLIDO");
+                return false;
+            }
+
             SelloDigital.leerCER(Empresa.RutaCer, out string a, out string b, out string c, out string NoCer);
             NoCertificado = NoCer;
 
@@ -145,8 +157,8 @@ namespace PointOfSale.CFDI33
             comprobante.LugarExpedicion = Empresa.Cp;
 
             //Emisor
-            // oEmisor.Rfc = "MEJJ940824C61";
-            emisor.Rfc = "AAA010101AAA"; //los sellos estan utilizando este rfc
+            emisor.Rfc = "AAA010101AAA"; //los sellos estan utilizando este rfc 
+            //emisor.Rfc = Empresa.Rfc;
             emisor.Nombre = "JESUS MENDOZA JUAREZ";
             emisor.RegimenFiscal = Empresa.RegimenFiscalId;
 
@@ -165,8 +177,8 @@ namespace PointOfSale.CFDI33
             foreach (var p in Partidas)
             {
                 concepto = new ComprobanteConcepto();
-                concepto.ClaveProdServ = p.ClaveProdServ;
-                concepto.ClaveUnidad = p.ClaveUnidad;
+                concepto.ClaveProdServ = p.ClaveProdServ.Trim().Length == 0 ? "01010101" : p.ClaveProdServ.Trim();
+                concepto.ClaveUnidad = p.ClaveUnidad.Trim().Length == 0 ? "H87" : p.ClaveUnidad.Trim();
                 concepto.Descripcion = p.Descripcion;
                 concepto.Cantidad = p.Cantidad;
                 concepto.ValorUnitario = p.Precio;
@@ -286,7 +298,8 @@ namespace PointOfSale.CFDI33
             }
 
             /**********************************CREAR XML********************************/
-            FacturaActual = Empresa.DirectorioComprobantes + "FACTURA-" + comprobante.Folio + ".xml";
+            FacturaActual = Empresa.DirectorioComprobantes + "FACTURA " + Venta.NoRef.ToString() + "_" + Venta.CreatedBy + "_" + Ambiente.TimeText((DateTime)Venta.CreatedAt) + ".XML";
+
 
             //Crear Xml
             Serializar(comprobante);
@@ -298,11 +311,7 @@ namespace PointOfSale.CFDI33
             return Timbrar(FacturaActual);
         }
 
-        public bool GenerarPDF()
-        {
 
-            return true;
-        }
 
         //Cobvierte el objeto comprobante a xml
         private string Serializar(Comprobante comprobante)
@@ -410,7 +419,6 @@ namespace PointOfSale.CFDI33
                 Venta.UuId = comprobante.TimbreFiscalDigital.UUID;
                 Venta.NoCertificado = NoCertificado;
                 Venta.RutaXml = FacturaActual;
-
 
                 return ventaController.UpdateOne(Venta);
             }

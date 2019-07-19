@@ -1,4 +1,5 @@
-﻿using PointOfSale.Views.Modulos.Config;
+﻿using PointOfSale.Views.Modulos.Catalogos;
+using PointOfSale.Views.Modulos.Config;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,12 @@ namespace PointOfSale.Views.Menus
         private void BtnEmpresa_Click(object sender, EventArgs e)
         {
             var o = new FrmEmpresa();
+            o.Show();
+        }
+
+        private void BtnEstaciones_Click(object sender, EventArgs e)
+        {
+            var o = new FrmEstaciones();
             o.Show();
         }
     }

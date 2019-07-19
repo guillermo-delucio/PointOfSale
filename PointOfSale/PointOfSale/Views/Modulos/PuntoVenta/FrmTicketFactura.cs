@@ -70,6 +70,12 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 return false;
             }
 
+            if (venta.UuId != null)
+            {
+                Ambiente.Mensaje("No se clono la venta. Este documento ya es  una factura. ");
+                return false;
+            }
+
             //Anular la el ticket antes de insertar la factura
             venta.Anulada = true;
             if (ventaController.UpdateOne(venta))
@@ -146,32 +152,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Ambiente.Mensaje("El ticket no existe");
             }
         }
-        private bool Facturar()
-        {
-            var oCFDI = new CFDI();
-            oCFDI.Venta = venta;
-            return oCFDI.Facturar();
-        }
-        private bool GenerarPDF()
-        {
-            //Exportar
-            report = new StiReport();
-            report.Load(empresa.RutaFormatoFactura);
-            var ds = new DataSet("DS");
-            ds.Tables.Add(Ambiente.DT("select * from venta where VentaId=" + venta.VentaId, "v"));
-            ds.Tables.Add(Ambiente.DT("select * from ventap where VentaId=" + venta.VentaId, "vp"));
-            ds.Tables.Add(Ambiente.DT("select * from cliente where ClienteId='" + venta.ClienteId + "'", "c"));
-            ds.Tables.Add(Ambiente.DT("select top 1 * from Empresa", "e"));
-            report.RegData(ds);
-            report.Render(false);
-            var file = empresa.DirectorioComprobantes + "FACTURA-" + venta.NoRef.ToString() + ".PDF";
-            report.ExportDocument(StiExportFormat.Pdf, file);
-            System.Diagnostics.Process.Start(file);
-
-
-
-            return true;
-        }
 
         private void TxtCliente_KeyDown(object sender, KeyEventArgs e)
         {
@@ -235,28 +215,34 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
-
+            //Si no seleccionó otro cliente, se recupera el de la venta
             if (cliente == null)
                 cliente = clienteController.SelectOne(venta.ClienteId);
 
-            if (cliente.Rfc.Trim().Length < 12)
+            //valida rfc
+            if (Ambiente.RFCvalido(cliente.Rfc))
             {
-                Ambiente.Mensaje("El cliente no es un receptor válido");
-                return;
-            }
-            BtnAceptar.Enabled = false;
-            if (ClonarVenta())
-                if (Facturar())
-                    if (!GenerarPDF())
-                        Ambiente.Mensaje("Algo salio mal al generar el PDF");
-                    else
+
+                //Anula el ticket y crea la venta factura (sin timbrar)
+                if (ClonarVenta())
+                {
+                    var oCFDI = new CFDI();
+                    oCFDI.Venta = venta;
+
+                    //Timbra la venta
+                    if (oCFDI.Facturar())
                     {
+                        Ambiente.SaveAndPrintFactura(venta);
                         Close();
                     }
-
-
-
-
+                    else
+                        Ambiente.Mensaje("Algo salió mal al facturar la venta");
+                }
+                else
+                    Ambiente.Mensaje("No se clonó la venta");
+            }
+            else
+                Ambiente.Mensaje("El rfc del cliente está mal formado");
         }
 
         private void TxtNoRereren_KeyDown(object sender, KeyEventArgs e)
@@ -280,6 +266,41 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void ChkMismoCliente_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChkMismoCliente.Checked)
+            {
+                DeabilitarCampos();
+            }
+            if (!ChkMismoCliente.Checked)
+            {
+                HabilitarCampos();
+            }
+
+        }
+
+        private void HabilitarCampos()
+        {
+            TxtCliente.Enabled = true;
+            TxtUsoCFDI.Enabled = true;
+            TxtFormaPago.Enabled = true;
+            TxtMetodoPago.Enabled = true;
+        }
+
+        private void DeabilitarCampos()
+        {
+            TxtCliente.Text = "";
+            TxtUsoCFDI.Text = "";
+            TxtFormaPago.Text = "";
+            TxtMetodoPago.Text = "";
+
+            TxtCliente.Enabled = true;
+            TxtUsoCFDI.Enabled = true;
+            TxtFormaPago.Enabled = true;
+            TxtMetodoPago.Enabled = true;
+
         }
     }
 }

@@ -92,6 +92,7 @@
             this.BtnReimpresionT.TabIndex = 243;
             this.BtnReimpresionT.Text = "&ReImpresión de Ticket.";
             this.BtnReimpresionT.UseVisualStyleBackColor = true;
+            this.BtnReimpresionT.Click += new System.EventHandler(this.BtnReimpresionT_Click);
             // 
             // BtnMovsCaja
             // 
