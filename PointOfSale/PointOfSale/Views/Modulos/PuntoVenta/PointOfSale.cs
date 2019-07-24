@@ -325,6 +325,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 LblCambio.Text = "SU CAMBIO: " + Ambiente.FDinero(venta.Cambio.ToString());
 
                 Ambiente.SaveAndPrintTicket(venta);
+
+                if (Ambiente.Pregunta("Requiere factura para este documento"))
+                    new FrmTicketFactura(venta.NoRef).Show();
+
                 ResetPDV();
             }
             else
@@ -710,5 +714,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             System.Diagnostics.Process.Start(path);
 
         }
+
+        
     }
 }

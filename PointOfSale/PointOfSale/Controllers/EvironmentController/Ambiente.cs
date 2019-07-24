@@ -757,7 +757,7 @@ namespace PointOfSale.Controllers
             else
                 Mensaje("Imposible imprimir, el documento llegó null");
         }
-        public static void SaveAndPrintFactura(Venta venta, bool OpenDoc = false)
+        public static void SaveAndPrintFactura(Venta venta, bool OpenDoc = false, bool PrintDoc = false)
         {
             if (venta != null)
             {
@@ -790,13 +790,61 @@ namespace PointOfSale.Controllers
                     report.ExportDocument(StiExportFormat.Pdf, file);
                     if (OpenDoc)
                         Process.Start(file);
-                    report.Print(false, settings);
+
+                    if (PrintDoc)
+                        report.Print(false, settings);
                 }
                 else
                     Mensaje("Imposible imprimir, la empresa o estación carece de información.");
             }
             else
                 Mensaje("Imposible imprimir, el documento llegó null");
+        }
+
+        public static void SaveAndCorte()
+        {
+            StiReport report = new StiReport();
+
+            List<Venta> ventas;
+            using (var db = new DymContext())
+            {
+                ventas = db.Venta.Where(x => x.Cortada == false).OrderBy(x => x.CreatedAt).ToList();
+            }
+
+            if (ventas.Count > 0)
+            {
+                var empresaController = new EmpresaController();
+                var empresa = empresaController.SelectTopOne();
+
+                report.Load(empresa.RutaFormatoCorte);
+                var ds = new DataSet("DS");
+                report["userId"] = LoggedUser.UsuarioId;
+                report["hinicial"] = ventas.FirstOrDefault().CreatedAt.ToString("dd/MM/yyyy h:mm tt");
+                report["hfinal"] = ventas.Last().CreatedAt.ToString("dd/MM/yyyy h:mm tt");
+
+
+                ds.Tables.Add(Ambiente.DT("select  v.CreatedAt, c.RazonSocial,v.Unidades, v.EstadoDocId, v.SubTotal, v.Impuesto, v.Total from Venta v join Cliente c on v.ClienteId = c.ClienteId where v.Cortada = 0 and v.EstadoDocId = 'CON'", "v"));
+                report.RegData(ds);
+
+                report.Render(false);
+                var file = empresa.DirectorioCortes + "CORTE " + LoggedUser.UsuarioId + "_" + TimeText((DateTime)ventas.Last().CreatedAt) + ".PDF"; ;
+                report.ExportDocument(StiExportFormat.Pdf, file);
+
+                foreach (var v in ventas)
+                    v.Cortada = true;
+                if (new VentaController().UpdateRange(ventas))
+                    Process.Start(file);
+
+
+
+
+            }
+            else
+            {
+                Ambiente.Mensaje("No hay nada que cortar");
+                return;
+            }
+
         }
         public static string TimeText(DateTime date)
         {

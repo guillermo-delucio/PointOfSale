@@ -57,11 +57,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Grid.Rows[Grid.RowCount - 1].Cells[5].Value = f.UuId;
             }
         }
-        private void CambiaCliente() { }
-        private void AbrirPFD() { }
-        private void Enviar() { }
-
-
 
         private void FrmFacturas_Load(object sender, EventArgs e)
         {
@@ -99,39 +94,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             }
             if (oCFDI.Venta.UuId == null)
             {
-                if (Facturar())
-                    if (!GenerarPDF())
-                        Ambiente.Mensaje("Algo salio mal al generar el PDF");
-                    else
-                        Close();
+                Ambiente.SaveAndPrintFactura(oCFDI.Venta, false, true);
+                Close();
             }
             else
                 Ambiente.Mensaje("Este documento ya es un CDFI");
-        }
-
-        private bool Facturar()
-        {
-            return oCFDI.Facturar();
-        }
-        private bool GenerarPDF()
-        {
-            //Exportar
-            report = new StiReport();
-            report.Load(empresa.RutaFormatoFactura);
-            var ds = new DataSet("DS");
-            ds.Tables.Add(Ambiente.DT("select * from venta where VentaId=" + oCFDI.Venta.VentaId, "v"));
-            ds.Tables.Add(Ambiente.DT("select * from ventap where VentaId=" + oCFDI.Venta.VentaId, "vp"));
-            ds.Tables.Add(Ambiente.DT("select * from cliente where ClienteId='" + oCFDI.Venta.ClienteId + "'", "c"));
-            ds.Tables.Add(Ambiente.DT("select top 1 * from Empresa", "e"));
-            report.RegData(ds);
-            report.Render(false);
-            var file = empresa.DirectorioComprobantes + "FACTURA-" + oCFDI.Venta.NoRef.ToString() + ".PDF";
-            report.ExportDocument(StiExportFormat.Pdf, file);
-            System.Diagnostics.Process.Start(file);
-
-
-
-            return true;
         }
 
         private void BtnSalir_Click(object sender, EventArgs e)

@@ -99,6 +99,25 @@ namespace PointOfSale.Controllers
             }
             return false;
         }
+        public bool UpdateRange(List<Venta> o)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    db.UpdateRange(o);
+                    if (db.SaveChanges() > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return false;
+        }
         public bool DeleteOne(Venta o)
         {
             try

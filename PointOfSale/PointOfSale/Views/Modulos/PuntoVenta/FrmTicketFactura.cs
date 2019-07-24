@@ -31,12 +31,22 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private List<Ventap> partidas;
         private StiReport report;
         private DataSet ds;
+        private int? noRef;
 
         public FrmTicketFactura()
         {
             InitializeComponent();
             Reset();
         }
+
+        public FrmTicketFactura(int? noRef)
+        {
+            InitializeComponent();
+            Reset();
+            this.noRef = noRef;
+            TxtNoRereren.Text = ((int)this.noRef).ToString();
+        }
+
         private void Reset()
         {
             ventaController = new VentaController();
@@ -232,7 +242,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     //Timbra la venta
                     if (oCFDI.Facturar())
                     {
-                        Ambiente.SaveAndPrintFactura(venta);
+                        Ambiente.SaveAndPrintFactura(venta, true, false);
                         Close();
                     }
                     else

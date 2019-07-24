@@ -37,7 +37,7 @@ namespace PointOfSale.Models
         public string EstacionId { get; set; }
         public bool Cortada { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime? CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
         public string UpdatedBy { get; set; }
         public decimal SubTotal { get; set; }
         public decimal Impuesto { get; set; }
