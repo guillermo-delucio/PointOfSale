@@ -268,7 +268,8 @@ namespace PointOfSale.Controllers
             expresion = @"^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))((-)?([A-Z\d]{3}))?$";
             Regex automata = new Regex(expresion);
             return automata.IsMatch(rfc.Trim());
-        }
+        }
+
 
 
 
@@ -817,6 +818,7 @@ namespace PointOfSale.Controllers
                 var empresa = empresaController.SelectTopOne();
 
                 report.Load(empresa.RutaFormatoCorte);
+                report.Compile();
                 var ds = new DataSet("DS");
                 report["userId"] = LoggedUser.UsuarioId;
                 report["hinicial"] = ventas.FirstOrDefault().CreatedAt.ToString("dd/MM/yyyy h:mm tt");
