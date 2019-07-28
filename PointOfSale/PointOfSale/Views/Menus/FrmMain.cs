@@ -63,13 +63,7 @@ namespace DYM.Views
 
         private void BtnReportesGraficas_Click(object sender, EventArgs e)
         {
-
-            var ventacontroller = new VentaController();
-
-
-            var cfdi = new CFDI();
-            cfdi.Venta = ventacontroller.SelectOne(258);
-            cfdi.Facturar();
+            new FrmConceptosEgreso().Show();
         }
     }
 }

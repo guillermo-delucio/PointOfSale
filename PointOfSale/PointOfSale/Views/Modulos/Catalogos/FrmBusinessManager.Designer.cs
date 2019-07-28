@@ -57,10 +57,16 @@
             System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Producto-Sustancias", 1, 2);
             System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Productos Completo", 1, 2);
             System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Producto Impuesto", 1, 2);
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Configuración", 3, 3, new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Concenptos de egresos", 1, 5);
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Concenptos de ingresos", 1, 5);
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Tipos de movimientos de almacen", 1, 5);
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Configuración", 3, 3, new System.Windows.Forms.TreeNode[] {
             treeNode14,
             treeNode15,
-            treeNode16});
+            treeNode16,
+            treeNode17,
+            treeNode18,
+            treeNode19});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBusinessManager));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importarDesdeExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,12 +90,12 @@
             this.importarDesdeExcelToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(185, 26);
             // 
             // importarDesdeExcelToolStripMenuItem
             // 
             this.importarDesdeExcelToolStripMenuItem.Name = "importarDesdeExcelToolStripMenuItem";
-            this.importarDesdeExcelToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.importarDesdeExcelToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.importarDesdeExcelToolStripMenuItem.Text = "Importar desde excel";
             this.importarDesdeExcelToolStripMenuItem.Click += new System.EventHandler(this.ImportarDesdeExcelToolStripMenuItem_Click);
             // 
@@ -256,14 +262,26 @@
             treeNode16.Name = "NodoProdImp";
             treeNode16.SelectedImageIndex = 2;
             treeNode16.Text = "Producto Impuesto";
-            treeNode17.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode17.ImageIndex = 3;
-            treeNode17.Name = "NodoConfiguracion";
-            treeNode17.SelectedImageIndex = 3;
-            treeNode17.Text = "Configuración";
+            treeNode17.ImageIndex = 1;
+            treeNode17.Name = "NodoConEgre";
+            treeNode17.SelectedImageIndex = 5;
+            treeNode17.Text = "Concenptos de egresos";
+            treeNode18.ImageIndex = 1;
+            treeNode18.Name = "NodoConIngre";
+            treeNode18.SelectedImageIndex = 5;
+            treeNode18.Text = "Concenptos de ingresos";
+            treeNode19.ImageIndex = 1;
+            treeNode19.Name = "NodoConMovsInv";
+            treeNode19.SelectedImageIndex = 5;
+            treeNode19.Text = "Tipos de movimientos de almacen";
+            treeNode20.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode20.ImageIndex = 3;
+            treeNode20.Name = "NodoConfiguracion";
+            treeNode20.SelectedImageIndex = 3;
+            treeNode20.Text = "Configuración";
             this.BMtree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode13,
-            treeNode17});
+            treeNode20});
             this.BMtree.SelectedImageIndex = 0;
             this.BMtree.Size = new System.Drawing.Size(238, 509);
             this.BMtree.TabIndex = 4;

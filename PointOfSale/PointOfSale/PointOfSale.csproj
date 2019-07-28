@@ -208,6 +208,8 @@
     <Compile Include="Controllers\ClaveSatController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
+    <Compile Include="Controllers\ConceptoEgresoController.cs" />
+    <Compile Include="Controllers\ConceptoIngresoController.cs" />
     <Compile Include="Controllers\CxpController.cs" />
     <Compile Include="Controllers\CxppController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
@@ -215,6 +217,7 @@
     <Compile Include="Controllers\EvironmentController\Ambiente.cs" />
     <Compile Include="Controllers\EvironmentController\CommonOpenFileDialog.cs" />
     <Compile Include="Controllers\EvironmentController\Inicializador.cs" />
+    <Compile Include="Controllers\FlujoController.cs" />
     <Compile Include="Controllers\ImportaExcelController.cs" />
     <Compile Include="Controllers\EvironmentController\IController.cs" />
     <Compile Include="Controllers\ImpuestoController.cs" />
@@ -223,6 +226,8 @@
     <Compile Include="Controllers\LoggerController\TraceLogger.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoteController.cs" />
+    <Compile Include="Controllers\ConceptoMovInvController.cs" />
+    <Compile Include="Controllers\MovInvController.cs" />
     <Compile Include="Controllers\PresentacionController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
@@ -249,8 +254,12 @@
     <Compile Include="Models\CNumpedimentoaduana.cs" />
     <Compile Include="Models\Compra.cs" />
     <Compile Include="Models\CompraP.cs" />
+    <Compile Include="Models\ConceptoEgreso.cs" />
+    <Compile Include="Models\ConceptoIngreso.cs" />
+    <Compile Include="Models\ConceptoMovInv.cs" />
     <Compile Include="Models\Configuracion.cs" />
     <Compile Include="Models\Consecutivo.cs" />
+    <Compile Include="Models\Corte.cs" />
     <Compile Include="Models\Cp.cs" />
     <Compile Include="Models\CPatenteaduanal.cs" />
     <Compile Include="Models\CRegimenfiscal.cs" />
@@ -269,11 +278,13 @@
     <Compile Include="Models\Estacion.cs" />
     <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\EstadoDoc.cs" />
+    <Compile Include="Models\Flujo.cs" />
     <Compile Include="Models\FormaPago.cs" />
     <Compile Include="Models\Impuesto.cs" />
     <Compile Include="Models\Laboratorio.cs" />
     <Compile Include="Models\Lote.cs" />
     <Compile Include="Models\MetodoPago.cs" />
+    <Compile Include="Models\MovInv.cs" />
     <Compile Include="Models\Municipio.cs" />
     <Compile Include="Models\Pais.cs" />
     <Compile Include="Models\Pcxp.cs" />
@@ -288,8 +299,11 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\RolePermiso.cs" />
     <Compile Include="Models\Serie.cs" />
+    <Compile Include="Models\Sucursal.cs" />
     <Compile Include="Models\Sustancia.cs" />
     <Compile Include="Models\TipoDoc.cs" />
+    <Compile Include="Models\Traspaso.cs" />
+    <Compile Include="Models\Traspasop.cs" />
     <Compile Include="Models\UnidadMedida.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuarioRole.cs" />
@@ -368,6 +382,24 @@
     </Compile>
     <Compile Include="Views\Modulos\Catalogos\FrmClientes.Designer.cs">
       <DependentUpon>FrmClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmConceptosEgreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmConceptosEgreso.Designer.cs">
+      <DependentUpon>FrmConceptosEgreso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmConceptosIngreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmConceptosIngreso.Designer.cs">
+      <DependentUpon>FrmConceptosIngreso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmConceptosMovsInv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Catalogos\FrmConceptosMovsInv.Designer.cs">
+      <DependentUpon>FrmConceptosMovsInv.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Modulos\Catalogos\FrmEstaciones.cs">
       <SubType>Form</SubType>
@@ -552,6 +584,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Catalogos\FrmClientes.resx">
       <DependentUpon>FrmClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmConceptosEgreso.resx">
+      <DependentUpon>FrmConceptosEgreso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmConceptosIngreso.resx">
+      <DependentUpon>FrmConceptosIngreso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Catalogos\FrmConceptosMovsInv.resx">
+      <DependentUpon>FrmConceptosMovsInv.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Catalogos\FrmEstaciones.resx">
       <DependentUpon>FrmEstaciones.cs</DependentUpon>

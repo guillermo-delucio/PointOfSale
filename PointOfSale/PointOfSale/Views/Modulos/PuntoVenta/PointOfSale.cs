@@ -32,6 +32,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private InventarioController inventarioController;
         private EmpresaController empresaController;
         private LoteController loteController;
+        private MovInvController movInvController;
+        private FlujoController flujoController;
 
 
         private const int NPARTIDAS = 100;
@@ -224,6 +226,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             ImpuestoController = new ImpuestoController();
             empresaController = new EmpresaController();
             loteController = new LoteController();
+            movInvController = new MovInvController();
+            flujoController = new FlujoController();
+
 
 
             //Reset malla
@@ -324,6 +329,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 LblUltDocumento.Text = "TICKET " + venta.NoRef + " " + DateTime.Now.ToShortTimeString();
                 LblCambio.Text = "SU CAMBIO: " + Ambiente.FDinero(venta.Cambio.ToString());
 
+                AfectaFlujo();
+                AfectaMovsInv();
+
                 Ambiente.SaveAndPrintTicket(venta);
 
                 if (Ambiente.Pregunta("Requiere factura para este documento"))
@@ -335,7 +343,93 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Ambiente.Mensaje("Cierre de la venta salió mal :(");
         }
 
+        private void AfectaMovsInv()
+        {
+            foreach (var p in partidas)
+            {
+                var movInv = new MovInv();
+                movInv.ConceptoMovsInvId = "VEN";
+                movInv.NoRef = (int)venta.NoRef;
+                movInv.EntradaSalida = "S";
+                movInv.IdEntrada = null;
+                movInv.IdSalida = p.VentapId;
+                movInv.ProductoId = p.ProductoId;
+                movInv.Precio = p.Precio;
+                movInv.Cantidad = p.Cantidad;
+                movInv.CreatedAt = DateTime.Now;
+                movInv.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                movInvController.InsertOne(movInv);
+            }
+        }
 
+        private void AfectaFlujo()
+        {
+            Flujo flujo = new Flujo();
+
+            flujo.ConceptoIngresoId = "CLIEN";
+            flujo.EntradaSalida = "E";
+            flujo.Importe = venta.Pago1;
+            flujo.EstacionId = Ambiente.Estacion.EstacionId;
+            flujo.VentaOrigen = venta.VentaId;
+            flujo.Cortado = false;
+            flujo.ConceptoImporteId = venta.ConceptoPago1;
+            flujo.CreatedAt = DateTime.Now;
+            flujo.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+            flujoController.InsertOne(flujo);
+            if (venta.Cambio != null)
+            {
+                if (venta.Cambio > 0)
+                {
+                    flujo = new Flujo();
+                    flujo.ConceptoEgresoId = "CAM";
+                    flujo.EntradaSalida = "S";
+                    flujo.Importe = (decimal)venta.Cambio;
+                    flujo.EstacionId = Ambiente.Estacion.EstacionId;
+                    flujo.VentaOrigen = venta.VentaId;
+                    flujo.Cortado = false;
+                    flujo.ConceptoImporteId = venta.ConceptoPago1;
+                    flujo.CreatedAt = DateTime.Now;
+                    flujo.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                    flujoController.InsertOne(flujo);
+                }
+            }
+
+            if (venta.ConceptoPago2 != null)
+            {
+                flujo = new Flujo();
+
+                flujo.ConceptoIngresoId = "CLIEN";
+                flujo.EntradaSalida = "E";
+                flujo.Importe = venta.Pago2;
+                flujo.EstacionId = Ambiente.Estacion.EstacionId;
+                flujo.VentaOrigen = venta.VentaId;
+                flujo.Cortado = false;
+                flujo.ConceptoImporteId = venta.ConceptoPago2;
+                flujo.CreatedAt = DateTime.Now;
+                flujo.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                flujoController.InsertOne(flujo);
+            }
+
+            if (venta.ConceptoPago3 != null)
+            {
+                flujo = new Flujo();
+
+                flujo.ConceptoIngresoId = "CLIEN";
+                flujo.EntradaSalida = "E";
+                flujo.Importe = venta.Pago3;
+                flujo.EstacionId = Ambiente.Estacion.EstacionId;
+                flujo.VentaOrigen = venta.VentaId;
+                flujo.Cortado = false;
+                flujo.ConceptoImporteId = venta.ConceptoPago3;
+                flujo.CreatedAt = DateTime.Now;
+                flujo.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                flujoController.InsertOne(flujo);
+            }
+
+
+
+
+        }
 
         private void EliminaVenta()
         {
@@ -715,6 +809,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         }
 
-        
+
     }
 }

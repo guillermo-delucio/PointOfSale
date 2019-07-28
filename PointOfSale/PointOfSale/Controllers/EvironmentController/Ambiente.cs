@@ -817,12 +817,13 @@ namespace PointOfSale.Controllers
                 var empresaController = new EmpresaController();
                 var empresa = empresaController.SelectTopOne();
 
+
                 report.Load(empresa.RutaFormatoCorte);
                 report.Compile();
                 var ds = new DataSet("DS");
                 report["userId"] = LoggedUser.UsuarioId;
-                report["hinicial"] = ventas.FirstOrDefault().CreatedAt.ToString("dd/MM/yyyy h:mm tt");
-                report["hfinal"] = ventas.Last().CreatedAt.ToString("dd/MM/yyyy h:mm tt");
+                report["hinicial"] = ventas.FirstOrDefault().CreatedAt.ToString("dd/MM/yyyy h:mm tt").ToUpper();
+                report["hfinal"] = ventas.Last().CreatedAt.ToString("dd/MM/yyyy h:mm tt").ToUpper();
 
 
                 ds.Tables.Add(Ambiente.DT("select  v.CreatedAt, c.RazonSocial,v.Unidades, v.EstadoDocId, v.SubTotal, v.Impuesto, v.Total from Venta v join Cliente c on v.ClienteId = c.ClienteId where v.Cortada = 0 and v.EstadoDocId = 'CON'", "v"));
@@ -836,15 +837,12 @@ namespace PointOfSale.Controllers
                     v.Cortada = true;
                 if (new VentaController().UpdateRange(ventas))
                     Process.Start(file);
-
-
-
-
             }
             else
             {
                 Ambiente.Mensaje("No hay nada que cortar");
                 return;
+
             }
 
         }

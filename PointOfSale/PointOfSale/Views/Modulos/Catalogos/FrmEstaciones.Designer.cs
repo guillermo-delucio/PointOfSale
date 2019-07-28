@@ -43,6 +43,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.CboIF = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.NTickets = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.NNc = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.NFacturas = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
             this.CboImpresoraNC = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
@@ -55,19 +61,13 @@
             this.ChkVentaSinExistencia = new System.Windows.Forms.CheckBox();
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnAceptar = new System.Windows.Forms.Button();
-            this.NFacturas = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.NNc = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.NTickets = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NFacturas)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NNc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NTickets)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NNc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NFacturas)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -101,6 +101,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(555, 351);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.TabStop = false;
             // 
             // tabPage1
             // 
@@ -129,7 +130,7 @@
             this.CboINC.Location = new System.Drawing.Point(6, 209);
             this.CboINC.Name = "CboINC";
             this.CboINC.Size = new System.Drawing.Size(433, 26);
-            this.CboINC.TabIndex = 6;
+            this.CboINC.TabIndex = 5;
             // 
             // label6
             // 
@@ -226,7 +227,7 @@
             this.CboIF.Location = new System.Drawing.Point(6, 156);
             this.CboIF.Name = "CboIF";
             this.CboIF.Size = new System.Drawing.Size(433, 26);
-            this.CboIF.TabIndex = 5;
+            this.CboIF.TabIndex = 4;
             // 
             // tabPage3
             // 
@@ -248,208 +249,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Impresoras";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label23.Location = new System.Drawing.Point(10, 75);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(148, 18);
-            this.label23.TabIndex = 321;
-            this.label23.Text = "IMPRESORA DE NC";
-            // 
-            // CboImpresoraNC
-            // 
-            this.CboImpresoraNC.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.CboImpresoraNC.FormattingEnabled = true;
-            this.CboImpresoraNC.Location = new System.Drawing.Point(13, 96);
-            this.CboImpresoraNC.Name = "CboImpresoraNC";
-            this.CboImpresoraNC.Size = new System.Drawing.Size(252, 26);
-            this.CboImpresoraNC.TabIndex = 320;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label22.Location = new System.Drawing.Point(10, 11);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(205, 18);
-            this.label22.TabIndex = 319;
-            this.label22.Text = "IMPRESORA DE FACTURAS";
-            // 
-            // CboImpresoraF
-            // 
-            this.CboImpresoraF.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.CboImpresoraF.FormattingEnabled = true;
-            this.CboImpresoraF.Location = new System.Drawing.Point(13, 32);
-            this.CboImpresoraF.Name = "CboImpresoraF";
-            this.CboImpresoraF.Size = new System.Drawing.Size(252, 26);
-            this.CboImpresoraF.TabIndex = 318;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label21.Location = new System.Drawing.Point(10, 141);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(188, 18);
-            this.label21.TabIndex = 317;
-            this.label21.Text = "IMPRESORA DE TICKETS";
-            // 
-            // CboImpresoraT
-            // 
-            this.CboImpresoraT.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.CboImpresoraT.FormattingEnabled = true;
-            this.CboImpresoraT.Location = new System.Drawing.Point(13, 162);
-            this.CboImpresoraT.Name = "CboImpresoraT";
-            this.CboImpresoraT.Size = new System.Drawing.Size(252, 26);
-            this.CboImpresoraT.TabIndex = 316;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.ChkSumarUnidades);
-            this.tabPage2.Controls.Add(this.ChkSolicitarFMpago);
-            this.tabPage2.Controls.Add(this.ChkVentaSinExistencia);
-            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(547, 325);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Config adicional";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // ChkSumarUnidades
-            // 
-            this.ChkSumarUnidades.AutoSize = true;
-            this.ChkSumarUnidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.ChkSumarUnidades.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ChkSumarUnidades.Location = new System.Drawing.Point(16, 79);
-            this.ChkSumarUnidades.Name = "ChkSumarUnidades";
-            this.ChkSumarUnidades.Size = new System.Drawing.Size(203, 22);
-            this.ChkSumarUnidades.TabIndex = 232;
-            this.ChkSumarUnidades.TabStop = false;
-            this.ChkSumarUnidades.Text = "Sumar unidades en el PDV";
-            this.ChkSumarUnidades.UseVisualStyleBackColor = true;
-            // 
-            // ChkSolicitarFMpago
-            // 
-            this.ChkSolicitarFMpago.AutoSize = true;
-            this.ChkSolicitarFMpago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.ChkSolicitarFMpago.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ChkSolicitarFMpago.Location = new System.Drawing.Point(16, 51);
-            this.ChkSolicitarFMpago.Name = "ChkSolicitarFMpago";
-            this.ChkSolicitarFMpago.Size = new System.Drawing.Size(246, 22);
-            this.ChkSolicitarFMpago.TabIndex = 231;
-            this.ChkSolicitarFMpago.TabStop = false;
-            this.ChkSolicitarFMpago.Text = "Solicitar forma y método de pago";
-            this.ChkSolicitarFMpago.UseVisualStyleBackColor = true;
-            // 
-            // ChkVentaSinExistencia
-            // 
-            this.ChkVentaSinExistencia.AutoSize = true;
-            this.ChkVentaSinExistencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.ChkVentaSinExistencia.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ChkVentaSinExistencia.Location = new System.Drawing.Point(16, 23);
-            this.ChkVentaSinExistencia.Name = "ChkVentaSinExistencia";
-            this.ChkVentaSinExistencia.Size = new System.Drawing.Size(165, 22);
-            this.ChkVentaSinExistencia.TabIndex = 230;
-            this.ChkVentaSinExistencia.TabStop = false;
-            this.ChkVentaSinExistencia.Text = "Vender sin existencia";
-            this.ChkVentaSinExistencia.UseVisualStyleBackColor = true;
-            // 
-            // BtnCancelar
-            // 
-            this.BtnCancelar.Location = new System.Drawing.Point(407, 397);
-            this.BtnCancelar.Name = "BtnCancelar";
-            this.BtnCancelar.Size = new System.Drawing.Size(148, 40);
-            this.BtnCancelar.TabIndex = 150;
-            this.BtnCancelar.Text = "SALIR";
-            this.BtnCancelar.UseVisualStyleBackColor = true;
-            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
-            // 
-            // BtnAceptar
-            // 
-            this.BtnAceptar.Location = new System.Drawing.Point(254, 397);
-            this.BtnAceptar.Name = "BtnAceptar";
-            this.BtnAceptar.Size = new System.Drawing.Size(148, 40);
-            this.BtnAceptar.TabIndex = 149;
-            this.BtnAceptar.Text = "ACEPTAR";
-            this.BtnAceptar.UseVisualStyleBackColor = true;
-            this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click_1);
-            // 
-            // NFacturas
-            // 
-            this.NFacturas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NFacturas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.NFacturas.Location = new System.Drawing.Point(289, 29);
-            this.NFacturas.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.NFacturas.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NFacturas.Name = "NFacturas";
-            this.NFacturas.Size = new System.Drawing.Size(202, 29);
-            this.NFacturas.TabIndex = 322;
-            this.NFacturas.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label3.Location = new System.Drawing.Point(286, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(176, 18);
-            this.label3.TabIndex = 323;
-            this.label3.Text = "TANTOS DE FACTURAS";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label7.Location = new System.Drawing.Point(286, 75);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(119, 18);
-            this.label7.TabIndex = 325;
-            this.label7.Text = "TANTOS DE NC";
-            // 
-            // NNc
-            // 
-            this.NNc.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NNc.Location = new System.Drawing.Point(289, 96);
-            this.NNc.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.NNc.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NNc.Name = "NNc";
-            this.NNc.Size = new System.Drawing.Size(202, 29);
-            this.NNc.TabIndex = 324;
-            this.NNc.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // label8
             // 
@@ -478,12 +277,216 @@
             0});
             this.NTickets.Name = "NTickets";
             this.NTickets.Size = new System.Drawing.Size(202, 29);
-            this.NTickets.TabIndex = 326;
+            this.NTickets.TabIndex = 11;
             this.NTickets.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label7.Location = new System.Drawing.Point(286, 75);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(119, 18);
+            this.label7.TabIndex = 325;
+            this.label7.Text = "TANTOS DE NC";
+            // 
+            // NNc
+            // 
+            this.NNc.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NNc.Location = new System.Drawing.Point(289, 96);
+            this.NNc.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.NNc.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NNc.Name = "NNc";
+            this.NNc.Size = new System.Drawing.Size(202, 29);
+            this.NNc.TabIndex = 9;
+            this.NNc.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label3.Location = new System.Drawing.Point(286, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(176, 18);
+            this.label3.TabIndex = 323;
+            this.label3.Text = "TANTOS DE FACTURAS";
+            // 
+            // NFacturas
+            // 
+            this.NFacturas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NFacturas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.NFacturas.Location = new System.Drawing.Point(289, 29);
+            this.NFacturas.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.NFacturas.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NFacturas.Name = "NFacturas";
+            this.NFacturas.Size = new System.Drawing.Size(202, 29);
+            this.NFacturas.TabIndex = 7;
+            this.NFacturas.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label23.Location = new System.Drawing.Point(10, 75);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(148, 18);
+            this.label23.TabIndex = 321;
+            this.label23.Text = "IMPRESORA DE NC";
+            // 
+            // CboImpresoraNC
+            // 
+            this.CboImpresoraNC.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.CboImpresoraNC.FormattingEnabled = true;
+            this.CboImpresoraNC.Location = new System.Drawing.Point(13, 96);
+            this.CboImpresoraNC.Name = "CboImpresoraNC";
+            this.CboImpresoraNC.Size = new System.Drawing.Size(252, 26);
+            this.CboImpresoraNC.TabIndex = 8;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label22.Location = new System.Drawing.Point(10, 11);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(205, 18);
+            this.label22.TabIndex = 319;
+            this.label22.Text = "IMPRESORA DE FACTURAS";
+            // 
+            // CboImpresoraF
+            // 
+            this.CboImpresoraF.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.CboImpresoraF.FormattingEnabled = true;
+            this.CboImpresoraF.Location = new System.Drawing.Point(13, 32);
+            this.CboImpresoraF.Name = "CboImpresoraF";
+            this.CboImpresoraF.Size = new System.Drawing.Size(252, 26);
+            this.CboImpresoraF.TabIndex = 6;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label21.Location = new System.Drawing.Point(10, 141);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(188, 18);
+            this.label21.TabIndex = 317;
+            this.label21.Text = "IMPRESORA DE TICKETS";
+            // 
+            // CboImpresoraT
+            // 
+            this.CboImpresoraT.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.CboImpresoraT.FormattingEnabled = true;
+            this.CboImpresoraT.Location = new System.Drawing.Point(13, 162);
+            this.CboImpresoraT.Name = "CboImpresoraT";
+            this.CboImpresoraT.Size = new System.Drawing.Size(252, 26);
+            this.CboImpresoraT.TabIndex = 10;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.ChkSumarUnidades);
+            this.tabPage2.Controls.Add(this.ChkSolicitarFMpago);
+            this.tabPage2.Controls.Add(this.ChkVentaSinExistencia);
+            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(547, 325);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Config adicional";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // ChkSumarUnidades
+            // 
+            this.ChkSumarUnidades.AutoSize = true;
+            this.ChkSumarUnidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.ChkSumarUnidades.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ChkSumarUnidades.Location = new System.Drawing.Point(16, 79);
+            this.ChkSumarUnidades.Name = "ChkSumarUnidades";
+            this.ChkSumarUnidades.Size = new System.Drawing.Size(203, 22);
+            this.ChkSumarUnidades.TabIndex = 14;
+            this.ChkSumarUnidades.TabStop = false;
+            this.ChkSumarUnidades.Text = "Sumar unidades en el PDV";
+            this.ChkSumarUnidades.UseVisualStyleBackColor = true;
+            // 
+            // ChkSolicitarFMpago
+            // 
+            this.ChkSolicitarFMpago.AutoSize = true;
+            this.ChkSolicitarFMpago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.ChkSolicitarFMpago.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ChkSolicitarFMpago.Location = new System.Drawing.Point(16, 51);
+            this.ChkSolicitarFMpago.Name = "ChkSolicitarFMpago";
+            this.ChkSolicitarFMpago.Size = new System.Drawing.Size(246, 22);
+            this.ChkSolicitarFMpago.TabIndex = 13;
+            this.ChkSolicitarFMpago.TabStop = false;
+            this.ChkSolicitarFMpago.Text = "Solicitar forma y método de pago";
+            this.ChkSolicitarFMpago.UseVisualStyleBackColor = true;
+            // 
+            // ChkVentaSinExistencia
+            // 
+            this.ChkVentaSinExistencia.AutoSize = true;
+            this.ChkVentaSinExistencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.ChkVentaSinExistencia.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ChkVentaSinExistencia.Location = new System.Drawing.Point(16, 23);
+            this.ChkVentaSinExistencia.Name = "ChkVentaSinExistencia";
+            this.ChkVentaSinExistencia.Size = new System.Drawing.Size(165, 22);
+            this.ChkVentaSinExistencia.TabIndex = 12;
+            this.ChkVentaSinExistencia.TabStop = false;
+            this.ChkVentaSinExistencia.Text = "Vender sin existencia";
+            this.ChkVentaSinExistencia.UseVisualStyleBackColor = true;
+            // 
+            // BtnCancelar
+            // 
+            this.BtnCancelar.Location = new System.Drawing.Point(407, 397);
+            this.BtnCancelar.Name = "BtnCancelar";
+            this.BtnCancelar.Size = new System.Drawing.Size(148, 40);
+            this.BtnCancelar.TabIndex = 16;
+            this.BtnCancelar.TabStop = false;
+            this.BtnCancelar.Text = "SALIR";
+            this.BtnCancelar.UseVisualStyleBackColor = true;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
+            // 
+            // BtnAceptar
+            // 
+            this.BtnAceptar.Location = new System.Drawing.Point(254, 397);
+            this.BtnAceptar.Name = "BtnAceptar";
+            this.BtnAceptar.Size = new System.Drawing.Size(148, 40);
+            this.BtnAceptar.TabIndex = 15;
+            this.BtnAceptar.TabStop = false;
+            this.BtnAceptar.Text = "ACEPTAR";
+            this.BtnAceptar.UseVisualStyleBackColor = true;
+            this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click_1);
             // 
             // FrmEstaciones
             // 
@@ -504,11 +507,11 @@
             this.tabPage1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NTickets)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NNc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NFacturas)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NFacturas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NNc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NTickets)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

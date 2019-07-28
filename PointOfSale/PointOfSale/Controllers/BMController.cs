@@ -177,12 +177,48 @@ namespace PointOfSale.Controllers
             }
             Ambiente.AdditionalSettingsDataGridView(Grid1);
         }
+
+        private void LlenaNodoConMovsInv(DataGridView Grid1)
+        {
+            using (var db = new DymContext())
+            {
+                Grid1.DataSource = db.ConceptoMovInv.Where(x => x.IsDeleted == false).Select(x => new
+                {
+                    Id = x.ConceptoMovInvId,
+                    x.Descripcion
+                }).OrderBy(x => x.Descripcion).ToList();
+            }
+            Ambiente.AdditionalSettingsDataGridView(Grid1);
+        }
+
+        private void LlenaNodoConIngre(DataGridView Grid1)
+        {
+            using (var db = new DymContext())
+            {
+                Grid1.DataSource = db.ConceptoIngreso.Where(x => x.IsDeleted == false).Select(x => new
+                {
+                    Id = x.ConceptoIngresoId,
+                    x.Descripcion
+                }).OrderBy(x => x.Descripcion).ToList();
+            }
+            Ambiente.AdditionalSettingsDataGridView(Grid1);
+        }
+
+        private void LlenaNodoConEgre(DataGridView Grid1)
+        {
+            using (var db = new DymContext())
+            {
+                Grid1.DataSource = db.ConceptoEgreso.Where(x => x.IsDeleted == false).Select(x => new
+                {
+                    Id = x.ConceptoEgresoId,
+                    x.Descripcion
+                }).OrderBy(x => x.Descripcion).ToList();
+            }
+            Ambiente.AdditionalSettingsDataGridView(Grid1);
+        }
         #endregion
 
-
-
-        #region Switch Nodos
-
+        #region Switch Llena Nodos
         public void LlenaNodo(string NodoName, DataGridView Grid1)
         {
             if (NodoName.Length == 0)
@@ -247,15 +283,24 @@ namespace PointOfSale.Controllers
 
                     break;
                 case "NodoUsuarios":
-
                     LlenaNodoUsuarios(Grid1);
-
+                    break;
+                //CONCEPTOS
+                case "NodoConEgre":
+                    LlenaNodoConEgre(Grid1);
+                    break;
+                case "NodoConIngre":
+                    LlenaNodoConIngre(Grid1);
+                    break;
+                case "NodoConMovsInv":
+                    LlenaNodoConMovsInv(Grid1);
                     break;
 
                 default:
                     break;
             }
         }
+
 
         #endregion
 
@@ -476,6 +521,26 @@ namespace PointOfSale.Controllers
                         Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
                     }
 
+                //Conceptos
+                case "NodoConEgre":
+                    using (var db = new DymContext())
+                    {
+                        return db.ConceptoEgreso.FirstOrDefault(x => x.ConceptoEgresoId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+                case "NodoConIngre":
+                    using (var db = new DymContext())
+                    {
+                        return db.ConceptoIngreso.FirstOrDefault(x => x.ConceptoIngresoId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
+
+                case "NodoConMovsInv":
+                    using (var db = new DymContext())
+                    {
+                        return db.ConceptoMovInv.FirstOrDefault(x => x.ConceptoMovInvId ==
+                        Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    }
                 default:
                     return null;
             }
@@ -569,6 +634,23 @@ namespace PointOfSale.Controllers
                 case "NodoUsuarios":
 
                     form = new FrmUsuarios(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                //CONCEPTOS
+                case "NodoConEgre":
+                    form = new FrmConceptosEgreso(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+                case "NodoConIngre":
+                    form = new FrmConceptosIngreso(objeto);
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+                case "NodoConMovsInv":
+                    form = new FrmConceptosMovsInv(objeto);
                     form.MdiParent = Mdi.MdiParent;
                     form.Show();
                     break;
@@ -668,6 +750,23 @@ namespace PointOfSale.Controllers
                 case "NodoUsuarios":
 
                     form = new FrmUsuarios();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+
+                //CONCEPTOS
+                case "NodoConEgre":
+                    form = new FrmConceptosEgreso();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+                case "NodoConIngre":
+                    form = new FrmConceptosIngreso();
+                    form.MdiParent = Mdi.MdiParent;
+                    form.Show();
+                    break;
+                case "NodoConMovsInv":
+                    form = new FrmConceptosMovsInv();
                     form.MdiParent = Mdi.MdiParent;
                     form.Show();
                     break;
@@ -810,6 +909,35 @@ namespace PointOfSale.Controllers
                     if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Nombre))
                     {
                         if (new UsuarioController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
+                    break;
+
+                //CONCEPTOS
+                case "NodoConEgre":
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Descripcion))
+                    {
+                        if (new ConceptoEgresoController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
+                    break;
+                case "NodoConIngre":
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Descripcion))
+                    {
+                        if (new ConceptoIngresoController().Delete(objeto))
+                            MessageBox.Show(Ambiente.CatalgoMensajes[2]);
+                    }
+                    else
+                        MessageBox.Show(Ambiente.CatalgoMensajes[-2]);
+                    break;
+                case "NodoConMovsInv":
+                    if (Ambiente.Pregunta("QUIERE BORRAR: " + objeto.Descripcion))
+                    {
+                        if (new ConceptoMovInvController().Delete(objeto))
                             MessageBox.Show(Ambiente.CatalgoMensajes[2]);
                     }
                     else

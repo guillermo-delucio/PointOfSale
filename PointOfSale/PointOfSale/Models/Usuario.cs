@@ -9,6 +9,7 @@ namespace PointOfSale.Models
         {
             CambiosPrecio = new HashSet<CambiosPrecio>();
             Compra = new HashSet<Compra>();
+            Corte = new HashSet<Corte>();
             Cxc = new HashSet<Cxc>();
             Cxp = new HashSet<Cxp>();
             UsuarioRole = new HashSet<UsuarioRole>();
@@ -25,6 +26,7 @@ namespace PointOfSale.Models
 
         public virtual ICollection<CambiosPrecio> CambiosPrecio { get; set; }
         public virtual ICollection<Compra> Compra { get; set; }
+        public virtual ICollection<Corte> Corte { get; set; }
         public virtual ICollection<Cxc> Cxc { get; set; }
         public virtual ICollection<Cxp> Cxp { get; set; }
         public virtual ICollection<UsuarioRole> UsuarioRole { get; set; }

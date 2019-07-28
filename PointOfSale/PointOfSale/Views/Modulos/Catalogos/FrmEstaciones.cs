@@ -130,6 +130,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 CboImpresoraF.Items.Add(printer);
                 CboImpresoraNC.Items.Add(printer);
             }
+            TxtClave.Focus();
         }
 
         private void TxtClave_Leave(object sender, EventArgs e)

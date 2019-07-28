@@ -36,8 +36,12 @@ namespace PointOfSale.Models
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Compra> Compra { get; set; }
         public virtual DbSet<Comprap> Comprap { get; set; }
+        public virtual DbSet<ConceptoEgreso> ConceptoEgreso { get; set; }
+        public virtual DbSet<ConceptoIngreso> ConceptoIngreso { get; set; }
+        public virtual DbSet<ConceptoMovInv> ConceptoMovInv { get; set; }
         public virtual DbSet<Configuracion> Configuracion { get; set; }
         public virtual DbSet<Consecutivo> Consecutivo { get; set; }
+        public virtual DbSet<Corte> Corte { get; set; }
         public virtual DbSet<Cp> Cp { get; set; }
         public virtual DbSet<Cxc> Cxc { get; set; }
         public virtual DbSet<Cxcp> Cxcp { get; set; }
@@ -47,10 +51,12 @@ namespace PointOfSale.Models
         public virtual DbSet<Estacion> Estacion { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<EstadoDoc> EstadoDoc { get; set; }
+        public virtual DbSet<Flujo> Flujo { get; set; }
         public virtual DbSet<FormaPago> FormaPago { get; set; }
         public virtual DbSet<Impuesto> Impuesto { get; set; }
         public virtual DbSet<Laboratorio> Laboratorio { get; set; }
         public virtual DbSet<Lote> Lote { get; set; }
+        public virtual DbSet<MovInv> MovInv { get; set; }
         public virtual DbSet<Municipio> Municipio { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
         public virtual DbSet<Permiso> Permiso { get; set; }
@@ -61,8 +67,11 @@ namespace PointOfSale.Models
         public virtual DbSet<Query> Query { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<RolePermiso> RolePermiso { get; set; }
+        public virtual DbSet<Sucursal> Sucursal { get; set; }
         public virtual DbSet<Sustancia> Sustancia { get; set; }
         public virtual DbSet<TipoDoc> TipoDoc { get; set; }
+        public virtual DbSet<Traspaso> Traspaso { get; set; }
+        public virtual DbSet<Traspasop> Traspasop { get; set; }
         public virtual DbSet<UnidadMedida> UnidadMedida { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<UsuarioRole> UsuarioRole { get; set; }
@@ -637,6 +646,45 @@ namespace PointOfSale.Models
                     .HasConstraintName("FK_Comprap_Compra");
             });
 
+            modelBuilder.Entity<ConceptoEgreso>(entity =>
+            {
+                entity.Property(e => e.ConceptoEgresoId)
+                    .HasMaxLength(50)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+            });
+
+            modelBuilder.Entity<ConceptoIngreso>(entity =>
+            {
+                entity.Property(e => e.ConceptoIngresoId)
+                    .HasMaxLength(50)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+            });
+
+            modelBuilder.Entity<ConceptoMovInv>(entity =>
+            {
+                entity.Property(e => e.ConceptoMovInvId)
+                    .HasMaxLength(50)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+            });
+
             modelBuilder.Entity<Configuracion>(entity =>
             {
                 entity.Property(e => e.RutaCadenaOriginal).HasMaxLength(250);
@@ -663,6 +711,41 @@ namespace PointOfSale.Models
                 entity.Property(e => e.ConsecutivoId)
                     .HasMaxLength(50)
                     .ValueGeneratedNever();
+            });
+
+            modelBuilder.Entity<Corte>(entity =>
+            {
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.EstacionId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.FechaFinal).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaInicial).HasColumnType("datetime");
+
+                entity.Property(e => e.Importe).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.RutaArchivo)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.Corte)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Corte_Usuario");
+
+                entity.HasOne(d => d.Estacion)
+                    .WithMany(p => p.Corte)
+                    .HasForeignKey(d => d.EstacionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Corte_Estacion");
             });
 
             modelBuilder.Entity<Cp>(entity =>
@@ -958,6 +1041,45 @@ namespace PointOfSale.Models
                     .HasMaxLength(50);
             });
 
+            modelBuilder.Entity<Flujo>(entity =>
+            {
+                entity.Property(e => e.ConceptoEgresoId).HasMaxLength(50);
+
+                entity.Property(e => e.ConceptoImporteId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.ConceptoIngresoId).HasMaxLength(50);
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.EntradaSalida)
+                    .IsRequired()
+                    .HasMaxLength(1);
+
+                entity.Property(e => e.EstacionId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Importe).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.RefBancaria).HasMaxLength(50);
+
+                entity.HasOne(d => d.ConceptoEgreso)
+                    .WithMany(p => p.Flujo)
+                    .HasForeignKey(d => d.ConceptoEgresoId)
+                    .HasConstraintName("FK_Flujo_ConceptoEgreso");
+
+                entity.HasOne(d => d.ConceptoIngreso)
+                    .WithMany(p => p.Flujo)
+                    .HasForeignKey(d => d.ConceptoIngresoId)
+                    .HasConstraintName("FK_Flujo_ConceptoIngreso");
+            });
+
             modelBuilder.Entity<FormaPago>(entity =>
             {
                 entity.Property(e => e.FormaPagoId)
@@ -1029,6 +1151,41 @@ namespace PointOfSale.Models
                     .WithMany(p => p.Lote)
                     .HasForeignKey(d => d.ProductoId)
                     .HasConstraintName("FK_Lote_Producto1");
+            });
+
+            modelBuilder.Entity<MovInv>(entity =>
+            {
+                entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 1)");
+
+                entity.Property(e => e.ConceptoMovsInvId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Costo).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.EntradaSalida)
+                    .IsRequired()
+                    .HasMaxLength(1);
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
+                entity.Property(e => e.Precio).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.ProductoId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.ConceptoMovsInv)
+                    .WithMany(p => p.MovInv)
+                    .HasForeignKey(d => d.ConceptoMovsInvId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MovsInv_ConceptoMovInv");
             });
 
             modelBuilder.Entity<Municipio>(entity =>
@@ -1343,6 +1500,15 @@ namespace PointOfSale.Models
                     .HasConstraintName("FK_RolePermiso_Role");
             });
 
+            modelBuilder.Entity<Sucursal>(entity =>
+            {
+                entity.Property(e => e.SucursalId)
+                    .HasMaxLength(50)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Nombre).HasMaxLength(50);
+            });
+
             modelBuilder.Entity<Sustancia>(entity =>
             {
                 entity.Property(e => e.SustanciaId)
@@ -1363,6 +1529,80 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Traspaso>(entity =>
+            {
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Documento).HasMaxLength(50);
+
+                entity.Property(e => e.SucursalDestino)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.SucursalDestinoId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.SucursalOrigen)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.SucursalOrigenId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.SucursalDestinoNavigation)
+                    .WithMany(p => p.TraspasoSucursalDestinoNavigation)
+                    .HasForeignKey(d => d.SucursalDestinoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Traspaso_Sucursal1");
+
+                entity.HasOne(d => d.SucursalOrigenNavigation)
+                    .WithMany(p => p.TraspasoSucursalOrigenNavigation)
+                    .HasForeignKey(d => d.SucursalOrigenId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Traspaso_Sucursal");
+            });
+
+            modelBuilder.Entity<Traspasop>(entity =>
+            {
+                entity.Property(e => e.TraspasopId).ValueGeneratedNever();
+
+                entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 1)");
+
+                entity.Property(e => e.Descripcion).IsRequired();
+
+                entity.Property(e => e.ImporteImpuesto1).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.ImporteImpuesto2).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.ImpuestoId1).HasMaxLength(50);
+
+                entity.Property(e => e.ImpuestoId2).HasMaxLength(50);
+
+                entity.Property(e => e.LoteId).HasMaxLength(50);
+
+                entity.Property(e => e.Precio).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.ProductoId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Subtotal).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Total).HasColumnType("decimal(18, 2)");
+
+                entity.HasOne(d => d.Traspaso)
+                    .WithMany(p => p.Traspasop)
+                    .HasForeignKey(d => d.TraspasoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Traspasop_Traspaso");
             });
 
             modelBuilder.Entity<UnidadMedida>(entity =>
