@@ -342,7 +342,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             else
                 Ambiente.Mensaje("Cierre de la venta salió mal :(");
         }
-
         private void AfectaMovsInv()
         {
             foreach (var p in partidas)
@@ -361,7 +360,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 movInvController.InsertOne(movInv);
             }
         }
-
         private void AfectaFlujo()
         {
             Flujo flujo = new Flujo();
@@ -430,7 +428,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
 
         }
-
         private void EliminaVenta()
         {
             if (venta != null)
@@ -450,6 +447,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             }
 
         }
+
         private void PendienteOdescarta()
         {
             if (partidas.Count > 0)

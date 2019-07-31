@@ -28,7 +28,7 @@ namespace DYM.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var o = new FrmEntradasPorCompra
+            var o = new FrmEntradaPorCompra2
             {
                 MdiParent = this.ParentForm
             };

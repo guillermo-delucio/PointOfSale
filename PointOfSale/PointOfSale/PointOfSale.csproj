@@ -208,6 +208,7 @@
     <Compile Include="Controllers\ClaveSatController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
+    <Compile Include="Controllers\ComprapController.cs" />
     <Compile Include="Controllers\ConceptoEgresoController.cs" />
     <Compile Include="Controllers\ConceptoIngresoController.cs" />
     <Compile Include="Controllers\CxpController.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Controllers\EvironmentController\Ambiente.cs" />
     <Compile Include="Controllers\EvironmentController\CommonOpenFileDialog.cs" />
     <Compile Include="Controllers\EvironmentController\Inicializador.cs" />
+    <Compile Include="Controllers\EvironmentController\Reportes.cs" />
     <Compile Include="Controllers\FlujoController.cs" />
     <Compile Include="Controllers\ImportaExcelController.cs" />
     <Compile Include="Controllers\EvironmentController\IController.cs" />
@@ -467,6 +469,12 @@
     <Compile Include="Views\Modulos\Importaciones\FrmImportaProds.Designer.cs">
       <DependentUpon>FrmImportaProds.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmEntradaPorCompra2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmEntradaPorCompra2.Designer.cs">
+      <DependentUpon>FrmEntradaPorCompra2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modulos\Logistica\FrmEntradasPorCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -626,6 +634,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Importaciones\FrmImportaProds.resx">
       <DependentUpon>FrmImportaProds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Logistica\FrmEntradaPorCompra2.resx">
+      <DependentUpon>FrmEntradaPorCompra2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Logistica\FrmEntradasPorCompra.resx">
       <DependentUpon>FrmEntradasPorCompra.cs</DependentUpon>

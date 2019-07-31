@@ -89,8 +89,6 @@ namespace PointOfSale.Views.Modulos.Logistica
             TxtU1.Focus();
         }
 
-
-
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
             if (producto == null || proveedor == null)
@@ -434,10 +432,10 @@ namespace PointOfSale.Views.Modulos.Logistica
                         Descuento = descuento,
                         Impuesto1 = impuesto1,
                         Impuesto2 = impuesto2,
-                        ImporteParcial = importeParcial,
-                        ImpuestoParcial = impuestoParcial,
-                        ImporteParcialNeto = importeParcial + impuestoParcial,
-                        CantImpuestos = nImpuestos,
+                        //ImporteParcial = importeParcial,
+                        //ImpuestoParcial = impuestoParcial,
+                        //ImporteParcialNeto = importeParcial + impuestoParcial,
+                        //CantImpuestos = nImpuestos,
                         Lote = lote,
                         Caducidad = caducidad
                     };
@@ -471,10 +469,10 @@ namespace PointOfSale.Views.Modulos.Logistica
                         Descuento = descuento,
                         Impuesto1 = impuesto1,
                         Impuesto2 = impuesto2,
-                        ImporteParcial = importeParcial,
-                        ImpuestoParcial = impuestoParcial,
-                        ImporteParcialNeto = importeParcial + impuestoParcial,
-                        CantImpuestos = nImpuestos,
+                        //ImporteParcial = importeParcial,
+                        //ImpuestoParcial = impuestoParcial,
+                        //ImporteParcialNeto = importeParcial + impuestoParcial,
+                        //CantImpuestos = nImpuestos,
                         Lote = lote,
                         Caducidad = caducidad
                     };
@@ -705,7 +703,18 @@ namespace PointOfSale.Views.Modulos.Logistica
             InsertaCxp();
             ActualizaEstadoCompra();
             ActualizaStock();
+            AfectaMovsInv();
             LimpiaTodo();
+        }
+
+        private void AfectaMovsInv()
+        {
+            //foreach (var p in comprap)
+            //{
+            //    var movInv = new MovInv();
+
+
+            //}
         }
 
         private void LimpiaTodo()
@@ -897,8 +906,8 @@ namespace PointOfSale.Views.Modulos.Logistica
             var comprap = compraController.SelectPartida(comprapId);
             if (comprap != null)
             {
-                importeTotal -= (decimal)comprap.ImporteParcial;
-                impuestoTotal -= (decimal)comprap.ImpuestoParcial;
+                //importeTotal -= (decimal)comprap.ImporteParcial;
+                //impuestoTotal -= (decimal)comprap.ImpuestoParcial;
                 if (compraController.DeletePartida(comprapId))
                 {
                     TxtSubtotal.Text = importeTotal.ToString();

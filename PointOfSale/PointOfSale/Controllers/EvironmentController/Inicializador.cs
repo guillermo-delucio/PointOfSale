@@ -226,11 +226,26 @@ namespace PointOfSale.Controllers
                     {
                         clienteSYS = new Cliente();
                         clienteSYS.ClienteId = "SYS";
+                        clienteSYS.Rfc = "XAXX010101000";
                         clienteSYS.Negocio = "PUBLICO EN GENERAL";
                         clienteSYS.RazonSocial = "PUBLICO EN GENERAL";
                         clienteSYS.MetodoPagoId = "PUE";
                         clienteSYS.FormaPagoId = "01";
                         db.Add(clienteSYS);
+                    }
+                    var proveedorSYS = db.Proveedor.FirstOrDefault(x => x.ProveedorId == "SYS");
+                    if (proveedorSYS == null)
+                    {
+                        proveedorSYS = new Proveedor();
+                        proveedorSYS.ProveedorId = "SYS";
+                        proveedorSYS.Negocio = "PROVEEDOR GENERICO";
+                        proveedorSYS.RazonSocial = "PROVEEDOR GENERICO";
+                        proveedorSYS.Rfc = "XAXX010101000";
+                        proveedorSYS.DiasCredito = 0;
+                        proveedorSYS.LimiteCredito = 0;
+                        proveedorSYS.Saldo = 0;
+                        proveedorSYS.IsDeleted = false;
+                        db.Add(proveedorSYS);
                     }
 
                     db.SaveChanges();

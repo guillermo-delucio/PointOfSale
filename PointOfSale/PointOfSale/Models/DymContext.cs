@@ -560,6 +560,10 @@ namespace PointOfSale.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
+                entity.Property(e => e.ProveedorName)
+                    .IsRequired()
+                    .HasMaxLength(350);
+
                 entity.Property(e => e.TipoDocId)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -602,42 +606,49 @@ namespace PointOfSale.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Cantidad)
-                    .HasColumnType("decimal(18, 3)")
+                    .HasColumnType("decimal(18, 2)")
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Descuento)
-                    .HasColumnType("decimal(18, 3)")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Descripcion).IsRequired();
 
-                entity.Property(e => e.ImporteParcial).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Descuento).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.ImporteParcialNeto).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.ImporteImpuesto1).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.Impuesto1).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.ImporteImpuesto2).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.Impuesto2).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Impuesto1).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.ImpuestoParcial).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.Impuesto2).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.LaboratorioId)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'SYS')");
+
+                entity.Property(e => e.LaboratorioName)
+                    .IsRequired()
+                    .HasMaxLength(350);
 
                 entity.Property(e => e.Lote)
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'SYS')");
 
-                entity.Property(e => e.PrecioCaja).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.NImpuestos).HasColumnName("nImpuestos");
 
-                entity.Property(e => e.PrecioCompra).HasColumnType("decimal(18, 3)");
+                entity.Property(e => e.PrecioCaja).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.PrecioCompra).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.ProductoId)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Stock)
-                    .HasColumnType("decimal(18, 3)")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Stock).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Subtotal).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Total).HasColumnType("decimal(18, 2)");
 
                 entity.HasOne(d => d.Compra)
                     .WithMany(p => p.Comprap)

@@ -14,6 +14,7 @@ namespace PointOfSale.Models
         public DateTime FechaDocumento { get; set; }
         public DateTime FechaVencimiento { get; set; }
         public string ProveedorId { get; set; }
+        public string ProveedorName { get; set; }
         public bool EsCxp { get; set; }
         public int? CxpId { get; set; }
         public decimal Importe { get; set; }
