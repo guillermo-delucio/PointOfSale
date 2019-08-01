@@ -21,12 +21,16 @@ namespace PointOfSale.Views.Modulos.Logistica
         private Comprap comprap;
         private Producto producto;
         private Proveedor proveedor;
-        private CambiosPrecio cambiosPrecio;
+        private CambiosPrecio cambioPrecio;
 
         //listas
         private List<Comprap> partidas;
         private List<Impuesto> impuestos;
-        public List<Lote> lotes { get; set; }
+        private List<Lote> lotes;
+        private List<Producto> productosActualizados;
+
+
+
 
         //Controladores
         private CompraController compraController;
@@ -36,6 +40,9 @@ namespace PointOfSale.Views.Modulos.Logistica
         private FlujoController flujoController;
         private ProductoController productoController;
         private LaboratorioController laboratorioController;
+        private CambioPrecioController cambioPrecioController;
+
+
 
         //Variables
         private int SigPartida;
@@ -49,7 +56,6 @@ namespace PointOfSale.Views.Modulos.Logistica
             ResetPDC();
         }
 
-
         #region Metodos
         private void ResetPDC()
         {
@@ -58,12 +64,13 @@ namespace PointOfSale.Views.Modulos.Logistica
             comprap = new Comprap();
             producto = new Producto();
             proveedor = new Proveedor();
-            cambiosPrecio = new CambiosPrecio();
+            cambioPrecio = new CambiosPrecio();
 
             //listas
             partidas = new List<Comprap>();
             impuestos = new List<Impuesto>();
             lotes = new List<Lote>();
+            productosActualizados = new List<Producto>();
 
             //Controladores
             compraController = new CompraController();
@@ -73,6 +80,8 @@ namespace PointOfSale.Views.Modulos.Logistica
             flujoController = new FlujoController();
             productoController = new ProductoController();
             laboratorioController = new LaboratorioController();
+            cambioPrecioController = new CambioPrecioController();
+
             //Variables
             SigPartida = 0;
             subtotal = 0;
@@ -80,6 +89,7 @@ namespace PointOfSale.Views.Modulos.Logistica
 
             //Reset malla
             Malla.Rows.Clear();
+            GridImpuestos.Rows.Clear();
             for (int i = 0; i < NPARTIDAS; i++)
             {
                 Malla.Rows.Add();
@@ -89,8 +99,36 @@ namespace PointOfSale.Views.Modulos.Logistica
                 Malla.Rows[i].Cells[9].Style.BackColor = Color.Yellow;
                 Malla.Rows[i].Cells[14].Style.BackColor = Color.Yellow;
                 Malla.Rows[i].Cells[15].Style.BackColor = Color.Yellow;
+
             }
 
+            TxtProvedorId.Text = "";
+            TxtFacturaProveedor.Text = "";
+            DpFechaDoc.Value = DateTime.Now;
+            DpFechaVencimiento.Value = DateTime.Now;
+            TxtDatosProveedor.Text = "";
+            TxtProductoId.Text = "";
+            NCantidad.Value = 1;
+            TxtPrecioCompra.Text = "";
+            TxtPrecioCaja.Text = "";
+            NDesc.Value = 0;
+            TxtDescripcion.Text = "";
+            TxtU1.Text = "";
+            TxtU2.Text = "";
+            TxtU3.Text = "";
+            TxtU4.Text = "";
+            TxtPrecio1.Text = "";
+            TxtPrecio2.Text = "";
+            TxtPrecio3.Text = "";
+            TxtPrecio4.Text = "";
+            TxtPrecioS1.Text = "";
+            TxtPrecioS2.Text = "";
+            TxtPrecioS3.Text = "";
+            TxtPrecioS4.Text = "";
+            PbxImagen.Image = null;
+            TxtSubtotal.Text = "";
+            TxtImpuestos.Text = "";
+            TxtTotal.Text = "";
             CreaCompra();
 
         }
@@ -239,6 +277,22 @@ namespace PointOfSale.Views.Modulos.Logistica
             partida.Descuento = NDesc.Value / 100;
             partida.NImpuestos = impuestos.Count;
 
+            //cambios de precio
+            if (partida.PrecioCompra != producto.PrecioCompra)
+            {
+                producto.PrecioCompra = Ambiente.ToDecimal(TxtPrecioCompra.Text);
+                producto.PrecioCaja = Ambiente.ToDecimal(TxtPrecioCaja.Text);
+                producto.Precio1 = Ambiente.ToDecimal(TxtPrecio1.Text);
+                producto.Precio2 = Ambiente.ToDecimal(TxtPrecio2.Text);
+                producto.Precio3 = Ambiente.ToDecimal(TxtPrecio3.Text);
+                producto.Precio4 = Ambiente.ToDecimal(TxtPrecio4.Text);
+                producto.Utilidad1 = Ambiente.ToDecimal(TxtU1.Text);
+                producto.Utilidad2 = Ambiente.ToDecimal(TxtU2.Text);
+                producto.Utilidad3 = Ambiente.ToDecimal(TxtU3.Text);
+                producto.Utilidad4 = Ambiente.ToDecimal(TxtU4.Text);
+                productosActualizados.Add(producto);
+            }
+            //totales
             partida.Impuesto1 = impuestos[0].Tasa;
             partida.Impuesto2 = impuestos[1].Tasa;
             partida.Subtotal = partida.Cantidad * partida.PrecioCompra;
@@ -373,7 +427,13 @@ namespace PointOfSale.Views.Modulos.Logistica
                 if (compraController.Update(compra))
                 {
                     if (GuardaPartidas() && !pendiente)
+                    {
+                        GuardaCambioPrecios();
                         Reportes.EntradaXCompra(compra.CompraId);
+
+                        ResetPDC();
+                        Ambiente.Mensaje("Proceso concluido con éxito");
+                    }
                     else
                         Ambiente.Mensaje("Algo salió mal con: GuardaPartidas()");
                 }
@@ -383,6 +443,40 @@ namespace PointOfSale.Views.Modulos.Logistica
             else
                 Ambiente.Mensaje("Sin productos.");
         }
+
+        private void GuardaCambioPrecios()
+        {
+
+            foreach (var pa in partidas)
+            {
+                foreach (var pr in productosActualizados)
+                {
+                    if (pa.ProductoId.Equals(pr.ProductoId))
+                    {
+                        cambioPrecio = new CambiosPrecio();
+                        cambioPrecio.ProductoId = producto.ProductoId;
+                        cambioPrecio.PrecioCompraViejo = producto.PrecioCompra;
+                        cambioPrecio.PrecioCompraNuevo = producto.PrecioCompra;
+                        cambioPrecio.Precio1Viejo = producto.Precio1;
+                        cambioPrecio.Precio2Viejo = producto.Precio2;
+                        cambioPrecio.Precio3Viejo = producto.Precio3;
+                        cambioPrecio.Precio4Viejo = producto.Precio4;
+                        cambioPrecio.Utilidad1Viejo = producto.Utilidad1;
+                        cambioPrecio.Utilidad2Viejo = producto.Utilidad2;
+                        cambioPrecio.Utilidad3Viejo = producto.Utilidad3;
+                        cambioPrecio.Utilidad4Viejo = producto.Utilidad4;
+                        cambioPrecio.CompraId = compra.CompraId;
+                        cambioPrecio.CreatedAt = DateTime.Now;
+                        cambioPrecio.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                        cambioPrecioController.InsertOne(cambioPrecio);
+                    }
+                }
+            }
+
+
+
+        }
+
         private void AfectaMovsInv()
         {
             foreach (var p in partidas)
@@ -404,7 +498,7 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         private void PendienteOdescarta()
         {
-            if (partidas.Count > 0)
+            if (partidas.Count > 0 && compra.EstadoDocId.Equals("PEN"))
             {
                 if (Ambiente.Pregunta("Quiere dejar la venta como pendiente"))
                     CerrarCompra(true);
@@ -476,46 +570,39 @@ namespace PointOfSale.Views.Modulos.Logistica
             TxtU1.Text = Ambiente.FDinero(TxtU1.Text);
             TxtPrecio1.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU1.Text);
         }
-
         private void TxtPrecio1_Leave(object sender, EventArgs e)
         {
             TxtPrecio1.Text = Ambiente.FDinero(TxtPrecio1.Text);
             TxtU1.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio1.Text);
             TxtPrecioS1.Text = Ambiente.GetPrecioSalida(TxtPrecio1.Text, impuestos);
         }
-
         private void TxtU2_Leave(object sender, EventArgs e)
         {
             TxtU2.Text = Ambiente.FDinero(TxtU2.Text);
             TxtPrecio2.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU2.Text);
         }
-
         private void TxtPrecio2_Leave(object sender, EventArgs e)
         {
             TxtPrecio2.Text = Ambiente.FDinero(TxtPrecio2.Text);
             TxtU2.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio2.Text);
             TxtPrecioS2.Text = Ambiente.GetPrecioSalida(TxtPrecio2.Text, impuestos);
         }
-
         private void TxtU3_Leave(object sender, EventArgs e)
         {
             TxtU3.Text = Ambiente.FDinero(TxtU3.Text);
             TxtPrecio3.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU3.Text);
         }
-
         private void TxtPrecio3_Leave(object sender, EventArgs e)
         {
             TxtPrecio3.Text = Ambiente.FDinero(TxtPrecio3.Text);
             TxtU3.Text = Ambiente.GetMargen(TxtPrecioCompra.Text, TxtPrecio3.Text);
             TxtPrecioS3.Text = Ambiente.GetPrecioSalida(TxtPrecio3.Text, impuestos);
         }
-
         private void TxtU4_Leave(object sender, EventArgs e)
         {
             TxtU4.Text = Ambiente.FDinero(TxtU4.Text);
             TxtPrecio4.Text = Ambiente.GetPrecio(TxtPrecioCompra.Text, TxtU4.Text);
         }
-
         private void TxtPrecio4_Leave(object sender, EventArgs e)
         {
             TxtPrecio4.Text = Ambiente.FDinero(TxtPrecio4.Text);
@@ -523,18 +610,14 @@ namespace PointOfSale.Views.Modulos.Logistica
             TxtPrecioS4.Text = Ambiente.GetPrecioSalida(TxtPrecio4.Text, impuestos);
             BtnAgregar.Focus();
         }
-
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
             CerrarCompra(false);
         }
-
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
             PendienteOdescarta();
         }
-
-
         private void TxtProductoId_Leave(object sender, EventArgs e)
         {
             if (TxtProductoId.Text.Trim().Length > 0)
@@ -545,15 +628,16 @@ namespace PointOfSale.Views.Modulos.Logistica
                     LlenaDatosProducto();
                 }
             }
-        }
+            else
+                TxtProductoId.Focus();
 
+        }
         private void Malla_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             ActualizaCantidad(decimal.Parse(Malla.CurrentCell.Value.ToString()), e.RowIndex);
             CalculaTotales();
             TxtProductoId.Focus();
         }
-
         private void Malla_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(ColumnCant_KeyPress);
@@ -573,8 +657,6 @@ namespace PointOfSale.Views.Modulos.Logistica
                 e.Handled = true;
             }
         }
-        #endregion
-
         private void Malla_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Oemplus)
@@ -587,5 +669,15 @@ namespace PointOfSale.Views.Modulos.Logistica
                     EliminaPartida(Malla.CurrentCell.RowIndex, Malla.Rows[Malla.CurrentCell.RowIndex].Cells[0].Value.ToString());
             }
         }
+        private void TxtPrecioCompra_Leave(object sender, EventArgs e)
+        {
+            TxtPrecioCompra.Text = Ambiente.FDinero(TxtPrecioCompra.Text);
+
+        }
+        private void TxtPrecioCaja_Leave(object sender, EventArgs e)
+        {
+            TxtPrecioCaja.Text = Ambiente.FDinero(TxtPrecioCaja.Text);
+        }
+        #endregion
     }
 }

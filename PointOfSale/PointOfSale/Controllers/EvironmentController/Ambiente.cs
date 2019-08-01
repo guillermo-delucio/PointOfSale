@@ -209,12 +209,12 @@ namespace PointOfSale.Controllers
         }
         public static string FDinero(string valor)
         {
-            valor = valor.Trim();
+
             if (valor == null)
                 return string.Format("{0:0.00}", "1");
 
 
-            bool successv = decimal.TryParse(valor, out decimal nValor);
+            bool successv = decimal.TryParse(valor.Trim(), out decimal nValor);
             if (!successv)
                 return "1.00";
             return string.Format("{0:0.00}", nValor);
