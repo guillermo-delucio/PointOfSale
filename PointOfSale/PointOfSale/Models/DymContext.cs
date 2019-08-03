@@ -1137,22 +1137,21 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Lote>(entity =>
             {
-                entity.HasKey(e => new { e.LoteId, e.CreatedAt })
-                    .HasName("PK_Lote_1");
-
-                entity.Property(e => e.LoteId).HasMaxLength(50);
+                entity.Property(e => e.Caducidad).HasColumnType("datetime");
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-                entity.Property(e => e.Caducidad).HasColumnType("datetime");
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.CreatedBy).HasMaxLength(50);
+                entity.Property(e => e.NoLote)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.EstadoDocId)
-                    .HasMaxLength(3)
-                    .HasDefaultValueSql("(N'PEN')");
-
-                entity.Property(e => e.ProductoId).HasMaxLength(50);
+                entity.Property(e => e.ProductoId)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.StockInicial).HasColumnType("decimal(18, 6)");
 
@@ -1161,6 +1160,7 @@ namespace PointOfSale.Models
                 entity.HasOne(d => d.Producto)
                     .WithMany(p => p.Lote)
                     .HasForeignKey(d => d.ProductoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Lote_Producto1");
             });
 

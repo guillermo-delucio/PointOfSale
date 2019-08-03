@@ -227,8 +227,8 @@
     <Compile Include="Controllers\LaboratorioController.cs" />
     <Compile Include="Controllers\LoggerController\TraceLogger.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\ConceptoMovInvController.cs" />
+    <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\MovInvController.cs" />
     <Compile Include="Controllers\PresentacionController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -475,29 +475,23 @@
     <Compile Include="Views\Modulos\Logistica\FrmEntradaPorCompra2.Designer.cs">
       <DependentUpon>FrmEntradaPorCompra2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Modulos\Logistica\FrmEntradasPorCompra.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Modulos\Logistica\FrmEntradasPorCompra.Designer.cs">
-      <DependentUpon>FrmEntradasPorCompra.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Modulos\Logistica\FrmEntradasPorTraspaso.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Modulos\Logistica\FrmEntradasPorTraspaso.Designer.cs">
       <DependentUpon>FrmEntradasPorTraspaso.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmLoteCaducidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Logistica\FrmLoteCaducidad.Designer.cs">
+      <DependentUpon>FrmLoteCaducidad.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modulos\Logistica\FrmSalidasPorTraspaso.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Modulos\Logistica\FrmSalidasPorTraspaso.Designer.cs">
       <DependentUpon>FrmSalidasPorTraspaso.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Modulos\Logistica\FrmLotesCaducidad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Modulos\Logistica\FrmLotesCaducidad.Designer.cs">
-      <DependentUpon>FrmLotesCaducidad.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Modulos\PuntoVenta\FrmCambioCliente.cs">
       <SubType>Form</SubType>
@@ -638,17 +632,14 @@
     <EmbeddedResource Include="Views\Modulos\Logistica\FrmEntradaPorCompra2.resx">
       <DependentUpon>FrmEntradaPorCompra2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Modulos\Logistica\FrmEntradasPorCompra.resx">
-      <DependentUpon>FrmEntradasPorCompra.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Logistica\FrmEntradasPorTraspaso.resx">
       <DependentUpon>FrmEntradasPorTraspaso.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Logistica\FrmLoteCaducidad.resx">
+      <DependentUpon>FrmLoteCaducidad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Logistica\FrmSalidasPorTraspaso.resx">
       <DependentUpon>FrmSalidasPorTraspaso.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Modulos\Logistica\FrmLotesCaducidad.resx">
-      <DependentUpon>FrmLotesCaducidad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmCambioCliente.resx">
       <DependentUpon>FrmCambioCliente.cs</DependentUpon>

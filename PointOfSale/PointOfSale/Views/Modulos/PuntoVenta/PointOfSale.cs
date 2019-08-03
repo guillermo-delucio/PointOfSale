@@ -75,8 +75,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
                 if (producto.TieneLote)
                 {
-                    partida.LoteId = loteController.TraeDatosLote(producto, partida.Cantidad).Item1;
-                    partida.Caducidad = loteController.TraeDatosLote(producto, partida.Cantidad).Item2;
+                    //partida.LoteId = loteController.TraeDatosLote(producto, partida.Cantidad).Item1;
+                    //partida.Caducidad = loteController.TraeDatosLote(producto, partida.Cantidad).Item2;
                 }
                 partida.SubTotal = partida.Cantidad * partida.Precio;
                 partida.ImporteImpuesto1 = partida.SubTotal * partida.Impuesto1;
@@ -506,8 +506,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
             if (producto.TieneLote)
             {
-                partida.LoteId = loteController.TraeDatosLote(producto, partida.Cantidad).Item1;
-                partida.Caducidad = loteController.TraeDatosLote(producto, partida.Cantidad).Item2;
+                //partida.LoteId = loteController.TraeDatosLote(producto, partida.Cantidad).Item1;
+                //partida.Caducidad = loteController.TraeDatosLote(producto, partida.Cantidad).Item2;
             }
             partida.ClaveProdServ = producto.ClaveProdServId.Trim().Length == 0 ? "01010101" : producto.ClaveProdServId.Trim();
             partida.ClaveUnidad = producto.ClaveUnidadId.Trim().Length == 0 ? "H87" : producto.ClaveUnidadId.Trim();
@@ -549,11 +549,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     var prod = productoController.SelectOne(p.ProductoId);
                     if (prod != null)
                     {
-                        if (loteController.RestaLote(prod, p.Cantidad))
-                        {
-                            if (!inventarioController.AfectaInventario(p.ProductoId, -p.Cantidad))
-                                Ambiente.Mensaje("Algo salió mal al afectar el inventario");
-                        }
+                        //if (loteController.RestaLote(prod, p.Cantidad))
+                        //{
+                        //    if (!inventarioController.AfectaInventario(p.ProductoId, -p.Cantidad))
+                        //        Ambiente.Mensaje("Algo salió mal al afectar el inventario");
+                        //}
                         //else
                         // Ambiente.Mensaje("Algo salió mal al restar el lote");
                     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Controllers
 {
-    class LoteController : IController<Lote>
+    class LoteController 
     {
 
         public bool Delete(Lote o)
@@ -16,7 +16,6 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-
                     db.Remove(o);
                     db.SaveChanges();
                     return true;
@@ -29,13 +28,13 @@ namespace PointOfSale.Controllers
             return false;
         }
 
-        public bool Delete(string Id)
+        public bool Delete(int Id)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    var temp = db.Lote.FirstOrDefault(x => x.LoteId == Id.Trim());
+                    var temp = db.Lote.FirstOrDefault(x => x.LoteId == Id);
                     if (temp != null)
                     {
                         db.Remove(temp);
@@ -118,13 +117,14 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
-        public List<Lote> SelectMany(string Id)
+
+        public Lote SelectOne(int Id)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.Lote.Where(x => x.LoteId == Id && x.StockRestante > 0).ToList();
+                    return db.Lote.FirstOrDefault(x => x.LoteId == Id);
                 }
             }
             catch (Exception ex)
@@ -134,29 +134,13 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-        public Lote SelectOne(string Id)
+        public List<Lote> SelectOneOverList(int Id)
         {
             try
             {
                 using (var db = new DymContext())
                 {
-                    return db.Lote.FirstOrDefault(x => x.LoteId == Id.Trim());
-                }
-            }
-            catch (Exception ex)
-            {
-                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
-            }
-            return null;
-        }
-
-        public List<Lote> SelectOneOverList(string Id)
-        {
-            try
-            {
-                using (var db = new DymContext())
-                {
-                    return db.Lote.Where(x => x.LoteId == Id.Trim()).ToList();
+                    return db.Lote.Where(x => x.LoteId == Id).ToList();
                 }
             }
             catch (Exception ex)
@@ -182,92 +166,6 @@ namespace PointOfSale.Controllers
                 Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return false;
-        }
-
-        public Tuple<string, DateTime> TraeDatosLote(Producto producto, decimal cantidad)
-        {
-
-            Tuple<string, DateTime> datos;// = Tuple.Create("", DateTime.Now);
-            string sLote = "";
-            DateTime caducidad = DateTime.Now;
-
-            if (producto.TieneLote && cantidad > 0)
-            {
-                using (var db = new DymContext())
-                {
-                    var lotes = db.Lote.Where(x => x.ProductoId.Equals(producto.ProductoId) && x.StockRestante > 0).OrderBy(x => x.CreatedAt).ToList();
-                    foreach (var lote in lotes)
-                    {
-                        if (lote.StockRestante >= cantidad && cantidad > 0)
-                        {
-                            sLote += lote.LoteId + ",";
-                            caducidad = (DateTime)lote.Caducidad;
-                            cantidad = 0;
-                        }
-                        else if (cantidad > 0)
-                        {
-                            sLote += lote.LoteId + ",";
-                            caducidad = (DateTime)lote.Caducidad;
-                            cantidad -= (decimal)lote.StockRestante;
-
-
-                        }
-                    }
-                    if (sLote.EndsWith(","))
-                        sLote = sLote.Substring(0, sLote.LastIndexOf(","));
-
-                    datos = Tuple.Create(sLote, caducidad);
-                    return datos;
-                }
-            }
-            else
-            {
-                return Tuple.Create("", DateTime.Now);
-            }
-        }
-        public bool RestaLote(Producto producto, decimal cantidad)
-        {
-
-            Tuple<string, DateTime> datos;// = Tuple.Create("", DateTime.Now);
-            string sLote = "";
-            DateTime caducidad = DateTime.Now;
-            int afectados = 0;
-            if (producto.TieneLote && cantidad > 0)
-            {
-                using (var db = new DymContext())
-                {
-                    var lotes = db.Lote.Where(x => x.ProductoId.Equals(producto.ProductoId) && x.StockRestante > 0).OrderBy(x => x.CreatedAt).ToList();
-                    foreach (var lote in lotes)
-                    {
-                        if (lote.StockRestante >= cantidad && cantidad > 0)
-                        {
-                            sLote += lote.LoteId + ",";
-                            caducidad = (DateTime)lote.Caducidad;
-                            lote.StockRestante -= cantidad;
-                            db.Update(lote);
-                            afectados = db.SaveChanges();
-                            cantidad = 0;
-                        }
-                        else if (cantidad > 0)
-                        {
-                            sLote += lote.LoteId + ",";
-                            caducidad = (DateTime)lote.Caducidad;
-                            cantidad -= (decimal)lote.StockRestante;
-                            lote.StockRestante = 0;
-                            db.Update(lote);
-                            afectados = db.SaveChanges();
-                        }
-                    }
-                    if (afectados > 0)
-                        return true;
-                    else
-                        return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 }

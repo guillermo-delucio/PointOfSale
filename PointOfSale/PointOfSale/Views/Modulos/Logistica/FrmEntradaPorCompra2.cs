@@ -263,6 +263,15 @@ namespace PointOfSale.Views.Modulos.Logistica
                 return;
             }
 
+
+            //control lotes
+            if (producto.TieneLote)
+            {
+                using (var o = new FrmLoteCaducidad(NCantidad.Value, producto.ProductoId))
+                {
+                    o.Show();
+                }
+            }
             //partida a la lista
             var partida = new Comprap();
             partida.CompraId = compra.CompraId;
@@ -309,17 +318,19 @@ namespace PointOfSale.Views.Modulos.Logistica
             Malla.Rows[SigPartida].Cells[2].Value = partida.LaboratorioName;
             Malla.Rows[SigPartida].Cells[3].Value = partida.Stock;
             Malla.Rows[SigPartida].Cells[4].Value = partida.Cantidad;
-            Malla.Rows[SigPartida].Cells[5].Value = partida.PrecioCompra;
-            Malla.Rows[SigPartida].Cells[6].Value = partida.Descuento;
-            Malla.Rows[SigPartida].Cells[7].Value = partida.Impuesto1;
-            Malla.Rows[SigPartida].Cells[8].Value = partida.Impuesto2;
-            Malla.Rows[SigPartida].Cells[9].Value = partida.Subtotal;
-            Malla.Rows[SigPartida].Cells[10].Value = partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
-            Malla.Rows[SigPartida].Cells[11].Value = partida.Subtotal + partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
-            Malla.Rows[SigPartida].Cells[12].Value = partida.NImpuestos;
-            Malla.Rows[SigPartida].Cells[13].Value = ""; //pendiente
-            Malla.Rows[SigPartida].Cells[14].Value = "";//pendiente
+            Malla.Rows[SigPartida].Cells[5].Value = partida.PrecioCaja;
+            Malla.Rows[SigPartida].Cells[6].Value = partida.PrecioCompra;
+            Malla.Rows[SigPartida].Cells[7].Value = partida.Descuento;
+            Malla.Rows[SigPartida].Cells[8].Value = partida.Impuesto1;
+            Malla.Rows[SigPartida].Cells[9].Value = partida.Impuesto2;
+            Malla.Rows[SigPartida].Cells[10].Value = partida.Subtotal;
+            Malla.Rows[SigPartida].Cells[11].Value = partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+            Malla.Rows[SigPartida].Cells[12].Value = partida.Subtotal + partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+            Malla.Rows[SigPartida].Cells[13].Value = partida.NImpuestos;
+            Malla.Rows[SigPartida].Cells[14].Value = ""; //pendiente
+            Malla.Rows[SigPartida].Cells[15].Value = "";//pendiente
             ResetPartida();
+
         }
         private void LimpiarFilaMalla(int index)
         {
@@ -429,6 +440,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                     if (GuardaPartidas() && !pendiente)
                     {
                         GuardaCambioPrecios();
+                        ActualizaPrecios();
                         Reportes.EntradaXCompra(compra.CompraId);
 
                         ResetPDC();
@@ -444,6 +456,13 @@ namespace PointOfSale.Views.Modulos.Logistica
                 Ambiente.Mensaje("Sin productos.");
         }
 
+        private void ActualizaPrecios()
+        {
+            foreach (var pa in partidas)
+                foreach (var pr in productosActualizados)
+                    productoController.Update(pr);
+        }
+
         private void GuardaCambioPrecios()
         {
 
@@ -453,22 +472,39 @@ namespace PointOfSale.Views.Modulos.Logistica
                 {
                     if (pa.ProductoId.Equals(pr.ProductoId))
                     {
-                        cambioPrecio = new CambiosPrecio();
-                        cambioPrecio.ProductoId = producto.ProductoId;
-                        cambioPrecio.PrecioCompraViejo = producto.PrecioCompra;
-                        cambioPrecio.PrecioCompraNuevo = producto.PrecioCompra;
-                        cambioPrecio.Precio1Viejo = producto.Precio1;
-                        cambioPrecio.Precio2Viejo = producto.Precio2;
-                        cambioPrecio.Precio3Viejo = producto.Precio3;
-                        cambioPrecio.Precio4Viejo = producto.Precio4;
-                        cambioPrecio.Utilidad1Viejo = producto.Utilidad1;
-                        cambioPrecio.Utilidad2Viejo = producto.Utilidad2;
-                        cambioPrecio.Utilidad3Viejo = producto.Utilidad3;
-                        cambioPrecio.Utilidad4Viejo = producto.Utilidad4;
-                        cambioPrecio.CompraId = compra.CompraId;
-                        cambioPrecio.CreatedAt = DateTime.Now;
-                        cambioPrecio.CreatedBy = Ambiente.LoggedUser.UsuarioId;
-                        cambioPrecioController.InsertOne(cambioPrecio);
+                        var p = productoController.SelectOne(pa.ProductoId);
+                        if (p != null)
+                        {
+                            //precios viejos
+                            cambioPrecio = new CambiosPrecio();
+                            cambioPrecio.ProductoId = p.ProductoId;
+                            cambioPrecio.PrecioCompraViejo = p.PrecioCompra;
+                            cambioPrecio.Precio1Viejo = p.Precio1;
+                            cambioPrecio.Precio2Viejo = p.Precio2;
+                            cambioPrecio.Precio3Viejo = p.Precio3;
+                            cambioPrecio.Precio4Viejo = p.Precio4;
+                            cambioPrecio.Utilidad1Viejo = p.Utilidad1;
+                            cambioPrecio.Utilidad2Viejo = p.Utilidad2;
+                            cambioPrecio.Utilidad3Viejo = p.Utilidad3;
+                            cambioPrecio.Utilidad4Viejo = p.Utilidad4;
+                            //precios nuevos
+                            cambioPrecio.PrecioCompraNuevo = pa.PrecioCompra;
+                            cambioPrecio.Precio1Nuevo = pr.Precio1;
+                            cambioPrecio.Precio2Nuevo = pr.Precio2;
+                            cambioPrecio.Precio3Nuevo = pr.Precio3;
+                            cambioPrecio.Precio4Nuevo = pr.Precio4;
+                            cambioPrecio.Utilidad1Nuevo = pr.Utilidad1;
+                            cambioPrecio.Utilidad2Nuevo = pr.Utilidad2;
+                            cambioPrecio.Utilidad3Nuevo = pr.Utilidad3;
+                            cambioPrecio.Utilidad4Nuevo = pr.Utilidad4;
+
+                            cambioPrecio.CompraId = compra.CompraId;
+                            cambioPrecio.CreatedAt = DateTime.Now;
+                            cambioPrecio.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                            cambioPrecioController.InsertOne(cambioPrecio);
+                        }
+                        else
+                            Ambiente.Mensaje("El producto ya no existe");
                     }
                 }
             }
