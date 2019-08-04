@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Controllers
 {
-    class LoteController 
+    class LoteController
     {
 
         public bool Delete(Lote o)
@@ -166,6 +166,27 @@ namespace PointOfSale.Controllers
                 Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return false;
+        }
+
+        public List<Lote> GetLotes(string productoId)
+        {
+
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    var lotes = db.Lote.Where(x => x.ProductoId.Equals(productoId.Trim()) && x.CreatedAt.Date == DateTime.Now.Date).ToList();
+                    if (lotes.Count > 0)
+                        return lotes;
+                    else
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
         }
     }
 }

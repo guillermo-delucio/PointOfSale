@@ -416,6 +416,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             {
                 if (partidas.Count > 0 && rowIndex >= 0)
                 {
+                    EliminaLotes(Malla.Rows[rowIndex].Cells[0].Value.ToString());
                     var p = partidas[rowIndex];
                     partidas.RemoveAt(rowIndex);
                     SigPartida -= 1;
@@ -425,6 +426,18 @@ namespace PointOfSale.Views.Modulos.Logistica
                 }
             }
 
+        }
+
+        private void EliminaLotes(string productoId)
+        {
+            var lotes = loteController.GetLotes(productoId);
+            if (lotes != null)
+            {
+                foreach (var l in lotes)
+                {
+                    loteController.Delete(l.LoteId);
+                }
+            }
         }
 
         private void ReCargaGrid()
