@@ -254,7 +254,6 @@
             this.Malla.DefaultCellStyle = dataGridViewCellStyle2;
             this.Malla.Location = new System.Drawing.Point(2, 306);
             this.Malla.Name = "Malla";
-            this.Malla.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -269,54 +268,49 @@
             this.Malla.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.Malla_CellEndEdit);
             this.Malla.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.Malla_EditingControlShowing);
             this.Malla.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Malla_KeyDown);
+            this.Malla.MouseEnter += new System.EventHandler(this.Malla_MouseEnter);
+            this.Malla.MouseLeave += new System.EventHandler(this.Malla_MouseLeave);
             // 
             // Column3
             // 
             this.Column3.HeaderText = "PRODUCTOID";
             this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
             this.Column3.Visible = false;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "PRODUCTO";
             this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
             this.Column4.Width = 150;
             // 
             // Column17
             // 
             this.Column17.HeaderText = "LABORATORIO";
             this.Column17.Name = "Column17";
-            this.Column17.ReadOnly = true;
             this.Column17.Width = 85;
             // 
             // Column18
             // 
             this.Column18.HeaderText = "STOCK";
             this.Column18.Name = "Column18";
-            this.Column18.ReadOnly = true;
             this.Column18.Width = 50;
             // 
             // Column7
             // 
             this.Column7.HeaderText = "CANT.";
             this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
             this.Column7.Width = 50;
             // 
             // Column19
             // 
             this.Column19.HeaderText = "PCAJA";
             this.Column19.Name = "Column19";
-            this.Column19.ReadOnly = true;
             this.Column19.Width = 80;
             // 
             // Column8
             // 
             this.Column8.HeaderText = "PCOMPRA";
             this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
             this.Column8.Width = 80;
             // 
             // Column9
@@ -324,7 +318,6 @@
             this.Column9.FillWeight = 50F;
             this.Column9.HeaderText = "DESC.";
             this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
             this.Column9.Width = 50;
             // 
             // Column11
@@ -332,28 +325,24 @@
             this.Column11.FillWeight = 50F;
             this.Column11.HeaderText = "IMP.1";
             this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
             this.Column11.Width = 50;
             // 
             // Column12
             // 
             this.Column12.HeaderText = "IMP.2";
             this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
             this.Column12.Width = 50;
             // 
             // Column14
             // 
             this.Column14.HeaderText = "IMPORTE";
             this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
             this.Column14.Width = 80;
             // 
             // Column15
             // 
             this.Column15.HeaderText = "IMPUESTOS";
             this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
             this.Column15.Visible = false;
             this.Column15.Width = 80;
             // 
@@ -361,14 +350,12 @@
             // 
             this.Column13.HeaderText = "IMPORTE NETO";
             this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
             this.Column13.Width = 115;
             // 
             // Column16
             // 
             this.Column16.HeaderText = "CANTIMP";
             this.Column16.Name = "Column16";
-            this.Column16.ReadOnly = true;
             this.Column16.Visible = false;
             this.Column16.Width = 50;
             // 
@@ -376,14 +363,12 @@
             // 
             this.Column20.HeaderText = "LOTE";
             this.Column20.Name = "Column20";
-            this.Column20.ReadOnly = true;
             this.Column20.Width = 50;
             // 
             // Column21
             // 
             this.Column21.HeaderText = "CADUCIDAD";
             this.Column21.Name = "Column21";
-            this.Column21.ReadOnly = true;
             this.Column21.Width = 80;
             // 
             // label21

@@ -49,7 +49,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         private const int NPARTIDAS = 400;
         private decimal subtotal;
         private decimal impuesto;
-
+        private bool sobreGrid;
         public FrmEntradaPorCompra2()
         {
             InitializeComponent();
@@ -86,6 +86,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             SigPartida = 0;
             subtotal = 0;
             impuesto = 0;
+            sobreGrid = false;
 
             //Reset malla
             Malla.Rows.Clear();
@@ -245,7 +246,8 @@ namespace PointOfSale.Views.Modulos.Logistica
 
                 //reflejar totales
                 TxtSubtotal.Text = Ambiente.FDinero(subtotal.ToString());
-                TxtSubtotal.Text = Ambiente.FDinero((subtotal + impuesto).ToString());
+                TxtImpuestos.Text = Ambiente.FDinero(impuesto.ToString());
+                TxtTotal.Text = Ambiente.FDinero((subtotal + impuesto).ToString());
             }
         }
         private void InsertaPartida()
@@ -267,9 +269,12 @@ namespace PointOfSale.Views.Modulos.Logistica
             //control lotes
             if (producto.TieneLote)
             {
-                using (var o = new FrmLoteCaducidad(NCantidad.Value, producto.ProductoId))
+                using (var form = new FrmLoteCaducidad(NCantidad.Value, producto.ProductoId))
                 {
-                    o.Show();
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+
+                    }
                 }
             }
             //partida a la lista
@@ -355,6 +360,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             if (partidas.Count > 0)
             {
                 partidas[rowIndex].Cantidad++;
+                Malla.Rows[rowIndex].Cells[4].Value = partidas[rowIndex].Cantidad;
                 CalculaTotales();
             }
         }
@@ -362,15 +368,30 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             if (partidas.Count > 0)
             {
-                partidas[rowIndex].Cantidad--;
-                CalculaTotales();
+                if (partidas[rowIndex].Cantidad > 1)
+                {
+                    partidas[rowIndex].Cantidad--;
+                    Malla.Rows[rowIndex].Cells[4].Value = partidas[rowIndex].Cantidad;
+                    CalculaTotales();
+                }
+                else
+                    Ambiente.Mensaje("Operación denegada, solo cantidades positivas");
             }
         }
         private void ActualizaCantidad(decimal cant, int rowIndex)
         {
-            if (partidas.Count > 0)
+            if ((rowIndex <= partidas.Count - 1) && cant > 0)
             {
-
+                partidas[rowIndex].Cantidad = cant;
+                Malla.Rows[rowIndex].Cells[4].Value = cant;
+                CalculaTotales();
+            }
+            else
+            {
+                partidas[rowIndex].Cantidad = 1;
+                Malla.Rows[rowIndex].Cells[4].Value = 1;
+                CalculaTotales();
+                Ambiente.Mensaje("Operación denegada, solo cantidades positivas");
             }
         }
         private void ResetPartida()
@@ -395,19 +416,51 @@ namespace PointOfSale.Views.Modulos.Logistica
             {
                 if (partidas.Count > 0 && rowIndex >= 0)
                 {
+                    var p = partidas[rowIndex];
                     partidas.RemoveAt(rowIndex);
                     SigPartida -= 1;
                     LimpiarFilaMalla(SigPartida);
+                    ReCargaGrid();
                     CalculaTotales();
                 }
             }
 
         }
 
+        private void ReCargaGrid()
+        {
+            int index = 0;
+            foreach (var partida in partidas)
+            {
+                Malla.Rows[index].Cells[0].Value = partida.ProductoId;
+                Malla.Rows[index].Cells[1].Value = partida.Descripcion;
+                Malla.Rows[index].Cells[2].Value = partida.LaboratorioName;
+                Malla.Rows[index].Cells[3].Value = partida.Stock;
+                Malla.Rows[index].Cells[4].Value = partida.Cantidad;
+                Malla.Rows[index].Cells[5].Value = partida.PrecioCaja;
+                Malla.Rows[index].Cells[6].Value = partida.PrecioCompra;
+                Malla.Rows[index].Cells[7].Value = partida.Descuento;
+                Malla.Rows[index].Cells[8].Value = partida.Impuesto1;
+                Malla.Rows[index].Cells[9].Value = partida.Impuesto2;
+                Malla.Rows[index].Cells[10].Value = partida.Subtotal;
+                Malla.Rows[index].Cells[11].Value = partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+                Malla.Rows[index].Cells[12].Value = partida.Subtotal + partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+                Malla.Rows[index].Cells[13].Value = partida.NImpuestos;
+                Malla.Rows[index].Cells[14].Value = partida.Lote;
+                Malla.Rows[index].Cells[15].Value = partida.Caducidad;
+                index++;
+            }
+        }
+
         private void CerrarCompra(bool pendiente)
         {
             if (partidas.Count > 0)
             {
+                if (proveedor.ProveedorId == null)
+                {
+                    Ambiente.Mensaje("Operación denegada, seleccione un proveedor");
+                    return;
+                }
                 compra.FechaDocumento = DpFechaDoc.Value;
                 compra.FechaVencimiento = DpFechaVencimiento.Value;
                 if (proveedor != null)
@@ -428,22 +481,22 @@ namespace PointOfSale.Views.Modulos.Logistica
                 compra.FacturaProveedor = TxtFacturaProveedor.Text.Trim().Length == 0 ? "SYS" : TxtFacturaProveedor.Text.Trim();
                 compra.TipoDocId = "COM";
 
-                if (!pendiente)
-                    compra.EstadoDocId = "CON";
-                else
+                if (pendiente)
                     compra.EstadoDocId = "PEN";
+                else
+                    compra.EstadoDocId = "CON";
 
                 compra.AlmacenId = "1";
                 compra.Datos = TxtDatosProveedor.Text.Trim();
                 if (compraController.Update(compra))
                 {
-                    if (GuardaPartidas() && !pendiente)
+                    if (GuardaPartidas())
                     {
                         GuardaCambioPrecios();
                         ActualizaPrecios();
                         Reportes.EntradaXCompra(compra.CompraId);
-
-                        ResetPDC();
+                        if (!pendiente)
+                            ResetPDC();
                         Ambiente.Mensaje("Proceso concluido con éxito");
                     }
                     else
@@ -664,7 +717,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                     LlenaDatosProducto();
                 }
             }
-            else
+            else if (TxtProductoId.Text.Trim().Length == 0 && !sobreGrid)
                 TxtProductoId.Focus();
 
         }
@@ -677,7 +730,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         private void Malla_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(ColumnCant_KeyPress);
-            if (Malla.CurrentCell.ColumnIndex == 3) //Desired Column
+            if (Malla.CurrentCell.ColumnIndex == 4) //Desired Column
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -691,6 +744,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+
             }
         }
         private void Malla_KeyDown(object sender, KeyEventArgs e)
@@ -702,7 +756,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             else if (e.KeyCode == Keys.Delete)
             {
                 if (Malla.Rows[Malla.CurrentCell.RowIndex].Cells[3].Value != null)
-                    EliminaPartida(Malla.CurrentCell.RowIndex, Malla.Rows[Malla.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    EliminaPartida(Malla.CurrentCell.RowIndex, Malla.Rows[Malla.CurrentCell.RowIndex].Cells[1].Value.ToString());
             }
         }
         private void TxtPrecioCompra_Leave(object sender, EventArgs e)
@@ -713,6 +767,18 @@ namespace PointOfSale.Views.Modulos.Logistica
         private void TxtPrecioCaja_Leave(object sender, EventArgs e)
         {
             TxtPrecioCaja.Text = Ambiente.FDinero(TxtPrecioCaja.Text);
+        }
+
+
+
+        private void Malla_MouseEnter(object sender, EventArgs e)
+        {
+            sobreGrid = true;
+        }
+
+        private void Malla_MouseLeave(object sender, EventArgs e)
+        {
+            sobreGrid = false;
         }
         #endregion
     }

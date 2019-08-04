@@ -120,7 +120,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         }
         private void GuardaLotes()
         {
-
+            
             if (restante == 0 && lotes.Count > 0)
             {
                 foreach (var l in lotes)
