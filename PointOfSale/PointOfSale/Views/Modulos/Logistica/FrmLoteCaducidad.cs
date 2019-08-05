@@ -15,7 +15,7 @@ namespace PointOfSale.Views.Modulos.Logistica
     public partial class FrmLoteCaducidad : Form
     {
         //listas
-        List<Lote> lotes;
+        public List<Lote> lotes;
 
         //Controladores
         LoteController loteController;
@@ -28,17 +28,21 @@ namespace PointOfSale.Views.Modulos.Logistica
         //Variables
         decimal cantidadTotal;
         decimal restante;
+        int compraId;
 
 
 
 
-        public FrmLoteCaducidad(decimal cantidad = 0, string productoId = "")
+        public FrmLoteCaducidad(int compId, decimal cantidad = 0, string productoId = "")
         {
             InitializeComponent();
             Inicializa();
 
             if (cantidad > 0)
+            {
+                compraId = compId;
                 LlenaCampos(productoId, cantidad);
+            }
         }
 
         #region Metodos
@@ -73,6 +77,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             {
                 lote = new Lote();
                 lote.NoLote = TxtNoLote.Text.Trim();
+                lote.CompraId = compraId;
                 lote.ProductoId = TxtProductoId.Text.Trim();
                 lote.StockInicial = NCantidad.Value;
                 lote.StockRestante = NCantidad.Value;
@@ -105,6 +110,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         private void BorraPartida(int rowIndex)
         {
             restante += lotes[rowIndex].StockInicial;
+            TxtRestante.Text = restante.ToString();
             lotes.RemoveAt(rowIndex);
             CargaGrid();
         }
@@ -112,7 +118,10 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             if (restante == 0 && lotes.Count > 0)
                 if (lotes[0].LoteId > 0)
+                {
+                    DialogResult = DialogResult.Cancel;
                     Close();
+                }
                 else
                     Ambiente.Mensaje("Operación denegada, No se han guardado los cambios");
             else
@@ -120,11 +129,12 @@ namespace PointOfSale.Views.Modulos.Logistica
         }
         private void GuardaLotes()
         {
-            
+
             if (restante == 0 && lotes.Count > 0)
             {
                 foreach (var l in lotes)
                     loteController.InsertOne(l);
+                DialogResult = DialogResult.OK;
                 Ambiente.Mensaje("Proceso concluido con éxito");
                 Close();
             }

@@ -22,6 +22,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         List<Ventap> partidas;
         public Cliente cliente;
         public Producto producto;
+        public List<Lote> lotes;
 
 
         private VentaController ventaController;
@@ -73,11 +74,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 partida.Precio = SeleccionaPrecio(producto, cliente);
                 partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
                 partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
-                if (producto.TieneLote)
-                {
-                    //partida.LoteId = loteController.TraeDatosLote(producto, partida.Cantidad).Item1;
-                    //partida.Caducidad = loteController.TraeDatosLote(producto, partida.Cantidad).Item2;
-                }
+                //if (producto.TieneLote)
+                //{
+                //    //partida.LoteId = loteController.TraeDatosLote(producto, partida.Cantidad).Item1;
+                //    //partida.Caducidad = loteController.TraeDatosLote(producto, partida.Cantidad).Item2;
+                //}
                 partida.SubTotal = partida.Cantidad * partida.Precio;
                 partida.ImporteImpuesto1 = partida.SubTotal * partida.Impuesto1;
                 partida.ImporteImpuesto2 = partida.SubTotal * partida.Impuesto2;
@@ -109,7 +110,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Malla.Rows[index].Cells[5].Value = partida.Impuesto1;
                 Malla.Rows[index].Cells[6].Value = partida.Impuesto2;
                 Malla.Rows[index].Cells[7].Value = partida.Total;
-                Malla.Rows[index].Cells[8].Value = partida.LoteId;
+                Malla.Rows[index].Cells[8].Value = partida.LoteId1;
                 Malla.Rows[index].Cells[9].Value = partida.ProductoId;
 
 
@@ -228,6 +229,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             loteController = new LoteController();
             movInvController = new MovInvController();
             flujoController = new FlujoController();
+            lotes = new List<Lote>();
 
 
 
@@ -324,6 +326,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
             if (ventaController.UpdateOne(venta))
             {
+                RestaLotes();
                 GuardaPartidas();
                 Ambiente.UpdateSiguiente("TIC");
                 LblUltDocumento.Text = "TICKET " + venta.NoRef + " " + DateTime.Now.ToShortTimeString();
@@ -463,8 +466,12 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         }
         private void InsertaPartida()
         {
+
             if (producto == null && TxtProductoId.Text.Trim().Length == 0)
+            {
                 Ambiente.Mensaje("Producto no encontrado");
+                return;
+            }
 
             producto = productoController.SelectOne(TxtProductoId.Text.Trim());
             if (producto == null)
@@ -506,9 +513,21 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
             if (producto.TieneLote)
             {
-                //partida.LoteId = loteController.TraeDatosLote(producto, partida.Cantidad).Item1;
-                //partida.Caducidad = loteController.TraeDatosLote(producto, partida.Cantidad).Item2;
+                lotes = loteController.GetLotesDisponibilidad(producto.ProductoId, 1);
+                if (lotes.Count > 0)
+                {
+                    partida.LoteId1 = lotes[0].LoteId;
+                    partida.NoLote1 = lotes[0].NoLote;
+                    partida.Caducidad1 = lotes[0].Caducidad;
+                }
             }
+            else
+            {
+                partida.LoteId1 = null;
+                partida.NoLote1 = null;
+                partida.Caducidad1 = null;
+            }
+
             partida.ClaveProdServ = producto.ClaveProdServId.Trim().Length == 0 ? "01010101" : producto.ClaveProdServId.Trim();
             partida.ClaveUnidad = producto.ClaveUnidadId.Trim().Length == 0 ? "H87" : producto.ClaveUnidadId.Trim();
             partida.Unidad = producto.UnidadMedidaId.Trim().Length == 0 ? "SYS" : producto.UnidadMedidaId.Trim();
@@ -534,7 +553,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             Malla.Rows[SigPartida].Cells[5].Value = partida.Impuesto1;
             Malla.Rows[SigPartida].Cells[6].Value = partida.Impuesto2;
             Malla.Rows[SigPartida].Cells[7].Value = partida.Total;
-            Malla.Rows[SigPartida].Cells[8].Value = partida.LoteId;
+            Malla.Rows[SigPartida].Cells[8].Value = partida.NoLote1;
             Malla.Rows[SigPartida].Cells[9].Value = partida.ProductoId;
 
 
@@ -711,8 +730,85 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             if (e.KeyCode == Keys.Enter)
             {
                 InsertaPartida();
+
             }
 
+        }
+
+        private void RestaLotes()
+        {
+
+            //Resta todos los lotes por partida, tenga en cuenta que si una partida tiene cantidad superior a la 
+            //suma de las existencias de los lotes, este ultimo quedará en cero y la diferencia no genera error
+            //es decir, se puede vender sin lotes, así cómo sin existencias.
+            foreach (var p in partidas)
+            {
+                var prod = productoController.SelectOne(p.ProductoId);
+                if (prod != null && prod.TieneLote)
+                {
+                    var lotes = loteController.GetLotesDisponibilidad(producto.ProductoId, p.Cantidad);
+                    var i = 0;
+                    decimal cantidad = p.Cantidad;
+                    foreach (var l in lotes)
+                    {
+                        if (i == 0)
+                        {
+                            p.LoteId1 = l.LoteId;
+                            p.NoLote1 = l.NoLote;
+                            p.Caducidad1 = l.Caducidad;
+                            if (l.StockRestante >= cantidad)
+                            {
+                                l.StockRestante -= cantidad;
+                                cantidad -= cantidad;
+                            }
+                            else
+                            {
+                                cantidad -= l.StockRestante;
+                                l.StockRestante = 0;
+                            }
+                            i++;
+                        }
+                        else if (i == 1)
+                        {
+                            p.LoteId2 = l.LoteId;
+                            p.NoLote2 = l.NoLote;
+                            p.Caducidad2 = l.Caducidad;
+
+                            if (l.StockRestante >= cantidad)
+                            {
+                                l.StockRestante -= cantidad;
+                                cantidad -= cantidad;
+                            }
+                            else
+                            {
+
+                                cantidad -= l.StockRestante;
+                                l.StockRestante = 0;
+                            }
+                            i++;
+                        }
+                        else if (i == 2)
+                        {
+                            p.LoteId3 = l.LoteId;
+                            p.NoLote3 = l.NoLote;
+                            p.Caducidad3 = l.Caducidad;
+                            if (l.StockRestante >= cantidad)
+                            {
+                                l.StockRestante -= cantidad;
+                                cantidad -= cantidad;
+                            }
+                            else
+                            {
+
+                                cantidad -= l.StockRestante;
+                                l.StockRestante = 0;
+                            }
+                            i++;
+                        }
+                    }
+                    loteController.UpdateRange(lotes);
+                }
+            }
         }
 
         private void TxtCliente_KeyDown(object sender, KeyEventArgs e)
@@ -799,14 +895,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             Ambiente.OpenDirectory(Ambiente.Empresa.DirectorioTickets);
 
         }
-
-        private void BtnVisualizacionPrev_Click(object sender, EventArgs e)
-        {
-            string path = @"C:\Dympos\Tickets\";
-            System.Diagnostics.Process.Start(path);
-
-        }
-
 
     }
 }

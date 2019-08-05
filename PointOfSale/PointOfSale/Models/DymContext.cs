@@ -1798,7 +1798,11 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Ventap>(entity =>
             {
-                entity.Property(e => e.Caducidad).HasColumnType("datetime");
+                entity.Property(e => e.Caducidad1).HasColumnType("datetime");
+
+                entity.Property(e => e.Caducidad2).HasColumnType("datetime");
+
+                entity.Property(e => e.Caducidad3).HasColumnType("datetime");
 
                 entity.Property(e => e.Cantidad)
                     .HasColumnType("decimal(18, 2)")
@@ -1828,7 +1832,11 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Impuesto2).HasColumnType("decimal(18, 6)");
 
-                entity.Property(e => e.LoteId).HasMaxLength(50);
+                entity.Property(e => e.NoLote1).HasMaxLength(50);
+
+                entity.Property(e => e.NoLote2).HasMaxLength(50);
+
+                entity.Property(e => e.NoLote3).HasMaxLength(50);
 
                 entity.Property(e => e.Precio)
                     .HasColumnType("decimal(18, 2)")

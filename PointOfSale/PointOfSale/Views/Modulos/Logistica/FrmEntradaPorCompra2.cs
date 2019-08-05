@@ -267,16 +267,7 @@ namespace PointOfSale.Views.Modulos.Logistica
 
 
             //control lotes
-            if (producto.TieneLote)
-            {
-                using (var form = new FrmLoteCaducidad(NCantidad.Value, producto.ProductoId))
-                {
-                    if (form.ShowDialog() == DialogResult.OK)
-                    {
 
-                    }
-                }
-            }
             //partida a la lista
             var partida = new Comprap();
             partida.CompraId = compra.CompraId;
@@ -290,6 +281,23 @@ namespace PointOfSale.Views.Modulos.Logistica
             partida.PrecioCaja = Ambiente.ToDecimal(TxtPrecioCaja.Text);
             partida.Descuento = NDesc.Value / 100;
             partida.NImpuestos = impuestos.Count;
+
+            if (producto.TieneLote)
+            {
+                using (var form = new FrmLoteCaducidad(compra.CompraId, NCantidad.Value, producto.ProductoId))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        partida.Lote = form.lotes[0].NoLote;
+                        partida.Caducidad = form.lotes[0].Caducidad;
+                    }
+                    else
+                    {
+                        partida.Lote = null;
+                        partida.Caducidad = null;
+                    }
+                }
+            }
 
             //cambios de precio
             if (partida.PrecioCompra != producto.PrecioCompra)
@@ -332,8 +340,8 @@ namespace PointOfSale.Views.Modulos.Logistica
             Malla.Rows[SigPartida].Cells[11].Value = partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
             Malla.Rows[SigPartida].Cells[12].Value = partida.Subtotal + partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
             Malla.Rows[SigPartida].Cells[13].Value = partida.NImpuestos;
-            Malla.Rows[SigPartida].Cells[14].Value = ""; //pendiente
-            Malla.Rows[SigPartida].Cells[15].Value = "";//pendiente
+            Malla.Rows[SigPartida].Cells[14].Value = partida.Lote;
+            Malla.Rows[SigPartida].Cells[15].Value = partida.Caducidad;
             ResetPartida();
 
         }
@@ -416,7 +424,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             {
                 if (partidas.Count > 0 && rowIndex >= 0)
                 {
-                    EliminaLotes(Malla.Rows[rowIndex].Cells[0].Value.ToString());
+                    EliminaLotes(Malla.Rows[rowIndex].Cells[0].Value.ToString(), compra.CompraId);
                     var p = partidas[rowIndex];
                     partidas.RemoveAt(rowIndex);
                     SigPartida -= 1;
@@ -428,9 +436,9 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         }
 
-        private void EliminaLotes(string productoId)
+        private void EliminaLotes(string productoId, int compraId)
         {
-            var lotes = loteController.GetLotes(productoId);
+            var lotes = loteController.GetLotes(productoId, compraId);
             if (lotes != null)
             {
                 foreach (var l in lotes)
@@ -507,6 +515,8 @@ namespace PointOfSale.Views.Modulos.Logistica
                     {
                         GuardaCambioPrecios();
                         ActualizaPrecios();
+                        AfectaMovsInv();
+                        AfectaStock();
                         Reportes.EntradaXCompra(compra.CompraId);
                         if (!pendiente)
                             ResetPDC();
@@ -521,6 +531,8 @@ namespace PointOfSale.Views.Modulos.Logistica
             else
                 Ambiente.Mensaje("Sin productos.");
         }
+
+
 
         private void ActualizaPrecios()
         {
@@ -583,21 +595,30 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             foreach (var p in partidas)
             {
-                //var movInv = new MovInv();
-                //movInv.ConceptoMovsInvId = "VEN";
-                //movInv.NoRef = (int)venta.NoRef;
-                //movInv.EntradaSalida = "S";
-                //movInv.IdEntrada = null;
-                //movInv.IdSalida = p.VentapId;
-                //movInv.ProductoId = p.ProductoId;
-                //movInv.Precio = p.Precio;
-                //movInv.Cantidad = p.Cantidad;
-                //movInv.CreatedAt = DateTime.Now;
-                //movInv.CreatedBy = Ambiente.LoggedUser.UsuarioId;
-                //movInvController.InsertOne(movInv);
+                var movInv = new MovInv();
+                movInv.ConceptoMovsInvId = "COM";
+                movInv.NoRef = compra.CompraId;
+                movInv.EntradaSalida = "E";
+                movInv.IdEntrada = p.ComprapId;
+                movInv.IdSalida = null;
+                movInv.ProductoId = p.ProductoId;
+                movInv.Precio = p.PrecioCompra;
+                movInv.Cantidad = p.Cantidad;
+                movInv.CreatedAt = DateTime.Now;
+                movInv.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                movInvController.InsertOne(movInv);
             }
         }
 
+        private void AfectaStock()
+        {
+            foreach (var p in partidas)
+            {
+                var prod = productoController.SelectOne(p.ProductoId);
+                prod.Stock += p.Cantidad;
+                productoController.Update(prod);
+            }
+        }
         private void PendienteOdescarta()
         {
             if (partidas.Count > 0 && compra.EstadoDocId.Equals("PEN"))

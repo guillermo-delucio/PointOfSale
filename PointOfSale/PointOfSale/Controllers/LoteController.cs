@@ -168,14 +168,31 @@ namespace PointOfSale.Controllers
             return false;
         }
 
-        public List<Lote> GetLotes(string productoId)
+        public bool UpdateRange(List<Lote> lotes)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    db.UpdateRange(lotes);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return false;
+        }
+        public List<Lote> GetLotes(string productoId, int compraId)
         {
 
             try
             {
                 using (var db = new DymContext())
                 {
-                    var lotes = db.Lote.Where(x => x.ProductoId.Equals(productoId.Trim()) && x.CreatedAt.Date == DateTime.Now.Date).ToList();
+                    var lotes = db.Lote.Where(x => x.ProductoId.Equals(productoId.Trim()) && x.CompraId == compraId).ToList();
                     if (lotes.Count > 0)
                         return lotes;
                     else
@@ -187,6 +204,37 @@ namespace PointOfSale.Controllers
                 Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return null;
+        }
+        public List<Lote> GetLotesDisponibilidad(string productoId, decimal cantidad)
+        {
+            decimal restante = cantidad;
+            var disponibilidades = new List<Lote>();
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    var lotes = db.Lote.Where(x => x.ProductoId.Equals(productoId.Trim()) && x.StockRestante > 0)
+                        .OrderBy(x => x.CreatedAt).ToList();
+
+                    foreach (var l in lotes)
+                    {
+                        if (restante == 0)
+                            break;
+
+                        if (l.StockRestante >= restante)
+                            restante = 0;
+                        else
+                            restante -= l.StockRestante;
+
+                        disponibilidades.Add(l);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return disponibilidades;
         }
     }
 }

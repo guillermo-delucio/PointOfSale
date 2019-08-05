@@ -106,6 +106,7 @@
             this.Name = "Pregunta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pregunta";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Pregunta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

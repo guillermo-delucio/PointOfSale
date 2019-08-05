@@ -12,8 +12,6 @@ namespace PointOfSale.Models
         public decimal Cantidad { get; set; }
         public decimal Precio { get; set; }
         public decimal Descuento { get; set; }
-        public string LoteId { get; set; }
-        public DateTime? Caducidad { get; set; }
         public string ClaveImpuesto1 { get; set; }
         public string ClaveImpuesto2 { get; set; }
         public string TasaOcuota1 { get; set; }
@@ -27,6 +25,15 @@ namespace PointOfSale.Models
         public string ClaveProdServ { get; set; }
         public string ClaveUnidad { get; set; }
         public string Unidad { get; set; }
+        public int? LoteId1 { get; set; }
+        public string NoLote1 { get; set; }
+        public DateTime? Caducidad1 { get; set; }
+        public int? LoteId2 { get; set; }
+        public string NoLote2 { get; set; }
+        public DateTime? Caducidad2 { get; set; }
+        public int? LoteId3 { get; set; }
+        public string NoLote3 { get; set; }
+        public DateTime? Caducidad3 { get; set; }
 
         public virtual CImpuesto ClaveImpuesto1Navigation { get; set; }
         public virtual CImpuesto ClaveImpuesto2Navigation { get; set; }
