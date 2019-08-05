@@ -1127,6 +1127,7 @@
             this.TxtProvedorId.Size = new System.Drawing.Size(115, 24);
             this.TxtProvedorId.TabIndex = 1;
             this.TxtProvedorId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtProvedorId_KeyDown);
+            this.TxtProvedorId.MouseEnter += new System.EventHandler(this.TxtProvedorId_MouseEnter);
             // 
             // label1
             // 

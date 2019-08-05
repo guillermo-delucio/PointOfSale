@@ -532,8 +532,6 @@ namespace PointOfSale.Views.Modulos.Logistica
                 Ambiente.Mensaje("Sin productos.");
         }
 
-
-
         private void ActualizaPrecios()
         {
             foreach (var pa in partidas)
@@ -619,6 +617,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                 productoController.Update(prod);
             }
         }
+
         private void PendienteOdescarta()
         {
             if (partidas.Count > 0 && compra.EstadoDocId.Equals("PEN"))
@@ -637,11 +636,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             return comprapController.InsertRange(partidas);
         }
-
-
         #endregion
-
-
 
 
         #region Eventos
@@ -802,18 +797,19 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             TxtPrecioCaja.Text = Ambiente.FDinero(TxtPrecioCaja.Text);
         }
-
-
-
         private void Malla_MouseEnter(object sender, EventArgs e)
         {
             sobreGrid = true;
         }
-
         private void Malla_MouseLeave(object sender, EventArgs e)
         {
             sobreGrid = false;
         }
         #endregion
+
+        private void TxtProvedorId_MouseEnter(object sender, EventArgs e)
+        {
+            sobreGrid = true;
+        }
     }
 }
