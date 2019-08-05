@@ -13,6 +13,7 @@ namespace PointOfSale.Models
         public string RutaArchivo { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual Usuario CreatedByNavigation { get; set; }
         public virtual Estacion Estacion { get; set; }

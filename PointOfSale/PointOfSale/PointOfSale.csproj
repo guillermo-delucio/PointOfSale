@@ -211,6 +211,7 @@
     <Compile Include="Controllers\ComprapController.cs" />
     <Compile Include="Controllers\ConceptoEgresoController.cs" />
     <Compile Include="Controllers\ConceptoIngresoController.cs" />
+    <Compile Include="Controllers\CorteController.cs" />
     <Compile Include="Controllers\CxpController.cs" />
     <Compile Include="Controllers\CxppController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />

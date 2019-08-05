@@ -746,7 +746,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 var prod = productoController.SelectOne(p.ProductoId);
                 if (prod != null && prod.TieneLote)
                 {
-                    var lotes = loteController.GetLotesDisponibilidad(producto.ProductoId, p.Cantidad);
+                    var lotes = loteController.GetLotesDisponibilidad(prod.ProductoId, p.Cantidad);
                     var i = 0;
                     decimal cantidad = p.Cantidad;
                     foreach (var l in lotes)

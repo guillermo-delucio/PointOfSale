@@ -32,19 +32,6 @@ namespace PointOfSale.Views.Menus
         {
 
             Ambiente.SaveAndCorte();
-
-            //StiReport report = new StiReport();
-            //report.Load(@"C:\Dympos\Formatos\Corte.mrt");
-            //var ds = new DataSet("DS");
-            //ds.Tables.Add(Ambiente.DT("select  v.CreatedAt, c.RazonSocial,v.Unidades, v.EstadoDocId, v.SubTotal, v.Impuesto, v.Total from Venta v join Cliente c on v.ClienteId = c.ClienteId", "v"));
-            //report.RegData(ds);
-
-
-            //report.Render(false);
-            //var file = @"C:\Dympos\Corte.PDF";
-            //report.ExportDocument(StiExportFormat.Pdf, file);
-            //System.Diagnostics.Process.Start(file);
-
         }
 
         private void BtnTicketAFactura_Click(object sender, EventArgs e)

@@ -807,9 +807,11 @@ namespace PointOfSale.Controllers
             StiReport report = new StiReport();
 
             List<Venta> ventas;
+            decimal importe = 0;
             using (var db = new DymContext())
             {
                 ventas = db.Venta.Where(x => x.Cortada == false).OrderBy(x => x.CreatedAt).ToList();
+                importe = db.Venta.Where(x => x.Cortada == false).Sum(x => x.Total);
             }
 
             if (ventas.Count > 0)
@@ -833,10 +835,26 @@ namespace PointOfSale.Controllers
                 var file = empresa.DirectorioCortes + "CORTE " + LoggedUser.UsuarioId + "_" + TimeText((DateTime)ventas.Last().CreatedAt) + ".PDF"; ;
                 report.ExportDocument(StiExportFormat.Pdf, file);
 
+                var corte = new Corte();
+                corte.EstacionId = Ambiente.Estacion.EstacionId;
+                corte.FechaInicial = ventas.FirstOrDefault().CreatedAt;
+                corte.FechaFinal = ventas.Last().CreatedAt;
+                corte.Importe = importe;
+                corte.RutaArchivo = file;
+                corte.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                corte.CreatedAt = DateTime.Now;
+
+
+
                 foreach (var v in ventas)
                     v.Cortada = true;
                 if (new VentaController().UpdateRange(ventas))
+                {
+                    var corteController = new CorteController();
+                    corteController.InsertOne(corte);
                     Process.Start(file);
+
+                }
             }
             else
             {
