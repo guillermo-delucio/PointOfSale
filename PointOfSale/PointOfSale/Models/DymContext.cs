@@ -64,6 +64,8 @@ namespace PointOfSale.Models
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<ProductoSustancia> ProductoSustancia { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
+        public virtual DbSet<Punto> Punto { get; set; }
+        public virtual DbSet<PuntoConfig> PuntoConfig { get; set; }
         public virtual DbSet<Query> Query { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<RolePermiso> RolePermiso { get; set; }
@@ -452,13 +454,15 @@ namespace PointOfSale.Models
                     .HasColumnName("CP")
                     .HasMaxLength(50);
 
+                entity.Property(e => e.DineroElectronico).HasColumnType("decimal(18, 2)");
+
                 entity.Property(e => e.EsCxc).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Estado).HasMaxLength(50);
 
                 entity.Property(e => e.FormaPagoId)
-                    .HasMaxLength(5)
-                    .HasDefaultValueSql("(N'01')");
+                    .IsRequired()
+                    .HasMaxLength(5);
 
                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
@@ -467,8 +471,8 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Localidad).HasMaxLength(50);
 
                 entity.Property(e => e.MetodoPagoId)
-                    .HasMaxLength(5)
-                    .HasDefaultValueSql("(N'PUE')");
+                    .IsRequired()
+                    .HasMaxLength(5);
 
                 entity.Property(e => e.Municipio).HasMaxLength(50);
 
@@ -485,28 +489,32 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Telefono).HasMaxLength(50);
 
                 entity.Property(e => e.UsoCfdiid)
+                    .IsRequired()
                     .HasColumnName("UsoCFDIId")
-                    .HasMaxLength(5)
-                    .HasDefaultValueSql("(N'G01')");
+                    .HasMaxLength(5);
 
                 entity.HasOne(d => d.FormaPago)
                     .WithMany(p => p.Cliente)
                     .HasForeignKey(d => d.FormaPagoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cliente_C_Formapago");
 
                 entity.HasOne(d => d.FormaPagoNavigation)
                     .WithMany(p => p.Cliente)
                     .HasForeignKey(d => d.FormaPagoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cliente_FormaPago");
 
                 entity.HasOne(d => d.MetodoPago)
                     .WithMany(p => p.Cliente)
                     .HasForeignKey(d => d.MetodoPagoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cliente_C_Metodopago");
 
                 entity.HasOne(d => d.UsoCfdi)
                     .WithMany(p => p.Cliente)
                     .HasForeignKey(d => d.UsoCfdiid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cliente_C_Usocfdi");
             });
 
@@ -1466,6 +1474,53 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Telefono).HasMaxLength(100);
             });
 
+            modelBuilder.Entity<Punto>(entity =>
+            {
+                entity.Property(e => e.Base).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.ClienteId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.ClienteName)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Importe).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.ResetedBy).HasMaxLength(50);
+
+                entity.Property(e => e.Tasa).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(50);
+
+                entity.HasOne(d => d.Cliente)
+                    .WithMany(p => p.Punto)
+                    .HasForeignKey(d => d.ClienteId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Punto_Cliente");
+
+                entity.HasOne(d => d.Venta)
+                    .WithMany(p => p.Punto)
+                    .HasForeignKey(d => d.VentaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Punto_Venta");
+            });
+
+            modelBuilder.Entity<PuntoConfig>(entity =>
+            {
+                entity.HasKey(e => e.PuntosConfigId)
+                    .HasName("PK_Monedero");
+
+                entity.Property(e => e.TasaDescuento).HasColumnType("decimal(18, 2)");
+            });
+
             modelBuilder.Entity<Query>(entity =>
             {
                 entity.Property(e => e.QueryId)
@@ -1698,6 +1753,8 @@ namespace PointOfSale.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.DatosCliente).HasDefaultValueSql("(N'SYS')");
+
+                entity.Property(e => e.DescXpuntos).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.Descuento)
                     .HasColumnType("decimal(18, 2)")

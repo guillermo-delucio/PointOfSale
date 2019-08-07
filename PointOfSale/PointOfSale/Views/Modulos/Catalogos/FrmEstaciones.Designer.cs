@@ -61,6 +61,7 @@
             this.ChkVentaSinExistencia = new System.Windows.Forms.CheckBox();
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnAceptar = new System.Windows.Forms.Button();
+            this.ChCanjearPuntosAuto = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -415,6 +416,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.ChCanjearPuntosAuto);
             this.tabPage2.Controls.Add(this.ChkSumarUnidades);
             this.tabPage2.Controls.Add(this.ChkSolicitarFMpago);
             this.tabPage2.Controls.Add(this.ChkVentaSinExistencia);
@@ -488,6 +490,19 @@
             this.BtnAceptar.UseVisualStyleBackColor = true;
             this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click_1);
             // 
+            // ChCanjearPuntosAuto
+            // 
+            this.ChCanjearPuntosAuto.AutoSize = true;
+            this.ChCanjearPuntosAuto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.ChCanjearPuntosAuto.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ChCanjearPuntosAuto.Location = new System.Drawing.Point(16, 107);
+            this.ChCanjearPuntosAuto.Name = "ChCanjearPuntosAuto";
+            this.ChCanjearPuntosAuto.Size = new System.Drawing.Size(249, 22);
+            this.ChCanjearPuntosAuto.TabIndex = 15;
+            this.ChCanjearPuntosAuto.TabStop = false;
+            this.ChCanjearPuntosAuto.Text = "Canjear puntos automáticamente ";
+            this.ChCanjearPuntosAuto.UseVisualStyleBackColor = true;
+            // 
             // FrmEstaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -551,5 +566,6 @@
         private System.Windows.Forms.NumericUpDown NNc;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown NFacturas;
+        private System.Windows.Forms.CheckBox ChCanjearPuntosAuto;
     }
 }

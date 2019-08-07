@@ -7,6 +7,7 @@ namespace PointOfSale.Models
     {
         public Cliente()
         {
+            Punto = new HashSet<Punto>();
             Venta = new HashSet<Venta>();
         }
 
@@ -35,11 +36,13 @@ namespace PointOfSale.Models
         public bool TieneLicencia { get; set; }
         public string UsoCfdiid { get; set; }
         public bool? EsCxc { get; set; }
+        public decimal DineroElectronico { get; set; }
 
         public virtual CFormapago FormaPago { get; set; }
         public virtual FormaPago FormaPagoNavigation { get; set; }
         public virtual CMetodopago MetodoPago { get; set; }
         public virtual CUsocfdi UsoCfdi { get; set; }
+        public virtual ICollection<Punto> Punto { get; set; }
         public virtual ICollection<Venta> Venta { get; set; }
     }
 }

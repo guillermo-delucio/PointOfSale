@@ -69,6 +69,7 @@ namespace PointOfSale.Controllers
                         estacion = new Estacion();
                         estacion.EstacionId = "SYS";
                         estacion.Nombre = "DEFAUTL";
+                        estacion.CanjearPuntosAuto = false;
                         db.Add(estacion);
                     }
                     var sustancia = db.Sustancia.FirstOrDefault(x => x.SustanciaId == "SYS");
@@ -231,6 +232,7 @@ namespace PointOfSale.Controllers
                         clienteSYS.RazonSocial = "PUBLICO EN GENERAL";
                         clienteSYS.MetodoPagoId = "PUE";
                         clienteSYS.FormaPagoId = "01";
+                        clienteSYS.UsoCfdiid = "G01";
                         db.Add(clienteSYS);
                     }
                     var proveedorSYS = db.Proveedor.FirstOrDefault(x => x.ProveedorId == "SYS");
@@ -246,6 +248,17 @@ namespace PointOfSale.Controllers
                         proveedorSYS.Saldo = 0;
                         proveedorSYS.IsDeleted = false;
                         db.Add(proveedorSYS);
+                    }
+
+                    var puntosConfig = db.PuntoConfig.FirstOrDefault();
+                    if (puntosConfig == null)
+                    {
+                        puntosConfig = new PuntoConfig();
+                        puntosConfig.DiasReset = 30;
+                        puntosConfig.TasaDescuento = 0.01m;
+                        puntosConfig.Vigente = true;
+                        puntosConfig.IsDeleted = false;
+                        db.Add(puntosConfig);
                     }
 
                     db.SaveChanges();

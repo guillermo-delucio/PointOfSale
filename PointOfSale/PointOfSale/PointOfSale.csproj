@@ -234,6 +234,8 @@
     <Compile Include="Controllers\PresentacionController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\PuntoConfigController.cs" />
+    <Compile Include="Controllers\PuntoController.cs" />
     <Compile Include="Controllers\SustanciaController.cs" />
     <Compile Include="Controllers\TablasIntermedia\ProductoImpuestoController.cs" />
     <Compile Include="Controllers\TablasIntermedia\ProductoSustanciaController.cs" />
@@ -298,6 +300,8 @@
     <Compile Include="Models\ProductoImpuesto.cs" />
     <Compile Include="Models\ProductoSustancia.cs" />
     <Compile Include="Models\Proveedor.cs" />
+    <Compile Include="Models\Punto.cs" />
+    <Compile Include="Models\PuntoConfig.cs" />
     <Compile Include="Models\Query.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\RolePermiso.cs" />
@@ -464,6 +468,12 @@
     <Compile Include="Views\Modulos\Config\FrmEmpresa.Designer.cs">
       <DependentUpon>FrmEmpresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\Config\FrmPuntosConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Config\FrmPuntosConfig.Designer.cs">
+      <DependentUpon>FrmPuntosConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modulos\Importaciones\FrmImportaProds.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -626,6 +636,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Config\FrmEmpresa.resx">
       <DependentUpon>FrmEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Config\FrmPuntosConfig.resx">
+      <DependentUpon>FrmPuntosConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\Importaciones\FrmImportaProds.resx">
       <DependentUpon>FrmImportaProds.cs</DependentUpon>

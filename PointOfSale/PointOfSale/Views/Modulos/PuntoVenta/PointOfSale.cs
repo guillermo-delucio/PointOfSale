@@ -305,6 +305,39 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
             }
 
+            GuardaPuntos();
+            if (!Ambiente.Estacion.CanjearPuntosAuto && cliente.DineroElectronico > 2)
+            {
+                if (Ambiente.Pregunta("Aplicar el descuento de $" + cliente.DineroElectronico + " pesos por monedero electrónico "))
+                {
+                    var maxprecio = partidas.Max(x => x.Precio);
+                    foreach (var p in partidas)
+                    {
+                        if (p.Precio == maxprecio)
+                        {
+                            decimal precio = ((p.Cantidad * p.Precio) - cliente.DineroElectronico) / p.Cantidad;
+                            if (precio > 0)
+                            {
+                                venta.DescXpuntos = cliente.DineroElectronico;
+                                venta.PuntosAplicados = true;
+                                p.Precio = precio;
+                                CalculaTotales();
+                                break;
+                            }
+                            else
+                            {
+                                venta.DescXpuntos = 0;
+                                venta.PuntosAplicados = false;
+                                Ambiente.Mensaje("Proceso abortado, el descuento es muy grande.");
+                                Ambiente.Mensaje("Ningún registro de la venta sufrió cambios.");
+                                return;
+                            }
+                        }
+                    }
+
+                }
+            }
+
             venta.TotalConLetra = form.totalLetra;
             venta.EsCxc = form.Cxc;
 
@@ -335,6 +368,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 AfectaFlujo();
                 AfectaMovsInv();
 
+
                 Ambiente.SaveAndPrintTicket(venta);
 
                 if (Ambiente.Pregunta("Requiere factura para este documento"))
@@ -345,6 +379,35 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             else
                 Ambiente.Mensaje("Cierre de la venta salió mal :(");
         }
+
+        private bool GuardaPuntos()
+        {
+            var puntoController = new PuntoController();
+            var configpc = new PuntoConfigController();
+            var configPuntos = configpc.SelectTopOne();
+            if (configPuntos != null)
+            {
+                if (cliente != null)
+                {
+                    var punto = new Punto();
+
+                    punto.Base = venta.Total;
+                    punto.VentaId = venta.VentaId;
+                    punto.ClienteId = venta.ClienteId;
+                    punto.Tasa = configPuntos.TasaDescuento;
+                    punto.Importe = venta.Total * configPuntos.TasaDescuento;
+                    punto.CreatedAt = DateTime.Now;
+                    punto.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                    punto.ClienteName = cliente.RazonSocial.Trim().Length == 0 ? cliente.Negocio : cliente.RazonSocial;
+                    cliente.DineroElectronico += punto.Importe;
+                    return puntoController.InsertOne(punto) && clienteController.Update(cliente) == true ? true : false;
+
+                }
+                else return false;
+            }
+            else return false;
+        }
+
         private void AfectaMovsInv()
         {
             foreach (var p in partidas)
@@ -828,6 +891,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             if (venta.Total > 0)
             {
+                if (true)
+                {
+
+                }
                 using (var form = new FrmCobroRapido(venta.Total))
                 {
                     if (form.ShowDialog() == DialogResult.OK)

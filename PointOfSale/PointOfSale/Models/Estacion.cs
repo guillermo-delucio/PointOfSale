@@ -21,6 +21,7 @@ namespace PointOfSale.Models
         public int DefaultAlmacenId { get; set; }
         public bool VenderSinStock { get; set; }
         public bool SolicitarFmpago { get; set; }
+        public bool CanjearPuntosAuto { get; set; }
         public bool SumarUnidadesPdv { get; set; }
         public int TantosT { get; set; }
         public int TantosF { get; set; }

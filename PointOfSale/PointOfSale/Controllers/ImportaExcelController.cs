@@ -1142,6 +1142,7 @@ namespace PointOfSale.Controllers
                                     cliente.UsoCfdiid = "G01";
                                     cliente.PrecioDefault = 1;
                                     cliente.Saldo = 0;
+                                    cliente.DineroElectronico = 0;
                                     break;
                                 case 3:
                                     //RFC

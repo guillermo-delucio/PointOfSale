@@ -65,6 +65,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 NTickets.Value = objeto.TantosT;
                 NFacturas.Value = objeto.TantosF;
                 NNc.Value = objeto.TantosNc;
+                ChCanjearPuntosAuto.Checked = objeto.CanjearPuntosAuto;
             }
 
 
@@ -92,6 +93,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.TantosT = NTickets.Value;
                 objeto.TantosF = NFacturas.Value;
                 objeto.TantosNc = NNc.Value;
+                objeto.CanjearPuntosAuto = ChCanjearPuntosAuto.Checked;
+
                 if (estacionController.InsertOne(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
                 else
@@ -113,6 +116,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.TantosT = (int)NTickets.Value;
                 objeto.TantosF = (int)NFacturas.Value;
                 objeto.TantosNc = (int)NNc.Value;
+                objeto.CanjearPuntosAuto = ChCanjearPuntosAuto.Checked;
                 if (estacionController.Update(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
                 else

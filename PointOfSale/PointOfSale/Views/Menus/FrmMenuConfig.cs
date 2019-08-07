@@ -30,5 +30,11 @@ namespace PointOfSale.Views.Menus
             var o = new FrmEstaciones();
             o.Show();
         }
+
+        private void BtnMonedero_Click(object sender, EventArgs e)
+        {
+            var o = new FrmPuntosConfig();
+            o.Show();
+        }
     }
 }

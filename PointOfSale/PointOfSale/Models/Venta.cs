@@ -7,6 +7,7 @@ namespace PointOfSale.Models
     {
         public Venta()
         {
+            Punto = new HashSet<Punto>();
             Ventap = new HashSet<Ventap>();
         }
 
@@ -42,6 +43,8 @@ namespace PointOfSale.Models
         public decimal SubTotal { get; set; }
         public decimal Impuesto { get; set; }
         public decimal Total { get; set; }
+        public decimal DescXpuntos { get; set; }
+        public bool PuntosAplicados { get; set; }
         public decimal? Cambio { get; set; }
         public string TotalConLetra { get; set; }
         public bool? EsCxc { get; set; }
@@ -60,6 +63,7 @@ namespace PointOfSale.Models
         public virtual Estacion Estacion { get; set; }
         public virtual TipoDoc TipoDoc { get; set; }
         public virtual CUsocfdi UsoCfdiNavigation { get; set; }
+        public virtual ICollection<Punto> Punto { get; set; }
         public virtual ICollection<Ventap> Ventap { get; set; }
     }
 }

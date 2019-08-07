@@ -70,6 +70,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
             TxtFormaPago.Text = objeto.FormaPagoId;
             TxtMetodoPago.Text = objeto.MetodoPagoId;
             CboPrecioDefault.Text = objeto.PrecioDefault.ToString();
+            TxtDineroE.Text = Ambiente.FDinero(objeto.DineroElectronico.ToString());
 
         }
 
@@ -209,11 +210,11 @@ namespace PointOfSale.Views.Modulos.Catalogos
                         objeto.Correo = TxtCorreo.Text.Trim().Length == 0 ? "" : TxtCorreo.Text.Trim();
                         objeto.Telefono = TxtTelefono.Text.Trim().Length == 0 ? "" : TxtTelefono.Text.Trim();
                         objeto.Celular = TxtCelular.Text.Trim().Length == 0 ? "" : TxtCelular.Text.Trim();
-                        objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "01" : TxtMetodoPago.Text.Trim();
-                        objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
+                        objeto.MetodoPagoId = TxtMetodoPago.Text.Trim().Length == 0 ? "PUE" : TxtMetodoPago.Text.Trim();
+                        objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "01" : TxtFormaPago.Text.Trim();
                         objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
                         objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
-
+                        objeto.DineroElectronico = 0;
                         success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                         success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
                         if (success)

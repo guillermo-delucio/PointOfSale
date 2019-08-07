@@ -74,6 +74,8 @@
             this.CboPrecioDefault = new System.Windows.Forms.ComboBox();
             this.TxtUsoCFDI = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.TxtDineroE = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label18
@@ -517,7 +519,7 @@
             this.TxtMetodoPago.ForeColor = System.Drawing.Color.Black;
             this.TxtMetodoPago.Location = new System.Drawing.Point(18, 556);
             this.TxtMetodoPago.Name = "TxtMetodoPago";
-            this.TxtMetodoPago.Size = new System.Drawing.Size(298, 24);
+            this.TxtMetodoPago.Size = new System.Drawing.Size(162, 24);
             this.TxtMetodoPago.TabIndex = 17;
             this.TxtMetodoPago.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtMetodoPago_KeyDown);
             // 
@@ -526,7 +528,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label21.Location = new System.Drawing.Point(162, 592);
+            this.label21.Location = new System.Drawing.Point(487, 535);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(154, 18);
             this.label21.TabIndex = 254;
@@ -538,9 +540,9 @@
             this.TxtFormaPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtFormaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtFormaPago.ForeColor = System.Drawing.Color.Black;
-            this.TxtFormaPago.Location = new System.Drawing.Point(343, 556);
+            this.TxtFormaPago.Location = new System.Drawing.Point(186, 556);
             this.TxtFormaPago.Name = "TxtFormaPago";
-            this.TxtFormaPago.Size = new System.Drawing.Size(298, 24);
+            this.TxtFormaPago.Size = new System.Drawing.Size(130, 24);
             this.TxtFormaPago.TabIndex = 18;
             this.TxtFormaPago.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtFormaPago_KeyDown);
             // 
@@ -549,11 +551,11 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label22.Location = new System.Drawing.Point(340, 535);
+            this.label22.Location = new System.Drawing.Point(183, 535);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(152, 18);
+            this.label22.Size = new System.Drawing.Size(127, 18);
             this.label22.TabIndex = 257;
-            this.label22.Text = "♥FORMA DE PAGO";
+            this.label22.Text = "♥FORMA PAGO";
             // 
             // CboPrecioDefault
             // 
@@ -565,7 +567,7 @@
             "2",
             "3",
             "4"});
-            this.CboPrecioDefault.Location = new System.Drawing.Point(164, 611);
+            this.CboPrecioDefault.Location = new System.Drawing.Point(489, 554);
             this.CboPrecioDefault.Name = "CboPrecioDefault";
             this.CboPrecioDefault.Size = new System.Drawing.Size(152, 26);
             this.CboPrecioDefault.TabIndex = 19;
@@ -576,7 +578,7 @@
             this.TxtUsoCFDI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtUsoCFDI.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUsoCFDI.ForeColor = System.Drawing.Color.Black;
-            this.TxtUsoCFDI.Location = new System.Drawing.Point(18, 611);
+            this.TxtUsoCFDI.Location = new System.Drawing.Point(343, 554);
             this.TxtUsoCFDI.Name = "TxtUsoCFDI";
             this.TxtUsoCFDI.Size = new System.Drawing.Size(140, 24);
             this.TxtUsoCFDI.TabIndex = 258;
@@ -587,17 +589,42 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label23.Location = new System.Drawing.Point(15, 590);
+            this.label23.Location = new System.Drawing.Point(340, 533);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(97, 18);
             this.label23.TabIndex = 259;
             this.label23.Text = "♥USO CFDI";
+            // 
+            // TxtDineroE
+            // 
+            this.TxtDineroE.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtDineroE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtDineroE.Enabled = false;
+            this.TxtDineroE.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtDineroE.ForeColor = System.Drawing.Color.Black;
+            this.TxtDineroE.Location = new System.Drawing.Point(18, 604);
+            this.TxtDineroE.Name = "TxtDineroE";
+            this.TxtDineroE.Size = new System.Drawing.Size(162, 24);
+            this.TxtDineroE.TabIndex = 260;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label24.Location = new System.Drawing.Point(15, 583);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(157, 18);
+            this.label24.TabIndex = 261;
+            this.label24.Text = "$ MONEDERO ELEC.";
             // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 640);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.TxtDineroE);
             this.Controls.Add(this.TxtUsoCFDI);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.CboPrecioDefault);
@@ -701,5 +728,7 @@
         private System.Windows.Forms.ComboBox CboPrecioDefault;
         private System.Windows.Forms.TextBox TxtUsoCFDI;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox TxtDineroE;
+        private System.Windows.Forms.Label label24;
     }
 }
