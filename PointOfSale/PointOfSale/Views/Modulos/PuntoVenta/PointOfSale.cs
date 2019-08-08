@@ -1,4 +1,5 @@
 ﻿using PointOfSale.Controllers;
+using PointOfSale.Controllers.Utils;
 using PointOfSale.Models;
 using PointOfSale.Views.Modulos.Busquedas;
 using Stimulsoft.Report;
@@ -37,7 +38,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private FlujoController flujoController;
 
 
-        private const int NPARTIDAS = 100;
+        private const int NPARTIDAS = 400;
         private int SigPartida;
         private string datosCliente;
 
@@ -305,40 +306,13 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
             }
 
+            //Aplicaion de puntos
             GuardaPuntos();
-            if (!Ambiente.Estacion.CanjearPuntosAuto && cliente.DineroElectronico > 2)
-            {
-                if (Ambiente.Pregunta("Aplicar el descuento de $" + cliente.DineroElectronico + " pesos por monedero electrónico "))
-                {
-                    var maxprecio = partidas.Max(x => x.Precio);
-                    foreach (var p in partidas)
-                    {
-                        if (p.Precio == maxprecio)
-                        {
-                            decimal precio = ((p.Cantidad * p.Precio) - cliente.DineroElectronico) / p.Cantidad;
-                            if (precio > 0)
-                            {
-                                venta.DescXpuntos = cliente.DineroElectronico;
-                                venta.PuntosAplicados = true;
-                                p.Precio = precio;
-                                CalculaTotales();
-                                break;
-                            }
-                            else
-                            {
-                                venta.DescXpuntos = 0;
-                                venta.PuntosAplicados = false;
-                                Ambiente.Mensaje("Proceso abortado, el descuento es muy grande.");
-                                Ambiente.Mensaje("Ningún registro de la venta sufrió cambios.");
-                                return;
-                            }
-                        }
-                    }
+            AplicaPuntos();
 
-                }
-            }
-
-            venta.TotalConLetra = form.totalLetra;
+            
+           // venta.TotalConLetra = form.totalLetra;
+            venta.TotalConLetra = new Moneda().Convertir(venta.Total.ToString(), true);
             venta.EsCxc = form.Cxc;
 
             venta.FormaPago1 = form.formapago1;
@@ -378,6 +352,70 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             }
             else
                 Ambiente.Mensaje("Cierre de la venta salió mal :(");
+        }
+
+        private void AplicaPuntos()
+        {
+            if (!Ambiente.Estacion.CanjearPuntosAuto && cliente.DineroElectronico > 2)
+            {
+                if (Ambiente.Pregunta("Aplicar el descuento de $" + Math.Round(cliente.DineroElectronico, 1) + " pesos por monedero electrónico "))
+                {
+                    var maxprecio = partidas.Max(x => x.Precio);
+                    foreach (var p in partidas)
+                    {
+                        if (p.Precio == maxprecio)
+                        {
+                            decimal precio = ((p.Cantidad * p.Precio) - cliente.DineroElectronico) / p.Cantidad;
+                            if (precio > 1)
+                            {
+                                venta.DescXpuntos = cliente.DineroElectronico;
+                                venta.PuntosAplicados = true;
+                                p.Precio = precio;
+                                CalculaTotales();
+                                break;
+                            }
+                            else
+                            {
+                                venta.DescXpuntos = 0;
+                                venta.PuntosAplicados = false;
+                                Ambiente.Mensaje("Proceso abortado, el descuento es muy grande.");
+                                Ambiente.Mensaje("Ningún registro de la venta sufrió cambios.");
+                                return;
+                            }
+                        }
+                    }
+
+                }
+            }
+            else if (cliente.DineroElectronico > 2)
+            {
+                //GuardaPuntos();
+                var maxprecio = partidas.Max(x => x.Precio);
+                foreach (var p in partidas)
+                {
+                    if (p.Precio == maxprecio)
+                    {
+                        decimal precio = ((p.Cantidad * p.Precio) - cliente.DineroElectronico) / p.Cantidad;
+                        if (precio > 1)
+                        {
+                            venta.DescXpuntos = cliente.DineroElectronico;
+                            venta.PuntosAplicados = true;
+                            p.Precio = precio;
+                            CalculaTotales();
+                            break;
+                        }
+                        else
+                        {
+                            venta.DescXpuntos = 0;
+                            venta.PuntosAplicados = false;
+                            Ambiente.Mensaje("Proceso abortado, el descuento es muy grande.");
+                            Ambiente.Mensaje("Ningún registro de la venta sufrió cambios.");
+                            return;
+                        }
+                    }
+                }
+            }
+
         }
 
         private bool GuardaPuntos()
