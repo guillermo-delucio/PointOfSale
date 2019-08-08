@@ -52,8 +52,8 @@ namespace PointOfSale.Controllers
 
         public static void InicializaProdiedades()
         {
-            Ambiente.RutaImgs = @"C:\Dympos\IMGS";
-            Ambiente.PrefijoRutaImg = @"C:\Dympos\";
+            Ambiente.RutaImgs = @"C:\Dympos\Compartido\Imgs";
+            Ambiente.PrefijoRutaImg = @"C:\Dympos\Compartido\";
             Ambiente.Empresa = new EmpresaController().SelectTopOne();
         }
 

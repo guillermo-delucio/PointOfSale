@@ -923,7 +923,7 @@ namespace PointOfSale.Controllers
                                 case 19:
                                     //RutaImg
 
-                                    producto.RutaImg = workSheet.Cells[row, col].Text.Trim().Length == 0 ? null : workSheet.Cells[row, col].Text.Trim();
+                                    producto.RutaImg = workSheet.Cells[row, col].Text.Trim().Length == 0 ? null : (@"C:\Dympos\Compartido\" + workSheet.Cells[row, col].Text.Trim());
                                     producto.CratedAt = DateTime.Now;
                                     producto.UpdatedAt = DateTime.Now;
                                     producto.CratedBy = Ambiente.LoggedUser.UsuarioId;
