@@ -73,6 +73,16 @@ namespace PointOfSale.Views.Modulos.Logistica
             Impuesto = 0;
             sobreGrid = false;
             SigPartida = 0;
+            Malla.Rows.Clear();
+            MallaLote.Rows.Clear();
+            for (int i = 0; i < NPARTIDAS; i++)
+            {
+                Malla.Rows.Add();
+                Malla.Rows[i].Cells[3].Style.BackColor = Color.Yellow;
+                Malla.Rows[i].Cells[4].Style.BackColor = Color.Yellow;
+                Malla.Rows[i].Cells[6].Style.BackColor = Color.Yellow;
+                Malla.Rows[i].Cells[8].Style.BackColor = Color.Yellow;
+            }
             CreaTraspaso();
         }
 
@@ -109,7 +119,10 @@ namespace PointOfSale.Views.Modulos.Logistica
             foreach (var l in lotesProd)
             {
                 MallaLote.Rows.Add();
-                Malla.row
+                MallaLote.Rows[MallaLote.RowCount - 1].Cells[0].Value = l.LoteId;
+                MallaLote.Rows[MallaLote.RowCount - 1].Cells[1].Value =l.NoLote;
+                MallaLote.Rows[MallaLote.RowCount - 1].Cells[2].Value =l.Caducidad;
+                MallaLote.Rows[MallaLote.RowCount - 1].Cells[3].Value =l.StockRestante;
             }
         }
 
@@ -514,6 +527,19 @@ namespace PointOfSale.Views.Modulos.Logistica
         }
         #endregion
 
-
+        private void MallaLote_SelectionChanged(object sender, EventArgs e)
+        {
+            if (MallaLote.Rows[MallaLote.CurrentCell.RowIndex].Cells[0].Value != null)
+            {
+                var loteId =(int) MallaLote.Rows[MallaLote.CurrentCell.RowIndex].Cells[0].Value;
+                lote = loteController.SelectOne(loteId);
+                if (lote!=null)
+                {
+                    TxtLoteId.Text = lote.LoteId.ToString();
+                    TxtNoLote.Text = lote.NoLote;
+                    TxtCaducidad.Text = lote.Caducidad.ToString("dd/MM/yyyy");
+                }
+            }
+        }
     }
 }
