@@ -47,9 +47,10 @@ namespace PointOfSale.Views.Modulos.Logistica
         //Variables
         private int SigPartida;
         private const int NPARTIDAS = 400;
+        private bool sobreGrid;
         private decimal subtotal;
         private decimal impuesto;
-        private bool sobreGrid;
+       
         public FrmEntradaPorCompra2()
         {
             InitializeComponent();

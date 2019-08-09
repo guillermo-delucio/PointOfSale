@@ -1568,11 +1568,13 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Sucursal>(entity =>
             {
-                entity.Property(e => e.SucursalId)
-                    .HasMaxLength(50)
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.Nombre).HasMaxLength(50);
+                entity.Property(e => e.Serie)
+                    .IsRequired()
+                    .HasMaxLength(1);
             });
 
             modelBuilder.Entity<Sustancia>(entity =>
@@ -1607,38 +1609,44 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Documento).HasMaxLength(50);
 
-                entity.Property(e => e.SucursalDestino)
+                entity.Property(e => e.EstadoDocId).HasMaxLength(5);
+
+                entity.Property(e => e.FechaDocumento).HasColumnType("datetime");
+
+                entity.Property(e => e.SerieDestino)
+                    .IsRequired()
+                    .HasMaxLength(1);
+
+                entity.Property(e => e.SerieOrigen)
+                    .IsRequired()
+                    .HasMaxLength(1);
+
+                entity.Property(e => e.SucursalDestinoName)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.SucursalDestinoId)
+                entity.Property(e => e.SucursalOrigenName)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.SucursalOrigen)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.TipoDocId).HasMaxLength(5);
 
-                entity.Property(e => e.SucursalOrigenId)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.SucursalDestinoNavigation)
-                    .WithMany(p => p.TraspasoSucursalDestinoNavigation)
+                entity.HasOne(d => d.SucursalDestino)
+                    .WithMany(p => p.TraspasoSucursalDestino)
                     .HasForeignKey(d => d.SucursalDestinoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Traspaso_Sucursal1");
 
-                entity.HasOne(d => d.SucursalOrigenNavigation)
-                    .WithMany(p => p.TraspasoSucursalOrigenNavigation)
+                entity.HasOne(d => d.SucursalOrigen)
+                    .WithMany(p => p.TraspasoSucursalOrigen)
                     .HasForeignKey(d => d.SucursalOrigenId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Traspaso_Sucursal");
             });
 
             modelBuilder.Entity<Traspasop>(entity =>
             {
                 entity.Property(e => e.TraspasopId).ValueGeneratedNever();
+
+                entity.Property(e => e.Caducidad).HasColumnType("datetime");
 
                 entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 1)");
 
@@ -1648,17 +1656,23 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.ImporteImpuesto2).HasColumnType("decimal(18, 2)");
 
+                entity.Property(e => e.Impuesto1).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Impuesto2).HasColumnType("decimal(18, 2)");
+
                 entity.Property(e => e.ImpuestoId1).HasMaxLength(50);
 
                 entity.Property(e => e.ImpuestoId2).HasMaxLength(50);
 
-                entity.Property(e => e.LoteId).HasMaxLength(50);
+                entity.Property(e => e.NoLote).HasMaxLength(50);
 
                 entity.Property(e => e.Precio).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.ProductoId)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.Stock).HasColumnType("decimal(18, 1)");
 
                 entity.Property(e => e.Subtotal).HasColumnType("decimal(18, 2)");
 

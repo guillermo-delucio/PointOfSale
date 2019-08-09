@@ -34,6 +34,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
         public Venta Venta;
         public Empresa Empresa;
         public CRegimenfiscal Regimenfiscal;
+        public Sucursal Sucursal;
 
         public FrmBusqueda()
         {
@@ -51,7 +52,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
         private void FrmBusqueda_Load(object sender, EventArgs e)
         {
-           // CargaGrid();
+            // CargaGrid();
         }
 
         private void CargaGrid()
@@ -250,6 +251,14 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Ambiente.AdditionalSettingsDataGridView(Grid1);
                     }
                     break;
+                case (int)Ambiente.TipoBusqueda.Sucursal:
+                    using (var db = new DymContext())
+                    {
+                        Grid1.DataSource = db.Sucursal.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).
+                            Select(x => new { ID = x.SucursalId, x.Nombre }).ToList();
+                        Ambiente.AdditionalSettingsDataGridView(Grid1);
+                    }
+                    break;
                 default:
                     MessageBox.Show("Error, no hay enumerador para catalogo");
                     break;
@@ -437,6 +446,12 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     {
                         Regimenfiscal = db.CRegimenfiscal.Where(x => x.RegimenFiscalId.Equals(
                     Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value.ToString())).FirstOrDefault();
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.Sucursal:
+                    using (var db = new DymContext())
+                    {
+                        Sucursal = db.Sucursal.Where(x => x.SucursalId == (int)Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value).FirstOrDefault();
                     }
                     break;
                 default:

@@ -236,9 +236,12 @@
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\PuntoConfigController.cs" />
     <Compile Include="Controllers\PuntoController.cs" />
+    <Compile Include="Controllers\SucursalController.cs" />
     <Compile Include="Controllers\SustanciaController.cs" />
     <Compile Include="Controllers\TablasIntermedia\ProductoImpuestoController.cs" />
     <Compile Include="Controllers\TablasIntermedia\ProductoSustanciaController.cs" />
+    <Compile Include="Controllers\TraspasoController.cs" />
+    <Compile Include="Controllers\TraspasopController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\Utils\Moneda.cs" />

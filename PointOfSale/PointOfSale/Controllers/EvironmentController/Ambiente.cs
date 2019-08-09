@@ -39,7 +39,7 @@ namespace PointOfSale.Controllers
             ClavesSat, Presentaciones, UnidadesMedida,
             Usuarios, ProductoImpuesto, ProductoSustancia,
             ProductosCompleto, MetodoPago, FormaPago, UsoCDFI,
-            Tickets, Empresas, RegimenFiscal
+            Tickets, Empresas, RegimenFiscal, Sucursal
 
         };
 
@@ -165,7 +165,6 @@ namespace PointOfSale.Controllers
                 return false;
             }
         }
-
         /// Encripta una cadena
         public static string Encrypt(this string _cadenaAencriptar)
         {
@@ -183,7 +182,6 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
-
         /// Esta función desencripta la cadena que le envíamos en el parámentro de entrada.
         public static string Decrypt(this string _cadenaAdesencriptar)
         {
@@ -240,7 +238,6 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
-
         public static string GetFolderPath()
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -260,8 +257,6 @@ namespace PointOfSale.Controllers
         {
             Process.Start(RutaDirectorio);
         }
-
-
         public static bool RFCvalido(string rfc)
         {
             string expresion;
@@ -269,10 +264,6 @@ namespace PointOfSale.Controllers
             Regex automata = new Regex(expresion);
             return automata.IsMatch(rfc.Trim());
         }
-
-
-
-
         public static int TraeSiguiente(string consecutivoId)
         {
 
@@ -303,7 +294,6 @@ namespace PointOfSale.Controllers
             return -1;
 
         }
-
         public static int UpdateSiguiente(string consecutivoId)
         {
 
@@ -328,7 +318,6 @@ namespace PointOfSale.Controllers
             return -1;
 
         }
-
         public static string Z(int valor)
         {
             return string.Format("{0:00000}", valor);

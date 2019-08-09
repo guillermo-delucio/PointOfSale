@@ -7,15 +7,16 @@ namespace PointOfSale.Models
     {
         public Sucursal()
         {
-            TraspasoSucursalDestinoNavigation = new HashSet<Traspaso>();
-            TraspasoSucursalOrigenNavigation = new HashSet<Traspaso>();
+            TraspasoSucursalDestino = new HashSet<Traspaso>();
+            TraspasoSucursalOrigen = new HashSet<Traspaso>();
         }
 
-        public string SucursalId { get; set; }
+        public int SucursalId { get; set; }
         public string Nombre { get; set; }
+        public string Serie { get; set; }
         public bool Deleted { get; set; }
 
-        public virtual ICollection<Traspaso> TraspasoSucursalDestinoNavigation { get; set; }
-        public virtual ICollection<Traspaso> TraspasoSucursalOrigenNavigation { get; set; }
+        public virtual ICollection<Traspaso> TraspasoSucursalDestino { get; set; }
+        public virtual ICollection<Traspaso> TraspasoSucursalOrigen { get; set; }
     }
 }

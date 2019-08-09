@@ -118,6 +118,25 @@ namespace PointOfSale.Controllers
             return null;
         }
 
+        public List<Lote> SelecByProduc(Producto producto)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+
+                    return db.Lote.Where(x => x.ProductoId.Equals(producto.ProductoId.Trim()) && x.StockRestante > 0)
+                        .OrderBy(x => x.CreatedAt).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+
+        }
+
         public Lote SelectOne(int Id)
         {
             try

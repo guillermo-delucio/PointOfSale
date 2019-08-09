@@ -221,6 +221,14 @@ namespace PointOfSale.Controllers
                         tipoDocCxp.Descripcion = "CUENTA POR PAGAR";
                         db.Add(tipoDocCxp);
                     }
+                    var tipoDocTra = db.TipoDoc.FirstOrDefault(x => x.TipoDocId == "TRA");
+                    if (tipoDocTra == null)
+                    {
+                        tipoDocTra = new TipoDoc();
+                        tipoDocTra.TipoDocId = "TRA";
+                        tipoDocTra.Descripcion = "TRASPASO DE MERCANCIAS";
+                        db.Add(tipoDocTra);
+                    }
 
                     var clienteSYS = db.Cliente.FirstOrDefault(x => x.ClienteId == "SYS");
                     if (clienteSYS == null)
