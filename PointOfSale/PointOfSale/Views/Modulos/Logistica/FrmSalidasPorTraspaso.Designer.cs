@@ -46,21 +46,15 @@
             this.TxtOrigen = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Malla = new System.Windows.Forms.DataGridView();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.TxtLoteId = new System.Windows.Forms.TextBox();
             this.TxtCaducidad = new System.Windows.Forms.TextBox();
             this.TxtNoLote = new System.Windows.Forms.TextBox();
             this.MallaLote = new System.Windows.Forms.DataGridView();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TxtDescripcion = new System.Windows.Forms.TextBox();
             this.NCantidad = new System.Windows.Forms.NumericUpDown();
             this.BtnAgregar = new System.Windows.Forms.Button();
@@ -76,10 +70,16 @@
             this.label25 = new System.Windows.Forms.Label();
             this.TxtSubtotal = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Malla)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -265,66 +265,6 @@
             this.Malla.MouseEnter += new System.EventHandler(this.Malla_MouseEnter);
             this.Malla.MouseLeave += new System.EventHandler(this.Malla_MouseLeave);
             // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "PRODUCTO";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 150;
-            // 
-            // Column18
-            // 
-            this.Column18.HeaderText = "STOCK";
-            this.Column18.Name = "Column18";
-            this.Column18.Width = 50;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "CANT.";
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 50;
-            // 
-            // Column19
-            // 
-            this.Column19.HeaderText = "PCAJA";
-            this.Column19.Name = "Column19";
-            this.Column19.Width = 80;
-            // 
-            // Column11
-            // 
-            this.Column11.FillWeight = 50F;
-            this.Column11.HeaderText = "IMP.1";
-            this.Column11.Name = "Column11";
-            this.Column11.Width = 50;
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "IMP.2";
-            this.Column12.Name = "Column12";
-            this.Column12.Width = 50;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "SUBTOTAL";
-            this.Column13.Name = "Column13";
-            this.Column13.Width = 115;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "TOTAL";
-            this.Column1.Name = "Column1";
-            // 
-            // Column20
-            // 
-            this.Column20.HeaderText = "LOTE";
-            this.Column20.Name = "Column20";
-            this.Column20.Width = 50;
-            // 
-            // Column21
-            // 
-            this.Column21.HeaderText = "CADUCIDAD";
-            this.Column21.Name = "Column21";
-            this.Column21.Width = 80;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.TxtLoteId);
@@ -424,6 +364,30 @@
             this.MallaLote.TabIndex = 7;
             this.MallaLote.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MallaLote_CellContentClick);
             this.MallaLote.SelectionChanged += new System.EventHandler(this.MallaLote_SelectionChanged);
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "ID";
+            this.Column3.Name = "Column3";
+            this.Column3.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "LOTE";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "CADUCIDAD";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.Width = 80;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "STOCK";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 70;
             // 
             // TxtDescripcion
             // 
@@ -614,29 +578,64 @@
             this.label8.TabIndex = 228;
             this.label8.Text = "SUB-TOTAL";
             // 
-            // Column3
+            // Column4
             // 
-            this.Column3.HeaderText = "ID";
-            this.Column3.Name = "Column3";
-            this.Column3.Visible = false;
+            this.Column4.HeaderText = "PRODUCTO";
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 150;
             // 
-            // dataGridViewTextBoxColumn12
+            // Column18
             // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "LOTE";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.Width = 80;
+            this.Column18.HeaderText = "STOCK";
+            this.Column18.Name = "Column18";
+            this.Column18.Width = 50;
             // 
-            // dataGridViewTextBoxColumn13
+            // Column7
             // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "CADUCIDAD";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.Width = 80;
+            this.Column7.HeaderText = "CANT.";
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 50;
             // 
-            // Column2
+            // Column19
             // 
-            this.Column2.HeaderText = "STOCK";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 70;
+            this.Column19.HeaderText = "PRECIO";
+            this.Column19.Name = "Column19";
+            this.Column19.Width = 80;
+            // 
+            // Column11
+            // 
+            this.Column11.FillWeight = 50F;
+            this.Column11.HeaderText = "IMP.1";
+            this.Column11.Name = "Column11";
+            this.Column11.Width = 50;
+            // 
+            // Column12
+            // 
+            this.Column12.HeaderText = "IMP.2";
+            this.Column12.Name = "Column12";
+            this.Column12.Width = 50;
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "SUBTOTAL";
+            this.Column13.Name = "Column13";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "TOTAL";
+            this.Column1.Name = "Column1";
+            // 
+            // Column20
+            // 
+            this.Column20.HeaderText = "LOTE";
+            this.Column20.Name = "Column20";
+            this.Column20.Width = 50;
+            // 
+            // Column21
+            // 
+            this.Column21.HeaderText = "CADUCIDAD";
+            this.Column21.Name = "Column21";
+            this.Column21.Width = 80;
             // 
             // FrmSalidasPorTraspaso
             // 
@@ -701,6 +700,10 @@
         private System.Windows.Forms.TextBox TxtCaducidad;
         private System.Windows.Forms.TextBox TxtNoLote;
         private System.Windows.Forms.TextBox TxtLoteId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
@@ -711,9 +714,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }

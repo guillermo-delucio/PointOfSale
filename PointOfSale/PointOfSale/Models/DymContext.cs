@@ -1644,8 +1644,6 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Traspasop>(entity =>
             {
-                entity.Property(e => e.TraspasopId).ValueGeneratedNever();
-
                 entity.Property(e => e.Caducidad).HasColumnType("datetime");
 
                 entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 1)");

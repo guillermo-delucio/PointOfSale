@@ -27,7 +27,6 @@ namespace PointOfSale.Views.Modulos.Logistica
 
         // Objetos
         private Traspaso traspaso;
-        private Traspasop traspasop;
         private Producto producto;
         private Sucursal sucursalO;
         private Sucursal sucursalD;
@@ -63,7 +62,7 @@ namespace PointOfSale.Views.Modulos.Logistica
 
             // Objetos
             traspaso = null;
-            traspasop = null;
+
             producto = null;
             sucursalO = null;
             lote = null;
@@ -120,9 +119,9 @@ namespace PointOfSale.Views.Modulos.Logistica
             {
                 MallaLote.Rows.Add();
                 MallaLote.Rows[MallaLote.RowCount - 1].Cells[0].Value = l.LoteId;
-                MallaLote.Rows[MallaLote.RowCount - 1].Cells[1].Value =l.NoLote;
-                MallaLote.Rows[MallaLote.RowCount - 1].Cells[2].Value =l.Caducidad;
-                MallaLote.Rows[MallaLote.RowCount - 1].Cells[3].Value =l.StockRestante;
+                MallaLote.Rows[MallaLote.RowCount - 1].Cells[1].Value = l.NoLote;
+                MallaLote.Rows[MallaLote.RowCount - 1].Cells[2].Value = l.Caducidad;
+                MallaLote.Rows[MallaLote.RowCount - 1].Cells[3].Value = l.StockRestante;
             }
         }
 
@@ -149,7 +148,10 @@ namespace PointOfSale.Views.Modulos.Logistica
         private void InsertaPartida()
         {
             if (producto == null && TxtProductoId.Text.Trim().Length == 0)
+            {
                 Ambiente.Mensaje("Producto no encontrado");
+                return;
+            }
 
             producto = productoController.SelectOne(TxtProductoId.Text.Trim());
             if (producto == null)
@@ -164,42 +166,51 @@ namespace PointOfSale.Views.Modulos.Logistica
                 }
             }
 
-            traspasop = new Traspasop();
-            traspasop.TraspasoId = traspaso.TraspasoId;
-            traspasop.ProductoId = producto.ProductoId;
-            traspasop.Descripcion = producto.Descripcion;
-            traspasop.Cantidad = NCantidad.Value;
-            traspasop.Stock = producto.Stock;
-            traspasop.Precio = producto.Precio1;
-            traspasop.ImpuestoId1 = producto.Impuesto1Id;
-            traspasop.ImpuestoId2 = producto.Impuesto2Id;
-            traspasop.Impuesto1 = Ambiente.GetTasaImpuesto(traspasop.ImpuestoId1);
-            traspasop.Impuesto2 = Ambiente.GetTasaImpuesto(traspasop.ImpuestoId2);
+            var partida = new Traspasop();
+            partida.TraspasoId = traspaso.TraspasoId;
+            partida.ProductoId = producto.ProductoId;
+            partida.Descripcion = producto.Descripcion;
+            partida.Cantidad = NCantidad.Value;
+            partida.Stock = producto.Stock;
+            partida.Precio = producto.Precio1;
+            partida.ImpuestoId1 = producto.Impuesto1Id;
+            partida.ImpuestoId2 = producto.Impuesto2Id;
+            partida.Impuesto1 = Ambiente.GetTasaImpuesto(partida.ImpuestoId1);
+            partida.Impuesto2 = Ambiente.GetTasaImpuesto(partida.ImpuestoId2);
+            //Totales de la partida
+            partida.Subtotal = partida.Cantidad * partida.Precio;
+            partida.ImporteImpuesto1 = partida.Subtotal * partida.Impuesto1;
+            partida.ImporteImpuesto2 = partida.Subtotal * partida.Impuesto2;
+            partida.Total = partida.Subtotal + partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+
+
             if (lote != null)
             {
-                traspasop.LoteId = lote.LoteId;
-                traspasop.NoLote = lote.NoLote;
-                traspasop.Caducidad = lote.Caducidad;
+                partida.LoteId = lote.LoteId;
+                partida.NoLote = lote.NoLote;
+                partida.Caducidad = lote.Caducidad;
             }
             else
             {
-                traspasop.LoteId = null;
-                traspasop.NoLote = null;
-                traspasop.Caducidad = null;
+                partida.LoteId = null;
+                partida.NoLote = null;
+                partida.Caducidad = null;
             }
 
 
+
             //partida al grid
-            Malla.Rows[SigPartida].Cells[0].Value = traspasop.Descripcion;
-            Malla.Rows[SigPartida].Cells[1].Value = traspasop.Stock;
-            Malla.Rows[SigPartida].Cells[2].Value = traspasop.Cantidad;
-            Malla.Rows[SigPartida].Cells[3].Value = traspasop.Precio;
-            Malla.Rows[SigPartida].Cells[4].Value = traspasop.Impuesto1;
-            Malla.Rows[SigPartida].Cells[5].Value = traspasop.Impuesto2;
-            Malla.Rows[SigPartida].Cells[6].Value = traspasop.Subtotal;
-            Malla.Rows[SigPartida].Cells[7].Value = traspasop.Subtotal + traspasop.ImporteImpuesto1 + traspasop.ImporteImpuesto2;
-            Malla.Rows[SigPartida].Cells[8].Value = traspasop.NoLote;
-            Malla.Rows[SigPartida].Cells[9].Value = traspasop.Caducidad;
+            Malla.Rows[SigPartida].Cells[0].Value = partida.Descripcion;
+            Malla.Rows[SigPartida].Cells[1].Value = partida.Stock;
+            Malla.Rows[SigPartida].Cells[2].Value = partida.Cantidad;
+            Malla.Rows[SigPartida].Cells[3].Value = partida.Precio;
+            Malla.Rows[SigPartida].Cells[4].Value = partida.Impuesto1;
+            Malla.Rows[SigPartida].Cells[5].Value = partida.Impuesto2;
+            Malla.Rows[SigPartida].Cells[6].Value = partida.Subtotal;
+            Malla.Rows[SigPartida].Cells[7].Value = partida.Subtotal + partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+            Malla.Rows[SigPartida].Cells[8].Value = partida.NoLote;
+            Malla.Rows[SigPartida].Cells[9].Value = partida.Caducidad;
+            partidas.Add(partida);
             ResetPartida();
             CalculaTotales();
         }
@@ -306,16 +317,16 @@ namespace PointOfSale.Views.Modulos.Logistica
             foreach (var partida in partidas)
             {
                 //partida al grid
-                Malla.Rows[index].Cells[0].Value = traspasop.Descripcion;
-                Malla.Rows[index].Cells[1].Value = traspasop.Stock;
-                Malla.Rows[index].Cells[2].Value = traspasop.Cantidad;
-                Malla.Rows[index].Cells[3].Value = traspasop.Precio;
-                Malla.Rows[index].Cells[4].Value = traspasop.Impuesto1;
-                Malla.Rows[index].Cells[5].Value = traspasop.Impuesto2;
-                Malla.Rows[index].Cells[6].Value = traspasop.Subtotal;
-                Malla.Rows[index].Cells[7].Value = traspasop.Subtotal + traspasop.ImporteImpuesto1 + traspasop.ImporteImpuesto2;
-                Malla.Rows[index].Cells[8].Value = traspasop.NoLote;
-                Malla.Rows[index].Cells[9].Value = traspasop.Caducidad;
+                Malla.Rows[index].Cells[0].Value = partida.Descripcion;
+                Malla.Rows[index].Cells[1].Value = partida.Stock;
+                Malla.Rows[index].Cells[2].Value = partida.Cantidad;
+                Malla.Rows[index].Cells[3].Value = partida.Precio;
+                Malla.Rows[index].Cells[4].Value = partida.Impuesto1;
+                Malla.Rows[index].Cells[5].Value = partida.Impuesto2;
+                Malla.Rows[index].Cells[6].Value = partida.Subtotal;
+                Malla.Rows[index].Cells[7].Value = partida.Subtotal + partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
+                Malla.Rows[index].Cells[8].Value = partida.NoLote;
+                Malla.Rows[index].Cells[9].Value = partida.Caducidad;
                 index++;
             }
         }
@@ -346,18 +357,19 @@ namespace PointOfSale.Views.Modulos.Logistica
                     if (GuardaPartidas())
                     {
                         //Generar el Excel
+                        ResetPDT();
                         Ambiente.Mensaje("Proceso concluido con éxito");
+
                     }
                     else
                     {
-                        Ambiente.Mensaje("Algo salio con: if (GuardaPartidas())");
+                        Ambiente.Mensaje("Algo salio mal con: if (GuardaPartidas())");
                     }
                 }
                 else
                 {
                     Ambiente.Mensaje("Algo salio mal con: if (traspasoController.Update(traspaso))");
                 }
-
             }
 
         }
@@ -531,9 +543,9 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             if (MallaLote.Rows[MallaLote.CurrentCell.RowIndex].Cells[0].Value != null)
             {
-                var loteId =(int) MallaLote.Rows[MallaLote.CurrentCell.RowIndex].Cells[0].Value;
+                var loteId = (int)MallaLote.Rows[MallaLote.CurrentCell.RowIndex].Cells[0].Value;
                 lote = loteController.SelectOne(loteId);
-                if (lote!=null)
+                if (lote != null)
                 {
                     TxtLoteId.Text = lote.LoteId.ToString();
                     TxtNoLote.Text = lote.NoLote;

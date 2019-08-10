@@ -27,7 +27,7 @@ namespace PointOfSale.Controllers
                 }).OrderBy(x => x.RazonSocial).ToList();
             }
 
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+           
         }
 
         private void LlenaNodoProveedores(DataGridView Grid1)
@@ -40,7 +40,7 @@ namespace PointOfSale.Controllers
                     x.RazonSocial
                 }).OrderBy(x => x.RazonSocial).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoProductos(DataGridView Grid1)
@@ -54,7 +54,7 @@ namespace PointOfSale.Controllers
                     x.Descripcion
                 }).OrderBy(x => x.Descripcion).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoCategorias(DataGridView Grid1)
@@ -68,7 +68,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoLaboratorios(DataGridView Grid1)
@@ -81,7 +81,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoImpuestos(DataGridView Grid1)
@@ -94,7 +94,7 @@ namespace PointOfSale.Controllers
                     x.Tasa
                 }).OrderBy(x => x.ImpuestoId).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoNodoSustancias(DataGridView Grid1)
@@ -107,7 +107,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
 
@@ -121,7 +121,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoClavesat(DataGridView Grid1)
@@ -134,7 +134,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoPresentaciones(DataGridView Grid1)
@@ -147,7 +147,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoUnidadMedida(DataGridView Grid1)
@@ -161,7 +161,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoUsuarios(DataGridView Grid1)
@@ -175,7 +175,7 @@ namespace PointOfSale.Controllers
                     x.Area
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoConMovsInv(DataGridView Grid1)
@@ -188,7 +188,7 @@ namespace PointOfSale.Controllers
                     x.Descripcion
                 }).OrderBy(x => x.Descripcion).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoConIngre(DataGridView Grid1)
@@ -201,7 +201,7 @@ namespace PointOfSale.Controllers
                     x.Descripcion
                 }).OrderBy(x => x.Descripcion).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
 
         private void LlenaNodoConEgre(DataGridView Grid1)
@@ -214,7 +214,7 @@ namespace PointOfSale.Controllers
                     x.Descripcion
                 }).OrderBy(x => x.Descripcion).ToList();
             }
-            Ambiente.AdditionalSettingsDataGridView(Grid1);
+            
         }
         #endregion
 

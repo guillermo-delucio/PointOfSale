@@ -110,11 +110,7 @@ namespace PointOfSale.Controllers
         #endregion
 
         #region Configuración Grids
-        public static void AdditionalSettingsDataGridView(DataGridView dataGridView)
-        {
-            if (dataGridView.ColumnCount > 0)
-                dataGridView.Columns[dataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        }
+        
         #endregion
 
         #region Miselaneos

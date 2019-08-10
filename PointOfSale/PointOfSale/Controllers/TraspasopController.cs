@@ -73,12 +73,13 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     db.AddRange(lista);
-                    return db.SaveChanges() > 0 ? true : false;
+                    db.SaveChanges();
+                    return true;
                 }
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje("Algo salio mal con: " + MethodBase.GetCurrentMethod().Name + "@" + GetType().Name + "\n" + ex.ToString());
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
             return false;
         }
