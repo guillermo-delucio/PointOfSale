@@ -50,7 +50,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         private bool sobreGrid;
         private decimal subtotal;
         private decimal impuesto;
-       
+
         public FrmEntradaPorCompra2()
         {
             InitializeComponent();
@@ -202,19 +202,14 @@ namespace PointOfSale.Views.Modulos.Logistica
 
             ImpuestoController impuestoController = new ImpuestoController();
 
-            if (!producto.Impuesto1Id.Equals("SYS"))
-            {
-                var impuesto1 = impuestoController.SelectOne(producto.Impuesto1Id);
-                if (impuesto1 != null)
-                    impuestos.Add(impuesto1);
-            }
+            var impuesto1 = impuestoController.SelectOne(producto.Impuesto1Id);
+            if (impuesto1 != null)
+                impuestos.Add(impuesto1);
 
-            if (!producto.Impuesto2Id.Equals("SYS"))
-            {
-                var impuesto2 = impuestoController.SelectOne(producto.Impuesto2Id);
-                if (impuesto2 != null)
-                    impuestos.Add(impuesto2);
-            }
+            var impuesto2 = impuestoController.SelectOne(producto.Impuesto2Id);
+            if (impuesto2 != null)
+                impuestos.Add(impuesto2);
+
         }
         private Image GetImg(string ruta)
         {

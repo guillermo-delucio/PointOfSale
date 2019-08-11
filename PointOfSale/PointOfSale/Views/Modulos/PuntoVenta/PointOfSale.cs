@@ -341,6 +341,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
                 AfectaFlujo();
                 AfectaMovsInv();
+                AfectaStock();
 
 
                 Ambiente.SaveAndPrintTicket(venta);
@@ -445,7 +446,15 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             }
             else return false;
         }
-
+        private void AfectaStock()
+        {
+            foreach (var p in partidas)
+            {
+                var prod = productoController.SelectOne(p.ProductoId);
+                prod.Stock -= p.Cantidad;
+                productoController.Update(prod);
+            }
+        }
         private void AfectaMovsInv()
         {
             foreach (var p in partidas)

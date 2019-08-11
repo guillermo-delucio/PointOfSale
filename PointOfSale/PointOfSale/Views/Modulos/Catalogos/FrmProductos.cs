@@ -546,6 +546,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 }
                 else
                 {
+
                     if (productoController.SelectOne(SearchText) != null)
                     {
                         //Encontrado por clave

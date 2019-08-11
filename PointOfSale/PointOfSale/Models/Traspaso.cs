@@ -25,6 +25,9 @@ namespace PointOfSale.Models
         public string CreatedBy { get; set; }
         public string TipoDocId { get; set; }
         public string EstadoDocId { get; set; }
+        public decimal Impuesto { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal Total { get; set; }
 
         public virtual Sucursal SucursalDestino { get; set; }
         public virtual Sucursal SucursalOrigen { get; set; }

@@ -134,7 +134,7 @@ namespace PointOfSale.Controllers
                     return db.Producto
                         .Include(x => x.ProductoSustancia)
                         .Include(x => x.Laboratorio)
-                        .FirstOrDefault(x => x.ProductoId == Id.Trim() && x.IsDeleted == false);
+                        .FirstOrDefault(x => x.ProductoId.Equals(Id.Trim()) && x.IsDeleted == false);
                 }
             }
             catch (Exception ex)
@@ -247,6 +247,6 @@ namespace PointOfSale.Controllers
             return null;
         }
 
-    
+
     }
 }

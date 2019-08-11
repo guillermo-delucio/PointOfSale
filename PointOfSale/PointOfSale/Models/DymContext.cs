@@ -1613,6 +1613,8 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.FechaDocumento).HasColumnType("datetime");
 
+                entity.Property(e => e.Impuesto).HasColumnType("decimal(18, 2)");
+
                 entity.Property(e => e.SerieDestino)
                     .IsRequired()
                     .HasMaxLength(1);
@@ -1620,6 +1622,8 @@ namespace PointOfSale.Models
                 entity.Property(e => e.SerieOrigen)
                     .IsRequired()
                     .HasMaxLength(1);
+
+                entity.Property(e => e.Subtotal).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.SucursalDestinoName)
                     .IsRequired()
@@ -1630,6 +1634,8 @@ namespace PointOfSale.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.TipoDocId).HasMaxLength(5);
+
+                entity.Property(e => e.Total).HasColumnType("decimal(18, 2)");
 
                 entity.HasOne(d => d.SucursalDestino)
                     .WithMany(p => p.TraspasoSucursalDestino)
