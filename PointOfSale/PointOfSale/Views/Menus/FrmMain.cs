@@ -3,6 +3,7 @@ using PointOfSale.CFDI33;
 using PointOfSale.Controllers;
 using PointOfSale.Views.Menus;
 using PointOfSale.Views.Modulos.Catalogos;
+using PointOfSale.Views.Modulos.Logistica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,19 +64,9 @@ namespace DYM.Views
 
         private void BtnReportesGraficas_Click(object sender, EventArgs e)
         {
-           // Ambiente.EscribirTraspaso("");
-            return;
-            EmpresaController empresaController = new EmpresaController();
-            var empresa = empresaController.SelectTopOne();
-            var file = "CS11082019";
-
-            Ambiente.CrearDirectorio(empresa.DirectorioTrabajo + file);
-            Ambiente.CopiarFile(empresa.RutaPlantillaTraspaso, empresa.DirectorioTrabajo+file+ @"\TRASPASO.XLSX", true);
-            Ambiente.CopiarFile(empresa.RutaPlantillaDetalleTraspaso, empresa.DirectorioTrabajo+ file+ @"\TRASPASOP.XLSX", true);
-            //Escribir platillas
-
-            //Comprimir 
-            Ambiente.ComprimirDirectorio(empresa.DirectorioTrabajo + file,empresa.DirectorioTraspasos+file+".zip");
+            var o = new FrmEntradasPorTraspaso();
+            o.MdiParent = this.MdiParent;
+            o.Show();
 
         }
     }

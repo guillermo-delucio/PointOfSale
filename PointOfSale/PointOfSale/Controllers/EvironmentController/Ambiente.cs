@@ -95,6 +95,281 @@ namespace PointOfSale.Controllers
             value = textBox.Text;
             return dialogResult;
         }
+
+
+
+        public static Traspaso SerializaPH(string path)
+        {
+            Traspaso traspaso = new Traspaso();
+            try
+            {
+                if (path.Length == 0)
+                {
+                    Mensaje("Archivo invalido. Proceso abortado");
+                    return null;
+                }
+
+                var fi = new FileInfo(path);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    //								
+
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            switch (col)
+                            {
+                                //TraspasoId
+                                case 1:
+                                    break;
+
+                                //Documento
+                                case 2:
+                                    traspaso.Documento = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //FechaDocumento
+                                case 3:
+                                    traspaso.FechaDocumento = DateTime.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //SucursalOrigenId
+                                case 4:
+                                    traspaso.SucursalOrigenId = int.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //SucursalOrigenName
+                                case 5:
+                                    traspaso.SucursalOrigenName = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //SerieOrigen
+                                case 6:
+                                    traspaso.SerieOrigen = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //SucursalDestinoId
+                                case 7:
+                                    traspaso.SucursalDestinoId = int.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //SucursalDestinoName
+                                case 8:
+                                    traspaso.SucursalDestinoName = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //SerieDestino
+                                case 9:
+                                    traspaso.SerieDestino = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //Enviado
+                                case 10:
+                                    traspaso.Enviado = workSheet.Cells[row, col].Text.Trim().Equals("FALSO") ? false : true;
+                                    break;
+
+                                //Aplicado
+                                case 11:
+                                    traspaso.Aplicado = workSheet.Cells[row, col].Text.Trim().Equals("FALSO") ? false : true;
+                                    break;
+
+                                //CreatedAt
+                                case 12:
+                                    traspaso.CreatedAt = DateTime.Now;
+                                    break;
+
+                                //CreatedBy
+                                case 13:
+                                    traspaso.CreatedBy = LoggedUser.UsuarioId;
+                                    break;
+
+                                //SentBy
+                                case 14:
+                                    traspaso.SentBy = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //TipoDocId
+                                case 15:
+                                    traspaso.TipoDocId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //EstadoDocId
+                                case 16:
+                                    traspaso.EstadoDocId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //Impuesto
+                                case 17:
+                                    traspaso.Impuesto = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //Subtotal
+                                case 18:
+                                    traspaso.Subtotal = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //Total
+                                case 19:
+                                    traspaso.Total = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+                            }
+                        }
+                    }
+                    excelPackage.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.ToString());
+            }
+
+            return traspaso;
+        }
+
+        public static List<Traspasop> SerializaPD(string path)
+        {
+            List<Traspasop> partidas = new List<Traspasop>();
+            try
+            {
+                if (path.Length == 0)
+                {
+                    Mensaje("Archivo invalido. Proceso abortado");
+                    return null;
+                }
+
+                var fi = new FileInfo(path);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    {
+                        var partida = new Traspasop();
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            switch (col)
+                            {
+                                //TraspasopId
+                                case 1:
+                                    break;
+
+                                //TraspasoId
+                                case 2:
+                                    break;
+
+                                //ProductoId
+                                case 3:
+                                    partida.ProductoId = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //Descripcion
+                                case 4:
+                                    partida.Descripcion = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //Cantidad
+                                case 5:
+                                    partida.Cantidad = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //Stock
+                                case 6:
+                                    partida.Stock = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //Precio
+                                case 7:
+                                    partida.Precio = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //LoteId
+                                case 8:
+                                    if (workSheet.Cells[row, col].Text.Trim().Length == 0)
+                                        partida.LoteId = null;
+                                    else
+                                        partida.LoteId = int.Parse(workSheet.Cells[row, col].Text.Trim());
+
+                                    break;
+
+                                //NoLote
+                                case 9:
+                                    if (partida.LoteId == null)
+                                        partida.NoLote = null;
+                                    else
+                                        partida.NoLote = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //Caducidad
+                                case 10:
+
+                                    if (partida.LoteId == null)
+                                        partida.Caducidad = null;
+                                    else
+                                        partida.Caducidad = DateTime.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //ImpuestoId1
+                                case 11:
+                                    partida.ImpuestoId1 = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //ImpuestoId2
+                                case 12:
+                                    partida.ImpuestoId2 = workSheet.Cells[row, col].Text.Trim();
+                                    break;
+
+                                //Impuesto1
+                                case 13:
+                                    partida.Impuesto1 = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //Impuesto2
+                                case 14:
+                                    partida.Impuesto2 = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //ImporteImpuesto1
+                                case 15:
+                                    partida.ImporteImpuesto1 = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //ImporteImpuesto2
+                                case 16:
+                                    partida.ImporteImpuesto2 = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //Subtotal
+                                case 17:
+                                    partida.Subtotal = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //Total
+                                case 18:
+                                    partida.Total = decimal.Parse(workSheet.Cells[row, col].Text.Trim());
+                                    break;
+                            }
+                        }
+                        partidas.Add(partida);
+                    }
+                    excelPackage.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.ToString());
+            }
+
+            return partidas;
+        }
         public static bool Pregunta(string s)
         {
 
@@ -886,7 +1161,7 @@ namespace PointOfSale.Controllers
             catch (Exception e)
             {
 
-                Mensaje(e.ToString());
+                Mensaje(e.Message);
             }
 
             return false;
@@ -970,18 +1245,14 @@ namespace PointOfSale.Controllers
         public static List<string> GetDirectoryFiles(string directorio)
         {
             List<string> filesList = new List<string>();
-            if (System.IO.Directory.Exists(directorio))
-            {
-                string[] files = Directory.GetFiles(directorio);
+            DirectoryInfo d = new DirectoryInfo(@directorio);//Assuming Test is your Folder
+            FileInfo[] Files = d.GetFiles("*.zip"); //Getting Text files
 
-                // Copy the files and overwrite destination files if they already exist.
-                foreach (string s in files)
-                {
-                    // Use static Path methods to extract only the file name from the path.
-                    filesList.Add(Path.GetFileName(s));
-                }
+            foreach (FileInfo file in Files)
+            {
+                filesList.Add(file.Name);
             }
-            return filesList.Count == 0 ? null : filesList;
+            return filesList;
 
         }
 
@@ -1022,43 +1293,43 @@ namespace PointOfSale.Controllers
                 worksheet.Cells[1, 1].Value = "TraspasoId";
                 worksheet.Cells[1, 2].Value = "Documento";
                 worksheet.Cells[1, 3].Value = "FechaDocumento";
-                worksheet.Cells[1, 19].Value = "SucursalOrigenId";
-                worksheet.Cells[1, 4].Value = "SucursalOrigenName";
-                worksheet.Cells[1, 5].Value = "SerieOrigen";
-                worksheet.Cells[1, 6].Value = "SucursalDestinoId";
-                worksheet.Cells[1, 7].Value = "SucursalDestinoName";
-                worksheet.Cells[1, 8].Value = "SerieDestino";
-                worksheet.Cells[1, 9].Value = "Enviado";
-                worksheet.Cells[1, 10].Value = "Aplicado";
-                worksheet.Cells[1, 11].Value = "CreatedAt";
-                worksheet.Cells[1, 12].Value = "CreatedBy";
-                worksheet.Cells[1, 13].Value = "SentBy";
-                worksheet.Cells[1, 14].Value = "TipoDocId";
-                worksheet.Cells[1, 15].Value = "EstadoDocId";
-                worksheet.Cells[1, 16].Value = "Impuesto";
-                worksheet.Cells[1, 17].Value = "Subtotal";
-                worksheet.Cells[1, 18].Value = "Total";
+                worksheet.Cells[1, 4].Value = "SucursalOrigenId";
+                worksheet.Cells[1, 5].Value = "SucursalOrigenName";
+                worksheet.Cells[1, 6].Value = "SerieOrigen";
+                worksheet.Cells[1, 7].Value = "SucursalDestinoId";
+                worksheet.Cells[1, 8].Value = "SucursalDestinoName";
+                worksheet.Cells[1, 9].Value = "SerieDestino";
+                worksheet.Cells[1, 10].Value = "Enviado";
+                worksheet.Cells[1, 11].Value = "Aplicado";
+                worksheet.Cells[1, 12].Value = "CreatedAt";
+                worksheet.Cells[1, 13].Value = "CreatedBy";
+                worksheet.Cells[1, 14].Value = "SentBy";
+                worksheet.Cells[1, 15].Value = "TipoDocId";
+                worksheet.Cells[1, 16].Value = "EstadoDocId";
+                worksheet.Cells[1, 17].Value = "Impuesto";
+                worksheet.Cells[1, 18].Value = "Subtotal";
+                worksheet.Cells[1, 19].Value = "Total";
 
                 // Loop data
                 worksheet.Cells[2, 1].Value = traspaso.TraspasoId;
                 worksheet.Cells[2, 2].Value = traspaso.Documento;
-                worksheet.Cells[2, 3].Value = traspaso.FechaDocumento;
-                worksheet.Cells[2, 19].Value = traspaso.SucursalOrigenId;
-                worksheet.Cells[2, 4].Value = traspaso.SucursalOrigenName;
-                worksheet.Cells[2, 5].Value = traspaso.SerieOrigen;
-                worksheet.Cells[2, 6].Value = traspaso.SucursalDestinoId;
-                worksheet.Cells[2, 7].Value = traspaso.SucursalDestinoName;
-                worksheet.Cells[2, 8].Value = traspaso.SerieDestino;
-                worksheet.Cells[2, 9].Value = traspaso.Enviado;
-                worksheet.Cells[2, 10].Value = traspaso.Aplicado;
-                worksheet.Cells[2, 11].Value = traspaso.CreatedAt;
-                worksheet.Cells[2, 12].Value = traspaso.CreatedBy;
-                worksheet.Cells[2, 13].Value = traspaso.SentBy;
-                worksheet.Cells[2, 14].Value = traspaso.TipoDocId;
-                worksheet.Cells[2, 15].Value = traspaso.EstadoDocId;
-                worksheet.Cells[2, 16].Value = traspaso.Impuesto;
-                worksheet.Cells[2, 17].Value = traspaso.Subtotal;
-                worksheet.Cells[2, 18].Value = traspaso.Total;
+                worksheet.Cells[2, 3].Value = traspaso.FechaDocumento.ToString("yyyy-MM-dd HH:mm:ss");
+                worksheet.Cells[2, 4].Value = traspaso.SucursalOrigenId;
+                worksheet.Cells[2, 5].Value = traspaso.SucursalOrigenName;
+                worksheet.Cells[2, 6].Value = traspaso.SerieOrigen;
+                worksheet.Cells[2, 7].Value = traspaso.SucursalDestinoId;
+                worksheet.Cells[2, 8].Value = traspaso.SucursalDestinoName;
+                worksheet.Cells[2, 9].Value = traspaso.SerieDestino;
+                worksheet.Cells[2, 10].Value = traspaso.Enviado;
+                worksheet.Cells[2, 11].Value = traspaso.Aplicado;
+                worksheet.Cells[2, 12].Value = traspaso.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss");
+                worksheet.Cells[2, 13].Value = traspaso.CreatedBy;
+                worksheet.Cells[2, 14].Value = traspaso.SentBy;
+                worksheet.Cells[2, 15].Value = traspaso.TipoDocId;
+                worksheet.Cells[2, 16].Value = traspaso.EstadoDocId;
+                worksheet.Cells[2, 17].Value = traspaso.Impuesto;
+                worksheet.Cells[2, 18].Value = traspaso.Subtotal;
+                worksheet.Cells[2, 19].Value = traspaso.Total;
 
                 // save our new workbook and we are done!
                 package.Save();
@@ -1083,6 +1354,7 @@ namespace PointOfSale.Controllers
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("PARTIDAS");
                 // Start adding the header
                 // First of all the first row
+
                 worksheet.Cells[1, 1].Value = "TraspasopId";
                 worksheet.Cells[1, 2].Value = "TraspasoId";
                 worksheet.Cells[1, 3].Value = "ProductoId";
@@ -1102,27 +1374,80 @@ namespace PointOfSale.Controllers
                 worksheet.Cells[1, 17].Value = "Subtotal";
                 worksheet.Cells[1, 18].Value = "Total";
 
+
+
+
                 int i = 2;
                 foreach (var p in partidas)
                 {
-                    worksheet.Cells[1, 1].Value = p.TraspasopId;
-                    worksheet.Cells[1, 2].Value = p.TraspasoId;
-                    worksheet.Cells[1, 3].Value = p.ProductoId;
-                    worksheet.Cells[1, 4].Value = p.Descripcion;
-                    worksheet.Cells[1, 5].Value = p.Cantidad;
-                    worksheet.Cells[1, 6].Value = p.Stock;
-                    worksheet.Cells[1, 7].Value = p.Precio;
-                    worksheet.Cells[1, 8].Value = p.LoteId;
-                    worksheet.Cells[1, 9].Value = p.NoLote;
-                    worksheet.Cells[1, 10].Value = p.Caducidad;
-                    worksheet.Cells[1, 11].Value = p.ImpuestoId1;
-                    worksheet.Cells[1, 12].Value = p.ImpuestoId2;
-                    worksheet.Cells[1, 13].Value = p.Impuesto1;
-                    worksheet.Cells[1, 14].Value = p.Impuesto2;
-                    worksheet.Cells[1, 15].Value = p.ImporteImpuesto1;
-                    worksheet.Cells[1, 16].Value = p.ImporteImpuesto2;
-                    worksheet.Cells[1, 17].Value = p.Subtotal;
-                    worksheet.Cells[1, 18].Value = p.Total;
+                    worksheet.Cells[i, 1].Value = p.TraspasopId;
+                    worksheet.Cells[i, 2].Value = p.TraspasoId;
+                    worksheet.Cells[i, 3].Value = p.ProductoId;
+                    worksheet.Cells[i, 4].Value = p.Descripcion;
+                    worksheet.Cells[i, 5].Value = p.Cantidad;
+                    worksheet.Cells[i, 6].Value = p.Stock;
+                    worksheet.Cells[i, 7].Value = p.Precio;
+                    worksheet.Cells[i, 8].Value = p.LoteId;
+                    worksheet.Cells[i, 9].Value = p.NoLote;
+                    worksheet.Cells[i, 10].Value = p.Caducidad == null ? null : ((DateTime)p.Caducidad).ToString("yyyy-MM-dd HH:mm:ss");
+                    worksheet.Cells[i, 11].Value = p.ImpuestoId1;
+                    worksheet.Cells[i, 12].Value = p.ImpuestoId2;
+                    worksheet.Cells[i, 13].Value = p.Impuesto1;
+                    worksheet.Cells[i, 14].Value = p.Impuesto2;
+                    worksheet.Cells[i, 15].Value = p.ImporteImpuesto1;
+                    worksheet.Cells[i, 16].Value = p.ImporteImpuesto2;
+                    worksheet.Cells[i, 17].Value = p.Subtotal;
+                    worksheet.Cells[i, 18].Value = p.Total;
+                    i++;
+                }
+                // save our new workbook and we are done!
+                package.Save();
+            }
+
+            return true;
+        }
+        public static bool CrearEnvioPreciosExcel(string outputDir, string fileName)
+        {
+            // Create the file using the FileInfo object
+            var file = new FileInfo(outputDir + fileName);
+
+            // Create the package and make sure you wrap it in a using statement
+            using (var package = new ExcelPackage(file))
+            {
+                // add a new worksheet to the empty workbook
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("PARTIDAS");
+                // Start adding the header
+                // First of all the first row
+
+                worksheet.Cells[1, 1].Value = "ProductoId";
+                worksheet.Cells[1, 2].Value = "Descripcion";
+                worksheet.Cells[1, 3].Value = "PrecioCompra";
+                worksheet.Cells[1, 4].Value = "PrecioCaja";
+                worksheet.Cells[1, 5].Value = "Precio1";
+                worksheet.Cells[1, 6].Value = "Precio2";
+                worksheet.Cells[1, 7].Value = "Precio3";
+                worksheet.Cells[1, 8].Value = "Precio4";
+                worksheet.Cells[1, 9].Value = "Utilidad1";
+                worksheet.Cells[1, 10].Value = "Utilidad2";
+                worksheet.Cells[1, 11].Value = "Utilidad3";
+                worksheet.Cells[1, 12].Value = "Utilidad4";
+
+                int i = 2;
+                var partidas = new ProductoController().SelectAll();
+                foreach (var p in partidas)
+                {
+                    worksheet.Cells[i, 1].Value = p.ProductoId;
+                    worksheet.Cells[i, 2].Value = p.Descripcion;
+                    worksheet.Cells[i, 3].Value = p.PrecioCompra;
+                    worksheet.Cells[i, 4].Value = p.PrecioCaja;
+                    worksheet.Cells[i, 5].Value = p.Precio1;
+                    worksheet.Cells[i, 6].Value = p.Precio2;
+                    worksheet.Cells[i, 7].Value = p.Precio3;
+                    worksheet.Cells[i, 8].Value = p.Precio4;
+                    worksheet.Cells[i, 9].Value = p.Utilidad1;
+                    worksheet.Cells[i, 10].Value = p.Utilidad2;
+                    worksheet.Cells[i, 11].Value = p.Utilidad3;
+                    worksheet.Cells[i, 12].Value = p.Utilidad4;
                     i++;
                 }
                 // save our new workbook and we are done!

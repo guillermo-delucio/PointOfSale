@@ -152,6 +152,21 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
+        public Lote SelectOneByNoLote(string NoLote)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Lote.FirstOrDefault(x => x.NoLote.Equals(NoLote));
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
 
         public List<Lote> SelectOneOverList(int Id)
         {

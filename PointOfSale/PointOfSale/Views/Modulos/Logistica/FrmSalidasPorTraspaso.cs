@@ -380,7 +380,12 @@ namespace PointOfSale.Views.Modulos.Logistica
                 traspaso.SucursalDestinoName = sucursalD.Nombre;
                 traspaso.SerieDestino = sucursalD.Serie;
                 traspaso.TipoDocId = "TRA";
-                traspaso.EstadoDocId = "CON";
+                traspaso.Enviado = true;
+                if (pendiente)
+                    traspaso.EstadoDocId = "PEN";
+                else
+                    traspaso.EstadoDocId = "CON";
+
                 traspaso.CreatedBy = Ambiente.LoggedUser.UsuarioId;
                 traspaso.Impuesto = Impuesto;
                 traspaso.Subtotal = Subtotal;
@@ -389,11 +394,15 @@ namespace PointOfSale.Views.Modulos.Logistica
                 {
                     if (GuardaPartidas())
                     {
-                        //Generar el Excel
+
                         RestaLotes();
                         AfectaStock();
                         AfectaMovsInv();
-                        EnviarTraspaso();
+
+                        //Generar el Excel
+                        if (!pendiente)
+                            EnviarTraspaso(ChkMandarCat.Checked);
+
                         Ambiente.Mensaje("Proceso concluido con éxito");
                         ResetPDT();
                     }
@@ -469,21 +478,28 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             return traspasopController.InsertRange(partidas);
         }
-        private void EnviarTraspaso()
+        private void EnviarTraspaso(bool enviarPrecios)
         {
+            try
+            {
+                var name = "P" + traspaso.SerieOrigen + traspaso.SerieDestino + Ambiente.JustNow();
+                var file = empresa.DirectorioTrabajo + name + ".xlsx";
 
-            var name = "P" + traspaso.SerieOrigen + traspaso.SerieDestino + Ambiente.JustNow();
-            var file = empresa.DirectorioTrabajo + name + ".xlsx";
+                Ambiente.CrearDirectorio(empresa.DirectorioTrabajo + name);
 
-            Ambiente.CrearDirectorio(empresa.DirectorioTrabajo + name);
+                //Escribir platillas
+                Ambiente.CrearTraspasoExcel(empresa.DirectorioTrabajo + name + @"\", "PH.XLSX", traspaso);
+                Ambiente.CrearTraspasopExcel(empresa.DirectorioTrabajo + name + @"\", "PD.XLSX", partidas);
+                if (enviarPrecios)
+                    Ambiente.CrearEnvioPreciosExcel(empresa.DirectorioTrabajo + name + @"\", "PP.XLSX");
 
-            //Escribir platillas
-            Ambiente.CrearTraspasoExcel(empresa.DirectorioTrabajo + name + @"\", "PH.XLSX", traspaso);
-            Ambiente.CrearTraspasopExcel(empresa.DirectorioTrabajo + name + @"\", "PD.XLSX", partidas);
-
-            //Comprimir 
-            Ambiente.ComprimirDirectorio(empresa.DirectorioTrabajo + name, empresa.DirectorioTraspasos + name + ".zip");
-
+                //Comprimir 
+                Ambiente.ComprimirDirectorio(empresa.DirectorioTrabajo + name, empresa.DirectorioTraspasos + name + ".zip");
+            }
+            catch (Exception e)
+            {
+                Ambiente.Mensaje(e.ToString());
+            }
         }
         #endregion
 
