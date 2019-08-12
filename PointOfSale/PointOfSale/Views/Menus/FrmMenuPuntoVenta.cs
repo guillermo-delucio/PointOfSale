@@ -50,12 +50,6 @@ namespace PointOfSale.Views.Menus
         private void BtnReimpresionT_Click(object sender, EventArgs e)
         {
 
-            Ambiente.Desing(@"C:\Dympos\Formatos\Factura.mrt",
-                "select * from venta where ventaid=",
-                "select * from venta where ventaid=",
-                "select * from cliente where clienteid='",
-                "select top 1 * from Empresa"
-                );
         }
     }
 }

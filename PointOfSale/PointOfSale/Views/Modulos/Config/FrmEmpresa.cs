@@ -48,7 +48,11 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.DirectorioCortes = TxtRutaCortes.Text;
                 empresa.UserWstimbrado = TxtUserWS.Text.Trim();
                 empresa.PassWstimbrado = TxtPassWS.Text.Trim();
-                empresa.DirectorioTickets = TxtDirectorioTickets.Text;
+                empresa.DirectorioTickets = TxtDirectorioTickets.Text.Trim();
+                empresa.DirectorioTraspasos = TxtDirectorioTraspasos.Text.Trim();
+                empresa.DirectorioTrabajo = TxtDirectorioTrabajo.Text.Trim();
+                empresa.RutaPlantillaTraspaso = TxtRutaPlantillaTraspaso.Text.Trim();
+                empresa.RutaPlantillaDetalleTraspaso = TxtRutaPlantillaDetalleTraspaso.Text.Trim();
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
                     Ambiente.Mensaje("Nada que guardar");
@@ -80,6 +84,10 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.UserWstimbrado = TxtUserWS.Text.Trim();
                 empresa.PassWstimbrado = TxtPassWS.Text.Trim();
                 empresa.DirectorioTickets = TxtDirectorioTickets.Text;
+                empresa.DirectorioTraspasos = TxtDirectorioTraspasos.Text.Trim();
+                empresa.DirectorioTrabajo = TxtDirectorioTrabajo.Text.Trim();
+                empresa.RutaPlantillaTraspaso = TxtRutaPlantillaTraspaso.Text.Trim();
+                empresa.RutaPlantillaDetalleTraspaso = TxtRutaPlantillaDetalleTraspaso.Text.Trim();
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
                     Ambiente.Mensaje("Nada que guardar");
@@ -115,6 +123,10 @@ namespace PointOfSale.Views.Modulos.Config
             TxtPassWS.Text = empresa.PassWstimbrado;
             TxtUserWS.Text = empresa.UserWstimbrado;
             TxtDirectorioTickets.Text = empresa.DirectorioTickets;
+            TxtDirectorioTraspasos.Text = empresa.DirectorioTraspasos;
+            TxtDirectorioTrabajo.Text = empresa.DirectorioTrabajo;
+            TxtRutaPlantillaTraspaso.Text = empresa.RutaPlantillaTraspaso;
+            TxtRutaPlantillaDetalleTraspaso.Text = empresa.RutaPlantillaDetalleTraspaso;
 
         }
 
@@ -208,11 +220,31 @@ namespace PointOfSale.Views.Modulos.Config
         }
 
 
-       
+
 
         private void FrmEmpresa_Load(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void BtnDirTrabajo_Click(object sender, EventArgs e)
+        {
+            TxtDirectorioTrabajo.Text = Ambiente.GetFolderPath();
+        }
+
+        private void BtnDirTraspsos_Click(object sender, EventArgs e)
+        {
+            TxtDirectorioTraspasos.Text = Ambiente.GetFolderPath();
+        }
+
+        private void BtnPlanTraspaso_Click(object sender, EventArgs e)
+        {
+            TxtRutaPlantillaTraspaso.Text=Ambiente.GetFilePath().Item1;
+        }
+
+        private void BtnPlanDetTraspaso_Click(object sender, EventArgs e)
+        {
+            TxtRutaPlantillaDetalleTraspaso.Text = Ambiente.GetFilePath().Item1;
         }
     }
 }

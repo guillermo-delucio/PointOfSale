@@ -955,6 +955,10 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.DirectorioTickets).HasMaxLength(250);
 
+                entity.Property(e => e.DirectorioTrabajo).HasMaxLength(250);
+
+                entity.Property(e => e.DirectorioTraspasos).HasMaxLength(250);
+
                 entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Nombre).HasMaxLength(50);
@@ -980,6 +984,10 @@ namespace PointOfSale.Models
                 entity.Property(e => e.RutaFormatoTicket).HasMaxLength(250);
 
                 entity.Property(e => e.RutaKey).HasMaxLength(250);
+
+                entity.Property(e => e.RutaPlantillaDetalleTraspaso).HasMaxLength(250);
+
+                entity.Property(e => e.RutaPlantillaTraspaso).HasMaxLength(250);
 
                 entity.Property(e => e.UserWstimbrado)
                     .HasColumnName("UserWSTimbrado")
@@ -1614,6 +1622,10 @@ namespace PointOfSale.Models
                 entity.Property(e => e.FechaDocumento).HasColumnType("datetime");
 
                 entity.Property(e => e.Impuesto).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.SentBy)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.SerieDestino)
                     .IsRequired()

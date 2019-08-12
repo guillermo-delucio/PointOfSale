@@ -21,7 +21,8 @@ namespace PointOfSale.Views.Modulos.Logistica
         private LoteController loteController;
         private TraspasoController traspasoController;
         private TraspasopController traspasopController;
-
+        private MovInvController movInvController;
+        private EmpresaController empresaController;
         //Listas 
         List<Traspasop> partidas;
 
@@ -31,6 +32,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         private Sucursal sucursalO;
         private Sucursal sucursalD;
         private Lote lote;
+        private Empresa empresa;
 
 
         //Variables
@@ -56,14 +58,14 @@ namespace PointOfSale.Views.Modulos.Logistica
             loteController = new LoteController();
             traspasoController = new TraspasoController();
             traspasopController = new TraspasopController();
-
-
+            movInvController = new MovInvController();
+            empresaController = new EmpresaController();
             //listas
             partidas = new List<Traspasop>();
 
             // Objetos
             traspaso = null;
-
+            empresa = empresaController.SelectTopOne();
             producto = null;
             sucursalO = null;
             lote = null;
@@ -81,6 +83,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             NCantidad.Value = 1;
             TxtImpuestos.Text = "";
             TxtSubtotal.Text = "";
+            TxtTotal.Text = "";
             TxtDescripcion.Text = "";
             TxtLoteId.Text = "";
             TxtNoLote.Text = "";
@@ -113,6 +116,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             traspaso.EstadoDocId = "PEN";
             traspaso.CreatedAt = DateTime.Now;
             traspaso.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+            traspaso.SentBy = Ambiente.LoggedUser.UsuarioId;
             traspaso.Subtotal = 0;
             traspaso.Impuesto = 0;
             traspaso.Total = 0;
@@ -205,9 +209,18 @@ namespace PointOfSale.Views.Modulos.Logistica
 
             if (lote != null)
             {
-                partida.LoteId = lote.LoteId;
-                partida.NoLote = lote.NoLote;
-                partida.Caducidad = lote.Caducidad;
+
+                if (lote.StockRestante >= partida.Cantidad)
+                {
+                    partida.LoteId = lote.LoteId;
+                    partida.NoLote = lote.NoLote;
+                    partida.Caducidad = lote.Caducidad;
+                }
+                else
+                {
+                    Ambiente.Mensaje("Proceso abortado, el lote seleccionado no tiene suficiente stock.");
+                    return;
+                }
             }
             else
             {
@@ -353,11 +366,16 @@ namespace PointOfSale.Views.Modulos.Logistica
                     Ambiente.Mensaje("Operación denegada, seleccione sucursales");
                     return;
                 }
+                if (sucursalO.SucursalId == sucursalD.SucursalId)
+                {
+                    Ambiente.Mensaje("Operación denegada, origen y destino son lo mismo.");
+                    return;
+                }
                 traspaso.FechaDocumento = DpFechaDoc.Value;
                 traspaso.SucursalOrigenId = sucursalO.SucursalId;
                 traspaso.SucursalOrigenName = sucursalO.Nombre;
                 traspaso.SerieOrigen = sucursalO.Serie;
-
+                traspaso.Documento = TxtDocumento.Text.Trim().Length == 0 ? null : TxtDocumento.Text.Trim();
                 traspaso.SucursalDestinoId = sucursalD.SucursalId;
                 traspaso.SucursalDestinoName = sucursalD.Nombre;
                 traspaso.SerieDestino = sucursalD.Serie;
@@ -372,9 +390,12 @@ namespace PointOfSale.Views.Modulos.Logistica
                     if (GuardaPartidas())
                     {
                         //Generar el Excel
-                        ResetPDT();
+                        RestaLotes();
+                        AfectaStock();
+                        AfectaMovsInv();
+                        EnviarTraspaso();
                         Ambiente.Mensaje("Proceso concluido con éxito");
-
+                        ResetPDT();
                     }
                     else
                     {
@@ -390,10 +411,46 @@ namespace PointOfSale.Views.Modulos.Logistica
         }
         private void AfectaMovsInv()
         {
-
+            foreach (var p in partidas)
+            {
+                var movInv = new MovInv();
+                movInv.ConceptoMovsInvId = "ST";
+                movInv.NoRef = (int)traspaso.TraspasoId;
+                movInv.EntradaSalida = "S";
+                movInv.IdEntrada = null;
+                movInv.IdSalida = p.TraspasopId;
+                movInv.ProductoId = p.ProductoId;
+                movInv.Precio = p.Precio;
+                movInv.Cantidad = p.Cantidad;
+                movInv.CreatedAt = DateTime.Now;
+                movInv.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                movInvController.InsertOne(movInv);
+            }
         }
         private void AfectaStock()
         {
+            foreach (var p in partidas)
+            {
+                var prod = productoController.SelectOne(p.ProductoId);
+                prod.Stock -= p.Cantidad;
+                productoController.Update(prod);
+            }
+        }
+        private void RestaLotes()
+        {
+            foreach (var p in partidas)
+            {
+                if (p.LoteId != null)
+                {
+                    var l = loteController.SelectOne((int)p.LoteId);
+                    if (l != null)
+                    {
+                        l.StockRestante -= p.Cantidad;
+                        loteController.Update(l);
+                    }
+                }
+
+            }
         }
         private void PendienteOdescarta()
         {
@@ -411,6 +468,22 @@ namespace PointOfSale.Views.Modulos.Logistica
         private bool GuardaPartidas()
         {
             return traspasopController.InsertRange(partidas);
+        }
+        private void EnviarTraspaso()
+        {
+
+            var name = "P" + traspaso.SerieOrigen + traspaso.SerieDestino + Ambiente.JustNow();
+            var file = empresa.DirectorioTrabajo + name + ".xlsx";
+
+            Ambiente.CrearDirectorio(empresa.DirectorioTrabajo + name);
+
+            //Escribir platillas
+            Ambiente.CrearTraspasoExcel(empresa.DirectorioTrabajo + name + @"\", "PH.XLSX", traspaso);
+            Ambiente.CrearTraspasopExcel(empresa.DirectorioTrabajo + name + @"\", "PD.XLSX", partidas);
+
+            //Comprimir 
+            Ambiente.ComprimirDirectorio(empresa.DirectorioTrabajo + name, empresa.DirectorioTraspasos + name + ".zip");
+
         }
         #endregion
 

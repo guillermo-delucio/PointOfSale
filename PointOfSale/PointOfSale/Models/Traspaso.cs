@@ -23,6 +23,7 @@ namespace PointOfSale.Models
         public bool Aplicado { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
+        public string SentBy { get; set; }
         public string TipoDocId { get; set; }
         public string EstadoDocId { get; set; }
         public decimal Impuesto { get; set; }

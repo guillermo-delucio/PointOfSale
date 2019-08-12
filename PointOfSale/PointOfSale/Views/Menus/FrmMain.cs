@@ -63,7 +63,20 @@ namespace DYM.Views
 
         private void BtnReportesGraficas_Click(object sender, EventArgs e)
         {
-            new FrmConceptosEgreso().Show();
+           // Ambiente.EscribirTraspaso("");
+            return;
+            EmpresaController empresaController = new EmpresaController();
+            var empresa = empresaController.SelectTopOne();
+            var file = "CS11082019";
+
+            Ambiente.CrearDirectorio(empresa.DirectorioTrabajo + file);
+            Ambiente.CopiarFile(empresa.RutaPlantillaTraspaso, empresa.DirectorioTrabajo+file+ @"\TRASPASO.XLSX", true);
+            Ambiente.CopiarFile(empresa.RutaPlantillaDetalleTraspaso, empresa.DirectorioTrabajo+ file+ @"\TRASPASOP.XLSX", true);
+            //Escribir platillas
+
+            //Comprimir 
+            Ambiente.ComprimirDirectorio(empresa.DirectorioTrabajo + file,empresa.DirectorioTraspasos+file+".zip");
+
         }
     }
 }

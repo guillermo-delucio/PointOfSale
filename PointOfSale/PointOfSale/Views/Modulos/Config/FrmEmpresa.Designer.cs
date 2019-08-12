@@ -61,6 +61,12 @@
             this.BtnCer = new System.Windows.Forms.Button();
             this.TxtRutaCer = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label22 = new System.Windows.Forms.Label();
+            this.BtnDirTraspsos = new System.Windows.Forms.Button();
+            this.TxtDirectorioTraspasos = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.BtnDirTrabajo = new System.Windows.Forms.Button();
+            this.TxtDirectorioTrabajo = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.BtnTickets = new System.Windows.Forms.Button();
             this.TxtDirectorioTickets = new System.Windows.Forms.TextBox();
@@ -82,6 +88,12 @@
             this.label11 = new System.Windows.Forms.Label();
             this.BtnCo = new System.Windows.Forms.Button();
             this.TxtRutaCO = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.BtnPlanTraspaso = new System.Windows.Forms.Button();
+            this.TxtRutaPlantillaTraspaso = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.BtnPlanDetTraspaso = new System.Windows.Forms.Button();
+            this.TxtRutaPlantillaDetalleTraspaso = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -471,6 +483,18 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label24);
+            this.tabPage3.Controls.Add(this.BtnPlanDetTraspaso);
+            this.tabPage3.Controls.Add(this.TxtRutaPlantillaDetalleTraspaso);
+            this.tabPage3.Controls.Add(this.label23);
+            this.tabPage3.Controls.Add(this.BtnPlanTraspaso);
+            this.tabPage3.Controls.Add(this.TxtRutaPlantillaTraspaso);
+            this.tabPage3.Controls.Add(this.label22);
+            this.tabPage3.Controls.Add(this.BtnDirTraspsos);
+            this.tabPage3.Controls.Add(this.TxtDirectorioTraspasos);
+            this.tabPage3.Controls.Add(this.label21);
+            this.tabPage3.Controls.Add(this.BtnDirTrabajo);
+            this.tabPage3.Controls.Add(this.TxtDirectorioTrabajo);
             this.tabPage3.Controls.Add(this.label20);
             this.tabPage3.Controls.Add(this.BtnTickets);
             this.tabPage3.Controls.Add(this.TxtDirectorioTickets);
@@ -500,12 +524,80 @@
             this.tabPage3.Text = "Directorios y formatos";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label22.Location = new System.Drawing.Point(8, 248);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(195, 18);
+            this.label22.TabIndex = 381;
+            this.label22.Text = "DIRECTORIO TRASPASOS";
+            // 
+            // BtnDirTraspsos
+            // 
+            this.BtnDirTraspsos.Location = new System.Drawing.Point(298, 267);
+            this.BtnDirTraspsos.Name = "BtnDirTraspsos";
+            this.BtnDirTraspsos.Size = new System.Drawing.Size(42, 26);
+            this.BtnDirTraspsos.TabIndex = 379;
+            this.BtnDirTraspsos.Text = "- - -";
+            this.BtnDirTraspsos.UseVisualStyleBackColor = true;
+            this.BtnDirTraspsos.Click += new System.EventHandler(this.BtnDirTraspsos_Click);
+            // 
+            // TxtDirectorioTraspasos
+            // 
+            this.TxtDirectorioTraspasos.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtDirectorioTraspasos.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtDirectorioTraspasos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.TxtDirectorioTraspasos.ForeColor = System.Drawing.Color.Black;
+            this.TxtDirectorioTraspasos.Location = new System.Drawing.Point(7, 269);
+            this.TxtDirectorioTraspasos.Name = "TxtDirectorioTraspasos";
+            this.TxtDirectorioTraspasos.ReadOnly = true;
+            this.TxtDirectorioTraspasos.Size = new System.Drawing.Size(284, 24);
+            this.TxtDirectorioTraspasos.TabIndex = 380;
+            this.TxtDirectorioTraspasos.TabStop = false;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label21.Location = new System.Drawing.Point(7, 186);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(173, 18);
+            this.label21.TabIndex = 378;
+            this.label21.Text = "DIRECTORIO TRABAJO";
+            // 
+            // BtnDirTrabajo
+            // 
+            this.BtnDirTrabajo.Location = new System.Drawing.Point(297, 205);
+            this.BtnDirTrabajo.Name = "BtnDirTrabajo";
+            this.BtnDirTrabajo.Size = new System.Drawing.Size(42, 26);
+            this.BtnDirTrabajo.TabIndex = 376;
+            this.BtnDirTrabajo.Text = "- - -";
+            this.BtnDirTrabajo.UseVisualStyleBackColor = true;
+            this.BtnDirTrabajo.Click += new System.EventHandler(this.BtnDirTrabajo_Click);
+            // 
+            // TxtDirectorioTrabajo
+            // 
+            this.TxtDirectorioTrabajo.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtDirectorioTrabajo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtDirectorioTrabajo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.TxtDirectorioTrabajo.ForeColor = System.Drawing.Color.Black;
+            this.TxtDirectorioTrabajo.Location = new System.Drawing.Point(6, 207);
+            this.TxtDirectorioTrabajo.Name = "TxtDirectorioTrabajo";
+            this.TxtDirectorioTrabajo.ReadOnly = true;
+            this.TxtDirectorioTrabajo.Size = new System.Drawing.Size(284, 24);
+            this.TxtDirectorioTrabajo.TabIndex = 377;
+            this.TxtDirectorioTrabajo.TabStop = false;
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label20.Location = new System.Drawing.Point(7, 185);
+            this.label20.Location = new System.Drawing.Point(7, 127);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(167, 18);
             this.label20.TabIndex = 375;
@@ -513,7 +605,7 @@
             // 
             // BtnTickets
             // 
-            this.BtnTickets.Location = new System.Drawing.Point(297, 204);
+            this.BtnTickets.Location = new System.Drawing.Point(297, 146);
             this.BtnTickets.Name = "BtnTickets";
             this.BtnTickets.Size = new System.Drawing.Size(42, 26);
             this.BtnTickets.TabIndex = 373;
@@ -527,7 +619,7 @@
             this.TxtDirectorioTickets.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtDirectorioTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.TxtDirectorioTickets.ForeColor = System.Drawing.Color.Black;
-            this.TxtDirectorioTickets.Location = new System.Drawing.Point(6, 206);
+            this.TxtDirectorioTickets.Location = new System.Drawing.Point(6, 148);
             this.TxtDirectorioTickets.Name = "TxtDirectorioTickets";
             this.TxtDirectorioTickets.ReadOnly = true;
             this.TxtDirectorioTickets.Size = new System.Drawing.Size(284, 24);
@@ -539,7 +631,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label9.Location = new System.Drawing.Point(8, 125);
+            this.label9.Location = new System.Drawing.Point(8, 67);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(233, 18);
             this.label9.TabIndex = 372;
@@ -547,7 +639,7 @@
             // 
             // BtnComprobantes
             // 
-            this.BtnComprobantes.Location = new System.Drawing.Point(298, 144);
+            this.BtnComprobantes.Location = new System.Drawing.Point(298, 86);
             this.BtnComprobantes.Name = "BtnComprobantes";
             this.BtnComprobantes.Size = new System.Drawing.Size(42, 26);
             this.BtnComprobantes.TabIndex = 370;
@@ -561,7 +653,7 @@
             this.TxtRutaComprobantes.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtRutaComprobantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.TxtRutaComprobantes.ForeColor = System.Drawing.Color.Black;
-            this.TxtRutaComprobantes.Location = new System.Drawing.Point(7, 146);
+            this.TxtRutaComprobantes.Location = new System.Drawing.Point(7, 88);
             this.TxtRutaComprobantes.Name = "TxtRutaComprobantes";
             this.TxtRutaComprobantes.ReadOnly = true;
             this.TxtRutaComprobantes.Size = new System.Drawing.Size(284, 24);
@@ -573,7 +665,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label8.Location = new System.Drawing.Point(7, 66);
+            this.label8.Location = new System.Drawing.Point(7, 8);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(168, 18);
             this.label8.TabIndex = 357;
@@ -584,7 +676,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label17.Location = new System.Drawing.Point(4, 8);
+            this.label17.Location = new System.Drawing.Point(361, 185);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(140, 18);
             this.label17.TabIndex = 369;
@@ -592,7 +684,7 @@
             // 
             // BtnCortes
             // 
-            this.BtnCortes.Location = new System.Drawing.Point(297, 85);
+            this.BtnCortes.Location = new System.Drawing.Point(297, 27);
             this.BtnCortes.Name = "BtnCortes";
             this.BtnCortes.Size = new System.Drawing.Size(42, 26);
             this.BtnCortes.TabIndex = 355;
@@ -602,7 +694,7 @@
             // 
             // BtnFormatoCorte
             // 
-            this.BtnFormatoCorte.Location = new System.Drawing.Point(293, 29);
+            this.BtnFormatoCorte.Location = new System.Drawing.Point(650, 206);
             this.BtnFormatoCorte.Name = "BtnFormatoCorte";
             this.BtnFormatoCorte.Size = new System.Drawing.Size(42, 24);
             this.BtnFormatoCorte.TabIndex = 360;
@@ -616,7 +708,7 @@
             this.TxtRutaCortes.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtRutaCortes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.TxtRutaCortes.ForeColor = System.Drawing.Color.Black;
-            this.TxtRutaCortes.Location = new System.Drawing.Point(6, 87);
+            this.TxtRutaCortes.Location = new System.Drawing.Point(6, 29);
             this.TxtRutaCortes.Name = "TxtRutaCortes";
             this.TxtRutaCortes.ReadOnly = true;
             this.TxtRutaCortes.Size = new System.Drawing.Size(284, 24);
@@ -629,7 +721,7 @@
             this.TxtFormatoCorte.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtFormatoCorte.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.TxtFormatoCorte.ForeColor = System.Drawing.Color.Black;
-            this.TxtFormatoCorte.Location = new System.Drawing.Point(3, 29);
+            this.TxtFormatoCorte.Location = new System.Drawing.Point(360, 206);
             this.TxtFormatoCorte.Name = "TxtFormatoCorte";
             this.TxtFormatoCorte.ReadOnly = true;
             this.TxtFormatoCorte.Size = new System.Drawing.Size(284, 24);
@@ -641,7 +733,7 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label16.Location = new System.Drawing.Point(365, 126);
+            this.label16.Location = new System.Drawing.Point(361, 128);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(156, 18);
             this.label16.TabIndex = 367;
@@ -649,7 +741,7 @@
             // 
             // BtnFormatoFactura
             // 
-            this.BtnFormatoFactura.Location = new System.Drawing.Point(654, 145);
+            this.BtnFormatoFactura.Location = new System.Drawing.Point(650, 147);
             this.BtnFormatoFactura.Name = "BtnFormatoFactura";
             this.BtnFormatoFactura.Size = new System.Drawing.Size(42, 26);
             this.BtnFormatoFactura.TabIndex = 361;
@@ -663,7 +755,7 @@
             this.TxtFormatoFactura.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtFormatoFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.TxtFormatoFactura.ForeColor = System.Drawing.Color.Black;
-            this.TxtFormatoFactura.Location = new System.Drawing.Point(364, 146);
+            this.TxtFormatoFactura.Location = new System.Drawing.Point(360, 148);
             this.TxtFormatoFactura.Name = "TxtFormatoFactura";
             this.TxtFormatoFactura.ReadOnly = true;
             this.TxtFormatoFactura.Size = new System.Drawing.Size(284, 24);
@@ -675,7 +767,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label15.Location = new System.Drawing.Point(359, 8);
+            this.label15.Location = new System.Drawing.Point(357, 70);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(139, 18);
             this.label15.TabIndex = 365;
@@ -683,7 +775,7 @@
             // 
             // BtnFormatoTicket
             // 
-            this.BtnFormatoTicket.Location = new System.Drawing.Point(648, 27);
+            this.BtnFormatoTicket.Location = new System.Drawing.Point(646, 89);
             this.BtnFormatoTicket.Name = "BtnFormatoTicket";
             this.BtnFormatoTicket.Size = new System.Drawing.Size(42, 26);
             this.BtnFormatoTicket.TabIndex = 358;
@@ -697,7 +789,7 @@
             this.TxtFormatoTicket.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtFormatoTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.TxtFormatoTicket.ForeColor = System.Drawing.Color.Black;
-            this.TxtFormatoTicket.Location = new System.Drawing.Point(364, 27);
+            this.TxtFormatoTicket.Location = new System.Drawing.Point(362, 89);
             this.TxtFormatoTicket.Name = "TxtFormatoTicket";
             this.TxtFormatoTicket.ReadOnly = true;
             this.TxtFormatoTicket.Size = new System.Drawing.Size(284, 24);
@@ -709,7 +801,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label11.Location = new System.Drawing.Point(363, 67);
+            this.label11.Location = new System.Drawing.Point(359, 251);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(212, 18);
             this.label11.TabIndex = 363;
@@ -717,7 +809,7 @@
             // 
             // BtnCo
             // 
-            this.BtnCo.Location = new System.Drawing.Point(652, 86);
+            this.BtnCo.Location = new System.Drawing.Point(648, 270);
             this.BtnCo.Name = "BtnCo";
             this.BtnCo.Size = new System.Drawing.Size(42, 26);
             this.BtnCo.TabIndex = 359;
@@ -731,12 +823,80 @@
             this.TxtRutaCO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtRutaCO.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.TxtRutaCO.ForeColor = System.Drawing.Color.Black;
-            this.TxtRutaCO.Location = new System.Drawing.Point(364, 85);
+            this.TxtRutaCO.Location = new System.Drawing.Point(360, 269);
             this.TxtRutaCO.Name = "TxtRutaCO";
             this.TxtRutaCO.ReadOnly = true;
             this.TxtRutaCO.Size = new System.Drawing.Size(284, 24);
             this.TxtRutaCO.TabIndex = 362;
             this.TxtRutaCO.TabStop = false;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label23.Location = new System.Drawing.Point(8, 310);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(167, 18);
+            this.label23.TabIndex = 384;
+            this.label23.Text = "PLANTILLA TRASPASO";
+            // 
+            // BtnPlanTraspaso
+            // 
+            this.BtnPlanTraspaso.Location = new System.Drawing.Point(298, 329);
+            this.BtnPlanTraspaso.Name = "BtnPlanTraspaso";
+            this.BtnPlanTraspaso.Size = new System.Drawing.Size(42, 26);
+            this.BtnPlanTraspaso.TabIndex = 382;
+            this.BtnPlanTraspaso.Text = "- - -";
+            this.BtnPlanTraspaso.UseVisualStyleBackColor = true;
+            this.BtnPlanTraspaso.Click += new System.EventHandler(this.BtnPlanTraspaso_Click);
+            // 
+            // TxtRutaPlantillaTraspaso
+            // 
+            this.TxtRutaPlantillaTraspaso.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtRutaPlantillaTraspaso.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtRutaPlantillaTraspaso.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.TxtRutaPlantillaTraspaso.ForeColor = System.Drawing.Color.Black;
+            this.TxtRutaPlantillaTraspaso.Location = new System.Drawing.Point(7, 331);
+            this.TxtRutaPlantillaTraspaso.Name = "TxtRutaPlantillaTraspaso";
+            this.TxtRutaPlantillaTraspaso.ReadOnly = true;
+            this.TxtRutaPlantillaTraspaso.Size = new System.Drawing.Size(284, 24);
+            this.TxtRutaPlantillaTraspaso.TabIndex = 383;
+            this.TxtRutaPlantillaTraspaso.TabStop = false;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label24.Location = new System.Drawing.Point(361, 6);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(225, 18);
+            this.label24.TabIndex = 387;
+            this.label24.Text = "PLATILLA DETALLE TRASPASO";
+            // 
+            // BtnPlanDetTraspaso
+            // 
+            this.BtnPlanDetTraspaso.Location = new System.Drawing.Point(651, 25);
+            this.BtnPlanDetTraspaso.Name = "BtnPlanDetTraspaso";
+            this.BtnPlanDetTraspaso.Size = new System.Drawing.Size(42, 26);
+            this.BtnPlanDetTraspaso.TabIndex = 385;
+            this.BtnPlanDetTraspaso.Text = "- - -";
+            this.BtnPlanDetTraspaso.UseVisualStyleBackColor = true;
+            this.BtnPlanDetTraspaso.Click += new System.EventHandler(this.BtnPlanDetTraspaso_Click);
+            // 
+            // TxtRutaPlantillaDetalleTraspaso
+            // 
+            this.TxtRutaPlantillaDetalleTraspaso.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtRutaPlantillaDetalleTraspaso.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtRutaPlantillaDetalleTraspaso.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.TxtRutaPlantillaDetalleTraspaso.ForeColor = System.Drawing.Color.Black;
+            this.TxtRutaPlantillaDetalleTraspaso.Location = new System.Drawing.Point(360, 27);
+            this.TxtRutaPlantillaDetalleTraspaso.Name = "TxtRutaPlantillaDetalleTraspaso";
+            this.TxtRutaPlantillaDetalleTraspaso.ReadOnly = true;
+            this.TxtRutaPlantillaDetalleTraspaso.Size = new System.Drawing.Size(284, 24);
+            this.TxtRutaPlantillaDetalleTraspaso.TabIndex = 386;
+            this.TxtRutaPlantillaDetalleTraspaso.TabStop = false;
             // 
             // FrmEmpresa
             // 
@@ -819,5 +979,17 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button BtnTickets;
         private System.Windows.Forms.TextBox TxtDirectorioTickets;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button BtnDirTraspsos;
+        private System.Windows.Forms.TextBox TxtDirectorioTraspasos;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button BtnDirTrabajo;
+        private System.Windows.Forms.TextBox TxtDirectorioTrabajo;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button BtnPlanDetTraspaso;
+        private System.Windows.Forms.TextBox TxtRutaPlantillaDetalleTraspaso;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button BtnPlanTraspaso;
+        private System.Windows.Forms.TextBox TxtRutaPlantillaTraspaso;
     }
 }

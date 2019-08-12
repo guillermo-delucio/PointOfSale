@@ -26,6 +26,10 @@ namespace PointOfSale.Models
         public bool? IsDeleted { get; set; }
         public string UserWstimbrado { get; set; }
         public string PassWstimbrado { get; set; }
+        public string DirectorioTrabajo { get; set; }
+        public string DirectorioTraspasos { get; set; }
+        public string RutaPlantillaTraspaso { get; set; }
+        public string RutaPlantillaDetalleTraspaso { get; set; }
 
         public virtual CRegimenfiscal RegimenFiscalNavigation { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using DYM.Views;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using PointOfSale.Models;
 using Stimulsoft.Report;
 using System;
@@ -11,6 +12,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -110,7 +112,7 @@ namespace PointOfSale.Controllers
         #endregion
 
         #region Configuración Grids
-        
+
         #endregion
 
         #region Miselaneos
@@ -853,7 +855,281 @@ namespace PointOfSale.Controllers
         {
             return date.ToString("dd.MM.yyyy_hh.mm.ss");
         }
+        public static string JustNow()
+        {
+            return DateTime.Now.ToString("ddMMyyyyHHmmss");
+        }
+        public static bool ComprimirDirectorio(String DirectorioOrigen, string RutaZipDestino)
+        {
 
+            try
+            {
+                ZipFile.CreateFromDirectory(DirectorioOrigen, RutaZipDestino);
+                return true;
+            }
+            catch (Exception e)
+            {
 
+                Mensaje(e.ToString());
+            }
+
+            return false;
+        }
+        public static bool ExtraerFile(string RutaZipOrigen, string DirectorioDestino)
+        {
+
+            try
+            {
+                ZipFile.ExtractToDirectory(RutaZipOrigen, DirectorioDestino);
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                Mensaje(e.ToString());
+            }
+
+            return false;
+        }
+        public static bool CopiarFile(string sourceFile, string destFile, bool remplazar = true)
+        {
+
+            try
+            {
+                File.Copy(sourceFile, destFile, remplazar);
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                Mensaje(e.ToString());
+            }
+
+            return false;
+        }
+
+        public static bool BorrarFile(string RutaArchivo)
+        {
+
+            // Delete a file by using File class static method...
+            if (File.Exists(@RutaArchivo))
+            {
+                // Use a try block to catch IOExceptions, to
+                // handle the case of the file already being
+                // opened by another process.
+                try
+                {
+                    File.Delete(@RutaArchivo);
+                    return true;
+                }
+                catch (IOException e)
+                {
+                    Mensaje(e.Message);
+                    return false;
+                }
+            }
+            return false;
+        }
+        public static bool BorrarDirectorio(string RutaDirectorio, bool BorradoRecursivo = true)
+        {
+
+            // Delete a directory and all subdirectories with Directory static method...
+            if (Directory.Exists(@RutaDirectorio))
+            {
+                try
+                {
+                    Directory.Delete(@RutaDirectorio, BorradoRecursivo);
+                }
+
+                catch (IOException e)
+                {
+                    Mensaje(e.Message);
+                }
+            }
+            return false;
+        }
+        public static bool CrearDirectorio(string RutaDirectorio)
+        {
+
+            //Create a new target folder.
+            // If the directory already exists, this method does not create a new directory
+
+            try
+            {
+                Directory.CreateDirectory(@RutaDirectorio);
+                return true;
+            }
+
+            catch (IOException e)
+            {
+                Mensaje(e.Message);
+            }
+
+            return false;
+        }
+        public static List<string> GetDirectoryFiles(string directorio)
+        {
+            List<string> filesList = new List<string>();
+            if (System.IO.Directory.Exists(directorio))
+            {
+                string[] files = Directory.GetFiles(directorio);
+
+                // Copy the files and overwrite destination files if they already exist.
+                foreach (string s in files)
+                {
+                    // Use static Path methods to extract only the file name from the path.
+                    filesList.Add(Path.GetFileName(s));
+                }
+            }
+            return filesList.Count == 0 ? null : filesList;
+
+        }
+
+        public static bool MoverFile(string sourceFile, string NewNameDestFile)
+        {
+
+            try
+            {
+                File.Move(sourceFile, NewNameDestFile);
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                Mensaje(e.ToString());
+            }
+
+            return false;
+        }
+
+        public static bool CrearTraspasoExcel(string outputDir, string fileName, Traspaso traspaso)
+        {
+            // Create the file using the FileInfo object
+            var file = new FileInfo(outputDir + fileName);
+            if (traspaso == null)
+            {
+                Mensaje("Proceso abortado, no se empacó el traspaso porque llegó vacío.");
+                return false;
+            }
+
+            // Create the package and make sure you wrap it in a using statement
+            using (var package = new ExcelPackage(file))
+            {
+                // add a new worksheet to the empty workbook
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("ENCABEZADO");
+
+                // Start adding the header
+                worksheet.Cells[1, 1].Value = "TraspasoId";
+                worksheet.Cells[1, 2].Value = "Documento";
+                worksheet.Cells[1, 3].Value = "FechaDocumento";
+                worksheet.Cells[1, 19].Value = "SucursalOrigenId";
+                worksheet.Cells[1, 4].Value = "SucursalOrigenName";
+                worksheet.Cells[1, 5].Value = "SerieOrigen";
+                worksheet.Cells[1, 6].Value = "SucursalDestinoId";
+                worksheet.Cells[1, 7].Value = "SucursalDestinoName";
+                worksheet.Cells[1, 8].Value = "SerieDestino";
+                worksheet.Cells[1, 9].Value = "Enviado";
+                worksheet.Cells[1, 10].Value = "Aplicado";
+                worksheet.Cells[1, 11].Value = "CreatedAt";
+                worksheet.Cells[1, 12].Value = "CreatedBy";
+                worksheet.Cells[1, 13].Value = "SentBy";
+                worksheet.Cells[1, 14].Value = "TipoDocId";
+                worksheet.Cells[1, 15].Value = "EstadoDocId";
+                worksheet.Cells[1, 16].Value = "Impuesto";
+                worksheet.Cells[1, 17].Value = "Subtotal";
+                worksheet.Cells[1, 18].Value = "Total";
+
+                // Loop data
+                worksheet.Cells[2, 1].Value = traspaso.TraspasoId;
+                worksheet.Cells[2, 2].Value = traspaso.Documento;
+                worksheet.Cells[2, 3].Value = traspaso.FechaDocumento;
+                worksheet.Cells[2, 19].Value = traspaso.SucursalOrigenId;
+                worksheet.Cells[2, 4].Value = traspaso.SucursalOrigenName;
+                worksheet.Cells[2, 5].Value = traspaso.SerieOrigen;
+                worksheet.Cells[2, 6].Value = traspaso.SucursalDestinoId;
+                worksheet.Cells[2, 7].Value = traspaso.SucursalDestinoName;
+                worksheet.Cells[2, 8].Value = traspaso.SerieDestino;
+                worksheet.Cells[2, 9].Value = traspaso.Enviado;
+                worksheet.Cells[2, 10].Value = traspaso.Aplicado;
+                worksheet.Cells[2, 11].Value = traspaso.CreatedAt;
+                worksheet.Cells[2, 12].Value = traspaso.CreatedBy;
+                worksheet.Cells[2, 13].Value = traspaso.SentBy;
+                worksheet.Cells[2, 14].Value = traspaso.TipoDocId;
+                worksheet.Cells[2, 15].Value = traspaso.EstadoDocId;
+                worksheet.Cells[2, 16].Value = traspaso.Impuesto;
+                worksheet.Cells[2, 17].Value = traspaso.Subtotal;
+                worksheet.Cells[2, 18].Value = traspaso.Total;
+
+                // save our new workbook and we are done!
+                package.Save();
+            }
+
+            return true;
+        }
+        public static bool CrearTraspasopExcel(string outputDir, string fileName, List<Traspasop> partidas)
+        {
+            // Create the file using the FileInfo object
+            var file = new FileInfo(outputDir + fileName);
+            if (partidas.Count == 0)
+            {
+                Mensaje("Proceso abortado, no se empacó porque las partidas llegaron vacias.");
+                return false;
+            }
+
+            // Create the package and make sure you wrap it in a using statement
+            using (var package = new ExcelPackage(file))
+            {
+                // add a new worksheet to the empty workbook
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("PARTIDAS");
+                // Start adding the header
+                // First of all the first row
+                worksheet.Cells[1, 1].Value = "TraspasopId";
+                worksheet.Cells[1, 2].Value = "TraspasoId";
+                worksheet.Cells[1, 3].Value = "ProductoId";
+                worksheet.Cells[1, 4].Value = "Descripcion";
+                worksheet.Cells[1, 5].Value = "Cantidad";
+                worksheet.Cells[1, 6].Value = "Stock";
+                worksheet.Cells[1, 7].Value = "Precio";
+                worksheet.Cells[1, 8].Value = "LoteId";
+                worksheet.Cells[1, 9].Value = "NoLote";
+                worksheet.Cells[1, 10].Value = "Caducidad";
+                worksheet.Cells[1, 11].Value = "ImpuestoId1";
+                worksheet.Cells[1, 12].Value = "ImpuestoId2";
+                worksheet.Cells[1, 13].Value = "Impuesto1";
+                worksheet.Cells[1, 14].Value = "Impuesto2";
+                worksheet.Cells[1, 15].Value = "ImporteImpuesto1";
+                worksheet.Cells[1, 16].Value = "ImporteImpuesto2";
+                worksheet.Cells[1, 17].Value = "Subtotal";
+                worksheet.Cells[1, 18].Value = "Total";
+
+                int i = 2;
+                foreach (var p in partidas)
+                {
+                    worksheet.Cells[1, 1].Value = p.TraspasopId;
+                    worksheet.Cells[1, 2].Value = p.TraspasoId;
+                    worksheet.Cells[1, 3].Value = p.ProductoId;
+                    worksheet.Cells[1, 4].Value = p.Descripcion;
+                    worksheet.Cells[1, 5].Value = p.Cantidad;
+                    worksheet.Cells[1, 6].Value = p.Stock;
+                    worksheet.Cells[1, 7].Value = p.Precio;
+                    worksheet.Cells[1, 8].Value = p.LoteId;
+                    worksheet.Cells[1, 9].Value = p.NoLote;
+                    worksheet.Cells[1, 10].Value = p.Caducidad;
+                    worksheet.Cells[1, 11].Value = p.ImpuestoId1;
+                    worksheet.Cells[1, 12].Value = p.ImpuestoId2;
+                    worksheet.Cells[1, 13].Value = p.Impuesto1;
+                    worksheet.Cells[1, 14].Value = p.Impuesto2;
+                    worksheet.Cells[1, 15].Value = p.ImporteImpuesto1;
+                    worksheet.Cells[1, 16].Value = p.ImporteImpuesto2;
+                    worksheet.Cells[1, 17].Value = p.Subtotal;
+                    worksheet.Cells[1, 18].Value = p.Total;
+                    i++;
+                }
+                // save our new workbook and we are done!
+                package.Save();
+            }
+
+            return true;
+        }
     }
 }
