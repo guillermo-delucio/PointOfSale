@@ -1,6 +1,7 @@
 ﻿
 using PointOfSale.CFDI33;
 using PointOfSale.Controllers;
+using PointOfSale.Controllers.EvironmentController;
 using PointOfSale.Views.Menus;
 using PointOfSale.Views.Modulos.Catalogos;
 using PointOfSale.Views.Modulos.Logistica;
@@ -64,9 +65,7 @@ namespace DYM.Views
 
         private void BtnReportesGraficas_Click(object sender, EventArgs e)
         {
-            var o = new FrmEntradasPorTraspaso();
-            o.MdiParent = this.MdiParent;
-            o.Show();
+            
 
         }
     }

@@ -1046,7 +1046,7 @@ namespace PointOfSale.Controllers
                     ds.Tables.Add(DT("select * from venta where ventaid=" + venta.VentaId, "v"));
                     ds.Tables.Add(DT("select * from ventap where ventaid = " + venta.VentaId, "vp"));
                     ds.Tables.Add(DT("select * from cliente where clienteid='" + venta.ClienteId + "'", "c"));
-                    ds.Tables.Add(Ambiente.DT("select top 1 * from Empresa", "e"));
+                    ds.Tables.Add(DT("select top 1 * from Empresa", "e"));
 
                     report.RegData(ds);
                     report.Render(false);

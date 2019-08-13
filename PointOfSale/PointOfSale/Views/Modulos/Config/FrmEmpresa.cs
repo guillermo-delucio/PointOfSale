@@ -53,6 +53,7 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.DirectorioTrabajo = TxtDirectorioTrabajo.Text.Trim();
                 empresa.RutaPlantillaTraspaso = TxtRutaPlantillaTraspaso.Text.Trim();
                 empresa.RutaPlantillaDetalleTraspaso = TxtRutaPlantillaDetalleTraspaso.Text.Trim();
+                empresa.DirectorioReportes = TxtDirectorioReportes.Text.Trim();
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
                     Ambiente.Mensaje("Nada que guardar");
@@ -88,6 +89,7 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.DirectorioTrabajo = TxtDirectorioTrabajo.Text.Trim();
                 empresa.RutaPlantillaTraspaso = TxtRutaPlantillaTraspaso.Text.Trim();
                 empresa.RutaPlantillaDetalleTraspaso = TxtRutaPlantillaDetalleTraspaso.Text.Trim();
+                empresa.DirectorioReportes = TxtDirectorioReportes.Text.Trim();
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
                     Ambiente.Mensaje("Nada que guardar");
@@ -127,7 +129,7 @@ namespace PointOfSale.Views.Modulos.Config
             TxtDirectorioTrabajo.Text = empresa.DirectorioTrabajo;
             TxtRutaPlantillaTraspaso.Text = empresa.RutaPlantillaTraspaso;
             TxtRutaPlantillaDetalleTraspaso.Text = empresa.RutaPlantillaDetalleTraspaso;
-
+            TxtDirectorioReportes.Text = empresa.DirectorioReportes;
         }
 
         private void BtnAceptar_Click(object sender, EventArgs e)
@@ -239,12 +241,17 @@ namespace PointOfSale.Views.Modulos.Config
 
         private void BtnPlanTraspaso_Click(object sender, EventArgs e)
         {
-            TxtRutaPlantillaTraspaso.Text=Ambiente.GetFilePath().Item1;
+            TxtRutaPlantillaTraspaso.Text = Ambiente.GetFilePath().Item1;
         }
 
         private void BtnPlanDetTraspaso_Click(object sender, EventArgs e)
         {
             TxtRutaPlantillaDetalleTraspaso.Text = Ambiente.GetFilePath().Item1;
+        }
+
+        private void BtnDirReportes_Click(object sender, EventArgs e)
+        {
+            TxtDirectorioReportes.Text = Ambiente.GetFolderPath();
         }
     }
 }

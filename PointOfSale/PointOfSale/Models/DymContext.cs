@@ -953,6 +953,8 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.DirectorioCortes).HasMaxLength(250);
 
+                entity.Property(e => e.DirectorioReportes).HasMaxLength(250);
+
                 entity.Property(e => e.DirectorioTickets).HasMaxLength(250);
 
                 entity.Property(e => e.DirectorioTrabajo).HasMaxLength(250);

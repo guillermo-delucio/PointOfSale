@@ -22,6 +22,7 @@ namespace PointOfSale.Views.Modulos.Logistica
         private Producto producto;
         private Proveedor proveedor;
         private CambiosPrecio cambioPrecio;
+        private Empresa empresa;
 
         //listas
         private List<Comprap> partidas;
@@ -66,6 +67,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             producto = new Producto();
             proveedor = new Proveedor();
             cambioPrecio = new CambiosPrecio();
+            empresa = new EmpresaController().SelectTopOne();
 
             //listas
             partidas = new List<Comprap>();
@@ -513,7 +515,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                         ActualizaPrecios();
                         AfectaMovsInv();
                         AfectaStock();
-                        Reportes.EntradaXCompra(compra.CompraId);
+                        Reportes.EntradaXCompra(compra, partidas, empresa);
                         if (!pendiente)
                             ResetPDC();
                         Ambiente.Mensaje("Proceso concluido con éxito");
