@@ -49,7 +49,8 @@ namespace PointOfSale.Views.Modulos.Logistica
             traspaso = null;
             partidas = new List<Traspasop>();
             empresa = empresaController.SelectTopOne();
-
+            Ambiente.BorrarFile(empresa.DirectorioTrabajo + @"\PH.XLSX");
+            Ambiente.BorrarFile(empresa.DirectorioTrabajo + @"\PD.XLSX");
             TxtOrigen.Text = "";
             TxtDestino.Text = "";
             TxtDocumento.Text = "";
@@ -222,6 +223,9 @@ namespace PointOfSale.Views.Modulos.Logistica
             }
         }
 
+        private void FrmEntradasPorTraspaso_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
