@@ -518,7 +518,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                         Reportes.EntradaXCompra(compra, partidas, empresa);
                         if (!pendiente)
                             ResetPDC();
-                        Ambiente.Mensaje("Proceso concluido con éxito");
+                        //Ambiente.Mensaje("Proceso concluido con éxito");
                     }
                     else
                         Ambiente.Mensaje("Algo salió mal con: GuardaPartidas()");
