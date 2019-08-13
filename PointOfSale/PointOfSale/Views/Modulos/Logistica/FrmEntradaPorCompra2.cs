@@ -515,7 +515,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                         ActualizaPrecios();
                         AfectaMovsInv();
                         AfectaStock();
-                        Reportes.EntradaXCompra(compra, partidas, empresa);
+                        Reports.EntradaXCompra(compra, partidas);
                         if (!pendiente)
                             ResetPDC();
                         //Ambiente.Mensaje("Proceso concluido con éxito");

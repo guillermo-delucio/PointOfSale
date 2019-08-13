@@ -85,6 +85,7 @@
             this.BtnReportes.TabIndex = 3;
             this.BtnReportes.Text = "&REPORTES";
             this.BtnReportes.UseVisualStyleBackColor = true;
+            this.BtnReportes.Click += new System.EventHandler(this.BtnReportes_Click);
             // 
             // button5
             // 

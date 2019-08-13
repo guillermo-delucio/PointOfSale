@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Controllers
 {
-    class ComprapController
+    public class ComprapController
     {
         public bool Delete(Comprap o)
         {

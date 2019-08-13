@@ -5,6 +5,7 @@ using PointOfSale.Controllers.EvironmentController;
 using PointOfSale.Views.Menus;
 using PointOfSale.Views.Modulos.Catalogos;
 using PointOfSale.Views.Modulos.Logistica;
+using PointOfSale.Views.Modulos.Reportes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -66,6 +67,14 @@ namespace DYM.Views
         private void BtnReportesGraficas_Click(object sender, EventArgs e)
         {
             
+
+        }
+
+        private void BtnReportes_Click(object sender, EventArgs e)
+        {
+            var o = new FrmReportes();
+            o.MdiParent = this.MdiParent;
+            o.Show();
 
         }
     }

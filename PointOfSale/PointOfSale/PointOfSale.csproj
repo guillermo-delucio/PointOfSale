@@ -227,6 +227,7 @@
     <Compile Include="Controllers\EvironmentController\CommonOpenFileDialog.cs" />
     <Compile Include="Controllers\EvironmentController\Inicializador.cs" />
     <Compile Include="Controllers\EvironmentController\Reportes.cs" />
+    <Compile Include="Controllers\EvironmentController\Reports.cs" />
     <Compile Include="Controllers\FlujoController.cs" />
     <Compile Include="Controllers\ImportaExcelController.cs" />
     <Compile Include="Controllers\EvironmentController\IController.cs" />
@@ -556,6 +557,18 @@
     <Compile Include="Views\Modulos\PuntoVenta\PointOfSale.Designer.cs">
       <DependentUpon>PointOfSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\Reportes\FrmParamData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Reportes\FrmParamData.Designer.cs">
+      <DependentUpon>FrmParamData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Modulos\Reportes\FrmReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Reportes\FrmReportes.Designer.cs">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\RootShell.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -685,6 +698,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\PointOfSale.resx">
       <DependentUpon>PointOfSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Reportes\FrmParamData.resx">
+      <DependentUpon>FrmParamData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Reportes\FrmReportes.resx">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RootShell.resx">
       <DependentUpon>RootShell.cs</DependentUpon>
