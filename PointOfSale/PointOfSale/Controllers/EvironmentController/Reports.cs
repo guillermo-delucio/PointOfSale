@@ -116,6 +116,44 @@ namespace PointOfSale.Controllers.EvironmentController
             }
         }
 
+        public static void Proveedores()
+        {
+            try
+            {
+                var ds = new DataSet();
+                var Sql = "";
+                Sql += " select ";
+                Sql += " ProveedorId clave,";
+                Sql += " RazonSocial,";
+                Sql += " RFC,";
+                Sql += " Localidad";
+                Sql += " from Proveedor order by RazonSocial";
+                ds.Tables.Add(Ambiente.DT(Sql, "DS"));
+
+                //Preview
+                report = new StiReport();
+                report.Load(FProveedores);
+                report.RegData(ds);
+                report.Show(true);
+
+                //Diseñar
+                //report = new StiReport();
+                //report.Load(FProveedores);
+                //report.Dictionary.Clear();
+                //report.RegData(ds);
+                //report.Dictionary.Synchronize();
+                //report.Design();
+                //report.Save(FProveedores);
+
+
+            }
+            catch (Exception e)
+            {
+
+                Ambiente.Mensaje(e.Message);
+            }
+        }
+
         internal static void ProductosConPrecio()
         {
             try

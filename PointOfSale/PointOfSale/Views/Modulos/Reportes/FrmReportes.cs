@@ -91,5 +91,10 @@ namespace PointOfSale.Views.Modulos.Reportes
         {
             Reports.ProductosConPrecio();
         }
+
+        private void BtnProveedores_Click(object sender, EventArgs e)
+        {
+            Reports.Proveedores();
+        }
     }
 }

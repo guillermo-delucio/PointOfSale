@@ -198,6 +198,7 @@
             this.BtnProveedores.TabIndex = 260;
             this.BtnProveedores.Text = "&PROVEEDORES";
             this.BtnProveedores.UseVisualStyleBackColor = true;
+            this.BtnProveedores.Click += new System.EventHandler(this.BtnProveedores_Click);
             // 
             // BtnVentasACosto
             // 
