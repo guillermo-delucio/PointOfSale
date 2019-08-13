@@ -485,6 +485,7 @@
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label14);
             this.Name = "FrmEntradasPorTraspaso";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmEntradasPorTraspaso";
             this.Load += new System.EventHandler(this.FrmEntradasPorTraspaso_Load);
             this.groupBox1.ResumeLayout(false);

@@ -418,6 +418,8 @@ namespace PointOfSale.Views.Modulos.Logistica
             }
 
         }
+
+
         private void AfectaMovsInv()
         {
             foreach (var p in partidas)

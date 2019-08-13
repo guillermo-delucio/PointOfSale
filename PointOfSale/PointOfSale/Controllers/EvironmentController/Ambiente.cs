@@ -1205,17 +1205,18 @@ namespace PointOfSale.Controllers
             }
             return false;
         }
-        public static bool BorrarDirectorio(string RutaDirectorio, bool BorradoRecursivo = true)
+        public static bool VaciarDirectorio(string RutaDirectorio)
         {
-
             // Delete a directory and all subdirectories with Directory static method...
             if (Directory.Exists(@RutaDirectorio))
             {
                 try
                 {
-                    Directory.Delete(@RutaDirectorio, BorradoRecursivo);
+                    foreach (var f in GetDirectoryFiles(RutaDirectorio))
+                    {
+                        File.Delete(RutaDirectorio + f);
+                    }
                 }
-
                 catch (IOException e)
                 {
                     Mensaje(e.Message);

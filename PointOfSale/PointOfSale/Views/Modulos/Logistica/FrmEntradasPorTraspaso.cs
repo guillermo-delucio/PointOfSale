@@ -1,10 +1,12 @@
-﻿using PointOfSale.Controllers;
+﻿using Microsoft.VisualBasic.FileIO;
+using PointOfSale.Controllers;
 using PointOfSale.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +53,8 @@ namespace PointOfSale.Views.Modulos.Logistica
             empresa = empresaController.SelectTopOne();
             Ambiente.BorrarFile(empresa.DirectorioTrabajo + @"\PH.XLSX");
             Ambiente.BorrarFile(empresa.DirectorioTrabajo + @"\PD.XLSX");
+            //Ambiente.VaciarDirectorio(empresa.DirectorioTraspasos);
+
             TxtOrigen.Text = "";
             TxtDestino.Text = "";
             TxtDocumento.Text = "";
@@ -159,9 +163,26 @@ namespace PointOfSale.Views.Modulos.Logistica
                     SumaLotes();
                     AfectaStock();
                     AfectaMovsInv();
+                    CambiarStatus();
                     Ambiente.Mensaje("Proceso concluido con éxito.");
                     Inicializa();
                 }
+            }
+        }
+
+        private void CambiarStatus()
+        {
+            try
+            {
+                var old = CboTraspasos.Text.Trim();
+                var nuevo = old.Substring(1, old.Length - 1);
+                nuevo = "A" + nuevo;
+                File.Move(empresa.DirectorioTraspasos + CboTraspasos.Text.Trim(), empresa.DirectorioTraspasos + nuevo);
+            }
+            catch (Exception e)
+            {
+
+                Ambiente.Mensaje(e.Message);
             }
         }
 

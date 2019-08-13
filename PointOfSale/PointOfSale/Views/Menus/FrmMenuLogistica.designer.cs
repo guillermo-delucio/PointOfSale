@@ -146,6 +146,7 @@
             this.button9.TabIndex = 10;
             this.button9.Text = "&RECEPCION POR TRASPASO";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
             // BtnSalida
             // 

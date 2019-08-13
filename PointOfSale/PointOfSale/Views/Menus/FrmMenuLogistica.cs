@@ -43,5 +43,14 @@ namespace DYM.Views
             };
             o.Show();
         }
+
+        private void Button9_Click(object sender, EventArgs e)
+        {
+            var o = new FrmEntradasPorTraspaso
+            {
+                MdiParent = this.ParentForm
+            };
+            o.Show();
+        }
     }
 }
