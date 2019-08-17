@@ -65,5 +65,36 @@ namespace PointOfSale.Views.Modulos.Reportes
                 }
             }
         }
+
+        private void BtnEgresosVSIngresos_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmParamData())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    Reports.IngresosVsEgresos(form.Inicial, form.Final, form.TodasLasFechas);
+                }
+            }
+        }
+
+        private void BtnExistencias_Click(object sender, EventArgs e)
+        {
+            Reports.Existencias();
+        }
+
+        private void BtnProductos_Click(object sender, EventArgs e)
+        {
+            Reports.Productos();
+        }
+
+        private void BtnProdConPrecio_Click(object sender, EventArgs e)
+        {
+            Reports.ProductosConPrecio();
+        }
+
+        private void BtnProveedores_Click(object sender, EventArgs e)
+        {
+            Reports.Proveedores();
+        }
     }
 }
