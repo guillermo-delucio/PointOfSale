@@ -84,8 +84,9 @@ namespace PointOfSale.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
+
+                //optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(@"Server=192.168.1.5;Database=Dym;User Id=SA;Password = 12345678;");
             }
         }
 
