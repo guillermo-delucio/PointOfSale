@@ -237,6 +237,7 @@ namespace PointOfSale.Controllers.EvironmentController
                                            Impuesto = (vp.ImporteImpuesto1 + vp.ImporteImpuesto2),
                                            vp.Total
                                        };
+
                                 report.Load(FVentasDetallada);
                                 report.Compile();
                                 report["creador"] = Ambiente.LoggedUser.UsuarioId;
