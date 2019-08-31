@@ -404,7 +404,20 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             producto = null;
             TxtProductoId.Text = "";
+            NCantidad.Value = 1;
+            TxtPrecioCompra.Text = "";
+            TxtPrecioCaja.Text = "";
+            TxtPrecio1.Text = "";
+            TxtPrecio2.Text = "";
+            TxtPrecio3.Text = "";
+            TxtPrecio4.Text = "";
+            TxtU1.Text = "";
+            TxtU2.Text = "";
+            TxtU3.Text = "";
+            TxtU4.Text = "";
+            TxtDescripcion.Text = "";
             SigPartida++;
+
             TxtProductoId.Focus();
         }
         private void EliminaCompra()
@@ -515,6 +528,7 @@ namespace PointOfSale.Views.Modulos.Logistica
                         ActualizaPrecios();
                         AfectaMovsInv();
                         AfectaStock();
+                        Reports.empresa = empresa;
                         Reports.EntradaXCompra(compra, partidas);
                         if (!pendiente)
                             ResetPDC();

@@ -1,5 +1,11 @@
-﻿using PointOfSale.Controllers.EvironmentController;
+﻿using PointOfSale.Controllers;
+using PointOfSale.Controllers.EvironmentController;
+using PointOfSale.Models;
+using Stimulsoft.Report;
 using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PointOfSale.Views.Modulos.Reportes
@@ -46,24 +52,13 @@ namespace PointOfSale.Views.Modulos.Reportes
 
         private void BtnCompras_Click(object sender, EventArgs e)
         {
-            using (var form = new FrmParamData())
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    Reports.Compras(form.Inicial, form.Final, form.TodasLasFechas);
-                }
-            }
+            Reports.Compras();
         }
+
 
         private void BtnComprasXdia_Click(object sender, EventArgs e)
         {
-            using (var form = new FrmParamData())
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    Reports.Compras(form.Inicial, form.Final, form.TodasLasFechas);
-                }
-            }
+            Reports.Compras();
         }
 
         private void BtnEgresosVSIngresos_Click(object sender, EventArgs e)
@@ -95,6 +90,101 @@ namespace PointOfSale.Views.Modulos.Reportes
         private void BtnProveedores_Click(object sender, EventArgs e)
         {
             Reports.Proveedores();
+        }
+
+        private void Button14_Click(object sender, EventArgs e)
+        {
+            StiReport report = new StiReport();
+            using (var form = new FrmParamData())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+
+                    using (var db = new DymContext())
+                    {
+                        if (form.TodasLasFechas)
+                        {
+                            var q = from compra in db.Compra
+                                    join comprap in db.Comprap on compra.CompraId equals comprap.CompraId
+                                    where compra.EstadoDocId.Equals("CON")
+                                    select new
+                                    {
+                                        compra.CompraId,
+                                        comprap.ProductoId,
+                                        comprap.Descripcion,
+                                        comprap.Cantidad,
+                                        comprap.ImporteImpuesto1,
+                                        comprap.ImporteImpuesto2,
+                                        comprap.PrecioCompra,
+                                        comprap.Total,
+                                        compra.CreatedAt,
+                                        compra.CreatedBy
+                                    };
+                            report.Load(Reports.FVentas);
+                            report.Dictionary.DataSources.Clear();
+                            report.RegBusinessObject("partidas", "partidas", q.ToList());
+                            report.Dictionary.Synchronize();
+                            //report.Design();
+                            //report.Save(Reports.FCompras);
+                            report.Show(true);
+                        }
+                        else
+                        {
+                            var q = from compra in db.Compra
+                                    join comprap in db.Comprap on compra.CompraId equals comprap.CompraId
+                                    where compra.EstadoDocId.Equals("CON") && compra.CreatedAt.Date >= form.Inicial && compra.CreatedAt.Date <= form.Final
+                                    select new
+                                    {
+                                        compra.CompraId,
+                                        comprap.ProductoId,
+                                        comprap.Descripcion,
+                                        comprap.Cantidad,
+                                        comprap.ImporteImpuesto1,
+                                        comprap.ImporteImpuesto2,
+                                        comprap.Total,
+                                        comprap.PrecioCompra,
+                                        compra.CreatedAt,
+                                        compra.CreatedBy
+                                    };
+                            report.Load(Reports.FVentas);
+                            report.Dictionary.DataSources.Clear();
+                            report.RegBusinessObject("partidas", "partidas", q.ToList());
+                            report.Dictionary.Synchronize();
+                            //report.Design();
+                            //report.Save(Reports.FCompras);
+                            report.Show(true);
+                        }
+
+                    }
+
+                }
+            }
+        }
+
+        private void BtnClientXMonXSal_Click(object sender, EventArgs e)
+        {
+            Reports.ClientesXmonedero();
+        }
+
+        private void BtnVentasACosto_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmParamData())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    Reports.VentasAcosto(form.Inicial, form.Final, form.TodasLasFechas);
+                }
+            }
+        }
+
+        private void BtnVentasDelDia_Click(object sender, EventArgs e)
+        {
+            Reports.Ventas();
+        }
+
+        private void BtnVentasDetalladas_Click(object sender, EventArgs e)
+        {
+            Reports.VentasDetallada();
         }
     }
 }

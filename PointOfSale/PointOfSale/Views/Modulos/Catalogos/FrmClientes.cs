@@ -71,6 +71,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
             TxtMetodoPago.Text = objeto.MetodoPagoId;
             CboPrecioDefault.Text = objeto.PrecioDefault.ToString();
             TxtDineroE.Text = Ambiente.FDinero(objeto.DineroElectronico.ToString());
+            ChkMonedero.Checked = objeto.TieneMonedero;
 
         }
 
@@ -166,7 +167,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                     objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
                     objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
                     objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
-
+                    objeto.TieneMonedero = ChkMonedero.Checked;
                     success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                     success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
                     if (success)
@@ -215,6 +216,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                         objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
                         objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
                         objeto.DineroElectronico = 0;
+                        objeto.TieneMonedero = ChkMonedero.Checked;
                         success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                         success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
                         if (success)
@@ -257,7 +259,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                         objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
                         objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
                         objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
-
+                        objeto.TieneMonedero = ChkMonedero.Checked;
                         success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                         success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
                         if (success)

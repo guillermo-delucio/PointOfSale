@@ -785,9 +785,13 @@ namespace PointOfSale.Controllers
 
         public static decimal GetTasaImpuesto(string impuestoId)
         {
+            if (string.IsNullOrEmpty(impuestoId.Trim()))
+            {
+                return 1;
+            }
             if (impuestoId == null)
             {
-                return 0;
+                return 1;
             }
 
             try
@@ -798,14 +802,14 @@ namespace PointOfSale.Controllers
                     if (impuesto != null)
                         return impuesto.Tasa;
                     else
-                        return 0;
+                        return 1;
                 }
             }
             catch (Exception ex)
             {
                 Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@ GetTasaImpuesto \n" + ex.ToString());
             }
-            return 0;
+            return 1;
 
         }
 

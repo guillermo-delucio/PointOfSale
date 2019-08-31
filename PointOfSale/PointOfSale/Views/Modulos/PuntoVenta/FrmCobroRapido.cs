@@ -32,6 +32,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         public string tipoDoc;
         public string formaPago;
         public string metodoPago;
+        public bool CobroConPuntos;
 
         public bool Cxc;
 
@@ -64,6 +65,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             pago3 = 0;
             Cxc = false;
             tipoDoc = "TIC";
+            CobroConPuntos = false;
             moneda = new Moneda();
         }
 
@@ -238,7 +240,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                         metodoPago = "PUE";
                 }
             }
-           
+            CobroConPuntos = ChkCobrarConPtos.Checked;
             totalLetra = moneda.Convertir(total.ToString(), true);
             DialogResult = DialogResult.OK;
             Close();

@@ -76,6 +76,7 @@
             this.label23 = new System.Windows.Forms.Label();
             this.TxtDineroE = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
+            this.ChkMonedero = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label18
@@ -618,11 +619,24 @@
             this.label24.TabIndex = 261;
             this.label24.Text = "$ MONEDERO ELEC.";
             // 
+            // ChkMonedero
+            // 
+            this.ChkMonedero.AutoSize = true;
+            this.ChkMonedero.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.ChkMonedero.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ChkMonedero.Location = new System.Drawing.Point(186, 604);
+            this.ChkMonedero.Name = "ChkMonedero";
+            this.ChkMonedero.Size = new System.Drawing.Size(164, 22);
+            this.ChkMonedero.TabIndex = 262;
+            this.ChkMonedero.Text = "TIENE MONEDERO";
+            this.ChkMonedero.UseVisualStyleBackColor = true;
+            // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 640);
+            this.Controls.Add(this.ChkMonedero);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.TxtDineroE);
             this.Controls.Add(this.TxtUsoCFDI);
@@ -730,5 +744,6 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox TxtDineroE;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.CheckBox ChkMonedero;
     }
 }

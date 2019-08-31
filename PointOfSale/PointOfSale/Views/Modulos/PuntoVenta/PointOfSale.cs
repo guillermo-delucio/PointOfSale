@@ -308,10 +308,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
             //Aplicaion de puntos
             GuardaPuntos();
-            AplicaPuntos();
+            AplicaPuntos(form);
 
-            
-           // venta.TotalConLetra = form.totalLetra;
+
+            // venta.TotalConLetra = form.totalLetra;
             venta.TotalConLetra = new Moneda().Convertir(venta.Total.ToString(), true);
             venta.EsCxc = form.Cxc;
 
@@ -343,80 +343,53 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 AfectaMovsInv();
                 AfectaStock();
 
-
+                if (!venta.PuntosAplicados)
+                {
+                    if (Ambiente.Pregunta("Requiere factura para este documento"))
+                        new FrmTicketFactura(venta.NoRef).Show();
+                }
                 Ambiente.SaveAndPrintTicket(venta);
-
-                if (Ambiente.Pregunta("Requiere factura para este documento"))
-                    new FrmTicketFactura(venta.NoRef).Show();
-
                 ResetPDV();
             }
             else
                 Ambiente.Mensaje("Cierre de la venta salió mal :(");
         }
 
-        private void AplicaPuntos()
+        private void AplicaPuntos(FrmCobroRapido form)
         {
-            if (!Ambiente.Estacion.CanjearPuntosAuto && cliente.DineroElectronico > 2)
+            if (form.CobroConPuntos)
             {
-                if (Ambiente.Pregunta("Aplicar el descuento de $" + Math.Round(cliente.DineroElectronico, 1) + " pesos por monedero electrónico "))
+                if (cliente != null && cliente.DineroElectronico > 0 && cliente.TieneMonedero)
                 {
-                    var maxprecio = partidas.Max(x => x.Precio);
-                    foreach (var p in partidas)
+                    if (cliente.DineroElectronico >= venta.Total)
                     {
-                        if (p.Precio == maxprecio)
+                        if (Ambiente.Pregunta("Aplicar el 100 % de descuento a la venta"))
                         {
-                            decimal precio = ((p.Cantidad * p.Precio) - cliente.DineroElectronico) / p.Cantidad;
-                            if (precio > 1)
-                            {
-                                venta.DescXpuntos = cliente.DineroElectronico;
-                                venta.PuntosAplicados = true;
-                                p.Precio = precio;
-                                CalculaTotales();
-                                break;
-                            }
-                            else
-                            {
-                                venta.DescXpuntos = 0;
-                                venta.PuntosAplicados = false;
-                                Ambiente.Mensaje("Proceso abortado, el descuento es muy grande.");
-                                Ambiente.Mensaje("Ningún registro de la venta sufrió cambios.");
-                                return;
-                            }
+                            venta.DescXpuntos = venta.Total;
+                            venta.Total = 0;
+                            venta.PuntosAplicados = true;
+                            cliente.DineroElectronico -= venta.Total;
+                            clienteController.Update(cliente);
                         }
                     }
-
-                }
-            }
-            else if (cliente.DineroElectronico > 2)
-            {
-                //GuardaPuntos();
-                var maxprecio = partidas.Max(x => x.Precio);
-                foreach (var p in partidas)
-                {
-                    if (p.Precio == maxprecio)
+                    else
                     {
-                        decimal precio = ((p.Cantidad * p.Precio) - cliente.DineroElectronico) / p.Cantidad;
-                        if (precio > 1)
+                        if (Ambiente.Pregunta("Aplicar $" + Math.Round(cliente.DineroElectronico, 1) + " pesos  de descuento a la venta"))
                         {
                             venta.DescXpuntos = cliente.DineroElectronico;
                             venta.PuntosAplicados = true;
-                            p.Precio = precio;
-                            CalculaTotales();
-                            break;
-                        }
-                        else
-                        {
-                            venta.DescXpuntos = 0;
-                            venta.PuntosAplicados = false;
-                            Ambiente.Mensaje("Proceso abortado, el descuento es muy grande.");
-                            Ambiente.Mensaje("Ningún registro de la venta sufrió cambios.");
-                            return;
+                            cliente.DineroElectronico = 0;
+                            venta.Total -= venta.DescXpuntos;
+                            clienteController.Update(cliente);
                         }
                     }
                 }
+                else
+                {
+                    Ambiente.Mensaje("Puntos no aplicados. El cliente no tiene monedero, o no tiene puntos o el cliente es público en general.  ");
+                    return;
+                }
             }
-
         }
 
         private bool GuardaPuntos()

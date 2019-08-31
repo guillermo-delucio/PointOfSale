@@ -43,14 +43,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.TxtCambio = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.TxtPago2 = new System.Windows.Forms.TextBox();
-            this.TxtFormaPago3 = new System.Windows.Forms.TextBox();
-            this.TxtConceptoPago2 = new System.Windows.Forms.TextBox();
-            this.TxtConceptoPago3 = new System.Windows.Forms.TextBox();
-            this.TxtFormaPago2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.TxtPago3 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TxtFormaPago2 = new System.Windows.Forms.TextBox();
+            this.TxtConceptoPago3 = new System.Windows.Forms.TextBox();
+            this.TxtConceptoPago2 = new System.Windows.Forms.TextBox();
+            this.TxtFormaPago3 = new System.Windows.Forms.TextBox();
+            this.TxtPago2 = new System.Windows.Forms.TextBox();
+            this.ChkCobrarConPtos = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -243,6 +244,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ChkCobrarConPtos);
             this.groupBox2.Controls.Add(this.TxtPago3);
             this.groupBox2.Controls.Add(this.TxtFormaPago1);
             this.groupBox2.Controls.Add(this.label4);
@@ -263,59 +265,41 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
-            // TxtPago2
+            // TxtPago3
             // 
-            this.TxtPago2.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtPago2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtPago2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtPago2.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtPago2.Location = new System.Drawing.Point(285, 99);
-            this.TxtPago2.Name = "TxtPago2";
-            this.TxtPago2.Size = new System.Drawing.Size(117, 29);
-            this.TxtPago2.TabIndex = 3;
-            this.TxtPago2.TextChanged += new System.EventHandler(this.TxtPago2_TextChanged);
-            this.TxtPago2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPago2_KeyDown);
-            this.TxtPago2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPago2_KeyPress);
+            this.TxtPago3.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtPago3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtPago3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtPago3.ForeColor = System.Drawing.Color.DimGray;
+            this.TxtPago3.Location = new System.Drawing.Point(285, 129);
+            this.TxtPago3.Name = "TxtPago3";
+            this.TxtPago3.Size = new System.Drawing.Size(117, 29);
+            this.TxtPago3.TabIndex = 5;
+            this.TxtPago3.TextChanged += new System.EventHandler(this.TxtPago3_TextChanged);
+            this.TxtPago3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPago3_KeyDown);
+            this.TxtPago3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPago3_KeyPress);
             // 
-            // TxtFormaPago3
+            // label4
             // 
-            this.TxtFormaPago3.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtFormaPago3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtFormaPago3.Enabled = false;
-            this.TxtFormaPago3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFormaPago3.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtFormaPago3.Location = new System.Drawing.Point(126, 129);
-            this.TxtFormaPago3.Name = "TxtFormaPago3";
-            this.TxtFormaPago3.Size = new System.Drawing.Size(30, 29);
-            this.TxtFormaPago3.TabIndex = 256;
-            this.TxtFormaPago3.TabStop = false;
-            this.TxtFormaPago3.TextChanged += new System.EventHandler(this.TxtFormaPago3_TextChanged);
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label4.Location = new System.Drawing.Point(14, 129);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 25);
+            this.label4.TabIndex = 268;
+            this.label4.Text = "♥PAGO3";
             // 
-            // TxtConceptoPago2
+            // label3
             // 
-            this.TxtConceptoPago2.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtConceptoPago2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtConceptoPago2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtConceptoPago2.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtConceptoPago2.Location = new System.Drawing.Point(162, 99);
-            this.TxtConceptoPago2.Name = "TxtConceptoPago2";
-            this.TxtConceptoPago2.Size = new System.Drawing.Size(117, 29);
-            this.TxtConceptoPago2.TabIndex = 2;
-            this.TxtConceptoPago2.TextChanged += new System.EventHandler(this.TxtConceptoPago2_TextChanged);
-            this.TxtConceptoPago2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtConceptoPago2_KeyDown);
-            // 
-            // TxtConceptoPago3
-            // 
-            this.TxtConceptoPago3.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtConceptoPago3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtConceptoPago3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtConceptoPago3.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtConceptoPago3.Location = new System.Drawing.Point(162, 129);
-            this.TxtConceptoPago3.Name = "TxtConceptoPago3";
-            this.TxtConceptoPago3.Size = new System.Drawing.Size(117, 29);
-            this.TxtConceptoPago3.TabIndex = 4;
-            this.TxtConceptoPago3.TextChanged += new System.EventHandler(this.TxtConceptoPago3_TextChanged);
-            this.TxtConceptoPago3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtConceptoPago3_KeyDown);
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label3.Location = new System.Drawing.Point(15, 99);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 25);
+            this.label3.TabIndex = 267;
+            this.label3.Text = "♥PAGO2";
             // 
             // TxtFormaPago2
             // 
@@ -331,41 +315,72 @@
             this.TxtFormaPago2.TabStop = false;
             this.TxtFormaPago2.TextChanged += new System.EventHandler(this.TxtFormaPago2_TextChanged);
             // 
-            // label3
+            // TxtConceptoPago3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label3.Location = new System.Drawing.Point(15, 99);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 25);
-            this.label3.TabIndex = 267;
-            this.label3.Text = "♥PAGO2";
+            this.TxtConceptoPago3.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtConceptoPago3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtConceptoPago3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtConceptoPago3.ForeColor = System.Drawing.Color.DimGray;
+            this.TxtConceptoPago3.Location = new System.Drawing.Point(162, 129);
+            this.TxtConceptoPago3.Name = "TxtConceptoPago3";
+            this.TxtConceptoPago3.Size = new System.Drawing.Size(117, 29);
+            this.TxtConceptoPago3.TabIndex = 4;
+            this.TxtConceptoPago3.TextChanged += new System.EventHandler(this.TxtConceptoPago3_TextChanged);
+            this.TxtConceptoPago3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtConceptoPago3_KeyDown);
             // 
-            // label4
+            // TxtConceptoPago2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label4.Location = new System.Drawing.Point(14, 129);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 25);
-            this.label4.TabIndex = 268;
-            this.label4.Text = "♥PAGO3";
+            this.TxtConceptoPago2.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtConceptoPago2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtConceptoPago2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtConceptoPago2.ForeColor = System.Drawing.Color.DimGray;
+            this.TxtConceptoPago2.Location = new System.Drawing.Point(162, 99);
+            this.TxtConceptoPago2.Name = "TxtConceptoPago2";
+            this.TxtConceptoPago2.Size = new System.Drawing.Size(117, 29);
+            this.TxtConceptoPago2.TabIndex = 2;
+            this.TxtConceptoPago2.TextChanged += new System.EventHandler(this.TxtConceptoPago2_TextChanged);
+            this.TxtConceptoPago2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtConceptoPago2_KeyDown);
             // 
-            // TxtPago3
+            // TxtFormaPago3
             // 
-            this.TxtPago3.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtPago3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtPago3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtPago3.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtPago3.Location = new System.Drawing.Point(285, 129);
-            this.TxtPago3.Name = "TxtPago3";
-            this.TxtPago3.Size = new System.Drawing.Size(117, 29);
-            this.TxtPago3.TabIndex = 5;
-            this.TxtPago3.TextChanged += new System.EventHandler(this.TxtPago3_TextChanged);
-            this.TxtPago3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPago3_KeyDown);
-            this.TxtPago3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPago3_KeyPress);
+            this.TxtFormaPago3.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtFormaPago3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtFormaPago3.Enabled = false;
+            this.TxtFormaPago3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtFormaPago3.ForeColor = System.Drawing.Color.DimGray;
+            this.TxtFormaPago3.Location = new System.Drawing.Point(126, 129);
+            this.TxtFormaPago3.Name = "TxtFormaPago3";
+            this.TxtFormaPago3.Size = new System.Drawing.Size(30, 29);
+            this.TxtFormaPago3.TabIndex = 256;
+            this.TxtFormaPago3.TabStop = false;
+            this.TxtFormaPago3.TextChanged += new System.EventHandler(this.TxtFormaPago3_TextChanged);
+            // 
+            // TxtPago2
+            // 
+            this.TxtPago2.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtPago2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtPago2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtPago2.ForeColor = System.Drawing.Color.DimGray;
+            this.TxtPago2.Location = new System.Drawing.Point(285, 99);
+            this.TxtPago2.Name = "TxtPago2";
+            this.TxtPago2.Size = new System.Drawing.Size(117, 29);
+            this.TxtPago2.TabIndex = 3;
+            this.TxtPago2.TextChanged += new System.EventHandler(this.TxtPago2_TextChanged);
+            this.TxtPago2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPago2_KeyDown);
+            this.TxtPago2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPago2_KeyPress);
+            // 
+            // ChkCobrarConPtos
+            // 
+            this.ChkCobrarConPtos.AutoSize = true;
+            this.ChkCobrarConPtos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.ChkCobrarConPtos.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ChkCobrarConPtos.Location = new System.Drawing.Point(19, 24);
+            this.ChkCobrarConPtos.Name = "ChkCobrarConPtos";
+            this.ChkCobrarConPtos.Size = new System.Drawing.Size(151, 22);
+            this.ChkCobrarConPtos.TabIndex = 294;
+            this.ChkCobrarConPtos.TabStop = false;
+            this.ChkCobrarConPtos.Text = "Cobrar con puntos";
+            this.ChkCobrarConPtos.UseVisualStyleBackColor = true;
             // 
             // FrmCobroRapido
             // 
@@ -412,5 +427,6 @@
         private System.Windows.Forms.TextBox TxtConceptoPago2;
         private System.Windows.Forms.TextBox TxtFormaPago3;
         private System.Windows.Forms.TextBox TxtPago2;
+        private System.Windows.Forms.CheckBox ChkCobrarConPtos;
     }
 }

@@ -70,7 +70,7 @@ namespace PointOfSale.Controllers
 
         public bool InsertRange(List<Cliente> lista)
         {
-         
+
             try
             {
                 using (var db = new DymContext())
@@ -95,6 +95,21 @@ namespace PointOfSale.Controllers
                 using (var db = new DymContext())
                 {
                     return db.Cliente.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
+        public List<Cliente> SelectAllOrderByMonedero()
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Cliente.OrderByDescending(x => x.TieneMonedero).ToList();
                 }
             }
             catch (Exception ex)

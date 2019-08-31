@@ -229,6 +229,13 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             if (cliente == null)
                 cliente = clienteController.SelectOne(venta.ClienteId);
 
+            //verificar que no sea pago con puntos
+            if (venta.PuntosAplicados || venta.DescXpuntos > 0)
+            {
+                Ambiente.Mensaje("Proceso abortado, el documento se cobró con puntos.");
+                return;
+            }
+
             //valida rfc
             if (Ambiente.RFCvalido(cliente.Rfc))
             {
