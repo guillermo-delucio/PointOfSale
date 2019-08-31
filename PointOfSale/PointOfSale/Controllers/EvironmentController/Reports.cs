@@ -35,6 +35,7 @@ namespace PointOfSale.Controllers.EvironmentController
         public static string FClientesXmonedero = @"C:\Dympos\Formatos\ClientesXmonedero.mrt";
         public static string FVentas = @"C:\Dympos\Formatos\Ventas.mrt";
         public static string FVentasDetallada = @"C:\Dympos\Formatos\VentasDetallada.mrt";
+        public static string FCompras = @"C:\Dympos\Formatos\Compras.mrt";
 
 
         //Controladores
@@ -100,7 +101,8 @@ namespace PointOfSale.Controllers.EvironmentController
                                             compra.CreatedAt,
                                             compra.CreatedBy
                                         };
-                                report.Load(Reports.FVentas);
+                                report.Load(Reports.FCompras);
+
                                 report.Dictionary.DataSources.Clear();
                                 report.RegBusinessObject("partidas", "partidas", q.ToList());
                                 report.Dictionary.Synchronize();
@@ -126,7 +128,10 @@ namespace PointOfSale.Controllers.EvironmentController
                                             compra.CreatedAt,
                                             compra.CreatedBy
                                         };
-                                report.Load(Reports.FVentas);
+                                report.Load(Reports.FCompras);
+                                report.Compile();
+                                report["inicial"] = form.Inicial;
+                                report["final"] = form.Final;
                                 report.Dictionary.DataSources.Clear();
                                 report.RegBusinessObject("partidas", "partidas", q.ToList());
                                 report.Dictionary.Synchronize();
@@ -207,15 +212,14 @@ namespace PointOfSale.Controllers.EvironmentController
                                 report.Load(FVentasDetallada);
                                 report.Compile();
                                 report["creador"] = Ambiente.LoggedUser.UsuarioId;
-                                report["inicial"] = form.Inicial;
-                                report["final"] = form.Final;
+
                                 report.Dictionary.DataSources.Clear();
                                 report.RegBusinessObject("ventas", "ventas", q.ToList());
                                 report.Dictionary.Synchronize();
 
-                                report.Design();
-                                report.Save(FVentasDetallada);
-                                //report.Show(true);
+                                //report.Design();
+                                //report.Save(FVentasDetallada);
+                                report.Show(true);
                             }
                             else
                             {
@@ -247,9 +251,9 @@ namespace PointOfSale.Controllers.EvironmentController
                                 report.RegBusinessObject("ventas", "ventas", q.ToList());
                                 report.Dictionary.Synchronize();
 
-                                report.Design();
-                                report.Save(FVentasDetallada);
-                                //report.Show(true);
+                                //report.Design();
+                                //report.Save(FVentasDetallada);
+                                report.Show(true);
                             }
 
                         }
