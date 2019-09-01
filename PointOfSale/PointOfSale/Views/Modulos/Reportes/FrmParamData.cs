@@ -13,8 +13,8 @@ namespace PointOfSale.Views.Modulos.Reportes
 
     public partial class FrmParamData : Form
     {
-        public DateTime Inicial;
-        public DateTime Final;
+        public static DateTime Inicial;
+        public static DateTime Final;
         public bool TodasLasFechas;
         public FrmParamData()
         {
@@ -24,8 +24,8 @@ namespace PointOfSale.Views.Modulos.Reportes
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
-            Inicial = DpInicial.Value.Date;
-            Final = DpFinal.Value.Date;
+            Inicial = DpInicial.Value;
+            Final = DpFinal.Value;
             TodasLasFechas = ChkTotasLasFechas.Checked;
             DialogResult = DialogResult.OK;
             Close();

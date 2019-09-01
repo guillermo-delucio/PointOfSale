@@ -4,12 +4,7 @@ using PointOfSale.Models;
 using PointOfSale.Views.Modulos.Busquedas;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PointOfSale.Views.Modulos.Logistica
@@ -159,8 +154,6 @@ namespace PointOfSale.Views.Modulos.Logistica
             compra.EstacionId = Ambiente.Estacion.EstacionId;
             compra.CreatedAt = DateTime.Now;
             compra.CreatedBy = Ambiente.LoggedUser.UsuarioId;
-
-
             compraController.InsertOne(compra);
         }
         private void LlenaDatosProducto()
@@ -817,11 +810,12 @@ namespace PointOfSale.Views.Modulos.Logistica
         {
             sobreGrid = false;
         }
-        #endregion
-
         private void TxtProvedorId_MouseEnter(object sender, EventArgs e)
         {
             sobreGrid = true;
         }
+        #endregion
+
+
     }
 }

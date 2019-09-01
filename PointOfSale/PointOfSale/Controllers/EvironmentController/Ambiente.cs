@@ -492,24 +492,32 @@ namespace PointOfSale.Controllers
         }
         public static Tuple<string, string> GetFilePath()
         {
-
-            var filePath = string.Empty;
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            try
             {
-                openFileDialog.Filter = "All files (*.*)|*.*";
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                var filePath = string.Empty;
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    //Get the path of specified file
-                    filePath = openFileDialog.FileName;
-                    if (filePath.Length == 0 || openFileDialog.SafeFileName.Length == 0)
-                        return new Tuple<string, string>("", "");
+                    openFileDialog.Filter = "All files (*.*)|*.*";
+                    openFileDialog.RestoreDirectory = true;
 
-                    return new Tuple<string, string>(filePath, openFileDialog.SafeFileName);
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        //Get the path of specified file
+                        filePath = openFileDialog.FileName;
+                        if (filePath.Length == 0 || openFileDialog.SafeFileName.Length == 0)
+                            return new Tuple<string, string>("", "");
+
+                        return new Tuple<string, string>(filePath, openFileDialog.SafeFileName);
+                    }
                 }
+                return new Tuple<string, string>("", "");
             }
-            return null;
+            catch (Exception)
+            {
+                return new Tuple<string, string>("", "");
+            }
+
+
         }
         public static string GetFolderPath()
         {

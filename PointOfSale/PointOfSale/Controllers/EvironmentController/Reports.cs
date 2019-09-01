@@ -102,7 +102,9 @@ namespace PointOfSale.Controllers.EvironmentController
                                             compra.CreatedBy
                                         };
                                 report.Load(Reports.FCompras);
-
+                                report.Compile();
+                                report["inicial"] = null;
+                                //report["final"] = null;
                                 report.Dictionary.DataSources.Clear();
                                 report.RegBusinessObject("partidas", "partidas", q.ToList());
                                 report.Dictionary.Synchronize();
@@ -114,7 +116,7 @@ namespace PointOfSale.Controllers.EvironmentController
                             {
                                 var q = from compra in db.Compra
                                         join comprap in db.Comprap on compra.CompraId equals comprap.CompraId
-                                        where compra.EstadoDocId.Equals("CON") && compra.CreatedAt.Date >= form.Inicial && compra.CreatedAt.Date <= form.Final
+                                        where compra.EstadoDocId.Equals("CON") && compra.CreatedAt.Date >= FrmParamData.Inicial.Date && compra.CreatedAt.Date <= FrmParamData.Final.Date
                                         select new
                                         {
                                             compra.CompraId,
@@ -130,8 +132,8 @@ namespace PointOfSale.Controllers.EvironmentController
                                         };
                                 report.Load(Reports.FCompras);
                                 report.Compile();
-                                report["inicial"] = form.Inicial;
-                                report["final"] = form.Final;
+                                report["inicial"] = FrmParamData.Inicial.Date;
+                                report["final"] = FrmParamData.Final.Date;
                                 report.Dictionary.DataSources.Clear();
                                 report.RegBusinessObject("partidas", "partidas", q.ToList());
                                 report.Dictionary.Synchronize();
@@ -245,8 +247,8 @@ namespace PointOfSale.Controllers.EvironmentController
                                 report.Load(FVentasDetallada);
                                 report.Compile();
                                 report["creador"] = Ambiente.LoggedUser.UsuarioId;
-                                report["inicial"] = form.Inicial;
-                                report["final"] = form.Final;
+                                report["inicial"] = FrmParamData.Inicial.Date;
+                                report["final"] = FrmParamData.Final.Date;
                                 report.Dictionary.DataSources.Clear();
                                 report.RegBusinessObject("ventas", "ventas", q.ToList());
                                 report.Dictionary.Synchronize();
@@ -303,8 +305,8 @@ namespace PointOfSale.Controllers.EvironmentController
                                 report.Load(FVentas);
                                 report.Compile();
                                 report["creador"] = Ambiente.LoggedUser.UsuarioId;
-                                report["inicial"] = form.Inicial;
-                                report["final"] = form.Final;
+                                report["inicial"] = null;
+                                // report["final"] = null;
                                 report.Dictionary.DataSources.Clear();
                                 report.RegBusinessObject("ventas", "ventas", q.ToList());
                                 report.Dictionary.Synchronize();
@@ -319,7 +321,7 @@ namespace PointOfSale.Controllers.EvironmentController
                                          from v in db.Venta
                                          join c in db.Cliente on v.ClienteId equals c.ClienteId
                                          where v.EstadoDocId.Equals("CON") && v.Anulada == false &&
-                                         v.CreatedAt.Date >= form.Inicial && v.CreatedAt.Date <= form.Final
+                                         v.CreatedAt.Date >= FrmParamData.Inicial.Date && v.CreatedAt.Date <= FrmParamData.Final.Date
                                          select new
                                          {
                                              v.VentaId,
@@ -336,8 +338,8 @@ namespace PointOfSale.Controllers.EvironmentController
                                 report.Load(FVentas);
                                 report.Compile();
                                 report["creador"] = Ambiente.LoggedUser.UsuarioId;
-                                report["inicial"] = form.Inicial;
-                                report["final"] = form.Final;
+                                report["inicial"] = FrmParamData.Inicial.Date;
+                                report["final"] = FrmParamData.Final.Date;
                                 report.Dictionary.DataSources.Clear();
                                 report.RegBusinessObject("ventas", "ventas", q.ToList());
                                 report.Dictionary.Synchronize();
@@ -379,7 +381,6 @@ namespace PointOfSale.Controllers.EvironmentController
                     partidas = q.ToList();
                     productos = db.Producto.ToList();
                 }
-
                 else
                 {
                     var q = from v in db.Venta
@@ -433,7 +434,12 @@ namespace PointOfSale.Controllers.EvironmentController
             report["impc"] = impuestoct;
             report["totc"] = totalct;
             report["utilidad"] = totalvt - totalct;
-            if (!todasLasFechas)
+            if (todasLasFechas)
+            {
+                report["inicial"] = null;
+                //report["final"] = null;
+            }
+            else
             {
                 report["inicial"] = inicial.ToString("dd-MM-yyyy");
                 report["final"] = final.ToString("dd-MM-yyyy");
@@ -640,6 +646,18 @@ namespace PointOfSale.Controllers.EvironmentController
 
                 report = new StiReport();
                 report.Load(FCierres);
+                if (todasLasFechas)
+                {
+                    report.Compile();
+                    report["inicial"] = null;
+                    // report["final"] = null;
+                }
+                else
+                {
+                    report.Compile();
+                    report["inicial"] = inicial;
+                    report["final"] = final;
+                }
 
                 report.RegBusinessObject("cortes", "cortes", cortes);
 

@@ -39,7 +39,7 @@ namespace PointOfSale.Views.Modulos.Reportes
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    Reports.Cortes(form.Inicial, form.Final, form.TodasLasFechas);
+                    Reports.Cortes(FrmParamData.Inicial.Date, FrmParamData.Final.Date, form.TodasLasFechas);
                 }
             }
 
@@ -67,7 +67,7 @@ namespace PointOfSale.Views.Modulos.Reportes
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    Reports.IngresosVsEgresos(form.Inicial, form.Final, form.TodasLasFechas);
+                    Reports.IngresosVsEgresos(FrmParamData.Inicial.Date, FrmParamData.Final.Date, form.TodasLasFechas);
                 }
             }
         }
@@ -132,7 +132,7 @@ namespace PointOfSale.Views.Modulos.Reportes
                         {
                             var q = from compra in db.Compra
                                     join comprap in db.Comprap on compra.CompraId equals comprap.CompraId
-                                    where compra.EstadoDocId.Equals("CON") && compra.CreatedAt.Date >= form.Inicial && compra.CreatedAt.Date <= form.Final
+                                    where compra.EstadoDocId.Equals("CON") && compra.CreatedAt.Date >= FrmParamData.Inicial.Date && compra.CreatedAt.Date <= FrmParamData.Final.Date
                                     select new
                                     {
                                         compra.CompraId,
@@ -172,7 +172,7 @@ namespace PointOfSale.Views.Modulos.Reportes
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    Reports.VentasAcosto(form.Inicial, form.Final, form.TodasLasFechas);
+                    Reports.VentasAcosto(FrmParamData.Inicial.Date, FrmParamData.Final.Date, form.TodasLasFechas);
                 }
             }
         }
