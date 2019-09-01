@@ -510,6 +510,7 @@ namespace PointOfSale.Controllers
                         return new Tuple<string, string>(filePath, openFileDialog.SafeFileName);
                     }
                 }
+
                 return new Tuple<string, string>("", "");
             }
             catch (Exception)
