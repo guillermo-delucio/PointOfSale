@@ -67,13 +67,13 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         {
                             Grid1.DataSource = db.Cliente.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText) || x.Negocio.Contains(SearchText) && (x.IsDeleted == false && x.TieneLicencia == true)).OrderBy(x => x.RazonSocial).
                             Select(x => new { x.ClienteId, x.RazonSocial, x.Negocio, x.Rfc }).ToList();
-                            
+
                         }
                         else
                         {
                             Grid1.DataSource = db.Cliente.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText) || x.Negocio.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
                             Select(x => new { x.ClienteId, x.RazonSocial, x.Negocio, x.Rfc }).ToList();
-                            
+
                         }
 
                     }
@@ -86,7 +86,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     {
                         Grid1.DataSource = db.Proveedor.AsNoTracking().Where(x => x.RazonSocial.Contains(SearchText) || x.Negocio.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.RazonSocial).
                             Select(x => new { x.ProveedorId, x.RazonSocial, x.Negocio }).ToList();
-                        
+
                     }
                     break;
 
@@ -100,7 +100,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                            x.ProductoId,
                            x.Descripcion
                        }).OrderBy(x => x.Descripcion).ToList();
-                        
+
                     }
                     break;
 
@@ -110,7 +110,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.Categoria.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.CategoriaId, x.Nombre }).ToList();
 
-                        
+
                     }
                     break;
 
@@ -120,7 +120,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.Laboratorio.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.LaboratorioId, x.Nombre }).ToList();
 
-                        
+
                     }
                     break;
 
@@ -130,7 +130,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.Impuesto.AsNoTracking().Where(x => x.ImpuestoId.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.ImpuestoId).
                             Select(x => new { x.ImpuestoId, x.Tasa }).ToList();
 
-                        
+
                     }
 
                     break;
@@ -140,7 +140,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     {
                         Grid1.DataSource = db.Sustancia.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).
                             Select(x => new { x.SustanciaId, x.Nombre }).OrderBy(x => x.Nombre).ToList();
-                        
+
                     }
 
                     break;
@@ -153,7 +153,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.Estacion.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.EstacionId, x.Nombre }).ToList();
 
-                        
+
                     }
                     break;
 
@@ -163,7 +163,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.CClaveProdServ.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                         Select(x => new { x.ClaveProdServId, x.Nombre }).ToList();
 
-                        
+
                     }
                     break;
 
@@ -174,7 +174,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.Presentacion.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                              Select(x => new { x.PresentacionId, x.Nombre }).ToList();
 
-                        
+
                     }
                     break;
 
@@ -184,7 +184,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.UnidadMedida.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.UnidadMedidaId, x.Nombre }).ToList();
 
-                        
+
                     }
                     break;
 
@@ -194,7 +194,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.Usuario.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && x.IsDeleted == false).OrderBy(x => x.Nombre).
                             Select(x => new { x.UsuarioId, x.Nombre }).ToList();
 
-                        
+
                     }
                     break;
                 case (int)Ambiente.TipoBusqueda.FormaPago:
@@ -203,7 +203,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.FormaPago.AsNoTracking().Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
                             Select(x => new { x.FormaPagoId, x.Descripcion }).ToList();
 
-                        
+
                     }
                     break;
                 case (int)Ambiente.TipoBusqueda.MetodoPago:
@@ -212,7 +212,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.CMetodopago.AsNoTracking().Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
                             Select(x => new { x.MetodoPagoId, x.Descripcion }).ToList();
 
-                        
+
                     }
                     break;
                 case (int)Ambiente.TipoBusqueda.UsoCDFI:
@@ -221,7 +221,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.CUsocfdi.AsNoTracking().Where(x => x.Descripcion.Contains(SearchText)).OrderBy(x => x.Descripcion).
                             Select(x => new { x.UsoCfdiid, x.Descripcion }).ToList();
 
-                        
+
                     }
                     break;
                 case (int)Ambiente.TipoBusqueda.Tickets:
@@ -230,7 +230,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.Venta.AsNoTracking().Where(x => x.NoRef == int.Parse(SearchText) && x.EstadoDocId.Equals("CON")).
                             Select(x => new { Ticket = x.NoRef, Status = x.EstadoDocId, x.DatosCliente }).ToList();
 
-                        
+
                     }
                     break;
                 case (int)Ambiente.TipoBusqueda.Empresas:
@@ -239,7 +239,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.Empresa.AsNoTracking().Where(x => x.Nombre.Contains(SearchText) && !(bool)x.IsDeleted).
                             Select(x => new { ID = x.EmpresaId, x.Nombre }).ToList();
 
-                        
+
                     }
                     break;
                 case (int)Ambiente.TipoBusqueda.RegimenFiscal:
@@ -248,7 +248,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                         Grid1.DataSource = db.CRegimenfiscal.AsNoTracking().Where(x => x.Descripcion.Contains(SearchText)).
                             Select(x => new { ID = x.RegimenFiscalId, x.Descripcion }).ToList();
 
-                        
+
                     }
                     break;
                 case (int)Ambiente.TipoBusqueda.Sucursal:
@@ -256,7 +256,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     {
                         Grid1.DataSource = db.Sucursal.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).
                             Select(x => new { ID = x.SucursalId, x.Nombre }).ToList();
-                        
+
                     }
                     break;
                 default:

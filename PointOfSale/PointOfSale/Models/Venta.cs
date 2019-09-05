@@ -40,6 +40,8 @@ namespace PointOfSale.Models
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
         public string UpdatedBy { get; set; }
+        public decimal Iva { get; set; }
+        public decimal Ieps { get; set; }
         public decimal SubTotal { get; set; }
         public decimal Impuesto { get; set; }
         public decimal Total { get; set; }

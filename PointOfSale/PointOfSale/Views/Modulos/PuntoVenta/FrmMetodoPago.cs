@@ -1,5 +1,4 @@
 ﻿using PointOfSale.Controllers;
-using PointOfSale.Models;
 using PointOfSale.Views.Modulos.Busquedas;
 using System;
 using System.Collections.Generic;
@@ -13,26 +12,27 @@ using System.Windows.Forms;
 
 namespace PointOfSale.Views.Modulos.PuntoVenta
 {
-    public partial class FrmFormaPago : Form
+    public partial class FrmMetodoPago : Form
     {
-        public FormaPago formapago;
-
-        public FrmFormaPago()
+        public string MetodoPago { get; set; }
+        public FrmMetodoPago()
         {
             InitializeComponent();
+            MetodoPago = "PUE";
         }
 
-        private void TxtFormaPago_KeyDown(object sender, KeyEventArgs e)
+
+        private void TxtMetodoPago_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                using (var form = new FrmBusqueda(TxtFormaPago.Text, (int)Ambiente.TipoBusqueda.FormaPago))
+                using (var form = new FrmBusqueda(TxtMetodoPago.Text.Trim(), (int)Ambiente.TipoBusqueda.MetodoPago))
                 {
                     if (form.ShowDialog() == DialogResult.OK)
                     {
-                        formapago = form.FormaPago;
-                        TxtFormaPago.Text = formapago.Descripcion;
-
+                        TxtMetodoPagoId.Text = form.MetodoPago.MetodoPagoId;
+                        TxtMetodoPago.Text = form.MetodoPago.Descripcion;
+                        MetodoPago = form.MetodoPago.MetodoPagoId;
                     }
                 }
             }
@@ -46,7 +46,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Abort;
             Close();
         }
     }

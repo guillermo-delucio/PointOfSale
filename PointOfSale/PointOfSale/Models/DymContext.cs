@@ -1814,7 +1814,11 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.FormaPago3).HasMaxLength(2);
 
+                entity.Property(e => e.Ieps).HasColumnType("decimal(18, 2)");
+
                 entity.Property(e => e.Impuesto).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Iva).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.MetodoPago).HasMaxLength(50);
 

@@ -47,9 +47,10 @@ namespace PointOfSale.Views.Menus
             o.Show();
         }
 
-        private void BtnReimpresionT_Click(object sender, EventArgs e)
+        private void BtnFacturaGlobal_Click(object sender, EventArgs e)
         {
-
+            var o = new FrmFacturaGlobal();
+            o.Show();
         }
     }
 }

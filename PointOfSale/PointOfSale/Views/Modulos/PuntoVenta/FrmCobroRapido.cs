@@ -232,7 +232,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
             if (tipoDoc.Equals("FAC") && Ambiente.Estacion.SolicitarFmpago)
             {
-                using (var form = new FrmFormaPago())
+                using (var form = new FrmMetodoPago())
                 {
                     if (form.ShowDialog() == DialogResult.OK)
                         metodoPago = form.MetodoPago;

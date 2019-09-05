@@ -32,7 +32,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.BtnReimpresionT = new System.Windows.Forms.Button();
+            this.BtnFacturaGlobal = new System.Windows.Forms.Button();
             this.BtnMovsCaja = new System.Windows.Forms.Button();
             this.BtnCerrarCaja = new System.Windows.Forms.Button();
             this.BtnVentasDelDia = new System.Windows.Forms.Button();
@@ -83,16 +83,16 @@
             this.button3.Text = "&Clientes";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // BtnReimpresionT
+            // BtnFacturaGlobal
             // 
-            this.BtnReimpresionT.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnReimpresionT.Location = new System.Drawing.Point(108, 312);
-            this.BtnReimpresionT.Name = "BtnReimpresionT";
-            this.BtnReimpresionT.Size = new System.Drawing.Size(132, 48);
-            this.BtnReimpresionT.TabIndex = 243;
-            this.BtnReimpresionT.Text = "&ReImpresión de Ticket.";
-            this.BtnReimpresionT.UseVisualStyleBackColor = true;
-            this.BtnReimpresionT.Click += new System.EventHandler(this.BtnReimpresionT_Click);
+            this.BtnFacturaGlobal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnFacturaGlobal.Location = new System.Drawing.Point(108, 312);
+            this.BtnFacturaGlobal.Name = "BtnFacturaGlobal";
+            this.BtnFacturaGlobal.Size = new System.Drawing.Size(132, 48);
+            this.BtnFacturaGlobal.TabIndex = 243;
+            this.BtnFacturaGlobal.Text = "&Factura Global";
+            this.BtnFacturaGlobal.UseVisualStyleBackColor = true;
+            this.BtnFacturaGlobal.Click += new System.EventHandler(this.BtnFacturaGlobal_Click);
             // 
             // BtnMovsCaja
             // 
@@ -169,7 +169,7 @@
             this.Controls.Add(this.BtnVentasDelDia);
             this.Controls.Add(this.BtnCerrarCaja);
             this.Controls.Add(this.BtnMovsCaja);
-            this.Controls.Add(this.BtnReimpresionT);
+            this.Controls.Add(this.BtnFacturaGlobal);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label14);
@@ -188,7 +188,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button BtnReimpresionT;
+        private System.Windows.Forms.Button BtnFacturaGlobal;
         private System.Windows.Forms.Button BtnMovsCaja;
         private System.Windows.Forms.Button BtnCerrarCaja;
         private System.Windows.Forms.Button BtnVentasDelDia;
