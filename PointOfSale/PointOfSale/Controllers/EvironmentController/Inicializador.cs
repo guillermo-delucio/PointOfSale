@@ -72,6 +72,7 @@ namespace PointOfSale.Controllers
                         estacion.CanjearPuntosAuto = false;
                         db.Add(estacion);
                     }
+
                     var sustancia = db.Sustancia.FirstOrDefault(x => x.SustanciaId == "SYS");
                     if (sustancia == null)
                     {
@@ -80,6 +81,7 @@ namespace PointOfSale.Controllers
                         sustancia.Nombre = "DEFAUTL";
                         db.Add(sustancia);
                     }
+
                     var categoria = db.Categoria.FirstOrDefault(x => x.CategoriaId == "SYS");
                     if (categoria == null)
                     {
@@ -115,6 +117,7 @@ namespace PointOfSale.Controllers
                         impuesto.CImpuesto = "002";
                         db.Add(impuesto);
                     }
+
                     var unidadMedida = db.UnidadMedida.FirstOrDefault(x => x.UnidadMedidaId == "SYS");
                     if (unidadMedida == null)
                     {
@@ -268,6 +271,39 @@ namespace PointOfSale.Controllers
                         puntosConfig.IsDeleted = false;
                         db.Add(puntosConfig);
                     }
+                    //01010101
+                    var prodSys = db.Producto.FirstOrDefault(x => x.ProductoId.Equals("01010101"));
+
+                    if (prodSys == null)
+                    {
+                        prodSys = new Producto();
+                        prodSys.ProductoId = "01010101";
+                        prodSys.CategoriaId = "SYS";
+                        prodSys.PresentacionId = "SYS";
+                        prodSys.LaboratorioId = "SYS";
+                        prodSys.Stock = 0;
+                        prodSys.Descripcion = "Concepto generico facturable";
+                        prodSys.PrecioCompra = 0;
+                        prodSys.PrecioCaja = 0;
+                        prodSys.Precio1 = 0;
+                        prodSys.Precio2 = 0;
+                        prodSys.Precio3 = 0;
+                        prodSys.Precio4 = 0;
+                        prodSys.Utilidad1 = 0;
+                        prodSys.Utilidad2 = 0;
+                        prodSys.Utilidad3 = 0;
+                        prodSys.Utilidad4 = 0;
+                        prodSys.TieneLote = false;
+                        prodSys.IsDeleted = false;
+                        prodSys.CratedAt = DateTime.Now;
+                        prodSys.UnidadMedidaId = "SYS";
+                        prodSys.ClaveProdServId = "01010101";
+                        prodSys.ClaveUnidadId = "SYS";
+                        prodSys.ChkCaducidad = false;
+
+                        db.Add(prodSys);
+                    }
+
 
                     db.SaveChanges();
                 }

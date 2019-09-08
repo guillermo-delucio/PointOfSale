@@ -232,6 +232,8 @@ namespace PointOfSale.Controllers
             return traspaso;
         }
 
+        
+
         public static List<Traspasop> SerializaPD(string path)
         {
             List<Traspasop> partidas = new List<Traspasop>();

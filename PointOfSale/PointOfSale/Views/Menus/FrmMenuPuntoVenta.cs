@@ -49,7 +49,7 @@ namespace PointOfSale.Views.Menus
 
         private void BtnFacturaGlobal_Click(object sender, EventArgs e)
         {
-            var o = new FrmFacturaGlobal();
+            var o = new FrmFacturaGlobal2();
             o.Show();
         }
     }

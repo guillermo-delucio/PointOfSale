@@ -98,8 +98,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
                 //sumar el total por partida a los totales de la venta
                 venta.SubTotal += partida.SubTotal;
-                //venta.Impuesto = 0;
-                venta.Impuesto += Math.Round(partida.ImporteImpuesto1, 2) + Math.Round(partida.ImporteImpuesto2, 2);
+                venta.Impuesto += partida.ImporteImpuesto1 + partida.ImporteImpuesto2;
                 venta.Total = venta.SubTotal + venta.Impuesto;
 
                 //Refleajar el cambio  de precio y columnas calculadas en la malla                
@@ -911,10 +910,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             if (venta.Total > 0)
             {
-                if (true)
-                {
-
-                }
+                
                 using (var form = new FrmCobroRapido(venta.Total))
                 {
                     if (form.ShowDialog() == DialogResult.OK)

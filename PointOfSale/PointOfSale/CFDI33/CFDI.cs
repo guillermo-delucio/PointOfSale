@@ -147,10 +147,10 @@ namespace PointOfSale.CFDI33
             comprobante.Fecha = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
             comprobante.FormaPago = Venta.FormaPago1;
             comprobante.NoCertificado = NoCertificado;
-            comprobante.SubTotal = Venta.SubTotal;
+            comprobante.SubTotal = Math.Round(Venta.SubTotal, 2);
             //comprobante.Descuento = 0;
             comprobante.Moneda = "MXN";
-            comprobante.Total = Venta.Total;
+            comprobante.Total = Math.Round(Venta.Total, 2);
             comprobante.TipoDeComprobante = "I";
             comprobante.MetodoPago = Venta.MetodoPago;
             comprobante.MetodoPago = "PUE";
@@ -292,7 +292,7 @@ namespace PointOfSale.CFDI33
             //totales de impuestos trasladados
             if ((TotalIva + TotalIeps) > 0)
             {
-                totalImpuestosComprobante.TotalImpuestosTrasladados = TotalIva + TotalIeps;
+                totalImpuestosComprobante.TotalImpuestosTrasladados = Math.Round(TotalIva + TotalIeps, 2);
                 totalImpuestosComprobante.Traslados = impuestosComprobante.ToArray();
                 comprobante.Impuestos = totalImpuestosComprobante;
             }

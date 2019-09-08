@@ -1762,7 +1762,7 @@ namespace PointOfSale.Models
             {
                 entity.Property(e => e.Anulada).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.Cambio).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.Cambio).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.ClienteId)
                     .HasMaxLength(50)
@@ -1786,10 +1786,10 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.DatosCliente).HasDefaultValueSql("(N'SYS')");
 
-                entity.Property(e => e.DescXpuntos).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.DescXpuntos).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.Descuento)
-                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnType("decimal(18, 6)")
                     .HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.EsCxc).HasDefaultValueSql("((0))");
@@ -1814,11 +1814,7 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.FormaPago3).HasMaxLength(2);
 
-                entity.Property(e => e.Ieps).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.Impuesto).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.Iva).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.Impuesto).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.MetodoPago).HasMaxLength(50);
 
@@ -1844,13 +1840,13 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.SelloSat).HasColumnName("SelloSAT");
 
-                entity.Property(e => e.SubTotal).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.SubTotal).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.TipoDocId)
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'TIC')");
 
-                entity.Property(e => e.Total).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.Total).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.Unidades).HasColumnType("decimal(18, 2)");
 
@@ -1898,7 +1894,7 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Caducidad3).HasColumnType("datetime");
 
                 entity.Property(e => e.Cantidad)
-                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnType("decimal(18, 6)")
                     .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.ClaveImpuesto1).HasMaxLength(5);
@@ -1915,11 +1911,11 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Descripcion).HasMaxLength(250);
 
-                entity.Property(e => e.Descuento).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.Descuento).HasColumnType("decimal(18, 6)");
 
-                entity.Property(e => e.ImporteImpuesto1).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.ImporteImpuesto1).HasColumnType("decimal(18, 6)");
 
-                entity.Property(e => e.ImporteImpuesto2).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.ImporteImpuesto2).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.Impuesto1).HasColumnType("decimal(18, 6)");
 
@@ -1932,20 +1928,20 @@ namespace PointOfSale.Models
                 entity.Property(e => e.NoLote3).HasMaxLength(50);
 
                 entity.Property(e => e.Precio)
-                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnType("decimal(18, 6)")
                     .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.ProductoId)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.SubTotal).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.SubTotal).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.TasaOcuota1).HasMaxLength(50);
 
                 entity.Property(e => e.TasaOcuota2).HasMaxLength(50);
 
-                entity.Property(e => e.Total).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.Total).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.Unidad).HasMaxLength(50);
 

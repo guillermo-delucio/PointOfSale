@@ -9,13 +9,13 @@ namespace PointOfSale.Models
         public int VentaId { get; set; }
         public string ProductoId { get; set; }
         public string Descripcion { get; set; }
-        public decimal Cantidad { get; set; }
-        public decimal Precio { get; set; }
-        public decimal Descuento { get; set; }
         public string ClaveImpuesto1 { get; set; }
         public string ClaveImpuesto2 { get; set; }
         public string TasaOcuota1 { get; set; }
         public string TasaOcuota2 { get; set; }
+        public decimal Cantidad { get; set; }
+        public decimal Precio { get; set; }
+        public decimal Descuento { get; set; }
         public decimal Impuesto1 { get; set; }
         public decimal Impuesto2 { get; set; }
         public decimal ImporteImpuesto1 { get; set; }
