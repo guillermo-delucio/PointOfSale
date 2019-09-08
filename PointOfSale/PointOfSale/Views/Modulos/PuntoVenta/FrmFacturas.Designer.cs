@@ -47,6 +47,7 @@
             this.BtnFacturar = new System.Windows.Forms.Button();
             this.BtnCambiarCliente = new System.Windows.Forms.Button();
             this.BtnSalir = new System.Windows.Forms.Button();
+            this.BtnCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -214,9 +215,9 @@
             // 
             // BtnFacturar
             // 
-            this.BtnFacturar.BackColor = System.Drawing.Color.LightSalmon;
+            this.BtnFacturar.BackColor = System.Drawing.SystemColors.Control;
             this.BtnFacturar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnFacturar.Location = new System.Drawing.Point(12, 357);
+            this.BtnFacturar.Location = new System.Drawing.Point(12, 356);
             this.BtnFacturar.Name = "BtnFacturar";
             this.BtnFacturar.Size = new System.Drawing.Size(95, 39);
             this.BtnFacturar.TabIndex = 277;
@@ -226,9 +227,9 @@
             // 
             // BtnCambiarCliente
             // 
-            this.BtnCambiarCliente.Location = new System.Drawing.Point(113, 357);
+            this.BtnCambiarCliente.Location = new System.Drawing.Point(214, 357);
             this.BtnCambiarCliente.Name = "BtnCambiarCliente";
-            this.BtnCambiarCliente.Size = new System.Drawing.Size(127, 39);
+            this.BtnCambiarCliente.Size = new System.Drawing.Size(127, 38);
             this.BtnCambiarCliente.TabIndex = 278;
             this.BtnCambiarCliente.Text = "ACTUALIZAR DATOS DEL CLIENTE ";
             this.BtnCambiarCliente.UseVisualStyleBackColor = true;
@@ -244,11 +245,24 @@
             this.BtnSalir.UseVisualStyleBackColor = true;
             this.BtnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
+            // BtnCancelar
+            // 
+            this.BtnCancelar.BackColor = System.Drawing.SystemColors.Control;
+            this.BtnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancelar.Location = new System.Drawing.Point(113, 356);
+            this.BtnCancelar.Name = "BtnCancelar";
+            this.BtnCancelar.Size = new System.Drawing.Size(95, 39);
+            this.BtnCancelar.TabIndex = 282;
+            this.BtnCancelar.Text = "&CANCELAR";
+            this.BtnCancelar.UseVisualStyleBackColor = false;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
+            // 
             // FrmFacturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(930, 407);
+            this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnSalir);
             this.Controls.Add(this.BtnFacturar);
             this.Controls.Add(this.BtnCambiarCliente);
@@ -284,5 +298,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.Button BtnCancelar;
     }
 }

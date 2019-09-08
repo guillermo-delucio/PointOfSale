@@ -201,6 +201,7 @@
     <Compile Include="CFDI33\CFDI.cs" />
     <Compile Include="CFDI33\cfdv33_tdCFDI_catCFDI.cs" />
     <Compile Include="CFDI33\opensslkey.cs" />
+    <Compile Include="CFDI33\PFX.cs" />
     <Compile Include="CFDI33\SelloDigital.cs" />
     <Compile Include="CFDI33\StringWriterEncoding.cs" />
     <Compile Include="CFDI33\TimbreFiscalDigitalv11_tdCFDI.cs" />

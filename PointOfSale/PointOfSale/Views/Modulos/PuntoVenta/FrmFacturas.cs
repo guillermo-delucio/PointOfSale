@@ -110,5 +110,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             CargaGrid();
         }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

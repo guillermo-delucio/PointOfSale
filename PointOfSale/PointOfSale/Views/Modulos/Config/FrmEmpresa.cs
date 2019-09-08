@@ -1,15 +1,9 @@
-﻿using PointOfSale.Controllers;
+﻿using PointOfSale.CFDI33;
+using PointOfSale.Controllers;
 using PointOfSale.Models;
 using PointOfSale.Views.Modulos.Busquedas;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace PointOfSale.Views.Modulos.Config
@@ -17,11 +11,13 @@ namespace PointOfSale.Views.Modulos.Config
     public partial class FrmEmpresa : Form
     {
         Empresa empresa;
+        PFX oPFX;
         EmpresaController empresaController;
         public FrmEmpresa()
         {
             InitializeComponent();
             empresaController = new EmpresaController();
+
         }
 
 
@@ -54,6 +50,9 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.RutaPlantillaTraspaso = TxtRutaPlantillaTraspaso.Text.Trim();
                 empresa.RutaPlantillaDetalleTraspaso = TxtRutaPlantillaDetalleTraspaso.Text.Trim();
                 empresa.DirectorioReportes = TxtDirectorioReportes.Text.Trim();
+                empresa.DirectorioOpenSslBin = TxtOpenSslBin.Text;
+                empresa.RutaArchivoPfx = TxtRutaArchivoPfx.Text;
+
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
                     Ambiente.Mensaje("Nada que guardar");
@@ -90,6 +89,9 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.RutaPlantillaTraspaso = TxtRutaPlantillaTraspaso.Text.Trim();
                 empresa.RutaPlantillaDetalleTraspaso = TxtRutaPlantillaDetalleTraspaso.Text.Trim();
                 empresa.DirectorioReportes = TxtDirectorioReportes.Text.Trim();
+                empresa.DirectorioOpenSslBin = TxtOpenSslBin.Text;
+                empresa.RutaArchivoPfx = TxtRutaArchivoPfx.Text;
+
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
                     Ambiente.Mensaje("Nada que guardar");
@@ -130,6 +132,8 @@ namespace PointOfSale.Views.Modulos.Config
             TxtRutaPlantillaTraspaso.Text = empresa.RutaPlantillaTraspaso;
             TxtRutaPlantillaDetalleTraspaso.Text = empresa.RutaPlantillaDetalleTraspaso;
             TxtDirectorioReportes.Text = empresa.DirectorioReportes;
+            TxtOpenSslBin.Text = empresa.DirectorioOpenSslBin;
+            TxtRutaArchivoPfx.Text = empresa.RutaArchivoPfx;
         }
 
         private void BtnAceptar_Click(object sender, EventArgs e)
@@ -153,7 +157,20 @@ namespace PointOfSale.Views.Modulos.Config
                     if (form.ShowDialog() == DialogResult.OK)
                     {
                         empresa = form.Empresa;
+
                         LlenaDatos(empresa);
+                        if (!File.Exists(@"C:\Dympos\FacturaElectronica\Certificados\PFX.pfx"))
+                        {
+                            oPFX = new PFX(empresa.RutaCer,
+                            empresa.RutaKey,
+                            empresa.ClavePrivada,
+                            @"C:\Dympos\FacturaElectronica\Certificados\PFX.pfx",
+                            @"C:\Dympos\FacturaElectronica\Certificados\",
+                            empresa.DirectorioOpenSslBin);
+                            if (!oPFX.creaPFX())
+                                Ambiente.Mensaje(oPFX.error);
+                        }
+
                     }
 
                 }
@@ -252,6 +269,21 @@ namespace PointOfSale.Views.Modulos.Config
         private void BtnDirReportes_Click(object sender, EventArgs e)
         {
             TxtDirectorioReportes.Text = Ambiente.GetFolderPath();
+        }
+
+        private void BtnOpenSslBin_Click(object sender, EventArgs e)
+        {
+            TxtOpenSslBin.Text = Ambiente.GetFolderPath();
+        }
+
+        private void BtnCrearPFX_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnPFX_Click(object sender, EventArgs e)
+        {
+            TxtRutaArchivoPfx.Text = TxtFormatoTicket.Text = Ambiente.GetFilePath().Item1;
         }
     }
 }

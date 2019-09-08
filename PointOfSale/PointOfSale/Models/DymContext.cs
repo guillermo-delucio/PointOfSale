@@ -953,6 +953,8 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.DirectorioCortes).HasMaxLength(250);
 
+                entity.Property(e => e.DirectorioOpenSslBin).HasMaxLength(250);
+
                 entity.Property(e => e.DirectorioReportes).HasMaxLength(250);
 
                 entity.Property(e => e.DirectorioTickets).HasMaxLength(250);
@@ -974,6 +976,10 @@ namespace PointOfSale.Models
                 entity.Property(e => e.RegimenFiscalId).HasMaxLength(50);
 
                 entity.Property(e => e.Rfc).HasMaxLength(13);
+
+                entity.Property(e => e.RutaArchivoPfx)
+                    .HasColumnName("RutaArchivoPFX")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.RutaCadenaOriginal).HasMaxLength(250);
 

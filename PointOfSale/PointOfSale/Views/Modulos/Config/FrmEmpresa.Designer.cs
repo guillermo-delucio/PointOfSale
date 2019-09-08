@@ -48,6 +48,12 @@
             this.TxtRazonSocial = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label27 = new System.Windows.Forms.Label();
+            this.BtnPFX = new System.Windows.Forms.Button();
+            this.TxtRutaArchivoPfx = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.BtnOpenSslBin = new System.Windows.Forms.Button();
+            this.TxtOpenSslBin = new System.Windows.Forms.TextBox();
             this.TxtPassWS = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.TxtUserWS = new System.Windows.Forms.TextBox();
@@ -61,6 +67,9 @@
             this.BtnCer = new System.Windows.Forms.Button();
             this.TxtRutaCer = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label25 = new System.Windows.Forms.Label();
+            this.BtnDirReportes = new System.Windows.Forms.Button();
+            this.TxtDirectorioReportes = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.BtnPlanDetTraspaso = new System.Windows.Forms.Button();
             this.TxtRutaPlantillaDetalleTraspaso = new System.Windows.Forms.TextBox();
@@ -94,9 +103,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.BtnCo = new System.Windows.Forms.Button();
             this.TxtRutaCO = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.BtnDirReportes = new System.Windows.Forms.Button();
-            this.TxtDirectorioReportes = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -328,6 +334,12 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label27);
+            this.tabPage2.Controls.Add(this.BtnPFX);
+            this.tabPage2.Controls.Add(this.TxtRutaArchivoPfx);
+            this.tabPage2.Controls.Add(this.label26);
+            this.tabPage2.Controls.Add(this.BtnOpenSslBin);
+            this.tabPage2.Controls.Add(this.TxtOpenSslBin);
             this.tabPage2.Controls.Add(this.TxtPassWS);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.TxtUserWS);
@@ -348,6 +360,74 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Facturación";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label27.Location = new System.Drawing.Point(11, 200);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(111, 18);
+            this.label27.TabIndex = 355;
+            this.label27.Text = "ARCHIVO .PFX";
+            // 
+            // BtnPFX
+            // 
+            this.BtnPFX.Location = new System.Drawing.Point(298, 221);
+            this.BtnPFX.Name = "BtnPFX";
+            this.BtnPFX.Size = new System.Drawing.Size(42, 26);
+            this.BtnPFX.TabIndex = 353;
+            this.BtnPFX.Text = "- - -";
+            this.BtnPFX.UseVisualStyleBackColor = true;
+            this.BtnPFX.Click += new System.EventHandler(this.BtnPFX_Click);
+            // 
+            // TxtRutaArchivoPfx
+            // 
+            this.TxtRutaArchivoPfx.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtRutaArchivoPfx.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtRutaArchivoPfx.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.TxtRutaArchivoPfx.ForeColor = System.Drawing.Color.Black;
+            this.TxtRutaArchivoPfx.Location = new System.Drawing.Point(14, 223);
+            this.TxtRutaArchivoPfx.Name = "TxtRutaArchivoPfx";
+            this.TxtRutaArchivoPfx.ReadOnly = true;
+            this.TxtRutaArchivoPfx.Size = new System.Drawing.Size(277, 24);
+            this.TxtRutaArchivoPfx.TabIndex = 354;
+            this.TxtRutaArchivoPfx.TabStop = false;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label26.Location = new System.Drawing.Point(352, 141);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(111, 18);
+            this.label26.TabIndex = 352;
+            this.label26.Text = "OPEN SSL BIN";
+            // 
+            // BtnOpenSslBin
+            // 
+            this.BtnOpenSslBin.Location = new System.Drawing.Point(639, 162);
+            this.BtnOpenSslBin.Name = "BtnOpenSslBin";
+            this.BtnOpenSslBin.Size = new System.Drawing.Size(42, 26);
+            this.BtnOpenSslBin.TabIndex = 350;
+            this.BtnOpenSslBin.Text = "- - -";
+            this.BtnOpenSslBin.UseVisualStyleBackColor = true;
+            this.BtnOpenSslBin.Click += new System.EventHandler(this.BtnOpenSslBin_Click);
+            // 
+            // TxtOpenSslBin
+            // 
+            this.TxtOpenSslBin.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtOpenSslBin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtOpenSslBin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.TxtOpenSslBin.ForeColor = System.Drawing.Color.Black;
+            this.TxtOpenSslBin.Location = new System.Drawing.Point(355, 164);
+            this.TxtOpenSslBin.Name = "TxtOpenSslBin";
+            this.TxtOpenSslBin.ReadOnly = true;
+            this.TxtOpenSslBin.Size = new System.Drawing.Size(278, 24);
+            this.TxtOpenSslBin.TabIndex = 351;
+            this.TxtOpenSslBin.TabStop = false;
             // 
             // TxtPassWS
             // 
@@ -529,6 +609,40 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Directorios y formatos";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label25.Location = new System.Drawing.Point(7, 309);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(188, 18);
+            this.label25.TabIndex = 390;
+            this.label25.Text = "DIRECTORIO REPORTES";
+            // 
+            // BtnDirReportes
+            // 
+            this.BtnDirReportes.Location = new System.Drawing.Point(297, 328);
+            this.BtnDirReportes.Name = "BtnDirReportes";
+            this.BtnDirReportes.Size = new System.Drawing.Size(42, 26);
+            this.BtnDirReportes.TabIndex = 388;
+            this.BtnDirReportes.Text = "- - -";
+            this.BtnDirReportes.UseVisualStyleBackColor = true;
+            this.BtnDirReportes.Click += new System.EventHandler(this.BtnDirReportes_Click);
+            // 
+            // TxtDirectorioReportes
+            // 
+            this.TxtDirectorioReportes.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtDirectorioReportes.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtDirectorioReportes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.TxtDirectorioReportes.ForeColor = System.Drawing.Color.Black;
+            this.TxtDirectorioReportes.Location = new System.Drawing.Point(6, 330);
+            this.TxtDirectorioReportes.Name = "TxtDirectorioReportes";
+            this.TxtDirectorioReportes.ReadOnly = true;
+            this.TxtDirectorioReportes.Size = new System.Drawing.Size(284, 24);
+            this.TxtDirectorioReportes.TabIndex = 389;
+            this.TxtDirectorioReportes.TabStop = false;
             // 
             // label24
             // 
@@ -904,40 +1018,6 @@
             this.TxtRutaCO.TabIndex = 362;
             this.TxtRutaCO.TabStop = false;
             // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label25.Location = new System.Drawing.Point(7, 309);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(188, 18);
-            this.label25.TabIndex = 390;
-            this.label25.Text = "DIRECTORIO REPORTES";
-            // 
-            // BtnDirReportes
-            // 
-            this.BtnDirReportes.Location = new System.Drawing.Point(297, 328);
-            this.BtnDirReportes.Name = "BtnDirReportes";
-            this.BtnDirReportes.Size = new System.Drawing.Size(42, 26);
-            this.BtnDirReportes.TabIndex = 388;
-            this.BtnDirReportes.Text = "- - -";
-            this.BtnDirReportes.UseVisualStyleBackColor = true;
-            this.BtnDirReportes.Click += new System.EventHandler(this.BtnDirReportes_Click);
-            // 
-            // TxtDirectorioReportes
-            // 
-            this.TxtDirectorioReportes.BackColor = System.Drawing.SystemColors.Control;
-            this.TxtDirectorioReportes.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtDirectorioReportes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.TxtDirectorioReportes.ForeColor = System.Drawing.Color.Black;
-            this.TxtDirectorioReportes.Location = new System.Drawing.Point(6, 330);
-            this.TxtDirectorioReportes.Name = "TxtDirectorioReportes";
-            this.TxtDirectorioReportes.ReadOnly = true;
-            this.TxtDirectorioReportes.Size = new System.Drawing.Size(284, 24);
-            this.TxtDirectorioReportes.TabIndex = 389;
-            this.TxtDirectorioReportes.TabStop = false;
-            // 
             // FrmEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1034,5 +1114,11 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button BtnDirReportes;
         private System.Windows.Forms.TextBox TxtDirectorioReportes;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Button BtnOpenSslBin;
+        private System.Windows.Forms.TextBox TxtOpenSslBin;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button BtnPFX;
+        private System.Windows.Forms.TextBox TxtRutaArchivoPfx;
     }
 }

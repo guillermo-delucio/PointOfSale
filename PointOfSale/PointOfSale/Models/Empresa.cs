@@ -31,6 +31,8 @@ namespace PointOfSale.Models
         public string RutaPlantillaTraspaso { get; set; }
         public string RutaPlantillaDetalleTraspaso { get; set; }
         public string DirectorioReportes { get; set; }
+        public string DirectorioOpenSslBin { get; set; }
+        public string RutaArchivoPfx { get; set; }
 
         public virtual CRegimenfiscal RegimenFiscalNavigation { get; set; }
     }
