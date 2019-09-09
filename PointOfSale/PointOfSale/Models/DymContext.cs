@@ -1808,6 +1808,10 @@ namespace PointOfSale.Models
                     .HasMaxLength(50)
                     .HasDefaultValueSql("(N'PEN')");
 
+                entity.Property(e => e.EstatusSat)
+                    .HasColumnName("EstatusSAT")
+                    .HasMaxLength(50);
+
                 entity.Property(e => e.FechaDoc)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");

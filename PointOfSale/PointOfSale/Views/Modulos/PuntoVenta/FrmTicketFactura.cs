@@ -225,6 +225,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
+            if (venta == null)
+            {
+                Ambiente.Mensaje("Proceso abortado, no se encontró ninguna venta seleccionada");
+                return;
+            }
             //Si no seleccionó otro cliente, se recupera el de la venta
             if (cliente == null)
                 cliente = clienteController.SelectOne(venta.ClienteId);

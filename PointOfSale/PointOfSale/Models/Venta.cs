@@ -25,6 +25,7 @@ namespace PointOfSale.Models
         public bool EsConversiondeTaF { get; set; }
         public int? VentaOrigen { get; set; }
         public int? CxcId { get; set; }
+        public string EstatusSat { get; set; }
         public string ConceptoPago1 { get; set; }
         public string ConceptoPago2 { get; set; }
         public string ConceptoPago3 { get; set; }

@@ -103,6 +103,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.BtnCo = new System.Windows.Forms.Button();
             this.TxtRutaCO = new System.Windows.Forms.TextBox();
+            this.ChkTimbradoTest = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -334,6 +335,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.ChkTimbradoTest);
             this.tabPage2.Controls.Add(this.label27);
             this.tabPage2.Controls.Add(this.BtnPFX);
             this.tabPage2.Controls.Add(this.TxtRutaArchivoPfx);
@@ -1018,6 +1020,20 @@
             this.TxtRutaCO.TabIndex = 362;
             this.TxtRutaCO.TabStop = false;
             // 
+            // ChkTimbradoTest
+            // 
+            this.ChkTimbradoTest.AutoSize = true;
+            this.ChkTimbradoTest.Checked = true;
+            this.ChkTimbradoTest.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkTimbradoTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.ChkTimbradoTest.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ChkTimbradoTest.Location = new System.Drawing.Point(14, 271);
+            this.ChkTimbradoTest.Name = "ChkTimbradoTest";
+            this.ChkTimbradoTest.Size = new System.Drawing.Size(324, 22);
+            this.ChkTimbradoTest.TabIndex = 356;
+            this.ChkTimbradoTest.Text = "LANZAR SERVICIO EN MODO DE PRUEBA";
+            this.ChkTimbradoTest.UseVisualStyleBackColor = true;
+            // 
             // FrmEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1120,5 +1136,6 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button BtnPFX;
         private System.Windows.Forms.TextBox TxtRutaArchivoPfx;
+        private System.Windows.Forms.CheckBox ChkTimbradoTest;
     }
 }

@@ -37,6 +37,7 @@ namespace PointOfSale.CFDI33
         public string NoCertificado { get; set; }
         public decimal TotalIva { get; set; }
         public decimal TotalIeps { get; set; }
+        public string r1, r2;
 
 
 
@@ -111,7 +112,8 @@ namespace PointOfSale.CFDI33
             Empresa = empresaController.SelectTopOne();
             Partidas = ventapController.SelectPartidas(Venta.VentaId);
             Cliente = clienteController.SelectOne(Venta.ClienteId);
-
+            r1 = "";
+            r2 = "";
 
         }
 
@@ -157,9 +159,9 @@ namespace PointOfSale.CFDI33
             comprobante.LugarExpedicion = Empresa.Cp;
 
             //Emisor
-            emisor.Rfc = "AAA010101AAA"; //los sellos estan utilizando este rfc 
-            //emisor.Rfc = Empresa.Rfc;
-            emisor.Nombre = "JESUS MENDOZA JUAREZ";
+            //emisor.Rfc = "AAA010101AAA"; //los sellos estan utilizando este rfc 
+            emisor.Rfc = Empresa.Rfc;
+            emisor.Nombre = Empresa.RazonSocial;
             emisor.RegimenFiscal = Empresa.RegimenFiscalId;
 
             //Receptor
@@ -311,6 +313,65 @@ namespace PointOfSale.CFDI33
             return Timbrar(FacturaActual);
         }
 
+        public void Cancelar()
+        {
+            Inicializar();
+            if (Venta == null || Partidas.Count == 0 || Empresa == null || Cliente == null)
+            {
+                Ambiente.Mensaje("Venta || Partidas || Empresa || Cliente == null");
+                return;
+            }
+
+            if (Cliente.Rfc == null)
+            {
+                Ambiente.Mensaje("PROCESO ABORTADO, RFC DEL CLIENTE NO ES VÁLIDO");
+                return;
+            }
+
+            if (Cliente.Rfc.Trim().Length == 0)
+            {
+                Ambiente.Mensaje("PROCESO ABORTADO, RFC DEL CLIENTE NO ES VÁLIDO");
+                return;
+            }
+            if (Venta.UuId == null)
+            {
+                Ambiente.Mensaje("Proceso abortado, este documento no es una factura o no está timbrada");
+                return;
+            }
+
+
+
+            respuestaCFDI = timbradoClient.CancelarAsincrono(
+                Empresa.UserWstimbrado,
+                Empresa.PassWstimbrado,
+                File.ReadAllBytes(Empresa.RutaArchivoPfx),
+                Venta.UuId,
+                Empresa.ClavePrivada,
+                (double)Venta.Total,
+                Empresa.Rfc,
+                Cliente.Rfc);
+
+            r1 = respuestaCFDI.Mensaje;
+
+
+            respuestaCFDI = timbradoClient.VerStatus(
+                 Empresa.UserWstimbrado,
+                Empresa.PassWstimbrado,
+                 Venta.UuId,
+                 (double)Math.Round(Venta.Total, 2),
+                 Empresa.Rfc,
+                Cliente.Rfc);
+            //salida += Environment.NewLine;
+            r2 = respuestaCFDI.Mensaje;
+
+            if (respuestaCFDI.Mensaje.Equals("Cancelado"))
+            {
+                Venta.EstatusSat = respuestaCFDI.Mensaje;
+                ventaController.UpdateOne(Venta);
+                Ambiente.Mensaje(r1 + Environment.NewLine + r2);
+            }
+
+        }
 
 
         //Cobvierte el objeto comprobante a xml
@@ -399,7 +460,10 @@ namespace PointOfSale.CFDI33
 
 
             byte[] bXML = File.ReadAllBytes(pathXML);
-            respuestaCFDI = timbradoClient.TimbrarTest(Empresa.UserWstimbrado, Empresa.PassWstimbrado, bXML);
+            if (Empresa.TimbradoTest)
+                respuestaCFDI = timbradoClient.TimbrarTest(Empresa.UserWstimbrado, Empresa.PassWstimbrado, bXML);
+            else
+                respuestaCFDI = timbradoClient.Timbrar(Empresa.UserWstimbrado, Empresa.PassWstimbrado, bXML);
 
             if (respuestaCFDI.Documento == null)
             {
@@ -410,16 +474,14 @@ namespace PointOfSale.CFDI33
             {
 
                 File.WriteAllBytes(pathXML, respuestaCFDI.Documento);
-
                 Deserializar(pathXML);
-
                 Venta.CadenaOriginal = CadenaOriginal;
                 Venta.SelloCfdi = comprobante.TimbreFiscalDigital.SelloCFD;
                 Venta.SelloSat = comprobante.TimbreFiscalDigital.SelloSAT;
                 Venta.UuId = comprobante.TimbreFiscalDigital.UUID;
                 Venta.NoCertificado = NoCertificado;
                 Venta.RutaXml = FacturaActual;
-
+                Venta.EstatusSat = "Vigente";
                 return ventaController.UpdateOne(Venta);
             }
         }

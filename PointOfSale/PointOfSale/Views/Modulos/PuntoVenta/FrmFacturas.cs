@@ -44,17 +44,28 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
             facturas = ventaController.SelectFacturas(DpFechaIni.Value.Date, DpFechaFin.Value.Date, ChkSinTimbrar.Checked);
 
-            Grid.Rows.Clear();
+            Malla.Rows.Clear();
             foreach (var f in facturas)
             {
-                Grid.Rows.Add();
+                Malla.Rows.Add();
                 cliente = clienteController.SelectOne(f.ClienteId);
-                Grid.Rows[Grid.RowCount - 1].Cells[0].Value = f.VentaId;
-                Grid.Rows[Grid.RowCount - 1].Cells[1].Value = f.NoRef;
-                Grid.Rows[Grid.RowCount - 1].Cells[2].Value = f.CreatedAt;
-                Grid.Rows[Grid.RowCount - 1].Cells[3].Value = cliente.RazonSocial.Trim().Length == 0 ? cliente.Negocio : cliente.RazonSocial;
-                Grid.Rows[Grid.RowCount - 1].Cells[4].Value = f.Total;
-                Grid.Rows[Grid.RowCount - 1].Cells[5].Value = f.UuId;
+                Malla.Rows[Malla.RowCount - 1].Cells[0].Value = f.VentaId;
+                Malla.Rows[Malla.RowCount - 1].Cells[1].Value = f.NoRef;
+                Malla.Rows[Malla.RowCount - 1].Cells[2].Value = f.CreatedAt;
+                Malla.Rows[Malla.RowCount - 1].Cells[3].Value = cliente.RazonSocial.Trim().Length == 0 ? cliente.Negocio : cliente.RazonSocial;
+                Malla.Rows[Malla.RowCount - 1].Cells[4].Value = f.Total;
+                Malla.Rows[Malla.RowCount - 1].Cells[5].Value = f.UuId;
+                if (f.EstatusSat != null)
+                {
+
+
+                    if (f.EstatusSat.Equals("Cancelado"))
+                        Malla.Rows[Malla.RowCount - 1].DefaultCellStyle.BackColor = Color.Red;
+                    else if (f.EstatusSat.Equals("Vigente"))
+                        Malla.Rows[Malla.RowCount - 1].DefaultCellStyle.BackColor = Color.LimeGreen;
+                    else if (f.EstatusSat.Equals("Pendiente"))
+                        Malla.Rows[Malla.RowCount - 1].DefaultCellStyle.BackColor = Color.Orange;
+                }
             }
         }
 
@@ -65,9 +76,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnCambiarCliente_Click(object sender, EventArgs e)
         {
-            if (Grid.RowCount > 0)
+            if (Malla.RowCount > 0)
             {
-                int index = Grid.CurrentCell.RowIndex;
+                int index = Malla.CurrentCell.RowIndex;
                 int i = 0;
                 foreach (var f in facturas)
                 {
@@ -113,7 +124,31 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
+            Cancelar();
+        }
 
+        private void Cancelar()
+        {
+            if (Malla.RowCount == 0)
+                return;
+
+            int ventaId = (int)Malla.Rows[Malla.CurrentCell.RowIndex].Cells[0].Value;
+            if (ventaId > 0)
+            {
+                var venta = ventaController.SelectOne(ventaId);
+                if (venta != null)
+                {
+                    if (Ambiente.Pregunta("Realmente quieres cancelar la factura " + venta.NoRef))
+                    {
+                        oCFDI.Venta = venta;
+                        oCFDI.Cancelar();
+                    }
+                }
+                else
+                {
+                    Ambiente.Mensaje("Primero selecciona una venta");
+                }
+            }
         }
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.Grid = new System.Windows.Forms.DataGridView();
+            this.Malla = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,19 +48,23 @@
             this.BtnCambiarCliente = new System.Windows.Forms.Button();
             this.BtnSalir = new System.Windows.Forms.Button();
             this.BtnCancelar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.Malla)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Grid
+            // Malla
             // 
-            this.Grid.AllowUserToAddRows = false;
-            this.Grid.AllowUserToDeleteRows = false;
-            this.Grid.AllowUserToOrderColumns = true;
-            this.Grid.BackgroundColor = System.Drawing.Color.White;
-            this.Grid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Malla.AllowUserToAddRows = false;
+            this.Malla.AllowUserToDeleteRows = false;
+            this.Malla.AllowUserToOrderColumns = true;
+            this.Malla.BackgroundColor = System.Drawing.Color.White;
+            this.Malla.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Malla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Malla.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column5,
@@ -74,15 +78,15 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Grid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Grid.EnableHeadersVisualStyles = false;
-            this.Grid.Location = new System.Drawing.Point(12, 90);
-            this.Grid.MultiSelect = false;
-            this.Grid.Name = "Grid";
-            this.Grid.ReadOnly = true;
-            this.Grid.Size = new System.Drawing.Size(909, 261);
-            this.Grid.TabIndex = 275;
-            this.Grid.TabStop = false;
+            this.Malla.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Malla.EnableHeadersVisualStyles = false;
+            this.Malla.Location = new System.Drawing.Point(12, 90);
+            this.Malla.MultiSelect = false;
+            this.Malla.Name = "Malla";
+            this.Malla.ReadOnly = true;
+            this.Malla.Size = new System.Drawing.Size(909, 261);
+            this.Malla.TabIndex = 275;
+            this.Malla.TabStop = false;
             // 
             // Column1
             // 
@@ -257,30 +261,75 @@
             this.BtnCancelar.UseVisualStyleBackColor = false;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.LimeGreen;
+            this.textBox1.Location = new System.Drawing.Point(475, 366);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 283;
+            this.textBox1.Text = "Timbrada vigente";
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.White;
+            this.textBox2.Location = new System.Drawing.Point(369, 367);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 284;
+            this.textBox2.Text = "Por timbrar";
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.Red;
+            this.textBox3.Location = new System.Drawing.Point(716, 366);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 285;
+            this.textBox3.Text = "Cancelada";
+            // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.Color.Orange;
+            this.textBox4.Location = new System.Drawing.Point(581, 366);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(129, 20);
+            this.textBox4.TabIndex = 286;
+            this.textBox4.Text = "Esperando cancelación";
+            // 
             // FrmFacturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(930, 407);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnSalir);
             this.Controls.Add(this.BtnFacturar);
             this.Controls.Add(this.BtnCambiarCliente);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.Grid);
+            this.Controls.Add(this.Malla);
             this.Name = "FrmFacturas";
             this.Text = "Facturas";
             this.Load += new System.EventHandler(this.FrmFacturas_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Malla)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView Grid;
+        private System.Windows.Forms.DataGridView Malla;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker DpFechaFin;
@@ -299,5 +348,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Button BtnCancelar;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }

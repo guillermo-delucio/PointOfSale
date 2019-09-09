@@ -33,6 +33,7 @@ namespace PointOfSale.Models
         public string DirectorioReportes { get; set; }
         public string DirectorioOpenSslBin { get; set; }
         public string RutaArchivoPfx { get; set; }
+        public bool TimbradoTest { get; set; }
 
         public virtual CRegimenfiscal RegimenFiscalNavigation { get; set; }
     }

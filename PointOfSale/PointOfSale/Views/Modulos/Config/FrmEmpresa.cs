@@ -52,6 +52,7 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.DirectorioReportes = TxtDirectorioReportes.Text.Trim();
                 empresa.DirectorioOpenSslBin = TxtOpenSslBin.Text;
                 empresa.RutaArchivoPfx = TxtRutaArchivoPfx.Text;
+                empresa.TimbradoTest = ChkTimbradoTest.Checked;
 
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
@@ -91,6 +92,7 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.DirectorioReportes = TxtDirectorioReportes.Text.Trim();
                 empresa.DirectorioOpenSslBin = TxtOpenSslBin.Text;
                 empresa.RutaArchivoPfx = TxtRutaArchivoPfx.Text;
+                empresa.TimbradoTest = ChkTimbradoTest.Checked;
 
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
@@ -134,6 +136,7 @@ namespace PointOfSale.Views.Modulos.Config
             TxtDirectorioReportes.Text = empresa.DirectorioReportes;
             TxtOpenSslBin.Text = empresa.DirectorioOpenSslBin;
             TxtRutaArchivoPfx.Text = empresa.RutaArchivoPfx;
+            ChkTimbradoTest.Checked = empresa.TimbradoTest;
         }
 
         private void BtnAceptar_Click(object sender, EventArgs e)
