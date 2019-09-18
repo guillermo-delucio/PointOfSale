@@ -27,7 +27,10 @@ namespace PointOfSale.Views.Modulos.Importaciones
         public string Ruta { get; private set; }
         public int row { get; private set; }
         public int col { get; private set; }
-        ExcelWorksheet workSheet;
+        public ExcelWorksheet workSheet;
+
+
+
 
 
 
@@ -40,6 +43,7 @@ namespace PointOfSale.Views.Modulos.Importaciones
             Productos = new List<Producto>();
             Errores = new List<string>();
             exito = false;
+
         }
 
 
@@ -246,7 +250,7 @@ namespace PointOfSale.Views.Modulos.Importaciones
                                         break;
                                     case 19:
                                         //RutaImg
-                                        producto.RutaImg = workSheet.Cells[row, col].Text.Trim().Length == 0 ? null : (Ambiente.PrefijoRutaImg + workSheet.Cells[row, col].Text.Trim());
+                                        producto.RutaImg = workSheet.Cells[row, col].Text.Trim().Length == 0 ? null : (Ambiente.Empresa.DirectorioImg + workSheet.Cells[row, col].Text.Trim());
                                         producto.CratedAt = DateTime.Now;
                                         producto.UpdatedAt = DateTime.Now;
                                         producto.CratedBy = Ambiente.LoggedUser.UsuarioId;

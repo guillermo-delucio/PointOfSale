@@ -953,6 +953,8 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.DirectorioCortes).HasMaxLength(250);
 
+                entity.Property(e => e.DirectorioImg).HasMaxLength(250);
+
                 entity.Property(e => e.DirectorioOpenSslBin).HasMaxLength(250);
 
                 entity.Property(e => e.DirectorioReportes).HasMaxLength(250);
@@ -994,8 +996,6 @@ namespace PointOfSale.Models
                 entity.Property(e => e.RutaKey).HasMaxLength(250);
 
                 entity.Property(e => e.RutaPlantillaDetalleTraspaso).HasMaxLength(250);
-
-                entity.Property(e => e.RutaPlantillaTraspaso).HasMaxLength(250);
 
                 entity.Property(e => e.UserWstimbrado)
                     .HasColumnName("UserWSTimbrado")

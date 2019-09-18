@@ -28,7 +28,7 @@ namespace PointOfSale.Models
         public string PassWstimbrado { get; set; }
         public string DirectorioTrabajo { get; set; }
         public string DirectorioTraspasos { get; set; }
-        public string RutaPlantillaTraspaso { get; set; }
+        public string DirectorioImg { get; set; }
         public string RutaPlantillaDetalleTraspaso { get; set; }
         public string DirectorioReportes { get; set; }
         public string DirectorioOpenSslBin { get; set; }

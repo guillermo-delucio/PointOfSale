@@ -48,6 +48,7 @@
             this.TxtRazonSocial = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.ChkTimbradoTest = new System.Windows.Forms.CheckBox();
             this.label27 = new System.Windows.Forms.Label();
             this.BtnPFX = new System.Windows.Forms.Button();
             this.TxtRutaArchivoPfx = new System.Windows.Forms.TextBox();
@@ -74,8 +75,8 @@
             this.BtnPlanDetTraspaso = new System.Windows.Forms.Button();
             this.TxtRutaPlantillaDetalleTraspaso = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.BtnPlanTraspaso = new System.Windows.Forms.Button();
-            this.TxtRutaPlantillaTraspaso = new System.Windows.Forms.TextBox();
+            this.BtnDirectorioImg = new System.Windows.Forms.Button();
+            this.TxtDirectorioImg = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.BtnDirTraspsos = new System.Windows.Forms.Button();
             this.TxtDirectorioTraspasos = new System.Windows.Forms.TextBox();
@@ -103,7 +104,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.BtnCo = new System.Windows.Forms.Button();
             this.TxtRutaCO = new System.Windows.Forms.TextBox();
-            this.ChkTimbradoTest = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -363,6 +363,20 @@
             this.tabPage2.Text = "Facturación";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // ChkTimbradoTest
+            // 
+            this.ChkTimbradoTest.AutoSize = true;
+            this.ChkTimbradoTest.Checked = true;
+            this.ChkTimbradoTest.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkTimbradoTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.ChkTimbradoTest.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ChkTimbradoTest.Location = new System.Drawing.Point(14, 271);
+            this.ChkTimbradoTest.Name = "ChkTimbradoTest";
+            this.ChkTimbradoTest.Size = new System.Drawing.Size(324, 22);
+            this.ChkTimbradoTest.TabIndex = 356;
+            this.ChkTimbradoTest.Text = "LANZAR SERVICIO EN MODO DE PRUEBA";
+            this.ChkTimbradoTest.UseVisualStyleBackColor = true;
+            // 
             // label27
             // 
             this.label27.AutoSize = true;
@@ -575,8 +589,8 @@
             this.tabPage3.Controls.Add(this.BtnPlanDetTraspaso);
             this.tabPage3.Controls.Add(this.TxtRutaPlantillaDetalleTraspaso);
             this.tabPage3.Controls.Add(this.label23);
-            this.tabPage3.Controls.Add(this.BtnPlanTraspaso);
-            this.tabPage3.Controls.Add(this.TxtRutaPlantillaTraspaso);
+            this.tabPage3.Controls.Add(this.BtnDirectorioImg);
+            this.tabPage3.Controls.Add(this.TxtDirectorioImg);
             this.tabPage3.Controls.Add(this.label22);
             this.tabPage3.Controls.Add(this.BtnDirTraspsos);
             this.tabPage3.Controls.Add(this.TxtDirectorioTraspasos);
@@ -687,32 +701,32 @@
             this.label23.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label23.Location = new System.Drawing.Point(361, 8);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(167, 18);
+            this.label23.Size = new System.Drawing.Size(208, 18);
             this.label23.TabIndex = 384;
-            this.label23.Text = "PLANTILLA TRASPASO";
+            this.label23.Text = "DIRECTORIO DE IMAGENES";
             // 
-            // BtnPlanTraspaso
+            // BtnDirectorioImg
             // 
-            this.BtnPlanTraspaso.Location = new System.Drawing.Point(651, 27);
-            this.BtnPlanTraspaso.Name = "BtnPlanTraspaso";
-            this.BtnPlanTraspaso.Size = new System.Drawing.Size(42, 26);
-            this.BtnPlanTraspaso.TabIndex = 382;
-            this.BtnPlanTraspaso.Text = "- - -";
-            this.BtnPlanTraspaso.UseVisualStyleBackColor = true;
-            this.BtnPlanTraspaso.Click += new System.EventHandler(this.BtnPlanTraspaso_Click);
+            this.BtnDirectorioImg.Location = new System.Drawing.Point(651, 27);
+            this.BtnDirectorioImg.Name = "BtnDirectorioImg";
+            this.BtnDirectorioImg.Size = new System.Drawing.Size(42, 26);
+            this.BtnDirectorioImg.TabIndex = 382;
+            this.BtnDirectorioImg.Text = "- - -";
+            this.BtnDirectorioImg.UseVisualStyleBackColor = true;
+            this.BtnDirectorioImg.Click += new System.EventHandler(this.BtnPlanTraspaso_Click);
             // 
-            // TxtRutaPlantillaTraspaso
+            // TxtDirectorioImg
             // 
-            this.TxtRutaPlantillaTraspaso.BackColor = System.Drawing.SystemColors.Control;
-            this.TxtRutaPlantillaTraspaso.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtRutaPlantillaTraspaso.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.TxtRutaPlantillaTraspaso.ForeColor = System.Drawing.Color.Black;
-            this.TxtRutaPlantillaTraspaso.Location = new System.Drawing.Point(360, 29);
-            this.TxtRutaPlantillaTraspaso.Name = "TxtRutaPlantillaTraspaso";
-            this.TxtRutaPlantillaTraspaso.ReadOnly = true;
-            this.TxtRutaPlantillaTraspaso.Size = new System.Drawing.Size(284, 24);
-            this.TxtRutaPlantillaTraspaso.TabIndex = 383;
-            this.TxtRutaPlantillaTraspaso.TabStop = false;
+            this.TxtDirectorioImg.BackColor = System.Drawing.SystemColors.Control;
+            this.TxtDirectorioImg.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtDirectorioImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.TxtDirectorioImg.ForeColor = System.Drawing.Color.Black;
+            this.TxtDirectorioImg.Location = new System.Drawing.Point(360, 29);
+            this.TxtDirectorioImg.Name = "TxtDirectorioImg";
+            this.TxtDirectorioImg.ReadOnly = true;
+            this.TxtDirectorioImg.Size = new System.Drawing.Size(284, 24);
+            this.TxtDirectorioImg.TabIndex = 383;
+            this.TxtDirectorioImg.TabStop = false;
             // 
             // label22
             // 
@@ -1020,20 +1034,6 @@
             this.TxtRutaCO.TabIndex = 362;
             this.TxtRutaCO.TabStop = false;
             // 
-            // ChkTimbradoTest
-            // 
-            this.ChkTimbradoTest.AutoSize = true;
-            this.ChkTimbradoTest.Checked = true;
-            this.ChkTimbradoTest.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkTimbradoTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.ChkTimbradoTest.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ChkTimbradoTest.Location = new System.Drawing.Point(14, 271);
-            this.ChkTimbradoTest.Name = "ChkTimbradoTest";
-            this.ChkTimbradoTest.Size = new System.Drawing.Size(324, 22);
-            this.ChkTimbradoTest.TabIndex = 356;
-            this.ChkTimbradoTest.Text = "LANZAR SERVICIO EN MODO DE PRUEBA";
-            this.ChkTimbradoTest.UseVisualStyleBackColor = true;
-            // 
             // FrmEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1125,8 +1125,8 @@
         private System.Windows.Forms.Button BtnPlanDetTraspaso;
         private System.Windows.Forms.TextBox TxtRutaPlantillaDetalleTraspaso;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Button BtnPlanTraspaso;
-        private System.Windows.Forms.TextBox TxtRutaPlantillaTraspaso;
+        private System.Windows.Forms.Button BtnDirectorioImg;
+        private System.Windows.Forms.TextBox TxtDirectorioImg;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button BtnDirReportes;
         private System.Windows.Forms.TextBox TxtDirectorioReportes;

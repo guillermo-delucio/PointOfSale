@@ -682,17 +682,14 @@ namespace PointOfSale.Controllers
                                     producto.Descripcion = workSheet.Cells[row, col].Text.Trim();
                                     break;
                                 case 3:
+
                                     bool succes = int.TryParse(workSheet.Cells[row, col].Text.Trim(), out int nStock);
-                                    if (succes)
-                                    {
-                                        producto.CratedAt = DateTime.Now;
-                                        producto.UpdatedAt = DateTime.Now;
-                                        producto.CratedBy = Ambiente.LoggedUser.UsuarioId;
-                                        producto.Stock = nStock;
-                                        Productos.Add(producto);
-                                    }
-                                    else
-                                        Errores.Add("SE OMITIÓ, " + producto.ProductoId + ", A CAUSA DE FILA: " + Fila + " COLUMNA: " + Columna + "\n");
+                                    producto.CratedAt = DateTime.Now;
+                                    producto.UpdatedAt = DateTime.Now;
+                                    producto.CratedBy = Ambiente.LoggedUser.UsuarioId;
+                                    producto.Stock = succes == true ? nStock : 1;
+                                    Productos.Add(producto);
+                                    
                                     break;
 
                                 default:

@@ -47,7 +47,7 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.DirectorioTickets = TxtDirectorioTickets.Text.Trim();
                 empresa.DirectorioTraspasos = TxtDirectorioTraspasos.Text.Trim();
                 empresa.DirectorioTrabajo = TxtDirectorioTrabajo.Text.Trim();
-                empresa.RutaPlantillaTraspaso = TxtRutaPlantillaTraspaso.Text.Trim();
+                empresa.DirectorioImg = TxtDirectorioImg.Text.Trim();
                 empresa.RutaPlantillaDetalleTraspaso = TxtRutaPlantillaDetalleTraspaso.Text.Trim();
                 empresa.DirectorioReportes = TxtDirectorioReportes.Text.Trim();
                 empresa.DirectorioOpenSslBin = TxtOpenSslBin.Text;
@@ -87,7 +87,7 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.DirectorioTickets = TxtDirectorioTickets.Text;
                 empresa.DirectorioTraspasos = TxtDirectorioTraspasos.Text.Trim();
                 empresa.DirectorioTrabajo = TxtDirectorioTrabajo.Text.Trim();
-                empresa.RutaPlantillaTraspaso = TxtRutaPlantillaTraspaso.Text.Trim();
+                empresa.DirectorioImg = TxtDirectorioImg.Text.Trim();
                 empresa.RutaPlantillaDetalleTraspaso = TxtRutaPlantillaDetalleTraspaso.Text.Trim();
                 empresa.DirectorioReportes = TxtDirectorioReportes.Text.Trim();
                 empresa.DirectorioOpenSslBin = TxtOpenSslBin.Text;
@@ -131,7 +131,7 @@ namespace PointOfSale.Views.Modulos.Config
             TxtDirectorioTickets.Text = empresa.DirectorioTickets;
             TxtDirectorioTraspasos.Text = empresa.DirectorioTraspasos;
             TxtDirectorioTrabajo.Text = empresa.DirectorioTrabajo;
-            TxtRutaPlantillaTraspaso.Text = empresa.RutaPlantillaTraspaso;
+            TxtDirectorioImg.Text = empresa.DirectorioImg;
             TxtRutaPlantillaDetalleTraspaso.Text = empresa.RutaPlantillaDetalleTraspaso;
             TxtDirectorioReportes.Text = empresa.DirectorioReportes;
             TxtOpenSslBin.Text = empresa.DirectorioOpenSslBin;
@@ -261,7 +261,7 @@ namespace PointOfSale.Views.Modulos.Config
 
         private void BtnPlanTraspaso_Click(object sender, EventArgs e)
         {
-            TxtRutaPlantillaTraspaso.Text = Ambiente.GetFilePath().Item1;
+            TxtDirectorioImg.Text = Ambiente.GetFolderPath();
         }
 
         private void BtnPlanDetTraspaso_Click(object sender, EventArgs e)
