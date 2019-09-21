@@ -103,7 +103,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void Mallap_SelectionChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void CargaConfigProd()
@@ -145,6 +145,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void BtnBuscarXSustancia_Click(object sender, EventArgs e)
         {
             LlenaGrid(ProductoController.FiltrarVsSustancia(TxtSustancia.Text));
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

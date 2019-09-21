@@ -800,7 +800,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
+
                     producto = form.Producto;
+                    if (producto == null)
+                        return;
                     TxtProductoId.Text = producto.ProductoId;
                     TxtProductoId.Focus();
                 }
@@ -910,7 +913,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             if (venta.Total > 0)
             {
-                
+
                 using (var form = new FrmCobroRapido(venta.Total))
                 {
                     if (form.ShowDialog() == DialogResult.OK)

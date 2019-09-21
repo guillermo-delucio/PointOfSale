@@ -8,6 +8,7 @@ namespace PointOfSale.Models
     {
         public DymContext()
         {
+
         }
 
         public DymContext(DbContextOptions<DymContext> options)
