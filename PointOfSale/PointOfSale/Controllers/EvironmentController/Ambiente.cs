@@ -41,7 +41,7 @@ namespace PointOfSale.Controllers
             ClavesSat, Presentaciones, UnidadesMedida,
             Usuarios, ProductoImpuesto, ProductoSustancia,
             ProductosCompleto, MetodoPago, FormaPago, UsoCDFI,
-            Tickets, Empresas, RegimenFiscal, Sucursal
+            Tickets, Empresas, RegimenFiscal, Sucursal,Lotes
 
         };
 

@@ -60,13 +60,15 @@
             System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Concenptos de egresos", 1, 5);
             System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Concenptos de ingresos", 1, 5);
             System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Tipos de movimientos de almacen", 1, 5);
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Configuración", 3, 3, new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Lotes", 1, 5);
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Configuración", 3, 3, new System.Windows.Forms.TreeNode[] {
             treeNode14,
             treeNode15,
             treeNode16,
             treeNode17,
             treeNode18,
-            treeNode19});
+            treeNode19,
+            treeNode20});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBusinessManager));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importarDesdeExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -275,13 +277,18 @@
             treeNode19.SelectedImageIndex = 5;
             treeNode19.Text = "Tipos de movimientos de almacen";
             treeNode20.ContextMenuStrip = this.contextMenuStrip1;
-            treeNode20.ImageIndex = 3;
-            treeNode20.Name = "NodoConfiguracion";
-            treeNode20.SelectedImageIndex = 3;
-            treeNode20.Text = "Configuración";
+            treeNode20.ImageIndex = 1;
+            treeNode20.Name = "NodoLotes";
+            treeNode20.SelectedImageIndex = 5;
+            treeNode20.Text = "Lotes";
+            treeNode21.ContextMenuStrip = this.contextMenuStrip1;
+            treeNode21.ImageIndex = 3;
+            treeNode21.Name = "NodoConfiguracion";
+            treeNode21.SelectedImageIndex = 3;
+            treeNode21.Text = "Configuración";
             this.BMtree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode13,
-            treeNode20});
+            treeNode21});
             this.BMtree.SelectedImageIndex = 0;
             this.BMtree.Size = new System.Drawing.Size(238, 509);
             this.BMtree.TabIndex = 4;

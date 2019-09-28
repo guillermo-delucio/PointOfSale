@@ -33,10 +33,7 @@ namespace PointOfSale.Controllers
         private List<Categoria> Categorias;
         private List<ProductoSustancia> ProductoSustancias;
         private List<ProductoImpuesto> ProductoImpuestos;
-
-
-
-
+        private List<Lote> Lotes;
 
         public ImportaExcelController(int catalogo)
         {
@@ -57,6 +54,8 @@ namespace PointOfSale.Controllers
             Proveedores = new List<Proveedor>();
             ProductoSustancias = new List<ProductoSustancia>();
             ProductoImpuestos = new List<ProductoImpuesto>();
+            Lotes = new List<Lote>();
+
 
 
 
@@ -146,9 +145,145 @@ namespace PointOfSale.Controllers
                 case (int)Ambiente.TipoBusqueda.ProductosCompleto:
                     ImportaProductosCompleto();
                     break;
+                case (int)Ambiente.TipoBusqueda.Lotes:
+                    ImportaLotes();
+                    break;
                 default:
                     MessageBox.Show("Error, no hay importacion para catalogo");
                     break;
+            }
+        }
+
+        private void ImportaLotes()
+        {
+            try
+            {
+                //GetRuta();
+                //Opening an existing Excel file
+                if (Ruta.Length == 0)
+                {
+                    Ambiente.Mensaje("Archivo invalido. \nProceso abortado");
+                    return;
+                }
+
+                fi = new FileInfo(Ruta);
+                using (ExcelPackage excelPackage = new ExcelPackage(fi))
+                {
+                    //Get a WorkSheet by index. Note that EPPlus indexes are base 1, not base 0!
+                    //Get a WorkSheet by name. If the worksheet doesn't exist, throw an exeption
+
+                    ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets[1];
+                    var productoController = new ProductoController();
+                    LoteController loteController = new LoteController();
+                    var start = workSheet.Dimension.Start;
+                    var end = workSheet.Dimension.End;
+
+                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    { // Row by row...
+                        object cellValue = workSheet.Cells[row, 2].Text; // This got me the actual value I needed.
+                        Fila = row;
+                        Producto producto = new Producto();
+                        Lote lote = new Lote(); ;
+
+
+                        for (int col = start.Column; col <= end.Column; col++)
+                        {
+                            // ... Cell by cell: 1ProductoId, 2NoLote, 3StockInicial	4StockRestante	5Caducidad
+
+                            Columna = col;
+                            switch (col)
+                            {
+                                case 1:
+                                    //1ProductoId
+                                    producto = productoController.SelectOne(workSheet.Cells[row, col].Text.Trim());
+                                    if (producto.ProductoId != null)
+                                    {
+                                        lote = new Lote();
+                                        lote.ProductoId = producto.ProductoId;
+                                    }
+                                    else
+                                        Errores.Add("Producto no encontrado" + workSheet.Cells[row, col].Text.Trim());
+                                    break;
+
+                                //2NoLote
+                                case 2:
+                                    if (producto.ProductoId != null)
+                                    {
+                                        lote.NoLote = workSheet.Cells[row, col].Text.Trim().Trim();
+                                    }
+
+                                    break;
+                                case 3:
+
+                                    if (producto.ProductoId != null)
+                                    {
+
+                                        var s = decimal.TryParse(workSheet.Cells[row, col].Text.Trim().Trim(), out decimal ini);
+                                        if (s)
+                                            lote.StockInicial = ini;
+                                        else
+                                            lote.StockInicial = 0;
+                                    }
+                                    Productos.Add(producto);
+
+                                    break;
+                                case 4:
+                                    if (producto.ProductoId != null)
+                                    {
+                                        var s = decimal.TryParse(workSheet.Cells[row, col].Text.Trim().Trim(), out decimal res);
+                                        if (s)
+                                            lote.StockRestante = res;
+                                        else
+                                            lote.StockRestante = 0;
+                                    }
+                                    //Productos.Add(producto);
+
+                                    break;
+                                case 5:
+                                    if (producto.ProductoId != null)
+                                    {
+
+                                        var s = DateTime.TryParse(workSheet.Cells[row, col].Text.Trim().Trim(), out DateTime cad);
+                                        if (s)
+                                            lote.Caducidad = cad;
+                                        else
+                                            lote.Caducidad = DateTime.Now;
+                                    }
+
+                                    lote.CompraId = 1;
+                                    lote.CreatedAt = DateTime.Now;
+                                    lote.CreatedBy = Ambiente.LoggedUser.UsuarioId;
+                                    // loteController.InsertOne(lote);
+                                    if (producto.ProductoId != null)
+                                        Lotes.Add(lote);
+
+                                    break;
+                                default:
+                                    MessageBox.Show("Columna no encontrada");
+                                    break;
+                            }
+                        }
+
+                        Application.DoEvents();
+
+                    }
+
+                    loteController = new LoteController();
+                    if (loteController.InsertRange(Lotes))
+                        Ambiente.Mensaje(Lotes.Count + " Registros importados");
+                    else
+                        Ambiente.Mensaje("Algo salio mal :(");
+
+                    if (Errores.Count > 0)
+                        Ambiente.Mensaje(Errores.ToString());
+
+                    excelPackage.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(" ALGO SALIO MAL EN FILA: " + Fila + " COLUMNA: " + Columna + "\n" + ex.ToString());
             }
         }
 
@@ -689,7 +824,7 @@ namespace PointOfSale.Controllers
                                     producto.CratedBy = Ambiente.LoggedUser.UsuarioId;
                                     producto.Stock = succes == true ? nStock : 1;
                                     Productos.Add(producto);
-                                    
+
                                     break;
 
                                 default:

@@ -27,7 +27,7 @@ namespace PointOfSale.Controllers
                 }).OrderBy(x => x.RazonSocial).ToList();
             }
 
-           
+
         }
 
         private void LlenaNodoProveedores(DataGridView Grid1)
@@ -40,7 +40,7 @@ namespace PointOfSale.Controllers
                     x.RazonSocial
                 }).OrderBy(x => x.RazonSocial).ToList();
             }
-            
+
         }
 
         private void LlenaNodoProductos(DataGridView Grid1)
@@ -54,7 +54,7 @@ namespace PointOfSale.Controllers
                     x.Descripcion
                 }).OrderBy(x => x.Descripcion).ToList();
             }
-            
+
         }
 
         private void LlenaNodoCategorias(DataGridView Grid1)
@@ -68,7 +68,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            
+
         }
 
         private void LlenaNodoLaboratorios(DataGridView Grid1)
@@ -81,7 +81,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            
+
         }
 
         private void LlenaNodoImpuestos(DataGridView Grid1)
@@ -94,7 +94,7 @@ namespace PointOfSale.Controllers
                     x.Tasa
                 }).OrderBy(x => x.ImpuestoId).ToList();
             }
-            
+
         }
 
         private void LlenaNodoNodoSustancias(DataGridView Grid1)
@@ -107,7 +107,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            
+
         }
 
 
@@ -121,7 +121,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            
+
         }
 
         private void LlenaNodoClavesat(DataGridView Grid1)
@@ -134,7 +134,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            
+
         }
 
         private void LlenaNodoPresentaciones(DataGridView Grid1)
@@ -147,7 +147,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            
+
         }
 
         private void LlenaNodoUnidadMedida(DataGridView Grid1)
@@ -161,7 +161,7 @@ namespace PointOfSale.Controllers
                     x.Nombre
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            
+
         }
 
         private void LlenaNodoUsuarios(DataGridView Grid1)
@@ -175,7 +175,7 @@ namespace PointOfSale.Controllers
                     x.Area
                 }).OrderBy(x => x.Nombre).ToList();
             }
-            
+
         }
 
         private void LlenaNodoConMovsInv(DataGridView Grid1)
@@ -188,7 +188,7 @@ namespace PointOfSale.Controllers
                     x.Descripcion
                 }).OrderBy(x => x.Descripcion).ToList();
             }
-            
+
         }
 
         private void LlenaNodoConIngre(DataGridView Grid1)
@@ -201,7 +201,7 @@ namespace PointOfSale.Controllers
                     x.Descripcion
                 }).OrderBy(x => x.Descripcion).ToList();
             }
-            
+
         }
 
         private void LlenaNodoConEgre(DataGridView Grid1)
@@ -214,7 +214,7 @@ namespace PointOfSale.Controllers
                     x.Descripcion
                 }).OrderBy(x => x.Descripcion).ToList();
             }
-            
+
         }
         #endregion
 
@@ -392,6 +392,10 @@ namespace PointOfSale.Controllers
                     break;
                 case "NodoProdImp":
                     ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.ProductoImpuesto);
+
+                    break;
+                case "NodoLotes":
+                    ImportaExcelController = new ImportaExcelController((int)Ambiente.TipoBusqueda.Lotes);
 
                     break;
                 case "NodoProductosCompleto":
