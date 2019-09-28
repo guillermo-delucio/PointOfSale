@@ -134,6 +134,14 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         }
         private void BtnSeleccionar_Click(object sender, EventArgs e)
         {
+            if (Mallap.RowCount == 0)
+                return;
+
+            if (Mallap.Rows[Mallap.CurrentCell.RowIndex].Cells[0].Value != null)
+            {
+                Producto = ProductoController.SelectOne(Mallap.Rows[Mallap.CurrentCell.RowIndex].Cells[7].Value.ToString());
+                CargaConfigProd();
+            }
             DescargaForma();
         }
 

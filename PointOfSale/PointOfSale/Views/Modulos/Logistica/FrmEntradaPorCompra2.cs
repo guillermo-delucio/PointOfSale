@@ -257,8 +257,8 @@ namespace PointOfSale.Views.Modulos.Logistica
             }
 
 
-            //control lotes
-
+            
+         
             //partida a la lista
             var partida = new Comprap();
             partida.CompraId = compra.CompraId;
@@ -273,6 +273,7 @@ namespace PointOfSale.Views.Modulos.Logistica
             partida.Descuento = NDesc.Value / 100;
             partida.NImpuestos = impuestos.Count;
 
+            //control lotes
             if (producto.TieneLote)
             {
                 using (var form = new FrmLoteCaducidad(compra.CompraId, NCantidad.Value, producto.ProductoId))

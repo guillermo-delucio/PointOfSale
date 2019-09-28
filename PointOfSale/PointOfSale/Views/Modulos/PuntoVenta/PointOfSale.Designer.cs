@@ -258,6 +258,7 @@
             this.BtnMinimizar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnMinimizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnMinimizar.UseVisualStyleBackColor = true;
+            this.BtnMinimizar.Click += new System.EventHandler(this.BtnMinimizar_Click);
             // 
             // BtnDirectoImp
             // 
@@ -318,7 +319,6 @@
             this.TxtCliente.Size = new System.Drawing.Size(463, 35);
             this.TxtCliente.TabIndex = 265;
             this.toolTip1.SetToolTip(this.TxtCliente, "Busque el cliente para la venta");
-           
             this.TxtCliente.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtCliente_KeyDown);
             // 
             // TxtProductoId

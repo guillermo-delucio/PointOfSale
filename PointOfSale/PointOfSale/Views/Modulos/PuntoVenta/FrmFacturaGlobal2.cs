@@ -285,5 +285,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
             }
         }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

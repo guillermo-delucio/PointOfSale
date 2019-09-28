@@ -965,7 +965,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Malla.CurrentCell = Malla.Rows[SigPartida - 1].Cells[2];
             }
         }
-
         private void BtnBorrarPartida_Click(object sender, EventArgs e)
         {
             EliminaPartida(Malla.CurrentCell.RowIndex, Malla.Rows[Malla.CurrentCell.RowIndex].Cells[0].Value.ToString());
@@ -982,5 +981,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         }
 
+        private void BtnMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }
