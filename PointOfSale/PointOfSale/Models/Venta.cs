@@ -7,6 +7,7 @@ namespace PointOfSale.Models
     {
         public Venta()
         {
+            LoteVentap = new HashSet<LoteVentap>();
             Punto = new HashSet<Punto>();
             Ventap = new HashSet<Ventap>();
         }
@@ -64,6 +65,7 @@ namespace PointOfSale.Models
         public virtual Estacion Estacion { get; set; }
         public virtual TipoDoc TipoDoc { get; set; }
         public virtual CUsocfdi UsoCfdiNavigation { get; set; }
+        public virtual ICollection<LoteVentap> LoteVentap { get; set; }
         public virtual ICollection<Punto> Punto { get; set; }
         public virtual ICollection<Ventap> Ventap { get; set; }
     }

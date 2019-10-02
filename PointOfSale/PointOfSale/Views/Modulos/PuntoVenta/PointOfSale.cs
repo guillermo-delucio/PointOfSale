@@ -23,7 +23,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         List<Ventap> partidas;
         public Cliente cliente;
         public Producto producto;
-        public List<Lote> lotes;
+        public Lote lote;
 
 
         private VentaController ventaController;
@@ -110,7 +110,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Malla.Rows[index].Cells[5].Value = partida.Impuesto1;
                 Malla.Rows[index].Cells[6].Value = partida.Impuesto2;
                 Malla.Rows[index].Cells[7].Value = partida.Total;
-                Malla.Rows[index].Cells[8].Value = partida.LoteId1;
+                Malla.Rows[index].Cells[8].Value = partida.LoteId;
                 Malla.Rows[index].Cells[9].Value = partida.ProductoId;
 
 
@@ -229,7 +229,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             loteController = new LoteController();
             movInvController = new MovInvController();
             flujoController = new FlujoController();
-            lotes = new List<Lote>();
+            lote = null;
 
 
 
@@ -593,21 +593,25 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             partida.Precio = SeleccionaPrecio(producto, cliente);
             partida.Impuesto1 = Ambiente.GetTasaImpuesto(producto.Impuesto1Id);
             partida.Impuesto2 = Ambiente.GetTasaImpuesto(producto.Impuesto2Id);
+
             if (producto.TieneLote)
             {
-                lotes = loteController.GetLotesDisponibilidad(producto.ProductoId, 1);
-                if (lotes.Count > 0)
+                lote = loteController.GetLoteDisponibilidad(producto.ProductoId, 1);
+                if (lote != null)
                 {
-                    partida.LoteId1 = lotes[0].LoteId;
-                    partida.NoLote1 = lotes[0].NoLote;
-                    partida.Caducidad1 = lotes[0].Caducidad;
+                    partida.LoteId = lote.LoteId;
+                    partida.NoLote = lote.NoLote;
+                    partida.Caducidad = lote.Caducidad;
                 }
+                else
+                    Ambiente.Mensaje("Este artículo tiene control de lote, pero no hay lotes registrados. No se imprimirá el lote del artículo");
             }
             else
             {
-                partida.LoteId1 = null;
-                partida.NoLote1 = null;
-                partida.Caducidad1 = null;
+
+                partida.LoteId = null;
+                partida.NoLote = null;
+                partida.Caducidad = null;
             }
 
             partida.ClaveProdServ = producto.ClaveProdServId.Trim().Length == 0 ? "01010101" : producto.ClaveProdServId.Trim();
@@ -635,7 +639,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             Malla.Rows[SigPartida].Cells[5].Value = partida.Impuesto1;
             Malla.Rows[SigPartida].Cells[6].Value = partida.Impuesto2;
             Malla.Rows[SigPartida].Cells[7].Value = partida.Total;
-            Malla.Rows[SigPartida].Cells[8].Value = partida.NoLote1;
+            Malla.Rows[SigPartida].Cells[8].Value = partida.NoLote;
             Malla.Rows[SigPartida].Cells[9].Value = partida.ProductoId;
 
 
@@ -828,73 +832,32 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             //es decir, se puede vender sin lotes, así cómo sin existencias.
             foreach (var p in partidas)
             {
-                var prod = productoController.SelectOne(p.ProductoId);
-                if (prod != null && prod.TieneLote)
+                if (productoController.SelectOne(p.ProductoId).TieneLote)
                 {
-                    var lotes = loteController.GetLotesDisponibilidad(prod.ProductoId, p.Cantidad);
-                    var i = 0;
-                    decimal cantidad = p.Cantidad;
+                    var lotes = loteController.GetLotesDisponibilidad(p.ProductoId, p.Cantidad);
+
+                    var restante = p.Cantidad;
                     foreach (var l in lotes)
                     {
-                        if (i == 0)
+                        if (restante == 0)
+                            break;
+
+                        if (restante <= l.StockRestante)
                         {
-                            p.LoteId1 = l.LoteId;
-                            p.NoLote1 = l.NoLote;
-                            p.Caducidad1 = l.Caducidad;
-                            if (l.StockRestante >= cantidad)
-                            {
-                                l.StockRestante -= cantidad;
-                                cantidad -= cantidad;
-                            }
-                            else
-                            {
-                                cantidad -= l.StockRestante;
-                                l.StockRestante = 0;
-                            }
-                            i++;
+                            l.StockRestante -= restante;
+                            restante = 0;
                         }
-                        else if (i == 1)
+                        else
                         {
-                            p.LoteId2 = l.LoteId;
-                            p.NoLote2 = l.NoLote;
-                            p.Caducidad2 = l.Caducidad;
-
-                            if (l.StockRestante >= cantidad)
-                            {
-                                l.StockRestante -= cantidad;
-                                cantidad -= cantidad;
-                            }
-                            else
-                            {
-
-                                cantidad -= l.StockRestante;
-                                l.StockRestante = 0;
-                            }
-                            i++;
-                        }
-                        else if (i == 2)
-                        {
-                            p.LoteId3 = l.LoteId;
-                            p.NoLote3 = l.NoLote;
-                            p.Caducidad3 = l.Caducidad;
-                            if (l.StockRestante >= cantidad)
-                            {
-                                l.StockRestante -= cantidad;
-                                cantidad -= cantidad;
-                            }
-                            else
-                            {
-
-                                cantidad -= l.StockRestante;
-                                l.StockRestante = 0;
-                            }
-                            i++;
+                            restante -= l.StockRestante;
+                            l.StockRestante = 0;
                         }
                     }
                     loteController.UpdateRange(lotes);
                 }
             }
         }
+
 
         private void TxtCliente_KeyDown(object sender, KeyEventArgs e)
         {

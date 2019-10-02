@@ -8,7 +8,6 @@ namespace PointOfSale.Models
     {
         public DymContext()
         {
-
         }
 
         public DymContext(DbContextOptions<DymContext> options)
@@ -57,6 +56,7 @@ namespace PointOfSale.Models
         public virtual DbSet<Impuesto> Impuesto { get; set; }
         public virtual DbSet<Laboratorio> Laboratorio { get; set; }
         public virtual DbSet<Lote> Lote { get; set; }
+        public virtual DbSet<LoteVentap> LoteVentap { get; set; }
         public virtual DbSet<MovInv> MovInv { get; set; }
         public virtual DbSet<Municipio> Municipio { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
@@ -1189,6 +1189,31 @@ namespace PointOfSale.Models
                     .HasConstraintName("FK_Lote_Producto1");
             });
 
+            modelBuilder.Entity<LoteVentap>(entity =>
+            {
+                entity.HasKey(e => e.LotepId);
+
+                entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 6)");
+
+                entity.Property(e => e.NoLote).HasMaxLength(50);
+
+                entity.Property(e => e.ProductoId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.Lote)
+                    .WithMany(p => p.LoteVentap)
+                    .HasForeignKey(d => d.LoteId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LoteVentap_Lote");
+
+                entity.HasOne(d => d.Venta)
+                    .WithMany(p => p.LoteVentap)
+                    .HasForeignKey(d => d.VentaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LoteVentap_Venta");
+            });
+
             modelBuilder.Entity<MovInv>(entity =>
             {
                 entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 1)");
@@ -1898,11 +1923,7 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Ventap>(entity =>
             {
-                entity.Property(e => e.Caducidad1).HasColumnType("datetime");
-
-                entity.Property(e => e.Caducidad2).HasColumnType("datetime");
-
-                entity.Property(e => e.Caducidad3).HasColumnType("datetime");
+                entity.Property(e => e.Caducidad).HasColumnType("datetime");
 
                 entity.Property(e => e.Cantidad)
                     .HasColumnType("decimal(18, 6)")
@@ -1932,11 +1953,7 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.Impuesto2).HasColumnType("decimal(18, 6)");
 
-                entity.Property(e => e.NoLote1).HasMaxLength(50);
-
-                entity.Property(e => e.NoLote2).HasMaxLength(50);
-
-                entity.Property(e => e.NoLote3).HasMaxLength(50);
+                entity.Property(e => e.NoLote).HasMaxLength(50);
 
                 entity.Property(e => e.Precio)
                     .HasColumnType("decimal(18, 6)")

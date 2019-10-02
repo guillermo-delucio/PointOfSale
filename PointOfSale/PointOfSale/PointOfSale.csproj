@@ -300,6 +300,7 @@
     <Compile Include="Models\Impuesto.cs" />
     <Compile Include="Models\Laboratorio.cs" />
     <Compile Include="Models\Lote.cs" />
+    <Compile Include="Models\LoteVentap.cs" />
     <Compile Include="Models\MetodoPago.cs" />
     <Compile Include="Models\MovInv.cs" />
     <Compile Include="Models\Municipio.cs" />

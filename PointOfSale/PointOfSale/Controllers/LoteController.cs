@@ -239,36 +239,40 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
-        public List<Lote> GetLotesDisponibilidad(string productoId, decimal cantidad)
+        public Lote GetLoteDisponibilidad(string productoId, decimal cantidad)
         {
-            decimal restante = cantidad;
-            var disponibilidades = new List<Lote>();
+            List<Lote> lotes = new List<Lote>();
             try
             {
+
                 using (var db = new DymContext())
                 {
-                    var lotes = db.Lote.Where(x => x.ProductoId.Equals(productoId.Trim()) && x.StockRestante > 0)
-                        .OrderBy(x => x.CreatedAt).ToList();
-
-                    foreach (var l in lotes)
-                    {
-                        if (restante == 0)
-                            break;
-
-                        if (l.StockRestante >= restante)
-                            restante = 0;
-                        else
-                            restante -= l.StockRestante;
-
-                        disponibilidades.Add(l);
-                    }
+                    lotes = db.Lote.Where(x => x.ProductoId.Equals(productoId.Trim()) && x.StockRestante > 0)
+                       .OrderBy(x => x.CreatedAt).ToList();
                 }
             }
             catch (Exception ex)
             {
                 Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
             }
-            return disponibilidades;
+            return lotes.FirstOrDefault();
+        }
+        public List<Lote> GetLotesDisponibilidad(string productoId, decimal cantidad)
+        {
+            List<Lote> lotes = new List<Lote>();
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    lotes = db.Lote.Where(x => x.ProductoId.Equals(productoId.Trim()) && x.StockRestante > 0)
+                       .OrderBy(x => x.CreatedAt).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return lotes;
         }
     }
 }
