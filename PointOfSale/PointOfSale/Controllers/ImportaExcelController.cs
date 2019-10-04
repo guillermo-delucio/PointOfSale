@@ -196,6 +196,10 @@ namespace PointOfSale.Controllers
                                 case 1:
                                     //1ProductoId
                                     producto = productoController.SelectOne(workSheet.Cells[row, col].Text.Trim());
+
+                                    if (producto == null)
+                                        break;
+
                                     if (producto.ProductoId != null)
                                     {
                                         lote = new Lote();
@@ -207,6 +211,8 @@ namespace PointOfSale.Controllers
 
                                 //2NoLote
                                 case 2:
+                                    if (producto == null)
+                                        break;
                                     if (producto.ProductoId != null)
                                     {
                                         lote.NoLote = workSheet.Cells[row, col].Text.Trim().Trim();
@@ -214,7 +220,8 @@ namespace PointOfSale.Controllers
 
                                     break;
                                 case 3:
-
+                                    if (producto == null)
+                                        break;
                                     if (producto.ProductoId != null)
                                     {
 
@@ -228,6 +235,8 @@ namespace PointOfSale.Controllers
 
                                     break;
                                 case 4:
+                                    if (producto == null)
+                                        break;
                                     if (producto.ProductoId != null)
                                     {
                                         var s = decimal.TryParse(workSheet.Cells[row, col].Text.Trim().Trim(), out decimal res);
@@ -240,6 +249,8 @@ namespace PointOfSale.Controllers
 
                                     break;
                                 case 5:
+                                    if (producto == null)
+                                        break;
                                     if (producto.ProductoId != null)
                                     {
 
