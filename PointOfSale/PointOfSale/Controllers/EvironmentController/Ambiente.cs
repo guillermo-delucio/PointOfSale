@@ -41,7 +41,7 @@ namespace PointOfSale.Controllers
             ClavesSat, Presentaciones, UnidadesMedida,
             Usuarios, ProductoImpuesto, ProductoSustancia,
             ProductosCompleto, MetodoPago, FormaPago, UsoCDFI,
-            Tickets, Empresas, RegimenFiscal, Sucursal,Lotes
+            Tickets, Empresas, RegimenFiscal, Sucursal, Lotes
 
         };
 
@@ -232,7 +232,7 @@ namespace PointOfSale.Controllers
             return traspaso;
         }
 
-        
+
 
         public static List<Traspasop> SerializaPD(string path)
         {
@@ -620,8 +620,8 @@ namespace PointOfSale.Controllers
                 if (!successc || !successm)
                     return "1.000";
 
-                decimal nPrecio = nCosto / (1 - (nMargen / 100));
-
+                //decimal nPrecio = nCosto / (1 - (nMargen / 100));
+                decimal nPrecio = nCosto + (nCosto * (nMargen / 100));
                 return string.Format("{0:0.000}", nPrecio);
             }
             catch (Exception)
@@ -644,7 +644,8 @@ namespace PointOfSale.Controllers
                 if (!successc || !successp)
                     return "1.000";
 
-                decimal nMargen = (1 - (nCosto / nPrecio)) * 100;
+                //decimal nMargen = (1 - (nCosto / nPrecio)) * 100;
+                decimal nMargen = ((nPrecio / nCosto) - 1) * 100;
                 return string.Format("{0:0.000}", nMargen);
             }
             catch (Exception)
@@ -662,9 +663,12 @@ namespace PointOfSale.Controllers
             decimal precio = 0M, acumulado = 0M;
             try
             {
-                if (decimal.TryParse(nPrecio, out precio) && impuestos.Count > 0)
+                if (decimal.TryParse(nPrecio, out precio))
+                {
+                    acumulado = precio;
                     foreach (var i in impuestos)
                         acumulado += precio * i.Tasa;
+                }
                 else
                     return "1.000";
             }
@@ -673,7 +677,7 @@ namespace PointOfSale.Controllers
 
                 Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + " precio y/o margen invalidos");
             }
-            return FDinero((precio + acumulado).ToString());
+            return FDinero((acumulado).ToString());
         }
 
         public static decimal GetPrecioSalida(Producto producto, int listaPrecio = 1)
