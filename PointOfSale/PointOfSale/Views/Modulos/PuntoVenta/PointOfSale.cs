@@ -305,8 +305,12 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             }
 
             //Aplicaion de puntos
+
             GuardaPuntos();
             AplicaPuntos(form);
+            if (Ambiente.CancelaProceso)
+                return;
+
 
 
             // venta.TotalConLetra = form.totalLetra;
@@ -359,28 +363,90 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             {
                 if (cliente != null && cliente.DineroElectronico > 0 && cliente.TieneMonedero)
                 {
-                    if (cliente.DineroElectronico >= venta.Total)
+                    if (form.NoTarjeta.Length == 0)
                     {
-                        if (Ambiente.Pregunta("Aplicar el 100 % de descuento a la venta"))
+                        Ambiente.Mensaje("Proceso abortado. Si el cobro es con puntos escanee la tarjeta.");
+                        Ambiente.CancelaProceso = true;
+                        return;
+                    }
+                    else
+                        Ambiente.CancelaProceso = false;
+
+                    var clientem = clienteController.SelectOneByMonedero(form.NoTarjeta);
+                    if (clientem == null)
+                    {
+                        //Cliente no tiene monedero asignado
+                        if (Ambiente.Pregunta("El cliente tiene monedero, pero no lo han asignado.  Quieres asignar el esta tarjera de puntos al cliente de la venta"))
                         {
-                            venta.DescXpuntos = venta.Total;
-                            venta.Total = 0;
-                            venta.PuntosAplicados = true;
-                            cliente.DineroElectronico -= venta.Total;
+                            cliente.NoTarjetaPuntos = form.NoTarjeta;
                             clienteController.Update(cliente);
+                            if (cliente.DineroElectronico >= venta.Total)
+                            {
+                                if (Ambiente.Pregunta("Aplicar el 100 % de descuento a la venta"))
+                                {
+                                    venta.DescXpuntos = venta.Total;
+                                    venta.Total = 0;
+                                    venta.PuntosAplicados = true;
+                                    cliente.DineroElectronico -= venta.Total;
+                                    clienteController.Update(cliente);
+                                }
+                            }
+                            else
+                            {
+                                if (Ambiente.Pregunta("Aplicar $" + Math.Round(cliente.DineroElectronico, 1) + " pesos  de descuento a la venta"))
+                                {
+                                    venta.DescXpuntos = cliente.DineroElectronico;
+                                    venta.PuntosAplicados = true;
+                                    cliente.DineroElectronico = 0;
+                                    venta.Total -= venta.DescXpuntos;
+                                    clienteController.Update(cliente);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Ambiente.Mensaje("No se aplicaron los puntos");
                         }
                     }
                     else
                     {
-                        if (Ambiente.Pregunta("Aplicar $" + Math.Round(cliente.DineroElectronico, 1) + " pesos  de descuento a la venta"))
+                        //validar que sea el mismo cliente de la venta
+                        if (clientem.ClienteId.Equals(cliente.ClienteId))
                         {
-                            venta.DescXpuntos = cliente.DineroElectronico;
-                            venta.PuntosAplicados = true;
-                            cliente.DineroElectronico = 0;
-                            venta.Total -= venta.DescXpuntos;
-                            clienteController.Update(cliente);
+                            //Aplicar los puntos
+                            if (cliente.DineroElectronico >= venta.Total)
+                            {
+                                if (Ambiente.Pregunta("Aplicar el 100 % de descuento a la venta"))
+                                {
+                                    venta.DescXpuntos = venta.Total;
+                                    venta.Total = 0;
+                                    venta.PuntosAplicados = true;
+                                    cliente.DineroElectronico -= venta.Total;
+                                    clienteController.Update(cliente);
+                                }
+                            }
+                            else
+                            {
+                                if (Ambiente.Pregunta("Aplicar $" + Math.Round(cliente.DineroElectronico, 1) + " pesos  de descuento a la venta"))
+                                {
+                                    venta.DescXpuntos = cliente.DineroElectronico;
+                                    venta.PuntosAplicados = true;
+                                    cliente.DineroElectronico = 0;
+                                    venta.Total -= venta.DescXpuntos;
+                                    clienteController.Update(cliente);
+                                }
+                            }
+
                         }
+                        else
+                        {
+
+                            Ambiente.Mensaje("Esta operacion no está permitida, los puntos no se transfieren entre clientes");
+                        }
+
                     }
+
+
                 }
                 else
                 {
@@ -531,7 +597,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             }
 
         }
-
         private void PendienteOdescarta()
         {
             if (partidas.Count > 0)
@@ -842,14 +907,14 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     {
                         if (restante == 0)
                             break;
-                        
+
 
                         if (restante <= l.StockRestante)
                         {
                             Lvp.ProductoId = p.ProductoId;
                             Lvp.VentaId = venta.VentaId;
                             Lvp.NoLote = l.NoLote;
-                            
+
                             Lvp.Cantidad += restante;
                             l.StockRestante -= restante;
                             restante = 0;
@@ -870,7 +935,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 }
             }
         }
-
 
         private void TxtCliente_KeyDown(object sender, KeyEventArgs e)
         {

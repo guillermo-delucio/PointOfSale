@@ -1476,5 +1476,6 @@ namespace PointOfSale.Controllers
 
             return true;
         }
+        public static bool CancelaProceso;
     }
 }

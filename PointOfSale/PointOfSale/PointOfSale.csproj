@@ -560,6 +560,12 @@
     <Compile Include="Views\Modulos\PuntoVenta\FrmMetodoPago.Designer.cs">
       <DependentUpon>FrmMetodoPago.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmSolicitudPuntos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\PuntoVenta\FrmSolicitudPuntos.Designer.cs">
+      <DependentUpon>FrmSolicitudPuntos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modulos\PuntoVenta\FrmTicketFactura.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -713,6 +719,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmMetodoPago.resx">
       <DependentUpon>FrmMetodoPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmSolicitudPuntos.resx">
+      <DependentUpon>FrmSolicitudPuntos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Modulos\PuntoVenta\FrmTicketFactura.resx">
       <DependentUpon>FrmTicketFactura.cs</DependentUpon>

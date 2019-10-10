@@ -32,6 +32,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         public string tipoDoc;
         public string formaPago;
         public string metodoPago;
+        public string NoTarjeta;
         public bool CobroConPuntos;
 
         public bool Cxc;
@@ -66,6 +67,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             Cxc = false;
             tipoDoc = "TIC";
             CobroConPuntos = false;
+            NoTarjeta = "";
             moneda = new Moneda();
         }
 
@@ -101,11 +103,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             }
         }
 
-        private void RFactura_CheckedChanged(object sender, EventArgs e)
-        {
-            if (RFactura.Checked)
-                tipoDoc = "FAC";
-        }
 
         private void RTicket_CheckedChanged(object sender, EventArgs e)
         {
@@ -119,7 +116,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             {
                 CalculaCambio();
                 if (cambio >= 0)
-                    BtnAceptar.Focus();
+                    ChkCobrarConPtos.Focus();
             }
         }
 
@@ -201,7 +198,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             {
                 CalculaCambio();
                 if (cambio >= 0)
-                    BtnAceptar.Focus();
+                    ChkCobrarConPtos.Focus();
             }
         }
 
@@ -211,7 +208,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             {
                 CalculaCambio();
                 if (cambio >= 0)
-                    BtnAceptar.Focus();
+                    ChkCobrarConPtos.Focus();
             }
         }
 
@@ -286,6 +283,45 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             Cxc = true;
             CerrarVenta();
+        }
+
+        private void ChkCobrarConPtos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChkCobrarConPtos.Checked)
+            {
+                TxtNoTarjeta.Enabled = true;
+                TxtNoTarjeta.Focus();
+            }
+            else
+            {
+                TxtNoTarjeta.Enabled = false;
+                TxtNoTarjeta.Focus();
+            }
+
+        }
+
+        private void TxtNoTarjeta_Leave(object sender, EventArgs e)
+        {
+            NoTarjeta = TxtNoTarjeta.Text.Trim();
+        }
+
+        private void TxtNoTarjeta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnAceptar.Focus();
+            }
+        }
+
+        private void ChkCobrarConPtos_Enter(object sender, EventArgs e)
+        {
+            ChkCobrarConPtos.ForeColor = Color.Black;
+        }
+
+        private void ChkCobrarConPtos_Leave(object sender, EventArgs e)
+        {
+            ChkCobrarConPtos.ForeColor = SystemColors.ControlDarkDark;
+
         }
     }
 }

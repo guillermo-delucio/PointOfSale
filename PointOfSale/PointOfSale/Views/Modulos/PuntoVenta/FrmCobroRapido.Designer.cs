@@ -33,7 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TxtFormaPago1 = new System.Windows.Forms.TextBox();
             this.RTicket = new System.Windows.Forms.RadioButton();
-            this.RFactura = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.TxtTotal = new System.Windows.Forms.TextBox();
             this.BtnCXC = new System.Windows.Forms.Button();
@@ -51,6 +50,7 @@
             this.TxtConceptoPago2 = new System.Windows.Forms.TextBox();
             this.TxtFormaPago3 = new System.Windows.Forms.TextBox();
             this.TxtPago2 = new System.Windows.Forms.TextBox();
+            this.TxtNoTarjeta = new System.Windows.Forms.TextBox();
             this.ChkCobrarConPtos = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -127,20 +127,6 @@
             this.RTicket.UseVisualStyleBackColor = true;
             this.RTicket.CheckedChanged += new System.EventHandler(this.RTicket_CheckedChanged);
             // 
-            // RFactura
-            // 
-            this.RFactura.AutoSize = true;
-            this.RFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RFactura.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.RFactura.Location = new System.Drawing.Point(6, 51);
-            this.RFactura.Name = "RFactura";
-            this.RFactura.Size = new System.Drawing.Size(117, 28);
-            this.RFactura.TabIndex = 3;
-            this.RFactura.TabStop = true;
-            this.RFactura.Text = "FACTURA";
-            this.RFactura.UseVisualStyleBackColor = true;
-            this.RFactura.CheckedChanged += new System.EventHandler(this.RFactura_CheckedChanged);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -207,8 +193,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.TxtNoTarjeta);
+            this.groupBox1.Controls.Add(this.ChkCobrarConPtos);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.RFactura);
             this.groupBox1.Controls.Add(this.TxtCambio);
             this.groupBox1.Controls.Add(this.RTicket);
             this.groupBox1.Location = new System.Drawing.Point(13, 196);
@@ -244,7 +231,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.ChkCobrarConPtos);
             this.groupBox2.Controls.Add(this.TxtPago3);
             this.groupBox2.Controls.Add(this.TxtFormaPago1);
             this.groupBox2.Controls.Add(this.label4);
@@ -369,18 +355,35 @@
             this.TxtPago2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPago2_KeyDown);
             this.TxtPago2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPago2_KeyPress);
             // 
+            // TxtNoTarjeta
+            // 
+            this.TxtNoTarjeta.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtNoTarjeta.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtNoTarjeta.Enabled = false;
+            this.TxtNoTarjeta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtNoTarjeta.ForeColor = System.Drawing.Color.DimGray;
+            this.TxtNoTarjeta.Location = new System.Drawing.Point(190, 61);
+            this.TxtNoTarjeta.Name = "TxtNoTarjeta";
+            this.TxtNoTarjeta.Size = new System.Drawing.Size(211, 22);
+            this.TxtNoTarjeta.TabIndex = 297;
+            this.TxtNoTarjeta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNoTarjeta_KeyDown);
+            this.TxtNoTarjeta.Leave += new System.EventHandler(this.TxtNoTarjeta_Leave);
+            // 
             // ChkCobrarConPtos
             // 
             this.ChkCobrarConPtos.AutoSize = true;
-            this.ChkCobrarConPtos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.ChkCobrarConPtos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.ChkCobrarConPtos.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ChkCobrarConPtos.Location = new System.Drawing.Point(19, 24);
+            this.ChkCobrarConPtos.Location = new System.Drawing.Point(6, 57);
             this.ChkCobrarConPtos.Name = "ChkCobrarConPtos";
-            this.ChkCobrarConPtos.Size = new System.Drawing.Size(151, 22);
-            this.ChkCobrarConPtos.TabIndex = 294;
+            this.ChkCobrarConPtos.Size = new System.Drawing.Size(163, 28);
+            this.ChkCobrarConPtos.TabIndex = 296;
             this.ChkCobrarConPtos.TabStop = false;
-            this.ChkCobrarConPtos.Text = "Cobrar con puntos";
+            this.ChkCobrarConPtos.Text = "USAR PUNTOS";
             this.ChkCobrarConPtos.UseVisualStyleBackColor = true;
+            this.ChkCobrarConPtos.CheckedChanged += new System.EventHandler(this.ChkCobrarConPtos_CheckedChanged);
+            this.ChkCobrarConPtos.Enter += new System.EventHandler(this.ChkCobrarConPtos_Enter);
+            this.ChkCobrarConPtos.Leave += new System.EventHandler(this.ChkCobrarConPtos_Leave);
             // 
             // FrmCobroRapido
             // 
@@ -409,7 +412,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TxtFormaPago1;
         private System.Windows.Forms.RadioButton RTicket;
-        private System.Windows.Forms.RadioButton RFactura;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TxtTotal;
         private System.Windows.Forms.Button BtnAceptar;
@@ -427,6 +429,7 @@
         private System.Windows.Forms.TextBox TxtConceptoPago2;
         private System.Windows.Forms.TextBox TxtFormaPago3;
         private System.Windows.Forms.TextBox TxtPago2;
+        private System.Windows.Forms.TextBox TxtNoTarjeta;
         private System.Windows.Forms.CheckBox ChkCobrarConPtos;
     }
 }

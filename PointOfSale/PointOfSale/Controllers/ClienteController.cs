@@ -150,6 +150,21 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
+        public Cliente SelectOneByMonedero(string Id)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Cliente.FirstOrDefault(x => x.NoTarjetaPuntos == Id.Trim());
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
 
         public List<Cliente> SelectOneOverList(string Id)
         {
