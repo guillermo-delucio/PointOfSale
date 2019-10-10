@@ -86,8 +86,7 @@ namespace PointOfSale.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server = 192.168.1.5; Database = Dym; User Id = sa;Password = 12345678;");
-                
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
             }
         }
 
@@ -477,6 +476,8 @@ namespace PointOfSale.Models
                     .HasMaxLength(5);
 
                 entity.Property(e => e.Municipio).HasMaxLength(50);
+
+                entity.Property(e => e.NoTarjetaPuntos).HasMaxLength(50);
 
                 entity.Property(e => e.Pais).HasMaxLength(50);
 

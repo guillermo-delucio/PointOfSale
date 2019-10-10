@@ -77,6 +77,8 @@
             this.TxtDineroE = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.ChkMonedero = new System.Windows.Forms.CheckBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.TxtNoTarjetaPuntos = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label18
@@ -171,7 +173,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label15.Location = new System.Drawing.Point(340, 478);
+            this.label15.Location = new System.Drawing.Point(183, 478);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(112, 18);
             this.label15.TabIndex = 248;
@@ -183,9 +185,9 @@
             this.TxtDiasCredito.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtDiasCredito.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtDiasCredito.ForeColor = System.Drawing.Color.Black;
-            this.TxtDiasCredito.Location = new System.Drawing.Point(343, 499);
+            this.TxtDiasCredito.Location = new System.Drawing.Point(186, 499);
             this.TxtDiasCredito.Name = "TxtDiasCredito";
-            this.TxtDiasCredito.Size = new System.Drawing.Size(298, 24);
+            this.TxtDiasCredito.Size = new System.Drawing.Size(130, 24);
             this.TxtDiasCredito.TabIndex = 16;
             this.TxtDiasCredito.Text = "0";
             // 
@@ -197,7 +199,7 @@
             this.TxtLimiteCredito.ForeColor = System.Drawing.Color.Black;
             this.TxtLimiteCredito.Location = new System.Drawing.Point(18, 499);
             this.TxtLimiteCredito.Name = "TxtLimiteCredito";
-            this.TxtLimiteCredito.Size = new System.Drawing.Size(298, 24);
+            this.TxtLimiteCredito.Size = new System.Drawing.Size(162, 24);
             this.TxtLimiteCredito.TabIndex = 15;
             this.TxtLimiteCredito.Text = "0.000";
             // 
@@ -506,7 +508,7 @@
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label20.Location = new System.Drawing.Point(15, 535);
+            this.label20.Location = new System.Drawing.Point(340, 478);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(165, 18);
             this.label20.TabIndex = 255;
@@ -518,7 +520,7 @@
             this.TxtMetodoPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtMetodoPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtMetodoPago.ForeColor = System.Drawing.Color.Black;
-            this.TxtMetodoPago.Location = new System.Drawing.Point(18, 556);
+            this.TxtMetodoPago.Location = new System.Drawing.Point(343, 499);
             this.TxtMetodoPago.Name = "TxtMetodoPago";
             this.TxtMetodoPago.Size = new System.Drawing.Size(162, 24);
             this.TxtMetodoPago.TabIndex = 17;
@@ -541,7 +543,7 @@
             this.TxtFormaPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxtFormaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtFormaPago.ForeColor = System.Drawing.Color.Black;
-            this.TxtFormaPago.Location = new System.Drawing.Point(186, 556);
+            this.TxtFormaPago.Location = new System.Drawing.Point(511, 499);
             this.TxtFormaPago.Name = "TxtFormaPago";
             this.TxtFormaPago.Size = new System.Drawing.Size(130, 24);
             this.TxtFormaPago.TabIndex = 18;
@@ -552,7 +554,7 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label22.Location = new System.Drawing.Point(183, 535);
+            this.label22.Location = new System.Drawing.Point(508, 478);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(127, 18);
             this.label22.TabIndex = 257;
@@ -603,7 +605,7 @@
             this.TxtDineroE.Enabled = false;
             this.TxtDineroE.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtDineroE.ForeColor = System.Drawing.Color.Black;
-            this.TxtDineroE.Location = new System.Drawing.Point(18, 604);
+            this.TxtDineroE.Location = new System.Drawing.Point(18, 554);
             this.TxtDineroE.Name = "TxtDineroE";
             this.TxtDineroE.Size = new System.Drawing.Size(162, 24);
             this.TxtDineroE.TabIndex = 260;
@@ -613,29 +615,54 @@
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label24.Location = new System.Drawing.Point(15, 583);
+            this.label24.Location = new System.Drawing.Point(15, 533);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(157, 18);
+            this.label24.Size = new System.Drawing.Size(113, 18);
             this.label24.TabIndex = 261;
-            this.label24.Text = "$ MONEDERO ELEC.";
+            this.label24.Text = "DINERO ELEC.";
             // 
             // ChkMonedero
             // 
             this.ChkMonedero.AutoSize = true;
             this.ChkMonedero.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.ChkMonedero.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ChkMonedero.Location = new System.Drawing.Point(186, 604);
+            this.ChkMonedero.Location = new System.Drawing.Point(18, 584);
             this.ChkMonedero.Name = "ChkMonedero";
             this.ChkMonedero.Size = new System.Drawing.Size(164, 22);
             this.ChkMonedero.TabIndex = 262;
             this.ChkMonedero.Text = "TIENE MONEDERO";
             this.ChkMonedero.UseVisualStyleBackColor = true;
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label25.Location = new System.Drawing.Point(183, 535);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(140, 18);
+            this.label25.TabIndex = 264;
+            this.label25.Text = "TARJETA PUNTOS";
+            // 
+            // TxtNoTarjetaPuntos
+            // 
+            this.TxtNoTarjetaPuntos.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtNoTarjetaPuntos.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtNoTarjetaPuntos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtNoTarjetaPuntos.ForeColor = System.Drawing.Color.Black;
+            this.TxtNoTarjetaPuntos.Location = new System.Drawing.Point(186, 556);
+            this.TxtNoTarjetaPuntos.Name = "TxtNoTarjetaPuntos";
+            this.TxtNoTarjetaPuntos.Size = new System.Drawing.Size(130, 24);
+            this.TxtNoTarjetaPuntos.TabIndex = 263;
+            this.TxtNoTarjetaPuntos.Text = "0";
+            // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 640);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.TxtNoTarjetaPuntos);
             this.Controls.Add(this.ChkMonedero);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.TxtDineroE);
@@ -745,5 +772,7 @@
         private System.Windows.Forms.TextBox TxtDineroE;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.CheckBox ChkMonedero;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox TxtNoTarjetaPuntos;
     }
 }

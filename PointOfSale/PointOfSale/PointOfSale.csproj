@@ -239,6 +239,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ConceptoMovInvController.cs" />
     <Compile Include="Controllers\LoteController.cs" />
+    <Compile Include="Controllers\LoteVentapController.cs" />
     <Compile Include="Controllers\MovInvController.cs" />
     <Compile Include="Controllers\PresentacionController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />

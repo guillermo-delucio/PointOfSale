@@ -48,7 +48,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             InitializeComponent();
             ResetPDV();
-
         }
 
         private void CalculaTotales()
@@ -832,23 +831,37 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             //es decir, se puede vender sin lotes, así cómo sin existencias.
             foreach (var p in partidas)
             {
+                var Lvp = new LoteVentap();
                 if (productoController.SelectOne(p.ProductoId).TieneLote)
                 {
                     var lotes = loteController.GetLotesDisponibilidad(p.ProductoId, p.Cantidad);
 
                     var restante = p.Cantidad;
+
                     foreach (var l in lotes)
                     {
                         if (restante == 0)
                             break;
+                        
 
                         if (restante <= l.StockRestante)
                         {
+                            Lvp.ProductoId = p.ProductoId;
+                            Lvp.VentaId = venta.VentaId;
+                            Lvp.NoLote = l.NoLote;
+                            
+                            Lvp.Cantidad += restante;
                             l.StockRestante -= restante;
                             restante = 0;
+
                         }
                         else
                         {
+                            Lvp.ProductoId = p.ProductoId;
+                            Lvp.VentaId = venta.VentaId;
+                            Lvp.NoLote = l.NoLote;
+
+                            Lvp.Cantidad += restante;
                             restante -= l.StockRestante;
                             l.StockRestante = 0;
                         }

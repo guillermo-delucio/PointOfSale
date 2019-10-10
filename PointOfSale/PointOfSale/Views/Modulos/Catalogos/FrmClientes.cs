@@ -72,6 +72,9 @@ namespace PointOfSale.Views.Modulos.Catalogos
             CboPrecioDefault.Text = objeto.PrecioDefault.ToString();
             TxtDineroE.Text = Ambiente.FDinero(objeto.DineroElectronico.ToString());
             ChkMonedero.Checked = objeto.TieneMonedero;
+            TxtNoTarjetaPuntos.Text = objeto.NoTarjetaPuntos;
+            TxtUsoCFDI.Text = objeto.UsoCfdiid;
+            ChkMonedero.Checked = objeto.TieneMonedero;
 
         }
 
@@ -124,7 +127,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                     objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
                     objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
                     objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
-
+                    objeto.NoTarjetaPuntos = TxtNoTarjetaPuntos.Text.Trim().Length == 0 ? null : TxtNoTarjetaPuntos.Text.Trim();
                     success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                     success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
                     if (success)
@@ -167,6 +170,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
                     objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
                     objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
                     objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
+                    objeto.NoTarjetaPuntos = TxtNoTarjetaPuntos.Text.Trim().Length == 0 ? null : TxtNoTarjetaPuntos.Text.Trim();
+
                     objeto.TieneMonedero = ChkMonedero.Checked;
                     success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                     success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);
@@ -215,6 +220,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                         objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "01" : TxtFormaPago.Text.Trim();
                         objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
                         objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
+                        objeto.NoTarjetaPuntos = TxtNoTarjetaPuntos.Text.Trim().Length == 0 ? null : TxtNoTarjetaPuntos.Text.Trim();
                         objeto.DineroElectronico = 0;
                         objeto.TieneMonedero = ChkMonedero.Checked;
                         success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
@@ -259,6 +265,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                         objeto.FormaPagoId = TxtFormaPago.Text.Trim().Length == 0 ? "PUE" : TxtFormaPago.Text.Trim();
                         objeto.PrecioDefault = CboPrecioDefault.Text.Trim().Length == 0 ? 1 : Convert.ToInt32(CboPrecioDefault.Text.Trim());
                         objeto.UsoCfdiid = TxtUsoCFDI.Text.Trim().Length == 0 ? "G01" : TxtUsoCFDI.Text.Trim();
+                        objeto.NoTarjetaPuntos = TxtNoTarjetaPuntos.Text.Trim().Length == 0 ? null : TxtNoTarjetaPuntos.Text.Trim();
                         objeto.TieneMonedero = ChkMonedero.Checked;
                         success = decimal.TryParse(TxtLimiteCredito.Text.Trim(), out decimal nLimite);
                         success = int.TryParse(TxtDiasCredito.Text.Trim(), out int nDias);

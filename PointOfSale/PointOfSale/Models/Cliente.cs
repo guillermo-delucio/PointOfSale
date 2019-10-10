@@ -36,8 +36,9 @@ namespace PointOfSale.Models
         public bool TieneLicencia { get; set; }
         public string UsoCfdiid { get; set; }
         public bool? EsCxc { get; set; }
-        public decimal DineroElectronico { get; set; }
         public bool TieneMonedero { get; set; }
+        public string NoTarjetaPuntos { get; set; }
+        public decimal DineroElectronico { get; set; }
 
         public virtual CFormapago FormaPago { get; set; }
         public virtual FormaPago FormaPagoNavigation { get; set; }
