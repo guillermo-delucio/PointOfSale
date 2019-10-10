@@ -225,6 +225,12 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
+            if (!Ambiente.LoggedUser.Facturar)
+            {
+                Ambiente.Mensaje("Operacion denegada. No tienes permiso para operar esta vista.");
+                return;
+            }
+
             if (venta == null)
             {
                 Ambiente.Mensaje("Proceso abortado, no se encontró ninguna venta seleccionada");
@@ -270,8 +276,13 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void TxtNoRereren_KeyDown(object sender, KeyEventArgs e)
         {
 
+
             if (e.KeyCode == Keys.Enter)
             {
+                if (TxtNoRereren.Text.Trim().Length == 0)
+                {
+                    return;
+                }
                 int referencia = int.Parse(TxtNoRereren.Text.Trim());
                 venta = ventaController.SelectTicket(referencia);
                 CargarDatos();
@@ -322,6 +333,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             TxtUsoCFDI.Enabled = true;
             TxtFormaPago.Enabled = true;
             TxtMetodoPago.Enabled = true;
+
+        }
+
+        private void FrmTicketFactura_Load(object sender, EventArgs e)
+        {
 
         }
     }

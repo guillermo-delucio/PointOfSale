@@ -59,6 +59,14 @@ namespace PointOfSale.Views.Modulos.Catalogos
         }
         private void InsertOrUpdate()
         {
+
+            if (!Ambiente.LoggedUser.IsAdmin)
+            {
+                Ambiente.Mensaje("Operación denegada. No tienes permiso para opera esta vista.");
+                return;
+            }
+
+
             if (ModoCreate)
             {
                 if (TxtUserId.Text.Trim().Length == 0)
