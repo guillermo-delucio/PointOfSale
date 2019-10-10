@@ -38,7 +38,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
             }
         }
 
-       
+
         private void LlenaCampos()
         {
             if (objeto == null)
@@ -51,7 +51,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 TxtArea.Text = objeto.Area;
                 TxtNombre.Text = objeto.Nombre;
                 ChkIsAdmin.Checked = objeto.IsAdmin;
-
+                ChkFacturar.Checked = objeto.Facturar;
 
             }
 
@@ -71,6 +71,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Area = TxtArea.Text.Trim();
                 objeto.Nombre = TxtNombre.Text.Trim();
                 objeto.IsAdmin = ChkIsAdmin.Checked;
+                objeto.Facturar = ChkFacturar.Checked;
 
                 if (usuarioController.InsertOne(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
@@ -80,10 +81,11 @@ namespace PointOfSale.Views.Modulos.Catalogos
             }
             else
             {
-                objeto.Password = Ambiente.Encrypt(TxtPassword.Text);            
+                objeto.Password = Ambiente.Encrypt(TxtPassword.Text);
                 objeto.Area = TxtArea.Text.Trim();
                 objeto.Nombre = TxtNombre.Text.Trim();
                 objeto.IsAdmin = ChkIsAdmin.Checked;
+                objeto.Facturar = ChkFacturar.Checked;
 
                 if (usuarioController.Update(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);

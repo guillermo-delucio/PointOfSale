@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.ChkFacturar = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // BtnSalir
@@ -187,11 +188,24 @@
             this.label14.Size = new System.Drawing.Size(655, 10);
             this.label14.TabIndex = 189;
             // 
+            // ChkFacturar
+            // 
+            this.ChkFacturar.AutoSize = true;
+            this.ChkFacturar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkFacturar.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ChkFacturar.Location = new System.Drawing.Point(22, 250);
+            this.ChkFacturar.Name = "ChkFacturar";
+            this.ChkFacturar.Size = new System.Drawing.Size(176, 24);
+            this.ChkFacturar.TabIndex = 195;
+            this.ChkFacturar.Text = "PUEDE FACTURAR";
+            this.ChkFacturar.UseVisualStyleBackColor = true;
+            // 
             // FrmUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(656, 339);
+            this.Controls.Add(this.ChkFacturar);
             this.Controls.Add(this.BtnSalir);
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.TxtNombre);
@@ -229,5 +243,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox ChkFacturar;
     }
 }
