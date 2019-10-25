@@ -1961,6 +1961,8 @@ namespace PointOfSale.Models
                     .HasColumnType("decimal(18, 6)")
                     .HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.PrecioCaja).HasColumnType("decimal(18, 6)");
+
                 entity.Property(e => e.ProductoId)
                     .IsRequired()
                     .HasMaxLength(50);

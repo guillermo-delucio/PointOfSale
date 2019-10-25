@@ -1030,8 +1030,11 @@ namespace PointOfSale.Controllers
 
                     report.RegData(ds);
                     report.Render(false);
+                    report.Design();
                     report.ExportDocument(StiExportFormat.Pdf, file);
                     report.Print(false, settings);
+                   report.Save(@"C:\Dympos\Formatos\Ticket.mrt");
+
                 }
                 else
                     Mensaje("Imposible imprimir, la empresa o estación carece de información.");

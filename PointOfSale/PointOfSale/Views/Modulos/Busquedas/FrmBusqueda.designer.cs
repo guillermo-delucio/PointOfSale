@@ -37,6 +37,8 @@
             // Grid1
             // 
             this.Grid1.AllowUserToAddRows = false;
+            this.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.Grid1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.Grid1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.Grid1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -45,7 +47,6 @@
             this.Grid1.Name = "Grid1";
             this.Grid1.Size = new System.Drawing.Size(618, 262);
             this.Grid1.TabIndex = 0;
-            
             this.Grid1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Grid1_KeyDown);
             // 
             // button1

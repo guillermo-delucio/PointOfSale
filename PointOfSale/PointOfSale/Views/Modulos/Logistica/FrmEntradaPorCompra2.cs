@@ -257,8 +257,8 @@ namespace PointOfSale.Views.Modulos.Logistica
             }
 
 
-            
-         
+
+
             //partida a la lista
             var partida = new Comprap();
             partida.CompraId = compra.CompraId;
@@ -380,18 +380,77 @@ namespace PointOfSale.Views.Modulos.Logistica
         }
         private void ActualizaCantidad(decimal cant, int rowIndex)
         {
-            if ((rowIndex <= partidas.Count - 1) && cant > 0)
+            if ((rowIndex < partidas.Count))
             {
-                partidas[rowIndex].Cantidad = cant;
-                Malla.Rows[rowIndex].Cells[4].Value = cant;
-                CalculaTotales();
+                if (cant > 0)
+                {
+                    partidas[rowIndex].Cantidad = cant;
+                    Malla.Rows[rowIndex].Cells[4].Value = cant;
+                }
+                else
+                {
+                    partidas[rowIndex].Cantidad = 1;
+                    Malla.Rows[rowIndex].Cells[4].Value = 1;
+                    Ambiente.Mensaje("Operación denegada, solo cantidades positivas");
+                }
             }
-            else
+        }
+        private void ActualizaPrecioCaja(decimal pcaja, int rowIndex)
+        {
+            if ((rowIndex < partidas.Count))
             {
-                partidas[rowIndex].Cantidad = 1;
-                Malla.Rows[rowIndex].Cells[4].Value = 1;
-                CalculaTotales();
-                Ambiente.Mensaje("Operación denegada, solo cantidades positivas");
+                if (pcaja > 0)
+                {
+                    partidas[rowIndex].PrecioCaja = pcaja;
+                    Malla.Rows[rowIndex].Cells[5].Value = pcaja;
+                }
+                else
+                {
+                    Malla.Rows[rowIndex].Cells[5].Value = partidas[rowIndex].PrecioCaja;
+                    Ambiente.Mensaje("Operación denegada, solo cantidades positivas");
+                }
+            }
+        }
+        private void ActualizaPrecioCompra(decimal pcompra, int rowIndex)
+        {
+            if ((rowIndex < partidas.Count))
+            {
+                if (pcompra > 0)
+                {
+                    partidas[rowIndex].PrecioCompra = pcompra;
+                    Malla.Rows[rowIndex].Cells[6].Value = pcompra;
+                }
+                else
+                {
+                    Malla.Rows[rowIndex].Cells[5].Value = partidas[rowIndex].PrecioCompra;
+                    Ambiente.Mensaje("Operación denegada, solo cantidades positivas");
+                }
+            }
+        }
+        private void ActualizaDescuento(decimal desc, int rowIndex)
+        {
+            if ((rowIndex < partidas.Count))
+            {
+                if (desc > 0)
+                {
+                    if (desc > 1)
+                    {
+                        partidas[rowIndex].Descuento = desc / 100;
+                        Malla.Rows[rowIndex].Cells[7].Value = desc / 100;
+                    }
+                    else
+                    {
+                        partidas[rowIndex].Descuento = desc;
+                        Malla.Rows[rowIndex].Cells[7].Value = desc;
+                    }
+
+                }
+                else
+                {
+                    partidas[rowIndex].Descuento = 0;
+                    Malla.Rows[rowIndex].Cells[7].Value = 0;
+                    //Ambiente.Mensaje("Operación denegada, solo cero y cantidades positivas");
+                }
             }
         }
         private void ResetPartida()
@@ -758,14 +817,52 @@ namespace PointOfSale.Views.Modulos.Logistica
         }
         private void Malla_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            ActualizaCantidad(decimal.Parse(Malla.CurrentCell.Value.ToString()), e.RowIndex);
-            CalculaTotales();
-            TxtProductoId.Focus();
+            if (Malla.CurrentCell.Value == null)
+                return;
+
+
+            if (Malla.CurrentCell.ColumnIndex == 4)
+            {
+                //Cantidad
+                ActualizaCantidad(decimal.Parse(Malla.CurrentCell.Value.ToString()), e.RowIndex);
+                CalculaTotales();
+                ReCargaGrid();
+                TxtProductoId.Focus();
+            }
+            if (Malla.CurrentCell.ColumnIndex == 5)
+            {
+                //Precio de caja
+                ActualizaPrecioCaja(decimal.Parse(Malla.CurrentCell.Value.ToString()), e.RowIndex);
+                CalculaTotales();
+                ReCargaGrid();
+                TxtProductoId.Focus();
+
+
+            }
+
+            if (Malla.CurrentCell.ColumnIndex == 6)
+            {
+                //Precio de compra
+                ActualizaPrecioCompra(decimal.Parse(Malla.CurrentCell.Value.ToString()), e.RowIndex);
+                CalculaTotales();
+                ReCargaGrid();
+                TxtProductoId.Focus();
+
+            }
+            if (Malla.CurrentCell.ColumnIndex == 7)
+            {
+                //Precio de compra
+                ActualizaDescuento(decimal.Parse(Malla.CurrentCell.Value.ToString()), e.RowIndex);
+                CalculaTotales();
+                ReCargaGrid();
+                TxtProductoId.Focus();
+
+            }
         }
         private void Malla_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(ColumnCant_KeyPress);
-            if (Malla.CurrentCell.ColumnIndex == 4) //Desired Column
+            if (Malla.CurrentCell.ColumnIndex == 4 || Malla.CurrentCell.ColumnIndex == 5 || Malla.CurrentCell.ColumnIndex == 6 || Malla.CurrentCell.ColumnIndex == 7) //Desired Column
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -776,11 +873,17 @@ namespace PointOfSale.Views.Modulos.Logistica
         }
         private void ColumnCant_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
-
             }
+
+            // solo se permite un punto decimal
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+
         }
         private void Malla_KeyDown(object sender, KeyEventArgs e)
         {

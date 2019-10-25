@@ -681,7 +681,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 partida.NoLote = null;
                 partida.Caducidad = null;
             }
-
+            partida.PrecioCaja = producto.PrecioCaja;
             partida.ClaveProdServ = producto.ClaveProdServId.Trim().Length == 0 ? "01010101" : producto.ClaveProdServId.Trim();
             partida.ClaveUnidad = producto.ClaveUnidadId.Trim().Length == 0 ? "H87" : producto.ClaveUnidadId.Trim();
             partida.Unidad = producto.UnidadMedidaId.Trim().Length == 0 ? "SYS" : producto.UnidadMedidaId.Trim();

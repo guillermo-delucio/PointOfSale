@@ -28,6 +28,7 @@ namespace PointOfSale.Models
         public int? LoteId { get; set; }
         public string NoLote { get; set; }
         public DateTime? Caducidad { get; set; }
+        public decimal PrecioCaja { get; set; }
 
         public virtual CImpuesto ClaveImpuesto1Navigation { get; set; }
         public virtual CImpuesto ClaveImpuesto2Navigation { get; set; }
