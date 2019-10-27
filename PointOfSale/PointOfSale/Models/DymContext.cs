@@ -68,6 +68,7 @@ namespace PointOfSale.Models
         public virtual DbSet<Punto> Punto { get; set; }
         public virtual DbSet<PuntoConfig> PuntoConfig { get; set; }
         public virtual DbSet<Query> Query { get; set; }
+        public virtual DbSet<Reporte> Reporte { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<RolePermiso> RolePermiso { get; set; }
         public virtual DbSet<Sucursal> Sucursal { get; set; }
@@ -1574,6 +1575,21 @@ namespace PointOfSale.Models
                 entity.Property(e => e.Descripcion).HasMaxLength(50);
 
                 entity.Property(e => e.Sql).HasColumnName("SQL");
+            });
+
+            modelBuilder.Entity<Reporte>(entity =>
+            {
+                entity.Property(e => e.Codigo).IsRequired();
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.SecuenciaCifrado)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Sql).IsRequired();
             });
 
             modelBuilder.Entity<Role>(entity =>

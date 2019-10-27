@@ -35,6 +35,8 @@ namespace PointOfSale.Views.Modulos.Busquedas
         public Empresa Empresa;
         public CRegimenfiscal Regimenfiscal;
         public Sucursal Sucursal;
+        public Reporte Reporte;
+
 
         public FrmBusqueda()
         {
@@ -259,6 +261,14 @@ namespace PointOfSale.Views.Modulos.Busquedas
 
                     }
                     break;
+                case (int)Ambiente.TipoBusqueda.Reportes:
+                    using (var db = new DymContext())
+                    {
+                        Grid1.DataSource = db.Reporte.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).
+                            Select(x => new { ID = x.ReporteId, x.Nombre }).ToList();
+
+                    }
+                    break;
                 default:
                     MessageBox.Show("Error, no hay enumerador para catalogo");
                     break;
@@ -452,6 +462,12 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     using (var db = new DymContext())
                     {
                         Sucursal = db.Sucursal.Where(x => x.SucursalId == (int)Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value).FirstOrDefault();
+                    }
+                    break;
+                case (int)Ambiente.TipoBusqueda.Reportes:
+                    using (var db = new DymContext())
+                    {
+                        Reporte = db.Reporte.Where(x => x.ReporteId == (int)Grid1.Rows[Grid1.CurrentCell.RowIndex].Cells[0].Value).FirstOrDefault();
                     }
                     break;
                 default:

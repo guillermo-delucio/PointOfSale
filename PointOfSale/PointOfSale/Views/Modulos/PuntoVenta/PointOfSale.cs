@@ -352,7 +352,6 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                         if (Ambiente.Pregunta("Requiere factura para este documento"))
                             new FrmTicketFactura(venta.NoRef).Show();
                     }
-
                 }
                 Ambiente.SaveAndPrintTicket(venta);
                 ResetPDV();

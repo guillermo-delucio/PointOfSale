@@ -15,6 +15,7 @@ namespace PointOfSale.Controllers.EvironmentController
 {
     public static class Reports
     {
+
         //Objetos
         public static StiReport report;
         public static Empresa empresa;

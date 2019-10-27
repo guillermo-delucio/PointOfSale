@@ -41,7 +41,7 @@ namespace PointOfSale.Controllers
             ClavesSat, Presentaciones, UnidadesMedida,
             Usuarios, ProductoImpuesto, ProductoSustancia,
             ProductosCompleto, MetodoPago, FormaPago, UsoCDFI,
-            Tickets, Empresas, RegimenFiscal, Sucursal, Lotes
+            Tickets, Empresas, RegimenFiscal, Sucursal, Lotes, Reportes
 
         };
 
@@ -1033,7 +1033,7 @@ namespace PointOfSale.Controllers
                     report.Design();
                     report.ExportDocument(StiExportFormat.Pdf, file);
                     report.Print(false, settings);
-                   report.Save(@"C:\Dympos\Formatos\Ticket.mrt");
+                    report.Save(@"C:\Dympos\Formatos\Ticket.mrt");
 
                 }
                 else
