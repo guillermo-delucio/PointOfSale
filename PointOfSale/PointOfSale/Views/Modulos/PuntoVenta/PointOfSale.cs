@@ -36,6 +36,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private LoteController loteController;
         private MovInvController movInvController;
         private FlujoController flujoController;
+        private ReporteController reporteController;
+        private Reporte reporteTickets;
 
 
         private const int NPARTIDAS = 400;
@@ -48,6 +50,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             InitializeComponent();
             ResetPDV();
+            reporteTickets = reporteController.SelectOneByName(Ambiente.Empresa.FormatoParaTickets);
         }
 
         private void CalculaTotales()
@@ -228,6 +231,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             loteController = new LoteController();
             movInvController = new MovInvController();
             flujoController = new FlujoController();
+            reporteController = new ReporteController();
             lote = null;
 
 
@@ -353,7 +357,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                             new FrmTicketFactura(venta.NoRef).Show();
                     }
                 }
-                Ambiente.SaveAndPrintTicket(venta);
+                Ambiente.SaveAndPrintTicket2(venta, reporteTickets, reporteController);
                 ResetPDV();
             }
             else

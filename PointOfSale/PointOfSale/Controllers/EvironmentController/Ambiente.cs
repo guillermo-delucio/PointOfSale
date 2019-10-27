@@ -32,6 +32,7 @@ namespace PointOfSale.Controllers
         public static string PrefijoRutaImg { get; set; }
         public static string FormatoTicket { get; set; }
 
+
         #region Enums
         public enum TipoBusqueda
         {
@@ -1035,6 +1036,57 @@ namespace PointOfSale.Controllers
                     report.Print(false, settings);
                     report.Save(@"C:\Dympos\Formatos\Ticket.mrt");
 
+                }
+                else
+                    Mensaje("Imposible imprimir, la empresa o estación carece de información.");
+            }
+            else
+                Mensaje("Imposible imprimir, el documento llegó null");
+        }
+
+        //Actualizacion del metodo SaveAndPrintTicket
+        public static void SaveAndPrintTicket2(Venta venta, Reporte reporte, ReporteController reporteController)
+        {
+            if (venta != null)
+            {
+                var empresa = new EmpresaController().SelectTopOne();
+                var estacion = new EstacionController().SelectOne(venta.EstacionId);
+                if (estacion != null && empresa != null)
+                {
+                    if (empresa.DirectorioTickets.Trim().Length == 0 || empresa.FormatoParaTickets.Trim().Length == 0 || estacion.ImpresoraT.Trim().Length == 0)
+                    {
+                        Mensaje("DirectorioTickets|| FormatoParaTickets || ImpresoraT, No configurado.");
+                        return;
+                    }
+
+                    var report = new StiReport();
+
+
+                    var settings = new PrinterSettings();
+
+
+                    var file = empresa.DirectorioTickets + "TICKET " + venta.NoRef.ToString() + "_" + venta.CreatedBy + "_" + Ambiente.TimeText((DateTime)venta.CreatedAt) + ".PDF"; ;
+
+                    var parametros = new List<Parametro>();
+                    var p = new Parametro();
+                    p.Clave = "[ventaId]";
+                    p.Valor = venta.VentaId.ToString();
+                    parametros.Add(p);
+                    var s = reporteController.Serializar(reporte.Sql, parametros);
+                    var ds = reporteController.GetDataSet(s);
+
+                    //Add data to datastore
+                    report.LoadEncryptedReportFromString(reporte.Codigo, reporte.SecuenciaCifrado);
+                    report.RegData("DS", "DS", ds);
+                    //Fill dictionary
+                    report.Dictionary.Synchronize();
+
+
+                    settings.PrinterName = estacion.ImpresoraT;
+                    settings.Copies = (short)estacion.TantosT;
+                    report.Render(false);
+                    report.ExportDocument(StiExportFormat.Pdf, file);
+                    report.Print(false, settings);
                 }
                 else
                     Mensaje("Imposible imprimir, la empresa o estación carece de información.");

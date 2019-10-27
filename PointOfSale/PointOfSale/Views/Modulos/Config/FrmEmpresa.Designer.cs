@@ -104,10 +104,16 @@
             this.label11 = new System.Windows.Forms.Label();
             this.BtnCo = new System.Windows.Forms.Button();
             this.TxtRutaCO = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.TxtFormatoParaTickets = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label13
@@ -157,11 +163,13 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(14, 45);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(718, 407);
             this.tabControl1.TabIndex = 293;
+            this.tabControl1.Tag = "";
             // 
             // tabPage1
             // 
@@ -1034,6 +1042,65 @@
             this.TxtRutaCO.TabIndex = 362;
             this.TxtRutaCO.TabStop = false;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.textBox2);
+            this.tabPage4.Controls.Add(this.label29);
+            this.tabPage4.Controls.Add(this.TxtFormatoParaTickets);
+            this.tabPage4.Controls.Add(this.label28);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(710, 381);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Formatos de impresion";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // TxtFormatoParaTickets
+            // 
+            this.TxtFormatoParaTickets.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtFormatoParaTickets.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtFormatoParaTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtFormatoParaTickets.ForeColor = System.Drawing.Color.Black;
+            this.TxtFormatoParaTickets.Location = new System.Drawing.Point(6, 28);
+            this.TxtFormatoParaTickets.Name = "TxtFormatoParaTickets";
+            this.TxtFormatoParaTickets.Size = new System.Drawing.Size(332, 24);
+            this.TxtFormatoParaTickets.TabIndex = 311;
+            this.TxtFormatoParaTickets.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtFormatoTickets_KeyDown);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label28.Location = new System.Drawing.Point(4, 7);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(210, 18);
+            this.label28.TabIndex = 312;
+            this.label28.Text = "♥FORMATO PARA TICKETS";
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.ForeColor = System.Drawing.Color.Black;
+            this.textBox2.Location = new System.Drawing.Point(7, 89);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(332, 24);
+            this.textBox2.TabIndex = 313;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label29.Location = new System.Drawing.Point(5, 68);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(210, 18);
+            this.label29.TabIndex = 314;
+            this.label29.Text = "♥FORMATO PARA TICKETS";
+            // 
             // FrmEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1054,6 +1121,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1137,5 +1206,10 @@
         private System.Windows.Forms.Button BtnPFX;
         private System.Windows.Forms.TextBox TxtRutaArchivoPfx;
         private System.Windows.Forms.CheckBox ChkTimbradoTest;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox TxtFormatoParaTickets;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label29;
     }
 }

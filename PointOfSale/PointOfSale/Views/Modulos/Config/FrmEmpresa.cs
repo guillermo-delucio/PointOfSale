@@ -53,6 +53,7 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.DirectorioOpenSslBin = TxtOpenSslBin.Text;
                 empresa.RutaArchivoPfx = TxtRutaArchivoPfx.Text;
                 empresa.TimbradoTest = ChkTimbradoTest.Checked;
+                empresa.FormatoParaTickets = TxtFormatoParaTickets.Text.Trim();
 
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
@@ -93,6 +94,7 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.DirectorioOpenSslBin = TxtOpenSslBin.Text;
                 empresa.RutaArchivoPfx = TxtRutaArchivoPfx.Text;
                 empresa.TimbradoTest = ChkTimbradoTest.Checked;
+                empresa.FormatoParaTickets = TxtFormatoParaTickets.Text.Trim();
 
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
@@ -137,6 +139,7 @@ namespace PointOfSale.Views.Modulos.Config
             TxtOpenSslBin.Text = empresa.DirectorioOpenSslBin;
             TxtRutaArchivoPfx.Text = empresa.RutaArchivoPfx;
             ChkTimbradoTest.Checked = empresa.TimbradoTest;
+            TxtFormatoParaTickets.Text = empresa.FormatoParaTickets;
         }
 
         private void BtnAceptar_Click(object sender, EventArgs e)
@@ -287,6 +290,20 @@ namespace PointOfSale.Views.Modulos.Config
         private void BtnPFX_Click(object sender, EventArgs e)
         {
             TxtRutaArchivoPfx.Text = TxtFormatoTicket.Text = Ambiente.GetFilePath().Item1;
+        }
+
+        private void TxtFormatoTickets_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                using (var form = new FrmBusqueda(TxtFormatoParaTickets.Text.Trim(), (int)Ambiente.TipoBusqueda.Reportes))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        TxtFormatoParaTickets.Text = form.Reporte.Nombre;
+                    }
+                }
+            }
         }
     }
 }

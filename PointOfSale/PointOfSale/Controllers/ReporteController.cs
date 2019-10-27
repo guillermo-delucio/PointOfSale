@@ -137,6 +137,21 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
+        public Reporte SelectOneByName(string nombre)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Reporte.FirstOrDefault(x => x.Nombre.Equals(nombre.Trim()));
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Algo salio mal @ " + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
 
         public bool Update(Reporte o)
         {
