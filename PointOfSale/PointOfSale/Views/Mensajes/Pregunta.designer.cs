@@ -40,9 +40,9 @@
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.button1.Location = new System.Drawing.Point(12, 302);
+            this.button1.Location = new System.Drawing.Point(26, 302);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(175, 43);
+            this.button1.Size = new System.Drawing.Size(161, 43);
             this.button1.TabIndex = 7;
             this.button1.Text = "SI";
             this.button1.UseVisualStyleBackColor = true;
@@ -62,7 +62,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::PointOfSale.Properties.Resources.info;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(26, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 55);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -75,7 +75,7 @@
             this.button2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.button2.Location = new System.Drawing.Point(193, 302);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(194, 43);
+            this.button2.Size = new System.Drawing.Size(180, 43);
             this.button2.TabIndex = 8;
             this.button2.Text = "NO";
             this.button2.UseVisualStyleBackColor = true;
@@ -89,6 +89,7 @@
             this.txtMensaje.Multiline = true;
             this.txtMensaje.Name = "txtMensaje";
             this.txtMensaje.ReadOnly = true;
+            this.txtMensaje.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtMensaje.Size = new System.Drawing.Size(347, 220);
             this.txtMensaje.TabIndex = 21;
             // 

@@ -64,6 +64,7 @@
             this.txtMensaje.Multiline = true;
             this.txtMensaje.Name = "txtMensaje";
             this.txtMensaje.ReadOnly = true;
+            this.txtMensaje.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtMensaje.Size = new System.Drawing.Size(347, 220);
             this.txtMensaje.TabIndex = 20;
             // 
