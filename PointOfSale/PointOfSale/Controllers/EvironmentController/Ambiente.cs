@@ -1138,6 +1138,65 @@ namespace PointOfSale.Controllers
                 Mensaje("Imposible imprimir, el documento llegó null");
         }
 
+        public static void SaveAndPrintFactura(Venta venta, Reporte reporte, ReporteController reporteController, bool OpenDoc = false, bool PrintDoc = false)
+        {
+            if (venta != null)
+            {
+                var empresa = new EmpresaController().SelectTopOne();
+                var estacion = new EstacionController().SelectOne(venta.EstacionId);
+                if (estacion != null && empresa != null)
+                {
+                    if (empresa.DirectorioComprobantes.Trim().Length == 0 || empresa.RutaFormatoFactura.Trim().Length == 0 || estacion.ImpresoraF.Trim().Length == 0)
+                    {
+                        Mensaje("DirectorioComprobantes|| RutaFormatoFactura || ImpresoraF, No configurado.");
+                        return;
+                    }
+
+                    var report = new StiReport();
+                    var settings = new PrinterSettings();
+                    var file = empresa.DirectorioComprobantes + "FACTURA " + venta.NoRef.ToString() + "_" + venta.CreatedBy + "_" + Ambiente.TimeText((DateTime)venta.CreatedAt) + ".PDF"; ;
+
+
+                    settings.PrinterName = estacion.ImpresoraF;
+                    settings.Copies = (short)estacion.TantosF;
+
+
+
+                    var parametros = new List<Parametro>();
+                    var p = new Parametro();
+                    p.Clave = "[ventaId]";
+                    p.Valor = venta.VentaId.ToString();
+                    parametros.Add(p);
+                    var s = reporteController.Serializar(reporte.Sql, parametros);
+                    var ds = reporteController.GetDataSet(s);
+
+                    //Add data to datastore
+                    report.LoadEncryptedReportFromString(reporte.Codigo, reporte.SecuenciaCifrado);
+                    report.RegData("DS", "DS", ds);
+                    //Fill dictionary
+                    report.Dictionary.Synchronize();
+                    report.Render(true);
+                    report.ExportDocument(StiExportFormat.Pdf, file);
+
+                    if (OpenDoc)
+                        Process.Start(file);
+
+                    if (PrintDoc)
+                        report.Print(false, settings);
+                }
+                else
+                    Mensaje("Imposible imprimir, la empresa o estación carece de información.");
+            }
+            else
+                Mensaje("Imposible imprimir, el documento llegó null");
+        }
+
+
+
+
+
+
+
         public static void SaveAndCorte()
         {
             StiReport report = new StiReport();

@@ -25,6 +25,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private Empresa empresa;
         private CFDI oCFDI;
         private StiReport report;
+        private Reporte reporte;
+        private ReporteController reporteController;
 
         List<Venta> facturas;
         public FrmFacturas()
@@ -33,9 +35,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             ventaController = new VentaController();
             clienteController = new ClienteController();
             empresaController = new EmpresaController();
+            reporteController = new ReporteController();
             oCFDI = new CFDI();
             cliente = null;
             empresa = empresaController.SelectTopOne();
+            reporte = reporteController.SelectOneByName(empresa.FormatoParaFacturas);
         }
 
 
@@ -97,19 +101,62 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnFacturar_Click(object sender, EventArgs e)
         {
-
             if (oCFDI.Venta == null)
             {
                 Ambiente.Mensaje("Primero actualice los datos del cliente");
                 return;
             }
-            if (oCFDI.Venta.UuId == null)
+            if (oCFDI.Venta.UuId != null)
             {
-                Ambiente.SaveAndPrintFactura(oCFDI.Venta, false, true);
+                Ambiente.Mensaje("Este documento ya es un CDFI");
                 Close();
             }
+            if (!Ambiente.LoggedUser.Facturar)
+            {
+                Ambiente.Mensaje("Operacion denegada. No tienes permiso para operar esta vista.");
+                return;
+            }
+
+            if (oCFDI.Venta == null)
+            {
+                Ambiente.Mensaje("Proceso abortado, no se encontró ninguna venta seleccionada");
+                return;
+            }
+            //Si no seleccionó otro cliente, se recupera el de la venta
+            if (cliente == null)
+                cliente = clienteController.SelectOne(oCFDI.Venta.ClienteId);
+
+            //verificar que no sea pago con puntos
+            if (oCFDI.Venta.PuntosAplicados || oCFDI.Venta.DescXpuntos > 0)
+            {
+                Ambiente.Mensaje("Proceso abortado, el documento se cobró con puntos.");
+                return;
+            }
+
+            //valida rfc
+            if (Ambiente.RFCvalido(cliente.Rfc))
+            {
+                //Timbra la venta
+                if (oCFDI.Facturar())
+                {
+                    //  Ambiente.SaveAndPrintFactura(venta, true, false);
+                    Ambiente.SaveAndPrintFactura(oCFDI.Venta, reporte, reporteController, true, false);
+
+                    Close();
+                }
+                else
+                    Ambiente.Mensaje("Algo salió mal al facturar la venta");
+            }
             else
-                Ambiente.Mensaje("Este documento ya es un CDFI");
+                Ambiente.Mensaje("El rfc del cliente está mal formado");
+
+
+
+
+            /////********************************************************
+
+
+
         }
 
         private void BtnSalir_Click(object sender, EventArgs e)

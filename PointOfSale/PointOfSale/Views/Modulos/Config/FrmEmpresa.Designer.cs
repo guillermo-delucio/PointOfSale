@@ -105,10 +105,10 @@
             this.BtnCo = new System.Windows.Forms.Button();
             this.TxtRutaCO = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.TxtFormatoParaFacturas = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
             this.TxtFormatoParaTickets = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1044,7 +1044,7 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.textBox2);
+            this.tabPage4.Controls.Add(this.TxtFormatoParaFacturas);
             this.tabPage4.Controls.Add(this.label29);
             this.tabPage4.Controls.Add(this.TxtFormatoParaTickets);
             this.tabPage4.Controls.Add(this.label28);
@@ -1055,6 +1055,29 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Formatos de impresion";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // TxtFormatoParaFacturas
+            // 
+            this.TxtFormatoParaFacturas.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtFormatoParaFacturas.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.TxtFormatoParaFacturas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtFormatoParaFacturas.ForeColor = System.Drawing.Color.Black;
+            this.TxtFormatoParaFacturas.Location = new System.Drawing.Point(7, 89);
+            this.TxtFormatoParaFacturas.Name = "TxtFormatoParaFacturas";
+            this.TxtFormatoParaFacturas.Size = new System.Drawing.Size(332, 24);
+            this.TxtFormatoParaFacturas.TabIndex = 313;
+            this.TxtFormatoParaFacturas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtFormatoParaFacturas_KeyDown);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label29.Location = new System.Drawing.Point(5, 68);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(227, 18);
+            this.label29.TabIndex = 314;
+            this.label29.Text = "♥FORMATO PARA FACTURAS";
             // 
             // TxtFormatoParaTickets
             // 
@@ -1078,28 +1101,6 @@
             this.label28.Size = new System.Drawing.Size(210, 18);
             this.label28.TabIndex = 312;
             this.label28.Text = "♥FORMATO PARA TICKETS";
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.ForeColor = System.Drawing.Color.Black;
-            this.textBox2.Location = new System.Drawing.Point(7, 89);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(332, 24);
-            this.textBox2.TabIndex = 313;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label29.Location = new System.Drawing.Point(5, 68);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(210, 18);
-            this.label29.TabIndex = 314;
-            this.label29.Text = "♥FORMATO PARA TICKETS";
             // 
             // FrmEmpresa
             // 
@@ -1209,7 +1210,7 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TextBox TxtFormatoParaTickets;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox TxtFormatoParaFacturas;
         private System.Windows.Forms.Label label29;
     }
 }

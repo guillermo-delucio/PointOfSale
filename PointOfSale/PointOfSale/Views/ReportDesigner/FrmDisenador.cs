@@ -32,10 +32,7 @@ namespace PointOfSale.Views.ReportDesigner
             InitializeComponent();
             reporteController = new ReporteController();
         }
-
         #region Metodos
-
-
 
         private void LlenarDatos()
         {
@@ -126,7 +123,6 @@ namespace PointOfSale.Views.ReportDesigner
                 }
             }
         }
-
         private void Visualizar()
         {
             if (reporte == null)

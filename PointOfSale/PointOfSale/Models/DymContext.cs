@@ -969,6 +969,8 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.DirectorioTraspasos).HasMaxLength(250);
 
+                entity.Property(e => e.FormatoParaFacturas).HasMaxLength(250);
+
                 entity.Property(e => e.FormatoParaTickets).HasMaxLength(250);
 
                 entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");

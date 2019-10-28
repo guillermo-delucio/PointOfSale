@@ -21,6 +21,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private VentapController ventapController;
         private ClienteController clienteController;
         private EmpresaController empresaController;
+        private ReporteController reporteController;
 
         private Empresa empresa;
         private Cliente cliente;
@@ -32,6 +33,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private StiReport report;
         private DataSet ds;
         private int? noRef;
+        private Reporte reporte;
+
 
         public FrmTicketFactura()
         {
@@ -53,11 +56,13 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             ventapController = new VentapController();
             clienteController = new ClienteController();
             empresaController = new EmpresaController();
+            reporteController = new ReporteController();
             partidas = new List<Ventap>();
             report = new StiReport();
             ds = new DataSet();
 
             empresa = empresaController.SelectTopOne();
+            reporte = reporteController.SelectOneByName(empresa.FormatoParaFacturas);
 
             cliente = null;
             venta = null;
@@ -260,7 +265,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     //Timbra la venta
                     if (oCFDI.Facturar())
                     {
-                        Ambiente.SaveAndPrintFactura(venta, true, false);
+                        //  Ambiente.SaveAndPrintFactura(venta, true, false);
+                        Ambiente.SaveAndPrintFactura(venta, reporte, reporteController, true, false);
+
                         Close();
                     }
                     else

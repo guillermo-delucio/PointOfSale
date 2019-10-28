@@ -54,6 +54,7 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.RutaArchivoPfx = TxtRutaArchivoPfx.Text;
                 empresa.TimbradoTest = ChkTimbradoTest.Checked;
                 empresa.FormatoParaTickets = TxtFormatoParaTickets.Text.Trim();
+                empresa.FormatoParaFacturas = TxtFormatoParaFacturas.Text.Trim();
 
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
@@ -95,6 +96,7 @@ namespace PointOfSale.Views.Modulos.Config
                 empresa.RutaArchivoPfx = TxtRutaArchivoPfx.Text;
                 empresa.TimbradoTest = ChkTimbradoTest.Checked;
                 empresa.FormatoParaTickets = TxtFormatoParaTickets.Text.Trim();
+                empresa.FormatoParaFacturas = TxtFormatoParaFacturas.Text.Trim();
 
                 if (empresa.RegimenFiscalId.Trim().Length == 0)
                 {
@@ -140,6 +142,7 @@ namespace PointOfSale.Views.Modulos.Config
             TxtRutaArchivoPfx.Text = empresa.RutaArchivoPfx;
             ChkTimbradoTest.Checked = empresa.TimbradoTest;
             TxtFormatoParaTickets.Text = empresa.FormatoParaTickets;
+            TxtFormatoParaFacturas.Text = empresa.FormatoParaFacturas;
         }
 
         private void BtnAceptar_Click(object sender, EventArgs e)
@@ -300,10 +303,25 @@ namespace PointOfSale.Views.Modulos.Config
                 {
                     if (form.ShowDialog() == DialogResult.OK)
                     {
-                        TxtFormatoParaTickets.Text = form.Reporte.Nombre;
+                        TxtFormatoParaTickets.Text = form.Reporte == null ? "" : form.Reporte.Nombre;
                     }
                 }
             }
+        }
+
+        private void TxtFormatoParaFacturas_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                using (var form = new FrmBusqueda(TxtFormatoParaFacturas.Text.Trim(), (int)Ambiente.TipoBusqueda.Reportes))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        TxtFormatoParaFacturas.Text = form.Reporte == null ? "" : form.Reporte.Nombre;
+                    }
+                }
+            }
+
         }
     }
 }
