@@ -15,6 +15,7 @@ namespace PointOfSale.Models
         {
         }
 
+        public virtual DbSet<Actualizacion> Actualizacion { get; set; }
         public virtual DbSet<CAduana> CAduana { get; set; }
         public virtual DbSet<CCaducidadfolios> CCaducidadfolios { get; set; }
         public virtual DbSet<CClaveProdServ> CClaveProdServ { get; set; }
@@ -94,6 +95,23 @@ namespace PointOfSale.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+
+            modelBuilder.Entity<Actualizacion>(entity =>
+            {
+                entity.Property(e => e.AppliedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Appliedby)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.ScriptSql).IsRequired();
+
+                entity.Property(e => e.Version)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
 
             modelBuilder.Entity<CAduana>(entity =>
             {

@@ -1,5 +1,7 @@
 ﻿using DYM.Views;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer.Management.Common;
+using Microsoft.SqlServer.Management.Smo;
 using OfficeOpenXml;
 using PointOfSale.Models;
 using Stimulsoft.Report;
@@ -1591,5 +1593,65 @@ namespace PointOfSale.Controllers
             return true;
         }
         public static bool CancelaProceso;
+
+        public static void InsertaActualizacion()
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    if (File.Exists(Application.StartupPath.ToString() + @"\SQL.sql"))
+                    {
+
+                        var version = File.ReadLines(Application.StartupPath.ToString() + @"\SQL.sql").First();
+                        var scriptSql = File.ReadAllText(Application.StartupPath.ToString() + @"\SQL.sql");
+                        var actualizacionController = new ActualizacionController();
+
+                        var actualizacion = new Actualizacion();
+                        actualizacion.Version = version;
+                        actualizacion.ScriptSql = scriptSql;
+                        actualizacion.BatchExitoso = false;
+                        actualizacion.CreatedAt = DateTime.Now;
+                        actualizacion.Applied = false;
+                        actualizacion.Appliedby = "";
+                        actualizacion.AppliedDate = DateTime.Now;
+
+                        if (actualizacionController.InsertOne(actualizacion))
+                        {
+                            File.Delete(Application.StartupPath.ToString() + @"\SQL.sql");
+                            SqlConnection conn = db.Database.GetDbConnection() as SqlConnection;
+
+                            try
+                            {
+                                Server server = new Server(new ServerConnection(conn));
+                                server.ConnectionContext.ExecuteNonQuery(scriptSql);
+                                conn.Close();
+                                actualizacion.Applied = true;
+                                actualizacion.BatchExitoso = true;
+                                actualizacion.Appliedby = "DymPosSystem";
+                                actualizacion.AppliedDate = DateTime.Now;
+                                actualizacionController.Update(actualizacion);
+                                Mensaje("La base de datos se actualizó con exito");
+                                Mensaje("El sistema se cerrará, abralo manualmente");
+                                Application.Exit();
+                            }
+                            catch (Exception ex)
+                            {
+
+                                Mensaje(ex.ToString());
+                            }
+                        }
+                        else
+                        {
+                            Mensaje("La actualizacion no se insertó ni se aplicó :(");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(ex.Message);
+            }
+        }
     }
 }

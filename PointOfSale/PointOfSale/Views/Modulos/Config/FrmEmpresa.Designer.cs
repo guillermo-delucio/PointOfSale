@@ -109,11 +109,14 @@
             this.label29 = new System.Windows.Forms.Label();
             this.TxtFormatoParaTickets = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.BtnUpdateDb = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label13
@@ -164,6 +167,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(14, 45);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1102,6 +1106,27 @@
             this.label28.TabIndex = 312;
             this.label28.Text = "♥FORMATO PARA TICKETS";
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.BtnUpdateDb);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(710, 381);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Actulizaciones";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // BtnUpdateDb
+            // 
+            this.BtnUpdateDb.Location = new System.Drawing.Point(6, 20);
+            this.BtnUpdateDb.Name = "BtnUpdateDb";
+            this.BtnUpdateDb.Size = new System.Drawing.Size(124, 26);
+            this.BtnUpdateDb.TabIndex = 330;
+            this.BtnUpdateDb.Text = "Actualizar base datos";
+            this.BtnUpdateDb.UseVisualStyleBackColor = true;
+            this.BtnUpdateDb.Click += new System.EventHandler(this.BtnUpdateDb_Click);
+            // 
             // FrmEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1124,6 +1149,7 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1212,5 +1238,7 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox TxtFormatoParaFacturas;
         private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button BtnUpdateDb;
     }
 }

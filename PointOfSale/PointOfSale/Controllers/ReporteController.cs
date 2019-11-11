@@ -112,7 +112,7 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    return db.Reporte.Take(cantidad).ToList();
+                  return db.Reporte.Take(cantidad).ToList();
                 }
             }
             catch (Exception ex)
@@ -128,7 +128,7 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                    return db.Reporte.FirstOrDefault(x => x.ReporteId == Id);
+                   return db.Reporte.FirstOrDefault(x => x.ReporteId == Id);
                 }
             }
             catch (Exception ex)

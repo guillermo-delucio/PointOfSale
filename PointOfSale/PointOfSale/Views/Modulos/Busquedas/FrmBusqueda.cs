@@ -265,7 +265,7 @@ namespace PointOfSale.Views.Modulos.Busquedas
                     using (var db = new DymContext())
                     {
                         Grid1.DataSource = db.Reporte.AsNoTracking().Where(x => x.Nombre.Contains(SearchText)).
-                            Select(x => new { ID = x.ReporteId, x.Nombre }).ToList();
+                           Select(x => new { ID = x.ReporteId, x.Nombre }).ToList();
 
                     }
                     break;

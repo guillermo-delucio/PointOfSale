@@ -323,5 +323,10 @@ namespace PointOfSale.Views.Modulos.Config
             }
 
         }
+
+        private void BtnUpdateDb_Click(object sender, EventArgs e)
+        {
+            Ambiente.InsertaActualizacion();
+        }
     }
 }
