@@ -1004,7 +1004,6 @@
     <None Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sql.txt" />
     <None Include="Connected Services\WsTimbrado\configuration91.svcinfo" />
     <None Include="Connected Services\WsTimbrado\configuration.svcinfo" />
     <None Include="Connected Services\WsTimbrado\Reference.svcmap">
