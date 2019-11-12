@@ -1156,7 +1156,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 556);
-            this.ControlBox = false;
             this.Controls.Add(this.Malla);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.PbxImagen);
@@ -1167,6 +1166,7 @@
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmEntradaPorCompra2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmEntradaPorCompra2";
             ((System.ComponentModel.ISupportInitialize)(this.NDesc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NCantidad)).EndInit();

@@ -50,5 +50,10 @@ namespace PointOfSale.Views
                 form.Show();
             }
         }
+
+        private void MenúPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

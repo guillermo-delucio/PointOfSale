@@ -873,6 +873,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             using (var form = new FrmBuscaProducto())
             {
+               
                 if (form.ShowDialog() == DialogResult.OK)
                 {
 

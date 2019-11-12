@@ -22,18 +22,21 @@ namespace PointOfSale.Views.Menus
         private void BtnEmpresa_Click(object sender, EventArgs e)
         {
             var o = new FrmEmpresa();
+            o.MdiParent = MdiParent;
             o.Show();
         }
 
         private void BtnEstaciones_Click(object sender, EventArgs e)
         {
             var o = new FrmEstaciones();
+            o.MdiParent = MdiParent;
             o.Show();
         }
 
         private void BtnMonedero_Click(object sender, EventArgs e)
         {
             var o = new FrmPuntosConfig();
+            o.MdiParent = MdiParent;
             o.Show();
         }
     }

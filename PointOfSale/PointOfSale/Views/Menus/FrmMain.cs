@@ -29,33 +29,29 @@ namespace DYM.Views
 
         private void BtnLogistica_Click(object sender, EventArgs e)
         {
-            var form = new FrmMenuLogistica
-            {
-                MdiParent = MdiParent.MdiParent
-            };
-            form.Show();
+            var o = new FrmMenuLogistica();
+            o.MdiParent = MdiParent;
+            o.Show();
         }
 
         private void BtnPuntoVenta_Click(object sender, EventArgs e)
         {
-            var form = new FrmMenuPuntoVenta
-            {
-                MdiParent = MdiParent.MdiParent
-            };
-            form.Show();
+            var o = new FrmMenuPuntoVenta();
+            o.MdiParent = MdiParent;
+            o.Show();
         }
 
         private void Button7_Click(object sender, EventArgs e)
         {
             var o = new FrmBusinessManager();
-            o.MdiParent = this.MdiParent;
+            o.MdiParent = MdiParent;
             o.Show();
         }
 
         private void BtnConfiguracion_Click(object sender, EventArgs e)
         {
             var o = new FrmMenuConfig();
-            o.MdiParent = this.MdiParent;
+            o.MdiParent = MdiParent;
             o.Show();
 
         }
@@ -68,7 +64,7 @@ namespace DYM.Views
         private void BtnReportesGraficas_Click(object sender, EventArgs e)
         {
             var o = new FrmDisenador();
-            o.MdiParent = this.MdiParent;
+            o.MdiParent = MdiParent;
             o.Show();
 
         }
@@ -76,7 +72,7 @@ namespace DYM.Views
         private void BtnReportes_Click(object sender, EventArgs e)
         {
             var o = new FrmReportes();
-            o.MdiParent = this.MdiParent;
+            o.MdiParent = MdiParent;
             o.Show();
 
         }

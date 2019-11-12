@@ -82,6 +82,7 @@
             this.button3.TabIndex = 242;
             this.button3.Text = "&Clientes";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // BtnFacturaGlobal
             // 
@@ -103,6 +104,7 @@
             this.BtnMovsCaja.TabIndex = 244;
             this.BtnMovsCaja.Text = "&Movs. de Caja.";
             this.BtnMovsCaja.UseVisualStyleBackColor = true;
+            this.BtnMovsCaja.Click += new System.EventHandler(this.BtnMovsCaja_Click);
             // 
             // BtnCerrarCaja
             // 
@@ -124,6 +126,7 @@
             this.BtnVentasDelDia.TabIndex = 246;
             this.BtnVentasDelDia.Text = "&Ventas del día.";
             this.BtnVentasDelDia.UseVisualStyleBackColor = true;
+            this.BtnVentasDelDia.Click += new System.EventHandler(this.BtnVentasDelDia_Click);
             // 
             // BtnSalir
             // 

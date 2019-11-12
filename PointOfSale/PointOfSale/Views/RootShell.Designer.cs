@@ -70,6 +70,7 @@
             this.menúPrincipalToolStripMenuItem.Name = "menúPrincipalToolStripMenuItem";
             this.menúPrincipalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.menúPrincipalToolStripMenuItem.Text = "Menú principal";
+            this.menúPrincipalToolStripMenuItem.Click += new System.EventHandler(this.MenúPrincipalToolStripMenuItem_Click);
             // 
             // RootShell
             // 

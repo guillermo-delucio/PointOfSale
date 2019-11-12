@@ -19,7 +19,8 @@ namespace PointOfSale.Views.Menus
 
         private void BtnPOS_Click(object sender, EventArgs e)
         {
-            var o = new PointOfSale.Views.Modulos.PuntoVenta.PointOfSale();
+            var o = new Modulos.PuntoVenta.PointOfSale();
+            o.MdiParent = MdiParent;
             o.Show();
         }
 
@@ -37,6 +38,7 @@ namespace PointOfSale.Views.Menus
         private void BtnTicketAFactura_Click(object sender, EventArgs e)
         {
             var o = new FrmTicketFactura();
+            o.MdiParent = MdiParent;
             o.Show();
 
         }
@@ -44,13 +46,30 @@ namespace PointOfSale.Views.Menus
         private void BtnFacturas_Click(object sender, EventArgs e)
         {
             var o = new FrmFacturas();
+            o.MdiParent = MdiParent;
             o.Show();
         }
 
         private void BtnFacturaGlobal_Click(object sender, EventArgs e)
         {
             var o = new FrmFacturaGlobal2();
+            o.MdiParent = MdiParent;
             o.Show();
+        }
+
+        private void BtnMovsCaja_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnVentasDelDia_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
