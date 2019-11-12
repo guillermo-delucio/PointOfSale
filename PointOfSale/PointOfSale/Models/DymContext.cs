@@ -63,6 +63,7 @@ namespace PointOfSale.Models
         public virtual DbSet<Municipio> Municipio { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
         public virtual DbSet<Permiso> Permiso { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<Presentacion> Presentacion { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<ProductoSustancia> ProductoSustancia { get; set; }
@@ -105,6 +106,7 @@ namespace PointOfSale.Models
                     optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
                 }
             }
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1323,6 +1325,15 @@ namespace PointOfSale.Models
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.Descripcion).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Persona>(entity =>
+            {
+                entity.Property(e => e.Amaterno).HasMaxLength(50);
+
+                entity.Property(e => e.Aparterno).HasMaxLength(50);
+
+                entity.Property(e => e.Nombre).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Presentacion>(entity =>

@@ -94,71 +94,9 @@ namespace PointOfSale.Views.Modulos.Reportes
 
         private void Button14_Click(object sender, EventArgs e)
         {
-            StiReport report = new StiReport();
-            using (var form = new FrmParamData())
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-
-                    using (var db = new DymContext())
-                    {
-                        if (form.TodasLasFechas)
-                        {
-                            var q = from compra in db.Compra
-                                    join comprap in db.Comprap on compra.CompraId equals comprap.CompraId
-                                    where compra.EstadoDocId.Equals("CON")
-                                    select new
-                                    {
-                                        compra.CompraId,
-                                        comprap.ProductoId,
-                                        comprap.Descripcion,
-                                        comprap.Cantidad,
-                                        comprap.ImporteImpuesto1,
-                                        comprap.ImporteImpuesto2,
-                                        comprap.PrecioCompra,
-                                        comprap.Total,
-                                        compra.CreatedAt,
-                                        compra.CreatedBy
-                                    };
-                            report.Load(Reports.FVentas);
-                            report.Dictionary.DataSources.Clear();
-                            report.RegBusinessObject("partidas", "partidas", q.ToList());
-                            report.Dictionary.Synchronize();
-                            //report.Design();
-                            //report.Save(Reports.FCompras);
-                            report.Show(true);
-                        }
-                        else
-                        {
-                            var q = from compra in db.Compra
-                                    join comprap in db.Comprap on compra.CompraId equals comprap.CompraId
-                                    where compra.EstadoDocId.Equals("CON") && compra.CreatedAt.Date >= FrmParamData.Inicial.Date && compra.CreatedAt.Date <= FrmParamData.Final.Date
-                                    select new
-                                    {
-                                        compra.CompraId,
-                                        comprap.ProductoId,
-                                        comprap.Descripcion,
-                                        comprap.Cantidad,
-                                        comprap.ImporteImpuesto1,
-                                        comprap.ImporteImpuesto2,
-                                        comprap.Total,
-                                        comprap.PrecioCompra,
-                                        compra.CreatedAt,
-                                        compra.CreatedBy
-                                    };
-                            report.Load(Reports.FVentas);
-                            report.Dictionary.DataSources.Clear();
-                            report.RegBusinessObject("partidas", "partidas", q.ToList());
-                            report.Dictionary.Synchronize();
-                            //report.Design();
-                            //report.Save(Reports.FCompras);
-                            report.Show(true);
-                        }
-
-                    }
-
-                }
-            }
+            var o = new FrmTest();
+            o.MdiParent = MdiParent;
+            o.Show();
         }
 
         private void BtnClientXMonXSal_Click(object sender, EventArgs e)

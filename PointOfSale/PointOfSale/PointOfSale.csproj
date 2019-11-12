@@ -55,6 +55,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>DimIco.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
@@ -458,6 +461,7 @@
     <Compile Include="Models\Parametro.cs" />
     <Compile Include="Models\Pcxp.cs" />
     <Compile Include="Models\Permiso.cs" />
+    <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Presentacion.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\ProductoAlmacen.cs" />
@@ -741,6 +745,12 @@
     <Compile Include="Views\Modulos\Reportes\FrmReportes.Designer.cs">
       <DependentUpon>FrmReportes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modulos\Reportes\FrmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Modulos\Reportes\FrmTest.Designer.cs">
+      <DependentUpon>FrmTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ReportDesigner\FrmDisenador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -898,6 +908,9 @@
     <EmbeddedResource Include="Views\Modulos\Reportes\FrmReportes.resx">
       <DependentUpon>FrmReportes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modulos\Reportes\FrmTest.resx">
+      <DependentUpon>FrmTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ReportDesigner\FrmDisenador.resx">
       <DependentUpon>FrmDisenador.cs</DependentUpon>
     </EmbeddedResource>
@@ -1010,6 +1023,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="DimIco.ico" />
     <Content Include="Localization\ar.xml" />
     <Content Include="Localization\be.xml" />
     <Content Include="Localization\bg.xml" />
