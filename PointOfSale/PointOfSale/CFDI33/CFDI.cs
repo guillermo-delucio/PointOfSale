@@ -155,7 +155,7 @@ namespace PointOfSale.CFDI33
             comprobante.Total = Math.Round(Venta.Total, 2);
             comprobante.TipoDeComprobante = "I";
             comprobante.MetodoPago = Venta.MetodoPago;
-            comprobante.MetodoPago = "PUE";
+            //comprobante.MetodoPago = "PUE";
             comprobante.LugarExpedicion = Empresa.Cp;
 
             //Emisor

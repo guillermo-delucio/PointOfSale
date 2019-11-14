@@ -1637,8 +1637,8 @@ namespace PointOfSale.Controllers
                             }
                             catch (Exception ex)
                             {
-
-                                Mensaje(ex.ToString());
+                                File.Delete(Application.StartupPath.ToString() + @"\SQL.sql");
+                                Mensaje(ex.Message);
                             }
                         }
                         else

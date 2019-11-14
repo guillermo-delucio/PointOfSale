@@ -5,6 +5,7 @@ using PointOfSale.Controllers.EvironmentController;
 using PointOfSale.Views.Menus;
 using PointOfSale.Views.Modulos.Catalogos;
 using PointOfSale.Views.Modulos.Logistica;
+using PointOfSale.Views.Modulos.PuntoVenta;
 using PointOfSale.Views.Modulos.Reportes;
 using PointOfSale.Views.ReportDesigner;
 using System;
@@ -75,6 +76,13 @@ namespace DYM.Views
             o.MdiParent = MdiParent;
             o.Show();
 
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            var o = new FrmFacturaGlobal3();
+            o.MdiParent = MdiParent;
+            o.Show();
         }
     }
 }

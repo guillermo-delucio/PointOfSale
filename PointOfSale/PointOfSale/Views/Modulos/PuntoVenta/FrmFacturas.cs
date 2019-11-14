@@ -91,6 +91,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                         cliente = clienteController.SelectOne(f.ClienteId);
                         oCFDI.Venta = f;
                         var c = new FrmClientes(cliente);
+                        c.MdiParent = MdiParent;
                         c.Show();
                     }
                     i++;
