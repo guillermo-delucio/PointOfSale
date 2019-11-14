@@ -46,6 +46,25 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
+        public List<Venta> SelectFacturasPendientesConfirmar()
+        {
+            try
+            {
+
+                using (var db = new DymContext())
+                {
+                    return db.Venta.Where(x => x.UuId != null && x.TipoDocId.Equals("FAC") && x.EstadoDocId.Equals("CON") && !x.EstatusSat.Equals("Vigente") && !x.EstatusSat.Equals("Cancelado")).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Ambiente.Mensaje(Ambiente.CatalgoMensajes[-1] + "@" + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
+
+
+
         public Venta SelectTicket(int NoRef)
         {
             try
@@ -137,5 +156,8 @@ namespace PointOfSale.Controllers
             }
             return false;
         }
+
+
+
     }
 }

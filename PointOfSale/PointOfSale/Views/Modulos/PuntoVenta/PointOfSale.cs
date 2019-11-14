@@ -1,4 +1,5 @@
-﻿using PointOfSale.Controllers;
+﻿using PointOfSale.CFDI33;
+using PointOfSale.Controllers;
 using PointOfSale.Controllers.Utils;
 using PointOfSale.Models;
 using PointOfSale.Views.Modulos.Busquedas;
@@ -24,6 +25,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         public Cliente cliente;
         public Producto producto;
         public Lote lote;
+        public CFDI oCFDI;
 
 
         private VentaController ventaController;
@@ -38,7 +40,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private FlujoController flujoController;
         private ReporteController reporteController;
         private Reporte reporteTickets;
-
+        private DymErrorController dymErrorController;
 
         private const int NPARTIDAS = 400;
         private int SigPartida;
@@ -232,6 +234,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             movInvController = new MovInvController();
             flujoController = new FlujoController();
             reporteController = new ReporteController();
+            dymErrorController = new DymErrorController();
+            oCFDI = new CFDI();
             lote = null;
 
 
@@ -873,7 +877,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         {
             using (var form = new FrmBuscaProducto())
             {
-               
+
                 if (form.ShowDialog() == DialogResult.OK)
                 {
 
@@ -1021,7 +1025,9 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void TimerPDV_Tick(object sender, EventArgs e)
         {
             TxtFecha.Text = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToString("hh:mm:ss");
+            
         }
+
 
         private void BtnDirectoImp_Click(object sender, EventArgs e)
         {
@@ -1032,6 +1038,38 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void BtnMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ActualizarEstatusSAT();
+        }
+
+        private void ActualizarEstatusSAT()
+        {
+
+            try
+            {
+                var facturas = ventaController.SelectFacturasPendientesConfirmar();
+                if (facturas.Count > 0)
+                {
+                    foreach (var f in facturas)
+                    {
+                        oCFDI.Venta = f;
+                        oCFDI.ActualizarStatusSAT();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var error = new DymError();
+                error.Message = ex.Message;
+                error.ToString = ex.ToString();
+                error.VentaId = "NULL";
+                error.LoggedUser = Ambiente.LoggedUser.UsuarioId;
+                error.CreatedAt = DateTime.Now;
+                dymErrorController.InsertOne(error);
+            }
         }
     }
 }

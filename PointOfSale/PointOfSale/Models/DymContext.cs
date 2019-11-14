@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -49,6 +48,7 @@ namespace PointOfSale.Models
         public virtual DbSet<Cxcp> Cxcp { get; set; }
         public virtual DbSet<Cxp> Cxp { get; set; }
         public virtual DbSet<Cxpp> Cxpp { get; set; }
+        public virtual DbSet<DymError> DymError { get; set; }
         public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<Estacion> Estacion { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
@@ -89,24 +89,9 @@ namespace PointOfSale.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                ConnectionStringSettingsCollection settings =
-                ConfigurationManager.ConnectionStrings;
-
-                if (settings != null)
-                {
-                    foreach (ConnectionStringSettings cs in settings)
-                    {
-                        // System.Windows.Forms.MessageBox.Show(cs.ConnectionString);
-                        optionsBuilder.UseSqlServer(cs.ConnectionString);
-                    }
-                }
-                else
-                {
-                    System.Windows.Forms.MessageBox.Show(@"La conexion no se inicializó y se usaron los valores por defecto: \n Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True");
-                    optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
-                }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
             }
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -978,6 +963,17 @@ namespace PointOfSale.Models
                     .HasForeignKey(d => d.ProveedorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PCXP_Proveedor");
+            });
+
+            modelBuilder.Entity<DymError>(entity =>
+            {
+                entity.Property(e => e.DymErrorId).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.LoggedUser).HasMaxLength(50);
+
+                entity.Property(e => e.VentaId).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Empresa>(entity =>

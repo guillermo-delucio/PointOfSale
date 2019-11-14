@@ -27,6 +27,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private StiReport report;
         private Reporte reporte;
         private ReporteController reporteController;
+        private DymErrorController dymErrorController;
 
         List<Venta> facturas;
         public FrmFacturas()
@@ -36,6 +37,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             clienteController = new ClienteController();
             empresaController = new EmpresaController();
             reporteController = new ReporteController();
+            dymErrorController = new DymErrorController();
             oCFDI = new CFDI();
             cliente = null;
             empresa = empresaController.SelectTopOne();
@@ -58,7 +60,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Malla.Rows[Malla.RowCount - 1].Cells[2].Value = f.CreatedAt;
                 Malla.Rows[Malla.RowCount - 1].Cells[3].Value = cliente.RazonSocial.Trim().Length == 0 ? cliente.Negocio : cliente.RazonSocial;
                 Malla.Rows[Malla.RowCount - 1].Cells[4].Value = f.Total;
-                Malla.Rows[Malla.RowCount - 1].Cells[5].Value = f.UuId;
+                Malla.Rows[Malla.RowCount - 1].Cells[5].Value = f.EstatusSat;
+                Malla.Rows[Malla.RowCount - 1].Cells[6].Value = f.UuId;
                 if (f.EstatusSat != null)
                 {
 
@@ -197,6 +200,43 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     Ambiente.Mensaje("Primero selecciona una venta");
                 }
             }
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ActualizarEstatusSAT();
+        }
+        private void ActualizarEstatusSAT()
+        {
+
+            try
+            {
+                var facturas = ventaController.SelectFacturasPendientesConfirmar();
+                if (facturas.Count > 0)
+                {
+                    foreach (var f in facturas)
+                    {
+                        oCFDI.Venta = f;
+                        oCFDI.ActualizarStatusSAT();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var error = new DymError();
+                error.Message = ex.Message;
+                error.ToString = ex.ToString();
+                error.VentaId = "NULL";
+                error.LoggedUser = Ambiente.LoggedUser.UsuarioId;
+                error.CreatedAt = DateTime.Now;
+                dymErrorController.InsertOne(error);
+            }
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            if (!Worker.IsBusy)
+                Worker.RunWorkerAsync();
         }
     }
 }

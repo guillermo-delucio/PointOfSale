@@ -372,6 +372,7 @@
     <Compile Include="Controllers\CorteController.cs" />
     <Compile Include="Controllers\CxpController.cs" />
     <Compile Include="Controllers\CxppController.cs" />
+    <Compile Include="Controllers\DymErrorController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EstacionController.cs" />
     <Compile Include="Controllers\EvironmentController\Ambiente.cs" />
@@ -444,6 +445,7 @@
     <Compile Include="Models\Cxpp.cs" />
     <Compile Include="Models\Documento.cs" />
     <Compile Include="Models\DymContext.cs" />
+    <Compile Include="Models\DymError.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Estacion.cs" />
     <Compile Include="Models\Estado.cs" />

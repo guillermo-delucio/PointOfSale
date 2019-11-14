@@ -21,7 +21,7 @@ namespace PointOfSale.CFDI33
         private VentapController ventapController;
         private ClienteController clienteController;
         private EmpresaController empresaController;
-
+        private DymErrorController dymErrorController;
 
         //Dym pos
         public Cliente Cliente { get; set; }
@@ -80,6 +80,7 @@ namespace PointOfSale.CFDI33
             ventapController = new VentapController();
             clienteController = new ClienteController();
             empresaController = new EmpresaController();
+            dymErrorController = new DymErrorController();
 
             //Utils
             respuestaCFDI = new RespuestaCFDi();
@@ -373,7 +374,65 @@ namespace PointOfSale.CFDI33
 
         }
 
+        public void ActualizarStatusSAT()
+        {
+            Inicializar();
+            bool CrearLog = false;
+            string s = "";
+            if (Venta == null || Partidas.Count == 0 || Empresa == null || Cliente == null)
+            {
+                CrearLog = true;
+                s += "Venta || Partidas || Empresa || Cliente == null";
+            }
 
+            if (Cliente.Rfc == null)
+            {
+                CrearLog = true;
+                s += "/";
+                s += "PROCESO ABORTADO, RFC DEL CLIENTE NO ES VÁLIDO";
+            }
+
+            if (Cliente.Rfc.Trim().Length == 0)
+            {
+                CrearLog = true;
+                s += "/";
+                s += "PROCESO ABORTADO, RFC DEL CLIENTE NO ES VÁLIDO";
+            }
+            if (Venta.UuId == null)
+            {
+                CrearLog = true;
+                s += "/";
+                s += "Proceso abortado, este documento no es una factura o no está timbrada";
+            }
+
+
+            if (CrearLog)
+            {
+                var error = new DymError();
+                error.Message = s;
+                error.ToString = s;
+                error.VentaId = Venta == null ? "NULL" : Venta.VentaId.ToString();
+                error.LoggedUser = Ambiente.LoggedUser.UsuarioId;
+                error.CreatedAt = DateTime.Now;
+                dymErrorController.InsertOne(error);
+                return;
+            }
+
+
+
+            respuestaCFDI = timbradoClient.VerStatus(
+                 Empresa.UserWstimbrado,
+                Empresa.PassWstimbrado,
+                 Venta.UuId,
+                 (double)Math.Round(Venta.Total, 2),
+                 Empresa.Rfc,
+                Cliente.Rfc);
+            //salida += Environment.NewLine;
+            r2 = respuestaCFDI.Mensaje;
+            Venta.EstatusSat = respuestaCFDI.Mensaje;
+            ventaController.UpdateOne(Venta);
+
+        }
         //Cobvierte el objeto comprobante a xml
         private string Serializar(Comprobante comprobante)
         {
