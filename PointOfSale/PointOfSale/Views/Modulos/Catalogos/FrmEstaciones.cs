@@ -89,10 +89,10 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.SumarUnidadesPdv = ChkSumarUnidades.Checked;
                 objeto.ImpresoraT = CboImpresoraT.Text;
                 objeto.ImpresoraF = CboImpresoraF.Text;
-                objeto.ImpresoraNC = CboImpresoraNC.Text;
-                objeto.TantosT = NTickets.Value;
-                objeto.TantosF = NFacturas.Value;
-                objeto.TantosNc = NNc.Value;
+                objeto.ImpresoraNc = CboImpresoraNC.Text;
+                objeto.TantosT = (int)NTickets.Value;
+                objeto.TantosF = (int)NFacturas.Value;
+                objeto.TantosNc = (int)NNc.Value;
                 objeto.CanjearPuntosAuto = ChCanjearPuntosAuto.Checked;
 
                 if (estacionController.InsertOne(objeto))

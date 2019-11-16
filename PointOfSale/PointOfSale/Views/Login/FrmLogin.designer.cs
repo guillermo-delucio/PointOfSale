@@ -53,7 +53,6 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(211, 24);
             this.txtPassword.TabIndex = 1;
-            this.txtPassword.Text = "12345678";
             this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPassword_KeyDown);
             // 
             // label1
@@ -77,7 +76,6 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(211, 24);
             this.txtUser.TabIndex = 0;
-            this.txtUser.Text = "JESUS.M";
             this.txtUser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtUser_KeyDown);
             // 
             // label6
@@ -152,7 +150,6 @@
             this.TxtEstacionId.Name = "TxtEstacionId";
             this.TxtEstacionId.Size = new System.Drawing.Size(428, 24);
             this.TxtEstacionId.TabIndex = 2;
-            this.TxtEstacionId.Text = "SYS";
             this.TxtEstacionId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtEstacionId_KeyDown);
             // 
             // label2
