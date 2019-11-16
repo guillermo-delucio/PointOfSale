@@ -376,6 +376,7 @@ namespace PointOfSale.CFDI33
 
         public void ActualizarStatusSAT()
         {
+            
             Inicializar();
             bool CrearLog = false;
             string s = "";
@@ -523,7 +524,6 @@ namespace PointOfSale.CFDI33
                 respuestaCFDI = timbradoClient.TimbrarTest(Empresa.UserWstimbrado, Empresa.PassWstimbrado, bXML);
             else
                 respuestaCFDI = timbradoClient.Timbrar(Empresa.UserWstimbrado, Empresa.PassWstimbrado, bXML);
-
             if (respuestaCFDI.Documento == null)
             {
                 Ambiente.Mensaje(respuestaCFDI.Mensaje);

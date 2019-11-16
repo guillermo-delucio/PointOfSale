@@ -467,7 +467,6 @@
             this.TxtPassWS.ReadOnly = true;
             this.TxtPassWS.Size = new System.Drawing.Size(332, 24);
             this.TxtPassWS.TabIndex = 348;
-            this.TxtPassWS.Text = "9616fb2b81e89673495f";
             // 
             // label19
             // 
@@ -490,7 +489,6 @@
             this.TxtUserWS.ReadOnly = true;
             this.TxtUserWS.Size = new System.Drawing.Size(327, 24);
             this.TxtUserWS.TabIndex = 346;
-            this.TxtUserWS.Text = "dge131017ip1";
             // 
             // label18
             // 
