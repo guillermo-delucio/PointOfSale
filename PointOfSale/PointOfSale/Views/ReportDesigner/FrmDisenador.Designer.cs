@@ -100,7 +100,7 @@
             this.ChkParam.AutoSize = true;
             this.ChkParam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkParam.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ChkParam.Location = new System.Drawing.Point(181, 8);
+            this.ChkParam.Location = new System.Drawing.Point(203, 8);
             this.ChkParam.Name = "ChkParam";
             this.ChkParam.Size = new System.Drawing.Size(85, 24);
             this.ChkParam.TabIndex = 136;
@@ -112,7 +112,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label6.Location = new System.Drawing.Point(1, 9);
+            this.label6.Location = new System.Drawing.Point(6, 8);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(174, 20);
             this.label6.TabIndex = 135;

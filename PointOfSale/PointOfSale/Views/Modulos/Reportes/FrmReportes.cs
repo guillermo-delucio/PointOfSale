@@ -12,10 +12,15 @@ namespace PointOfSale.Views.Modulos.Reportes
 {
     public partial class FrmReportes : Form
     {
+        private ReporteController reporteController;
+        private Reporte reporte;
+        private StiReport report;
+
         public FrmReportes()
         {
             InitializeComponent();
             InicializaReporteador();
+            reporteController = new ReporteController();
         }
 
         private void InicializaReporteador()
@@ -39,7 +44,38 @@ namespace PointOfSale.Views.Modulos.Reportes
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    Reports.Cortes(FrmParamData.Inicial.Date, FrmParamData.Final.Date, form.TodasLasFechas);
+                    reporte = reporteController.SelectOneByName("CORTES");
+
+                    var parametros = new List<Parametro>();
+                    var p1 = new Parametro();
+                    p1.Clave = "[From]";
+                    p1.Valor = "'" + Ambiente.FechaSQL(form.From) + "'";
+                    var p2 = new Parametro();
+                    p2.Clave = "[To]";
+                    p2.Valor = "'" + Ambiente.FechaSQL(form.To) + "'";
+
+                    parametros.Add(p1);
+                    parametros.Add(p2);
+
+                    var s = reporteController.Serializar(reporte.Sql, parametros);
+                    var ds = reporteController.GetDataSet(s);
+
+
+                    report = new StiReport();
+                    report.LoadEncryptedReportFromString(reporte.Codigo, reporte.SecuenciaCifrado);
+
+                    report.RegData("DS", "DS", ds);
+
+
+                    report.Compile();
+
+                    //Set Variables
+                    report["From"] = form.From;
+                    report["To"] = form.To;
+                    report["CreatedBy"] = Ambiente.LoggedUser.Nombre;
+                    report.Show();
+
+                    // Reports.Cortes(FrmParamData.Inicial.Date, FrmParamData.Final.Date, form.TodasLasFechas);
                 }
             }
 

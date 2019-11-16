@@ -15,6 +15,8 @@ namespace PointOfSale.Views.Modulos.Reportes
     {
         public static DateTime Inicial;
         public static DateTime Final;
+        public DateTime From;
+        public DateTime To;
         public bool TodasLasFechas;
         public FrmParamData()
         {
@@ -26,6 +28,8 @@ namespace PointOfSale.Views.Modulos.Reportes
         {
             Inicial = DpInicial.Value;
             Final = DpFinal.Value;
+            From = DpInicial.Value.Date;
+            To = DpFinal.Value.Date;
             TodasLasFechas = ChkTotasLasFechas.Checked;
             DialogResult = DialogResult.OK;
             Close();
