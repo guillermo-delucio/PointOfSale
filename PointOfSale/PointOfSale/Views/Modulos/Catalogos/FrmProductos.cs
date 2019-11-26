@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PointOfSale.Views.Modulos.Catalogos
@@ -375,10 +376,13 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 if (TxtProductoId.Text.Trim().Length > 0)
                 {
                     Impuestos.Add(impuesto);
+                    Impuestos = Impuestos.OrderBy(x => x.Indice).ToList();
                     CargaGridImpuestos();
                 }
             }
         }
+
+
 
         private bool ExisteSustancia(string sustanciaId)
         {
@@ -916,6 +920,11 @@ namespace PointOfSale.Views.Modulos.Catalogos
         private void TxtProductoId_Leave(object sender, EventArgs e)
         {
 
+
+        }
+
+        private void TxtBuscarImpuestos_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

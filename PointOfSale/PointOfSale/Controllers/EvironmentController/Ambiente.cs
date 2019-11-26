@@ -1257,13 +1257,11 @@ namespace PointOfSale.Controllers
             {
                 Ambiente.Mensaje("No hay nada que cortar");
                 return;
-
             }
-
         }
         public static string TimeText(DateTime date)
         {
-            return date.ToString("dd.MM.yyyy_hh.mm.ss");
+            return date.ToString("dd.MM.yyyy.hh.mm");
         }
         public static string JustNow()
         {

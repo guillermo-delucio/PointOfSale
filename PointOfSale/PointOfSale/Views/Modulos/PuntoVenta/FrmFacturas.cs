@@ -105,15 +105,32 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
         private void BtnFacturar_Click(object sender, EventArgs e)
         {
+
+            if (Malla.RowCount > 0)
+            {
+                int index = Malla.CurrentCell.RowIndex;
+                int i = 0;
+                foreach (var f in facturas)
+                {
+                    if (index == i && f.EsFacturaGlobal)
+                        oCFDI.Venta = f;
+
+                    i++;
+                }
+            }
+
+
+
             if (oCFDI.Venta == null)
             {
+
                 Ambiente.Mensaje("Primero actualice los datos del cliente");
                 return;
             }
             if (oCFDI.Venta.UuId != null)
             {
                 Ambiente.Mensaje("Este documento ya es un CDFI");
-                Close();
+                return;
             }
             if (!Ambiente.LoggedUser.Facturar)
             {
@@ -149,7 +166,10 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                     Close();
                 }
                 else
+                {
                     Ambiente.Mensaje("Algo salió mal al facturar la venta");
+                    Close();
+                }
             }
             else
                 Ambiente.Mensaje("El rfc del cliente está mal formado");
@@ -162,6 +182,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
 
 
         }
+
+
 
         private void BtnSalir_Click(object sender, EventArgs e)
         {

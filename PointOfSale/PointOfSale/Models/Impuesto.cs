@@ -16,6 +16,7 @@ namespace PointOfSale.Models
         public decimal Tasa { get; set; }
         public bool IsDeleted { get; set; }
         public string CImpuesto { get; set; }
+        public int Indice { get; set; }
 
         public virtual CImpuesto CImpuestoNavigation { get; set; }
         public virtual ICollection<Producto> ProductoImpuesto1 { get; set; }

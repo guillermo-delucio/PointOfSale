@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -90,24 +89,9 @@ namespace PointOfSale.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                ConnectionStringSettingsCollection settings =
-                ConfigurationManager.ConnectionStrings;
-
-                if (settings != null)
-                {
-                    foreach (ConnectionStringSettings cs in settings)
-                    {
-                        // System.Windows.Forms.MessageBox.Show(cs.ConnectionString);
-                        optionsBuilder.UseSqlServer(cs.ConnectionString);
-                    }
-                }
-                else
-                {
-                    System.Windows.Forms.MessageBox.Show(@"La conexion no se inicializó y se usaron los valores por defecto: \n Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True");
-                    optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
-                }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Dym;Trusted_Connection=True;");
             }
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1955,6 +1939,10 @@ namespace PointOfSale.Models
                 entity.Property(e => e.SelloSat).HasColumnName("SelloSAT");
 
                 entity.Property(e => e.SubTotal).HasColumnType("decimal(18, 6)");
+
+                entity.Property(e => e.TipoComprobante)
+                    .IsRequired()
+                    .HasMaxLength(1);
 
                 entity.Property(e => e.TipoDocId)
                     .HasMaxLength(50)

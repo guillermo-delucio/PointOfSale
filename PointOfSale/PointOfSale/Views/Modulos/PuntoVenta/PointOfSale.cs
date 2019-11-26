@@ -279,6 +279,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             venta.Pago3 = 0;
             venta.NoRef = 0;
             venta.Anulada = false;
+            venta.TipoComprobante = "I";
+            venta.EsFacturaGlobal = false;
             ventaController.InsertOne(venta);
 
         }
@@ -1025,7 +1027,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
         private void TimerPDV_Tick(object sender, EventArgs e)
         {
             TxtFecha.Text = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToString("hh:mm:ss");
-            
+
         }
 
 
@@ -1070,6 +1072,11 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 error.CreatedAt = DateTime.Now;
                 dymErrorController.InsertOne(error);
             }
+        }
+
+        private void PointOfSale_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

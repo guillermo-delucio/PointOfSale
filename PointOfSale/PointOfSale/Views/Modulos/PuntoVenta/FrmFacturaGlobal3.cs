@@ -157,6 +157,8 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 venta.FormaPago1 = "99";
                 venta.MetodoPago = "PUE";
                 venta.EsCxc = false;
+                venta.EsFacturaGlobal = true;
+                venta.TipoComprobante = "I";
                 ventaController.InsertOne(venta);
             }
             catch (Exception ex)

@@ -15,6 +15,7 @@ namespace PointOfSale.Models
         public int VentaId { get; set; }
         public int? NoRef { get; set; }
         public string TipoDocId { get; set; }
+        public string TipoComprobante { get; set; }
         public DateTime? FechaDoc { get; set; }
         public string ClienteId { get; set; }
         public int? NoPrecio { get; set; }
@@ -59,6 +60,7 @@ namespace PointOfSale.Models
         public string CadenaOriginal { get; set; }
         public string SelloCfdi { get; set; }
         public string SelloSat { get; set; }
+        public bool EsFacturaGlobal { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual Usuario CreatedByNavigation { get; set; }

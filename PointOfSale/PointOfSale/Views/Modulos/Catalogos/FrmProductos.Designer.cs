@@ -1113,6 +1113,7 @@
             this.TxtBuscarImpuestos.Name = "TxtBuscarImpuestos";
             this.TxtBuscarImpuestos.Size = new System.Drawing.Size(108, 24);
             this.TxtBuscarImpuestos.TabIndex = 16;
+            this.TxtBuscarImpuestos.TextChanged += new System.EventHandler(this.TxtBuscarImpuestos_TextChanged);
             this.TxtBuscarImpuestos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtBuscarImpuestos_KeyDown);
             // 
             // groupBox5

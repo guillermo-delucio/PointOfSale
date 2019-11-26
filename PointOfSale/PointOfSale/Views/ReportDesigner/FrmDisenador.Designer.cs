@@ -33,7 +33,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ChkParam = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.TxtReporte = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.BtnNuevo = new System.Windows.Forms.Button();
@@ -47,6 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.TxtQuery = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -85,8 +85,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.ChkParam);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.TxtReporte);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 59);
@@ -100,23 +100,12 @@
             this.ChkParam.AutoSize = true;
             this.ChkParam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChkParam.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ChkParam.Location = new System.Drawing.Point(203, 8);
+            this.ChkParam.Location = new System.Drawing.Point(186, 6);
             this.ChkParam.Name = "ChkParam";
-            this.ChkParam.Size = new System.Drawing.Size(85, 24);
+            this.ChkParam.Size = new System.Drawing.Size(191, 24);
             this.ChkParam.TabIndex = 136;
-            this.ChkParam.Text = "PARAM";
+            this.ChkParam.Text = "TIENE PARÁMETROS";
             this.ChkParam.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label6.Location = new System.Drawing.Point(6, 8);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(174, 20);
-            this.label6.TabIndex = 135;
-            this.label6.Text = "♥BUSCAR REPORTE";
             // 
             // TxtReporte
             // 
@@ -258,7 +247,7 @@
             this.TxtQuery.Size = new System.Drawing.Size(909, 233);
             this.TxtQuery.TabIndex = 136;
             this.TxtQuery.Text = "select * from Producto where ProductoId = [prodId] and PrecioCompra= [pCompra] an" +
-    "d PrecioCaja =[pCaja] and Precio1= [precio1]";
+    "d PrecioCaja =[pCaja] and Precio1= [precio1] ";
             // 
             // label3
             // 
@@ -270,6 +259,17 @@
             this.label3.Size = new System.Drawing.Size(127, 20);
             this.label3.TabIndex = 137;
             this.label3.Text = "COMANDO SQL";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label4.Location = new System.Drawing.Point(6, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(155, 18);
+            this.label4.TabIndex = 137;
+            this.label4.Text = "♥BUSCAR REPORT";
             // 
             // FrmDisenador
             // 
@@ -303,7 +303,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox TxtReporte;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button BtnNuevo;
@@ -318,5 +317,6 @@
         private System.Windows.Forms.RichTextBox TxtQuery;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox ChkParam;
+        private System.Windows.Forms.Label label4;
     }
 }
