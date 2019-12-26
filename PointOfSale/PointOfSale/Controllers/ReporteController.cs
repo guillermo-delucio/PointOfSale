@@ -105,6 +105,21 @@ namespace PointOfSale.Controllers
             }
             return null;
         }
+        public List<Reporte> FiltrarVsNombre(string s)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    return db.Reporte.Where(x => EF.Functions.Like(x.Nombre, "%" + s.Trim() + "%")).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Algo salio mal @ " + GetType().Name + "\n" + ex.ToString());
+            }
+            return null;
+        }
 
         public List<Reporte> SelectMany(int cantidad)
         {
@@ -112,7 +127,7 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                  return db.Reporte.Take(cantidad).ToList();
+                    return db.Reporte.Take(cantidad).ToList();
                 }
             }
             catch (Exception ex)
@@ -128,7 +143,7 @@ namespace PointOfSale.Controllers
             {
                 using (var db = new DymContext())
                 {
-                   return db.Reporte.FirstOrDefault(x => x.ReporteId == Id);
+                    return db.Reporte.FirstOrDefault(x => x.ReporteId == Id);
                 }
             }
             catch (Exception ex)
@@ -189,9 +204,12 @@ namespace PointOfSale.Controllers
             var output = String.Join(",", Regex.Matches(Sql, @"\[(.+?)\]")
                                                 .Cast<Match>()
                                                 .Select(m => m.Groups[1].Value));
+            string[] words;
 
-
-            string[] words = output.Split(',');
+            if (!output.Equals(""))
+                words = output.Split(',');
+            else
+                return keyValues;
 
             foreach (var word in words)
             {
@@ -275,6 +293,34 @@ namespace PointOfSale.Controllers
 
                 Ambiente.Mensaje(ex.Message);
                 return null;
+            }
+
+        }
+        public bool TestQuery(string SQL)
+        {
+            try
+            {
+                using (var db = new DymContext())
+                {
+                    SqlConnection conn = db.Database.GetDbConnection() as SqlConnection;
+                    SqlDataAdapter da = new SqlDataAdapter();
+                    SqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = SQL;
+                    da.SelectCommand = cmd;
+                    DataSet ds = new DataSet();
+
+                    conn.Open();
+                    da.Fill(ds);
+                    conn.Close();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Ambiente.Mensaje(ex.Message);
+                return false;
             }
 
         }

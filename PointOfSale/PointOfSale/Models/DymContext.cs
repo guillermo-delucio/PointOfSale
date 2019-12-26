@@ -76,6 +76,7 @@ namespace PointOfSale.Models
         public virtual DbSet<RolePermiso> RolePermiso { get; set; }
         public virtual DbSet<Sucursal> Sucursal { get; set; }
         public virtual DbSet<Sustancia> Sustancia { get; set; }
+        public virtual DbSet<Test> Test { get; set; }
         public virtual DbSet<TipoDoc> TipoDoc { get; set; }
         public virtual DbSet<Traspaso> Traspaso { get; set; }
         public virtual DbSet<Traspasop> Traspasop { get; set; }
@@ -1000,9 +1001,43 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.DirectorioTraspasos).HasMaxLength(250);
 
+                entity.Property(e => e.FormatoCatProds).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoCierres).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoClientesXpuntos).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoComprasVsventas).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoComprasXperido).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoCortes).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoEntradaXcompra).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoInventarioAut).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoMovsInv).HasMaxLength(250);
+
                 entity.Property(e => e.FormatoParaFacturas).HasMaxLength(250);
 
                 entity.Property(e => e.FormatoParaTickets).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoProdsXcompra).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoProdsXprecios).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoProveed).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoStockXprods).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoVentasAcosto).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoVentasXperiodo).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoVentasXperiodoDet).HasMaxLength(250);
+
+                entity.Property(e => e.FormatoVentasXpuntos).HasMaxLength(250);
 
                 entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
 
@@ -1623,11 +1658,21 @@ namespace PointOfSale.Models
 
             modelBuilder.Entity<Reporte>(entity =>
             {
+                entity.HasIndex(e => e.Nombre)
+                    .HasName("NameUnique")
+                    .IsUnique();
+
                 entity.Property(e => e.Codigo).IsRequired();
+
+                entity.Property(e => e.Descripcion).HasMaxLength(550);
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.Rtf)
+                    .IsRequired()
+                    .HasColumnName("RTF");
 
                 entity.Property(e => e.SecuenciaCifrado)
                     .IsRequired()
@@ -1690,6 +1735,24 @@ namespace PointOfSale.Models
                 entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
                 entity.Property(e => e.Nombre).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Test>(entity =>
+            {
+                entity.ToTable("test");
+
+                entity.HasIndex(e => e.Nombre)
+                    .HasName("IX_test")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasColumnName("nombre")
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<TipoDoc>(entity =>
@@ -1902,6 +1965,10 @@ namespace PointOfSale.Models
 
                 entity.Property(e => e.FechaDoc)
                     .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.FechaSistema)
+                    .HasColumnType("date")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.FormaPago1)

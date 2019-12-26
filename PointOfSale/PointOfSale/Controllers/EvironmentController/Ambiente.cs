@@ -26,13 +26,18 @@ namespace PointOfSale.Controllers
     public static class Ambiente
     {
         public static Dictionary<int, string> CatalgoMensajes { get; set; }
-
         public static Usuario LoggedUser { get; set; }
         public static Estacion Estacion { get; set; }
         public static Empresa Empresa { get; set; }
         public static string RutaImgs { get; set; }
         public static string PrefijoRutaImg { get; set; }
         public static string FormatoTicket { get; set; }
+        public static ReporteController reporteController { get; set; }
+
+
+        private static StiReport stiReport;
+        private static Reporte reporte;
+        private static List<Parametro> ReportParams;
 
 
         #region Enums
@@ -474,14 +479,13 @@ namespace PointOfSale.Controllers
             }
             catch (Exception ex)
             {
-
                 Mensaje(CatalgoMensajes[-1] + ex.ToString());
             }
             return null;
         }
         public static string FechaSQL(DateTime dateTime)
         {
-            return dateTime.Date.ToString("yyyy-MM-dd HH:mm:ss");
+            return "'" + dateTime.Date.ToString("yyyy-MM-dd") + "'";
         }
         public static string FDinero(string valor)
         {
@@ -1651,5 +1655,82 @@ namespace PointOfSale.Controllers
                 Ambiente.Mensaje(ex.Message);
             }
         }
+
+        public static void ShowReport(string ReportName, List<Parametro> parametros = null)
+        {
+            stiReport = new StiReport();
+            reporte = reporteController.SelectOneByName(ReportName.Trim());
+
+            if (reporte == null)
+            {
+                Mensaje("El reporte: " + ReportName + " no existe, proceso abortado");
+                return;
+            }
+
+
+
+            if (reporte.Parametrizado)
+            {
+
+                if (parametros == null)
+                {
+                    Mensaje("El reporte está parametrizado, pero no se recibieron parametros, proceso abortado.");
+                    return;
+                }
+                else
+                {
+                    // parametrizado
+                    var s = reporteController.Serializar(reporte.Sql, parametros);
+                    var ds = reporteController.GetDataSet(s);
+
+                    //Add data to datastore
+                    stiReport.LoadEncryptedReportFromString(reporte.Codigo, reporte.SecuenciaCifrado);
+                    stiReport.RegData("DS", "DS", ds);
+                    //Fill dictionary
+                    stiReport.Dictionary.Synchronize();
+                    stiReport.Show();
+                }
+            }
+            else
+            {
+                //No parametrizado
+
+                var ds = reporteController.GetDataSet(reporte.Sql);
+                //Add data to datastore
+                stiReport.LoadEncryptedReportFromString(reporte.Codigo, reporte.SecuenciaCifrado);
+                stiReport.RegData("DS", "DS", ds);
+                //Fill dictionary
+                stiReport.Dictionary.Synchronize();
+                stiReport.Show();
+            }
+        }
+
+        public static void AddReportParam(string clave, string valor, bool reset = false)
+        {
+            if (reset)
+                ReportParams = new List<Parametro>();
+
+            if (clave.Trim().Length == 0 || valor.Trim().Length == 0)
+            {
+                Mensaje("La clave y valor son necesarios, proceso abortado.");
+                return;
+            }
+
+            if (ReportParams != null)
+                ReportParams.Add(new Parametro { Clave = clave, Valor = valor });
+
+        }
+
+        public static List<Parametro> GetReportParam()
+        {
+
+            if (ReportParams == null)
+                return new List<Parametro>();
+            else
+                return ReportParams;
+        }
+
+
+
     }
 }

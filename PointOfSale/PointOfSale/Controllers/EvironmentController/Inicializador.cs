@@ -55,6 +55,7 @@ namespace PointOfSale.Controllers
             Ambiente.RutaImgs = @"C:\Dympos\Compartido\Imgs";
             Ambiente.PrefijoRutaImg = @"C:\Dympos\Compartido\";
             Ambiente.Empresa = new EmpresaController().SelectTopOne();
+            Ambiente.reporteController = new ReporteController();
         }
 
         public static void InicializaDatabaseDefaultsValues()

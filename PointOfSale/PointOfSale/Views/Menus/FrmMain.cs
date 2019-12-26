@@ -64,10 +64,14 @@ namespace DYM.Views
 
         private void BtnReportesGraficas_Click(object sender, EventArgs e)
         {
-            var o = new FrmDisenador();
+            // var o = new FrmDisenador();
+            //var o = new FrmMdiDesigner();
+            //var o = new FrmReportDesigner(false);
+            //o.MdiParent = MdiParent;
+            //o.Show();
+            var o = new FrmDesigner();
             o.MdiParent = MdiParent;
             o.Show();
-
         }
 
         private void BtnReportes_Click(object sender, EventArgs e)
@@ -83,6 +87,11 @@ namespace DYM.Views
             var o = new FrmFacturaGlobal3();
             o.MdiParent = MdiParent;
             o.Show();
+        }
+
+        private void BtnDisenar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

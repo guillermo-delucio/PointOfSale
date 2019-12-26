@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RootShell));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.BtnReporteador = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnLogin = new System.Windows.Forms.ToolStripSplitButton();
             this.menúPrincipalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -40,7 +42,8 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel,
-            this.toolStripSplitButton1});
+            this.BtnReporteador,
+            this.BtnLogin});
             this.statusStrip.Location = new System.Drawing.Point(0, 431);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(825, 22);
@@ -53,24 +56,40 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(42, 17);
             this.toolStripStatusLabel.Text = "Estado";
             // 
-            // toolStripSplitButton1
+            // BtnReporteador
             // 
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BtnReporteador.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.BtnReporteador.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.BtnReporteador.Image = ((System.Drawing.Image)(resources.GetObject("BtnReporteador.Image")));
+            this.BtnReporteador.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnReporteador.Name = "BtnReporteador";
+            this.BtnReporteador.Size = new System.Drawing.Size(91, 20);
+            this.BtnReporteador.Text = "Reporteador ";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "Menú principal";
+            // 
+            // BtnLogin
+            // 
+            this.BtnLogin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.BtnLogin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menúPrincipalToolStripMenuItem});
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(32, 20);
-            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
-            this.toolStripSplitButton1.ButtonClick += new System.EventHandler(this.ToolStripSplitButton1_ButtonClick);
+            this.BtnLogin.Image = ((System.Drawing.Image)(resources.GetObject("BtnLogin.Image")));
+            this.BtnLogin.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnLogin.Name = "BtnLogin";
+            this.BtnLogin.Size = new System.Drawing.Size(32, 20);
+            this.BtnLogin.Text = "toolStripSplitButton1";
+            this.BtnLogin.ButtonClick += new System.EventHandler(this.BtnLogin_ButtonClick);
             // 
             // menúPrincipalToolStripMenuItem
             // 
             this.menúPrincipalToolStripMenuItem.Name = "menúPrincipalToolStripMenuItem";
             this.menúPrincipalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.menúPrincipalToolStripMenuItem.Text = "Menú principal";
-            this.menúPrincipalToolStripMenuItem.Click += new System.EventHandler(this.MenúPrincipalToolStripMenuItem_Click);
             // 
             // RootShell
             // 
@@ -92,8 +111,10 @@
 
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripSplitButton BtnLogin;
         private System.Windows.Forms.ToolStripMenuItem menúPrincipalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSplitButton BtnReporteador;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using DYM.Views;
 using PointOfSale.Controllers;
+using PointOfSale.Views.ReportDesigner;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,7 +36,7 @@ namespace PointOfSale.Views
             form.Show();
         }
 
-        private void ToolStripSplitButton1_ButtonClick(object sender, EventArgs e)
+        private void BtnLogin_ButtonClick(object sender, EventArgs e)
         {
             if (Ambiente.LoggedUser == null)
             {
@@ -51,9 +52,6 @@ namespace PointOfSale.Views
             }
         }
 
-        private void MenúPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

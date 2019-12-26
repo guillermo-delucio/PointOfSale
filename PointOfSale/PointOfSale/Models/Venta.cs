@@ -51,6 +51,7 @@ namespace PointOfSale.Models
         public bool PuntosAplicados { get; set; }
         public string TotalConLetra { get; set; }
         public bool? EsCxc { get; set; }
+        public bool EsFacturaGlobal { get; set; }
         public string MetodoPago { get; set; }
         public string UsoCfdi { get; set; }
         public decimal? Unidades { get; set; }
@@ -60,7 +61,7 @@ namespace PointOfSale.Models
         public string CadenaOriginal { get; set; }
         public string SelloCfdi { get; set; }
         public string SelloSat { get; set; }
-        public bool EsFacturaGlobal { get; set; }
+        public DateTime? FechaSistema { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual Usuario CreatedByNavigation { get; set; }

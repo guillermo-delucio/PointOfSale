@@ -532,7 +532,6 @@ namespace PointOfSale.CFDI33
             }
             else
             {
-
                 File.WriteAllBytes(pathXML, respuestaCFDI.Documento);
                 Deserializar(pathXML);
                 Venta.CadenaOriginal = cadenaOriginal;

@@ -9,7 +9,10 @@ namespace PointOfSale.Models
         public string Nombre { get; set; }
         public string SecuenciaCifrado { get; set; }
         public string Sql { get; set; }
+        public string Rtf { get; set; }
         public string Codigo { get; set; }
         public bool Parametrizado { get; set; }
+        public bool DelSistema { get; set; }
+        public string Descripcion { get; set; }
     }
 }

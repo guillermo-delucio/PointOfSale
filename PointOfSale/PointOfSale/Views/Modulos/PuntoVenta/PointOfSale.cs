@@ -237,7 +237,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             dymErrorController = new DymErrorController();
             oCFDI = new CFDI();
             lote = null;
-
+            TxtProductoId.Focus();
 
 
             //Reset malla
@@ -248,9 +248,7 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
                 Malla.Rows[i].Cells[2].Style.BackColor = Color.Yellow;
                 Malla.Rows[i].Cells[8].Style.BackColor = Color.Yellow;
             }
-
             CreaVenta();
-
         }
         private void CreaVenta()
         {
@@ -718,6 +716,15 @@ namespace PointOfSale.Views.Modulos.PuntoVenta
             Malla.Rows[SigPartida].Cells[7].Value = partida.Total;
             Malla.Rows[SigPartida].Cells[8].Value = partida.NoLote;
             Malla.Rows[SigPartida].Cells[9].Value = partida.ProductoId;
+            //Scroll to the last row.
+            if (SigPartida > 10)
+            {
+                Malla.FirstDisplayedScrollingRowIndex = SigPartida - 10;
+                Malla.Rows[SigPartida].Selected = true;
+            }
+
+
+
 
 
             ResetPartida();

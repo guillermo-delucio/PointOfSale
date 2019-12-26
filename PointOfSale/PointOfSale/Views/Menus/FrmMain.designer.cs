@@ -41,6 +41,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.BtnDisenar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,11 +134,11 @@
             // BtnReportesGraficas
             // 
             this.BtnReportesGraficas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnReportesGraficas.Location = new System.Drawing.Point(263, 286);
+            this.BtnReportesGraficas.Location = new System.Drawing.Point(263, 281);
             this.BtnReportesGraficas.Name = "BtnReportesGraficas";
             this.BtnReportesGraficas.Size = new System.Drawing.Size(133, 49);
             this.BtnReportesGraficas.TabIndex = 8;
-            this.BtnReportesGraficas.Text = "&REPORTES GRAFICAS";
+            this.BtnReportesGraficas.Text = "&VER / EDITAR REPORTES";
             this.BtnReportesGraficas.UseVisualStyleBackColor = true;
             this.BtnReportesGraficas.Click += new System.EventHandler(this.BtnReportesGraficas_Click);
             // 
@@ -182,12 +183,24 @@
             this.label10.Size = new System.Drawing.Size(542, 10);
             this.label10.TabIndex = 83;
             // 
+            // BtnDisenar
+            // 
+            this.BtnDisenar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDisenar.Location = new System.Drawing.Point(263, 333);
+            this.BtnDisenar.Name = "BtnDisenar";
+            this.BtnDisenar.Size = new System.Drawing.Size(133, 31);
+            this.BtnDisenar.TabIndex = 84;
+            this.BtnDisenar.Text = "&DISEÑAR";
+            this.BtnDisenar.UseVisualStyleBackColor = true;
+            this.BtnDisenar.Click += new System.EventHandler(this.BtnDisenar_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(646, 407);
+            this.Controls.Add(this.BtnDisenar);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
@@ -226,5 +239,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button BtnDisenar;
     }
 }

@@ -52,10 +52,8 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 TxtNombre.Text = objeto.Nombre;
                 ChkIsAdmin.Checked = objeto.IsAdmin;
                 ChkFacturar.Checked = objeto.Facturar;
-
+                ChkReportear.Checked = objeto.Reportear;
             }
-
-
         }
         private void InsertOrUpdate()
         {
@@ -80,6 +78,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Nombre = TxtNombre.Text.Trim();
                 objeto.IsAdmin = ChkIsAdmin.Checked;
                 objeto.Facturar = ChkFacturar.Checked;
+                objeto.Reportear = ChkReportear.Checked;
 
                 if (usuarioController.InsertOne(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
@@ -94,6 +93,7 @@ namespace PointOfSale.Views.Modulos.Catalogos
                 objeto.Nombre = TxtNombre.Text.Trim();
                 objeto.IsAdmin = ChkIsAdmin.Checked;
                 objeto.Facturar = ChkFacturar.Checked;
+                objeto.Reportear = ChkReportear.Checked;
 
                 if (usuarioController.Update(objeto))
                     Ambiente.Mensaje(Ambiente.CatalgoMensajes[3]);
@@ -118,5 +118,11 @@ namespace PointOfSale.Views.Modulos.Catalogos
         {
             LlenaCampos();
         }
+
+        private void FrmUsuarios_Load(object sender, EventArgs e)
+        {
+            TxtUserId.Focus();
+        }
+       
     }
 }
