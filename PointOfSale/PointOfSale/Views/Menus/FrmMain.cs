@@ -69,16 +69,15 @@ namespace DYM.Views
             //var o = new FrmReportDesigner(false);
             //o.MdiParent = MdiParent;
             //o.Show();
-            var o = new FrmDesigner();
+            var o = new FrmTreeViewReportes();
             o.MdiParent = MdiParent;
             o.Show();
+
         }
 
         private void BtnReportes_Click(object sender, EventArgs e)
         {
-            var o = new FrmReportes();
-            o.MdiParent = MdiParent;
-            o.Show();
+
 
         }
 

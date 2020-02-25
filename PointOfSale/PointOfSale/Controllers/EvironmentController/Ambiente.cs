@@ -34,6 +34,7 @@ namespace PointOfSale.Controllers
         public static string FormatoTicket { get; set; }
         public static ReporteController reporteController { get; set; }
 
+        public static ImageList ImageList;
 
         private static StiReport stiReport;
         private static Reporte reporte;
@@ -61,6 +62,13 @@ namespace PointOfSale.Controllers
         {
             var m = new Mensaje(s);
             m.ShowDialog();
+        }
+        public static string ConnectionString()
+        {
+            using (var db = new DymContext())
+            {
+                return db.Database.GetDbConnection().ConnectionString;
+            }
         }
         public static DialogResult InputBox(string title, string promptText, ref string value)
         {

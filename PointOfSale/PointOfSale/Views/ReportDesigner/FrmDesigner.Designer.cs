@@ -49,6 +49,7 @@
             this.Controls.Add(this.ReportDesigner);
             this.Name = "FrmDesigner";
             this.Text = "FrmDesigner";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 
         }

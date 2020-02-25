@@ -35,7 +35,6 @@ namespace PointOfSale.Views.ReportDesigner
         {
             StiOptions.Engine.GlobalEvents.SavingReportInDesigner += new Stimulsoft.Report.Design.StiSavingObjectEventHandler(GlobalEvents_SavingReportInDesigner);
             StiOptions.Engine.GlobalEvents.LoadingReportInDesigner += new Stimulsoft.Report.Design.StiLoadingObjectEventHandler(GlobalEvents_LoadingReportInDesigner);
-            //StiOptions.Engine.GlobalEvents.CreatingReportInDesigner += GlobalEvents_CreatingReportInDesigner;
             StiOptions.Engine.GlobalEvents.CreatingReportInDesigner += GlobalEvents_CreatingReportInDesigner1;
 
 
@@ -55,27 +54,6 @@ namespace PointOfSale.Views.ReportDesigner
             if (procesado) e.Processed = true;
             e.Processed = false;
         }
-
-
-
-        private void CrearNuevoReporte()
-        {
-            using (var form = new FrmNuevoReporte())
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    reporte = form.Reporte;
-                    stiReport = form.StiReport;
-                    if (reporte == null || stiReport == null)
-                        procesado = true;
-                    else
-                    {
-                        ReportDesigner.Report = stiReport;
-                    }
-                }
-            }
-        }
-
         private void GlobalEvents_LoadingReportInDesigner(object sender, Stimulsoft.Report.Design.StiLoadingObjectEventArgs e)
         {
             e.Processed = true;
@@ -97,11 +75,46 @@ namespace PointOfSale.Views.ReportDesigner
                 }
             }
         }
+        private void GlobalEvents_SavingReportInDesigner(object sender, Stimulsoft.Report.Design.StiSavingObjectEventArgs e)
+        {
+            if (ReportDesigner.Report == null) return;
+            e.Processed = true;
 
+
+            Guardar();
+        }
+
+        private void CrearNuevoReporte()
+        {
+            using (var form = new FrmReporte(true))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    reporte = form.Reporte;
+                    stiReport = form.StiReport;
+                    if (reporte == null || stiReport == null)
+                        procesado = true;
+                    else
+                    {
+                        ReportDesigner.Report = stiReport;
+                    }
+                }
+            }
+        }
         private void LeerReporte()
         {
             try
             {
+                //Actaulizacion de reporte
+                using (var form = new FrmReporte(false, reporte))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        Ambiente.Mensaje("Reporte actualziado.");
+                    }
+                }
+
+
                 //Inicializa objetos
                 stiReport = new StiReport();
                 if (reporte.Parametrizado)
@@ -131,19 +144,9 @@ namespace PointOfSale.Views.ReportDesigner
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(ex.Message);
+                Ambiente.Mensaje(ex.ToString());
             }
         }
-
-        private void GlobalEvents_SavingReportInDesigner(object sender, Stimulsoft.Report.Design.StiSavingObjectEventArgs e)
-        {
-            if (ReportDesigner.Report == null) return;
-            e.Processed = true;
-
-
-            Guardar();
-        }
-
         private void Guardar()
         {
             try
@@ -164,7 +167,7 @@ namespace PointOfSale.Views.ReportDesigner
             }
             catch (Exception ex)
             {
-                Ambiente.Mensaje(ex.Message);
+                Ambiente.Mensaje(ex.ToString());
             }
         }
     }

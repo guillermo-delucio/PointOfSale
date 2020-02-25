@@ -56,6 +56,9 @@ namespace PointOfSale.Models
         public virtual DbSet<Flujo> Flujo { get; set; }
         public virtual DbSet<FormaPago> FormaPago { get; set; }
         public virtual DbSet<Impuesto> Impuesto { get; set; }
+        public virtual DbSet<Informe> Informe { get; set; }
+        public virtual DbSet<InformeCategoria> InformeCategoria { get; set; }
+        public virtual DbSet<InformeParametro> InformeParametro { get; set; }
         public virtual DbSet<Laboratorio> Laboratorio { get; set; }
         public virtual DbSet<Lote> Lote { get; set; }
         public virtual DbSet<LoteVentap> LoteVentap { get; set; }
@@ -97,7 +100,7 @@ namespace PointOfSale.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
             modelBuilder.Entity<Actualizacion>(entity =>
             {
@@ -1220,6 +1223,49 @@ namespace PointOfSale.Models
                     .HasForeignKey(d => d.CImpuesto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Impuesto_C_Impuesto_ImpuestoId_fk");
+            });
+
+            modelBuilder.Entity<Informe>(entity =>
+            {
+                entity.Property(e => e.Codigo).IsRequired();
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Guid)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.InformeCateforia)
+                    .WithMany(p => p.Informe)
+                    .HasForeignKey(d => d.InformeCateforiaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Informe_InformeCategoria");
+            });
+
+            modelBuilder.Entity<InformeCategoria>(entity =>
+            {
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<InformeParametro>(entity =>
+            {
+                entity.HasKey(e => e.ParametroId);
+
+                entity.Property(e => e.Estandar).HasMaxLength(50);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.Informe)
+                    .WithMany(p => p.InformeParametro)
+                    .HasForeignKey(d => d.InformeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_InformeParametro_Informe");
             });
 
             modelBuilder.Entity<Laboratorio>(entity =>

@@ -319,7 +319,7 @@ namespace PointOfSale.Controllers
             catch (Exception ex)
             {
 
-                Ambiente.Mensaje(ex.Message);
+                Ambiente.Mensaje(ex.ToString());
                 return false;
             }
 

@@ -65,6 +65,7 @@ namespace PointOfSale.Views.ReportDesigner
                 {
                     reporte = reporteController.SelectOneByName(Malla.Rows[Malla.CurrentRow.Index].Cells[1].Value.ToString());
                     DialogResult = DialogResult.OK;
+                    Close();
                 }
             }
         }
@@ -72,6 +73,7 @@ namespace PointOfSale.Views.ReportDesigner
         private void BtnSalir_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

@@ -59,5 +59,10 @@ namespace PointOfSale.Views.ReportDesigner
         {
             Salir();
         }
+
+        private void FrmSolicitudParam_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

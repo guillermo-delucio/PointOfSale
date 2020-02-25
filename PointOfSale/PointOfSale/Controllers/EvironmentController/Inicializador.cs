@@ -1,9 +1,11 @@
 ﻿using PointOfSale.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PointOfSale.Controllers
 {
@@ -56,6 +58,16 @@ namespace PointOfSale.Controllers
             Ambiente.PrefijoRutaImg = @"C:\Dympos\Compartido\";
             Ambiente.Empresa = new EmpresaController().SelectTopOne();
             Ambiente.reporteController = new ReporteController();
+            Ambiente.ImageList = new System.Windows.Forms.ImageList();
+
+            Ambiente.ImageList.TransparentColor = Color.Blue;
+            Ambiente.ImageList.ColorDepth = ColorDepth.Depth24Bit;
+            Ambiente.ImageList.ImageSize = new Size(16, 16);
+
+            Ambiente.ImageList.Images.Add("reports16", Properties.Resources.reports);
+            Ambiente.ImageList.Images.Add("folder16", Properties.Resources.Folder);
+            Ambiente.ImageList.Images.Add("openfolder16", Properties.Resources.FolderOpen);
+
         }
 
         public static void InicializaDatabaseDefaultsValues()

@@ -1,6 +1,6 @@
 ﻿namespace PointOfSale.Views.ReportDesigner
 {
-    partial class FrmNuevoReporte
+    partial class FrmReporte
     {
         /// <summary>
         /// Required designer variable.

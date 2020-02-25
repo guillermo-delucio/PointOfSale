@@ -406,6 +406,9 @@
     <Compile Include="Controllers\ImportaExcelController.cs" />
     <Compile Include="Controllers\EvironmentController\IController.cs" />
     <Compile Include="Controllers\ImpuestoController.cs" />
+    <Compile Include="Controllers\InformeCategoriaController.cs" />
+    <Compile Include="Controllers\InformeController.cs" />
+    <Compile Include="Controllers\InformeParametroController.cs" />
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\LaboratorioController.cs" />
     <Compile Include="Controllers\LoggerController\TraceLogger.cs" />
@@ -475,6 +478,9 @@
     <Compile Include="Models\Flujo.cs" />
     <Compile Include="Models\FormaPago.cs" />
     <Compile Include="Models\Impuesto.cs" />
+    <Compile Include="Models\Informe.cs" />
+    <Compile Include="Models\InformeCategoria.cs" />
+    <Compile Include="Models\InformeParametro.cs" />
     <Compile Include="Models\Laboratorio.cs" />
     <Compile Include="Models\Lote.cs" />
     <Compile Include="Models\LoteVentap.cs" />
@@ -793,6 +799,12 @@
     <Compile Include="Views\ReportDesigner\FrmAbout.Designer.cs">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ReportDesigner\FrmBuscadorInformes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ReportDesigner\FrmBuscadorInformes.Designer.cs">
+      <DependentUpon>FrmBuscadorInformes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ReportDesigner\FrmBuscadorReportes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -805,11 +817,23 @@
     <Compile Include="Views\ReportDesigner\FrmDesigner.Designer.cs">
       <DependentUpon>FrmDesigner.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ReportDesigner\FrmNuevoReporte.cs">
+    <Compile Include="Views\ReportDesigner\FrmNuevoInforme.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ReportDesigner\FrmNuevoReporte.Designer.cs">
-      <DependentUpon>FrmNuevoReporte.cs</DependentUpon>
+    <Compile Include="Views\ReportDesigner\FrmNuevoInforme.Designer.cs">
+      <DependentUpon>FrmNuevoInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportDesigner\FrmReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ReportDesigner\FrmReporte.Designer.cs">
+      <DependentUpon>FrmReporte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportDesigner\FrmTreeViewReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ReportDesigner\FrmTreeViewReportes.Designer.cs">
+      <DependentUpon>FrmTreeViewReportes.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ReportDesigner\FrmSolicitudParam.cs">
       <SubType>Form</SubType>
@@ -966,14 +990,23 @@
     <EmbeddedResource Include="Views\ReportDesigner\FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ReportDesigner\FrmBuscadorInformes.resx">
+      <DependentUpon>FrmBuscadorInformes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ReportDesigner\FrmBuscadorReportes.resx">
       <DependentUpon>FrmBuscadorReportes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ReportDesigner\FrmDesigner.resx">
       <DependentUpon>FrmDesigner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ReportDesigner\FrmNuevoReporte.resx">
-      <DependentUpon>FrmNuevoReporte.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ReportDesigner\FrmNuevoInforme.resx">
+      <DependentUpon>FrmNuevoInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ReportDesigner\FrmReporte.resx">
+      <DependentUpon>FrmReporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ReportDesigner\FrmTreeViewReportes.resx">
+      <DependentUpon>FrmTreeViewReportes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ReportDesigner\FrmSolicitudParam.resx">
       <DependentUpon>FrmSolicitudParam.cs</DependentUpon>
@@ -1097,6 +1130,10 @@
     <Content Include="Localization\sv.xml" />
     <Content Include="Localization\tr.xml" />
     <Content Include="Localization\zh-CHT.xml" />
+    <None Include="Resources\reports.png" />
+    <None Include="Resources\FolderOpen.png" />
+    <None Include="Resources\Folder.png" />
+    <None Include="Resources\Image1.png" />
     <None Include="Resources\search1.png" />
     <None Include="Resources\Search.png" />
     <None Include="Resources\enter_1131.png" />
